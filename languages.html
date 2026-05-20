@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StackEasy | JavaScript Language</title>
+  <meta name="description" content="Learn the fundamentals of JavaScript, the most popular programming language for web development.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    .qa-hero {
+      padding: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.04) 0%, rgba(245, 239, 235, 0) 100%);
+    }
+
+    .qa-tagline {
+      display: inline-block;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.3rem 1.0rem;
+      border-radius: 50px;
+      margin-bottom: 1.0rem;
+      border: 1px solid rgba(255, 90, 31, 0.15);
+    }
+
+    .qa-title {
+      font-size: 2.4rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.8rem;
+      letter-spacing: -1px;
+    }
+
+    .qa-subtitle {
+      font-size: 1.0rem;
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .qa-grid-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      margin-bottom: 6rem;
+    }
+
+    .category-section {
+      scroll-margin-top: 180px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid rgba(15, 38, 21, 0.06);
+      padding-bottom: 1rem;
+    }
+
+    .category-icon {
+      font-size: 1.8rem;
+    }
+
+    .category-title {
+      font-size: 1.8rem;
+      color: var(--color-forest-dark);
+    }
+
+    .qa-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .qa-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .qa-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(15, 38, 21, 0.04);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qa-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 90, 31, 0.15);
+    }
+    .qa-question-text {
+      font-size: 1.4rem;
+      color: var(--color-forest-dark);
+      line-height: 1.25;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .qa-answer {
+      font-size: 1.02rem;
+      color: var(--color-text-dark);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+    .qa-code-mockup {
+      background-color: #0f172a;
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .qa-table-wrapper {
+      overflow-x: auto;
+      margin: 1.2rem 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+    }
+
+    .qa-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .qa-table th {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.8rem 1.2rem;
+    }
+
+    .qa-table td {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.06);
+      background-color: var(--color-white);
+      line-height: 1.4;
+    }
+
+    /* Interactive Sticky Search and Categories Bar styling */
+    .qa-controls-wrapper {
+      position: sticky;
+      top: 60px; /* Adjusted to fit the optimized nav height */
+      z-index: 99;
+      background-color: rgba(245, 239, 235, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.05);
+      margin-bottom: 2.5rem;
+    }
+
+    .qa-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .qa-controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* Search Input */
+    .qa-search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background-color: var(--color-white);
+      border: 1px solid rgba(15, 38, 21, 0.12);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    .qa-search-box:focus-within {
+      border-color: var(--color-orange-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .qa-search-box input {
+      width: 100%;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-text-dark);
+    }
+
+    .qa-search-box input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .search-icon {
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* Category Filter Pills */
+    .qa-pills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .qa-pill-btn {
+      background-color: var(--color-white);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      color: var(--color-forest-dark);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qa-pill-btn:hover {
+      background-color: var(--color-pill-bg);
+      transform: translateY(-1px);
+    }
+
+    .qa-pill-btn.active {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      border-color: var(--color-forest-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Empty state */
+    .qa-empty-state {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(15, 38, 21, 0.12);
+      box-shadow: var(--shadow-sm);
+      margin-top: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .qa-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .qa-empty-title {
+      font-size: 1.5rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .qa-empty-desc {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="index.html" class="logo-group" id="logo-main">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+          <path d="M2 17L12 22L22 17" stroke="#0F2615" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="7" r="1.5" fill="#FFFFFF"/>
+        </svg>
+        <span class="logo-text">Stack<span>Easy</span></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
+          <li><a href="tree.html" class="nav-link">Tree</a></li>
+          <li><a href="questions.html" class="nav-link">Questions</a></li>
+          <li><a href="interview.html" class="nav-link">Interview</a></li>
+          <li><a href="interview2.html" class="nav-link">Interview 2.0</a></li>
+          <li><a href="languages.html" class="nav-link active">Languages</a></li>
+          <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Search & CTA -->
+      <div class="nav-actions">
+        <a href="index.html#customizer" class="btn-nav-cta">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="index.html#fullstack" class="drawer-link">FullStack</a></li>
+      <li><a href="tree.html" class="drawer-link">Tree</a></li>
+      <li><a href="questions.html" class="drawer-link">Questions</a></li>
+      <li><a href="interview.html" class="drawer-link">Interview</a></li>
+      <li><a href="interview2.html" class="drawer-link">Interview 2.0</a></li>
+      <li><a href="languages.html" class="drawer-link active">Languages</a></li>
+      <li><a href="index.html#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+  </div>
+
+  <main class="page-container">
+    
+    <section class="qa-hero">
+      <span class="qa-tagline">Language Fundamentals</span>
+      <h1 class="qa-title">JavaScript & React</h1>
+      <p class="qa-subtitle">
+        The language of the web and its most popular library for building user interfaces.
+      </p>
+    </section>
+
+    <!-- Interactive Sticky Search and Categories Bar -->
+    <section class="qa-controls-wrapper">
+      <div class="qa-controls">
+        <!-- Search Box -->
+        <div class="qa-search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="#717E75" stroke-width="2"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#717E75" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" placeholder="Search topics..." id="qa-search-input" aria-label="Search questions">
+        </div>
+
+        <!-- Filter pills list -->
+        <div class="qa-pills-list" id="category-pills">
+          <button class="qa-pill-btn active" data-category="all">All</button>
+          <button class="qa-pill-btn" data-category="javascript">JavaScript</button>
+          <button class="qa-pill-btn" data-category="react">Frameworks & Libraries (React)</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="qa-grid-container">
+      <div class="category-section" data-category-group="javascript">
+        <div class="category-header">
+          <h2 class="category-title">JavaScript</h2>
+        </div>
+        <div class="qa-grid">
+          <div class="qa-card">
+            <h3 class="qa-question-text">Used for:</h3>
+            <div class="qa-answer">
+              <ul>
+                <li>websites</li>
+                <li>frontend</li>
+                <li>backend with Node.js</li>
+              </ul>
+              <p>Flexible and dynamic.</p>
+              <pre class="qa-code-mockup">let age = 20;<br>console.log(age);</pre>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">Simple Difference</h3>
+            <div class="qa-table-wrapper">
+              <table class="qa-table">
+                <thead>
+                  <tr>
+                    <th>Java</th>
+                    <th>JavaScript</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Compiled</td>
+                    <td>Interpreted</td>
+                  </tr>
+                  <tr>
+                    <td>Strict typing</td>
+                    <td>Dynamic typing</td>
+                  </tr>
+                  <tr>
+                    <td>Backend mostly</td>
+                    <td>Frontend + Backend</td>
+                  </tr>
+                  <tr>
+                    <td>OOP heavy</td>
+                    <td>Flexible</td>
+                  </tr>
+                  <tr>
+                    <td>Verbose</td>
+                    <td>Short syntax</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-section" data-category-group="javascript">
+        <div class="category-header">
+          <h2 class="category-title">Before Learning JavaScript</h2>
+        </div>
+        <p class="qa-subtitle" style="max-width: 100%; text-align:left; margin-bottom: 2rem;">You should understand THESE concepts first. These are UNIVERSAL programming fundamentals.</p>
+        <div class="qa-grid">
+          <div class="qa-card">
+            <h3 class="qa-question-text">1. Variables</h3>
+            <div class="qa-answer">
+                <p>Store data.</p>
+                <pre class="qa-code-mockup">let name = "Bhupender";<br>const age = 20;</pre>
+                <p>Understand:</p>
+                <ul>
+                    <li>let</li>
+                    <li>const</li>
+                    <li>var</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">2. Data Types</h3>
+            <div class="qa-answer">
+                <p>Know basic types.</p>
+                <ul>
+                    <li>String</li>
+                    <li>Number</li>
+                    <li>Boolean</li>
+                    <li>Array</li>
+                    <li>Object</li>
+                    <li>null</li>
+                    <li>undefined</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">3. Conditions</h3>
+            <div class="qa-answer">
+                <pre class="qa-code-mockup">if(age > 18){<br>   console.log("Adult");<br>}else{<br>   console.log("Minor");<br>}</pre>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">4. Loops</h3>
+            <div class="qa-answer">
+                <p>MOST IMPORTANT.</p>
+                <pre class="qa-code-mockup">for(let i=0;i<5;i++){<br>   console.log(i);<br>}</pre>
+                <p>Also learn:</p>
+                <ul>
+                    <li>while</li>
+                    <li>for...of</li>
+                    <li>forEach</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">5. Functions</h3>
+            <div class="qa-answer">
+                <p>CORE OF JAVASCRIPT.</p>
+                <pre class="qa-code-mockup">function add(a,b){<br>   return a+b;<br>}</pre>
+                <p>Then learn:</p>
+                <p>arrow functions</p>
+                <pre class="qa-code-mockup">const add = (a,b) => a+b;</pre>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">6. Arrays</h3>
+            <div class="qa-answer">
+                <p>VERY IMPORTANT FOR DSA.</p>
+                <pre class="qa-code-mockup">const arr = [1,2,3];</pre>
+                <p>Learn:</p>
+                <ul>
+                    <li>push</li>
+                    <li>pop</li>
+                    <li>map</li>
+                    <li>filter</li>
+                    <li>reduce</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">7. Objects</h3>
+            <div class="qa-answer">
+                <p>MOST IMPORTANT FOR REAL PROJECTS.</p>
+                <pre class="qa-code-mockup">const user = {<br>   name: "Bhupender",<br>   age: 20<br>};</pre>
+                <p>Learn:</p>
+                <ul>
+                    <li>keys</li>
+                    <li>values</li>
+                    <li>destructuring</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">8. DOM (Frontend Magic)</h3>
+            <div class="qa-answer">
+                <p>This is where JavaScript controls websites.</p>
+                <pre class="qa-code-mockup">document.getElementById("btn")</pre>
+                <p>Used for:</p>
+                <ul>
+                    <li>button clicks</li>
+                    <li>animations</li>
+                    <li>changing UI</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">9. Async JavaScript</h3>
+            <div class="qa-answer">
+                <p>VERY IMPORTANT FOR INTERVIEWS.</p>
+                <p>Learn:</p>
+                <ul>
+                    <li>promises</li>
+                    <li>async/await</li>
+                    <li>fetch API</li>
+                </ul>
+                <p>Example</p>
+                <pre class="qa-code-mockup">async function getData(){<br><br>   const res = await fetch(url);<br><br>   const data = await res.json();<br><br>   console.log(data);<br>}</pre>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">10. ES6 Features</h3>
+            <div class="qa-answer">
+                <p>Modern JavaScript.</p>
+                <p>Must know:</p>
+                <ul>
+                    <li>arrow functions</li>
+                    <li>destructuring</li>
+                    <li>spread operator</li>
+                    <li>template literals</li>
+                    <li>modules</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">11. Event Loop (Advanced)</h3>
+            <div class="qa-answer">
+                <p>Interviewers LOVE this.</p>
+                <p>Understand:</p>
+                <ul>
+                    <li>synchronous</li>
+                    <li>asynchronous</li>
+                    <li>call stack</li>
+                    <li>callback queue</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">12. This Keyword</h3>
+            <div class="qa-answer">
+                <p>Confuses many developers.</p>
+                <p>Learn:</p>
+                <ul>
+                    <li>this</li>
+                    <li>bind</li>
+                    <li>call</li>
+                    <li>apply</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">13. Closures</h3>
+            <div class="qa-answer">
+                <p>VERY IMPORTANT INTERVIEW TOPIC.</p>
+                <p>Core idea:</p>
+                <p>Function remembers outer variables.</p>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">14. Prototypes</h3>
+            <div class="qa-answer">
+                <p>JavaScript inheritance system.</p>
+                <p>Important for:</p>
+                <ul>
+                    <li>advanced interviews</li>
+                    <li>deep JS understanding</li>
+                </ul>
+            </div>
+          </div>
+          <div class="qa-card">
+            <h3 class="qa-question-text">15. OOP in JavaScript</h3>
+            <div class="qa-answer">
+                <p>Learn:</p>
+                <ul>
+                    <li>class</li>
+                    <li>constructor</li>
+                    <li>inheritance</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-section" data-category-group="javascript">
+        <div class="category-header">
+            <h2 class="category-title">Best Learning Order</h2>
+        </div>
+        <div class="qa-grid">
+            <div class="qa-card">
+                <h3 class="qa-question-text">Phase 1 — Basics</h3>
+                <div class="qa-answer">
+                    <ul>
+                        <li>variables</li>
+                        <li>loops</li>
+                        <li>conditions</li>
+                        <li>functions</li>
+                        <li>arrays</li>
+                        <li>objects</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="qa-card">
+                <h3 class="qa-question-text">Phase 2 — Intermediate</h3>
+                <div class="qa-answer">
+                    <ul>
+                        <li>DOM</li>
+                        <li>events</li>
+                        <li>async/await</li>
+                        <li>ES6</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="qa-card">
+                <h3 class="qa-question-text">Phase 3 — Advanced</h3>
+                <div class="qa-answer">
+                    <ul>
+                        <li>closures</li>
+                        <li>prototypes</li>
+                        <li>event loop</li>
+                        <li>this keyword</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-section" data-category-group="javascript">
+        <div class="qa-grid">
+            <div class="qa-card">
+                <h3 class="qa-question-text">Then Learn</h3>
+                <div class="qa-answer">
+                    <p><strong>React</strong></p>
+                    <p>After JavaScript becomes comfortable.</p>
+                    <p>DO NOT jump too early.</p>
+                </div>
+            </div>
+            <div class="qa-card">
+                <h3 class="qa-question-text">Most Important Thing</h3>
+                <div class="qa-answer">
+                    <p>JavaScript is less about:<br>❌ memorization</p>
+                    <p>More about:<br>✅ understanding behavior</p>
+                </div>
+            </div>
+            <div class="qa-card" style="grid-column: span 2;">
+                <h3 class="qa-question-text">Big Secret</h3>
+                <div class="qa-answer">
+                    <p>If you deeply master:</p>
+                    <ul>
+                        <li>functions</li>
+                        <li>objects</li>
+                        <li>async</li>
+                        <li>arrays</li>
+                    </ul>
+                    <p>Then:</p>
+                    <ul>
+                        <li>React</li>
+                        <li>Next.js</li>
+                        <li>Node.js</li>
+                    </ul>
+                    <p>become MUCH easier.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-section" data-category-group="react">
+      <div class="category-header">
+        <h2 class="category-title">JavaScript Library - React</h2>
+      </div>
+      <div class="qa-grid">
+        <div class="qa-card">
+          <h3 class="qa-question-text">WHAT IS REACT?</h3>
+          <div class="qa-answer">
+            <p>React is a JavaScript library for building UI.</p>
+            <p>UI means:</p>
+            <ul>
+              <li>buttons</li>
+              <li>cards</li>
+              <li>navbar</li>
+              <li>dashboard</li>
+              <li>pages</li>
+              <li>animations</li>
+            </ul>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">SIMPLE IDEA OF REACT</h3>
+          <div class="qa-answer">
+            <p>Before React:</p>
+            <p>People used plain JavaScript to change HTML manually.</p>
+            <p>That became:<br>❌ messy<br>❌ hard to manage<br>❌ difficult for large apps</p>
+            <p>React solved this using:</p>
+            <p><strong>COMPONENTS</strong></p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">WHAT IS A COMPONENT?</h3>
+          <div class="qa-answer">
+            <p>A component is:</p>
+            <p>A reusable UI block.</p>
+            <p>Example:</p>
+            <ul>
+              <li>Navbar</li>
+              <li>Button</li>
+              <li>Card</li>
+              <li>Sidebar</li>
+            </ul>
+            <p>Each becomes separate component.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">REAL EXAMPLE</h3>
+          <div class="qa-answer">
+            <p>Without React</p>
+            <p>You manually write huge HTML.</p>
+            <p>With React</p>
+            <p>You create reusable components.</p>
+            <pre class="qa-code-mockup">function Button(){<br>   return &lt;button&gt;Click Me&lt;/button&gt;<br>}<br><br>&lt;Button /&gt;<br>&lt;Button /&gt;<br>&lt;Button /&gt;</pre>
+            <p>Reusable.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">WHY REACT BECAME POPULAR</h3>
+          <div class="qa-answer">
+            <p>Because:</p>
+            <ul>
+              <li>✅ reusable</li>
+              <li>✅ fast</li>
+              <li>✅ organized</li>
+              <li>✅ scalable</li>
+              <li>✅ easier for large apps</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="category-section" data-category-group="react">
+      <div class="category-header">
+        <h2 class="category-title">REACT CORE CONCEPTS</h2>
+      </div>
+        <p class="qa-subtitle" style="max-width: 100%; text-align:left; margin-bottom: 2rem;">These are MOST IMPORTANT.</p>
+      <div class="qa-grid">
+        <div class="qa-card">
+          <h3 class="qa-question-text">1. COMPONENTS</h3>
+          <div class="qa-answer">
+            <p>Everything in React is component-based.</p>
+            <p>Example</p>
+            <pre class="qa-code-mockup">function Navbar(){<br>   return &lt;h1&gt;My Website&lt;/h1&gt;<br>}</pre>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">2. JSX</h3>
+          <div class="qa-answer">
+            <p>Looks like HTML inside JavaScript.</p>
+            <pre class="qa-code-mockup">const element = &lt;h1&gt;Hello&lt;/h1&gt;</pre>
+            <p>Actually:<br>not pure HTML<br>not pure JS</p>
+            <p>It is:</p>
+            <p><strong>JSX</strong></p>
+            <p>React converts it behind the scenes.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">3. PROPS</h3>
+          <div class="qa-answer">
+            <p>Props = passing data.</p>
+            <p>Parent → child component communication.</p>
+            <p>Example</p>
+            <pre class="qa-code-mockup">function User(props){<br>   return &lt;h1&gt;{props.name}&lt;/h1&gt;<br>}<br><br>&lt;User name="Bhupender" /&gt;</pre>
+            <p>Output:</p>
+            <p>Bhupender</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">4. STATE (VERY IMPORTANT)</h3>
+          <div class="qa-answer">
+            <p>State = dynamic data.</p>
+            <p>Example:</p>
+            <ul>
+              <li>counter</li>
+              <li>likes</li>
+              <li>dark mode</li>
+              <li>login state</li>
+            </ul>
+            <p><strong>useState Hook</strong></p>
+            <pre class="qa-code-mockup">const [count, setCount] = useState(0);</pre>
+            <p>Understanding This<br>count → current value<br>setCount → update value<br>0 → initial value</p>
+            <p>Example</p>
+            <pre class="qa-code-mockup">function Counter(){<br><br>   const [count, setCount] = useState(0);<br><br>   return(<br>      &lt;button onClick={() => setCount(count + 1)}&gt;<br>         {count}<br>      &lt;/button&gt;<br>   )<br>}</pre>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">5. EVENTS</h3>
+          <div class="qa-answer">
+            <p>React handles clicks/events.</p>
+            <pre class="qa-code-mockup">&lt;button onClick={handleClick}&gt;</pre>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">6. CONDITIONAL RENDERING</h3>
+          <div class="qa-answer">
+            <p>Show UI based on condition.</p>
+            <pre class="qa-code-mockup">{isLogin ? &lt;Home /&gt; : &lt;Login /&gt;}</pre>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">7. LIST RENDERING</h3>
+          <div class="qa-answer">
+            <p>Render arrays.</p>
+            <pre class="qa-code-mockup">users.map(user => (<br>   &lt;p&gt;{user.name}&lt;/p&gt;<br>))</pre>
+            <p>VERY important.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">8. useEffect (VERY IMPORTANT)</h3>
+          <div class="qa-answer">
+            <p>Handles:</p>
+            <ul>
+              <li>API calls</li>
+              <li>side effects</li>
+              <li>lifecycle logic</li>
+            </ul>
+            <p>Example</p>
+            <pre class="qa-code-mockup">useEffect(() => {<br><br>   fetchData();<br><br>}, [])</pre>
+            <p>Empty Array Means<br>Run only once when component loads</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">9. API FETCHING</h3>
+          <div class="qa-answer">
+            <p>React apps connect backend APIs.</p>
+            <pre class="qa-code-mockup">const res = await fetch(url);<br><br>const data = await res.json();</pre>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">10. COMPONENT FLOW</h3>
+          <div class="qa-answer">
+            <p>React apps work like:</p>
+            <pre class="qa-code-mockup">App<br> ├── Navbar<br> ├── Sidebar<br> ├── Cards<br> └── Footer</pre>
+            <p>Small components combine into big apps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="category-section" data-category-group="react">
+      <div class="category-header">
+        <h2 class="category-title">REACT INTERVIEW QUESTIONS</h2>
+      </div>
+      <div class="qa-table-wrapper">
+        <table class="qa-table">
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Important</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>What is React?</td>
+              <td>YES</td>
+            </tr>
+            <tr>
+              <td>What is component?</td>
+              <td>YES</td>
+            </tr>
+            <tr>
+              <td>What is state?</td>
+              <td>YES</td>
+            </tr>
+            <tr>
+              <td>Difference props vs state</td>
+              <td>VERY YES</td>
+            </tr>
+            <tr>
+              <td>What is useEffect?</td>
+              <td>YES</td>
+            </tr>
+            <tr>
+              <td>What is virtual DOM?</td>
+              <td>YES</td>
+            </tr>
+            <tr>
+              <td>What is JSX?</td>
+              <td>YES</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="category-section" data-category-group="react">
+      <div class="qa-grid">
+        <div class="qa-card">
+          <h3 class="qa-question-text">WHAT IS VIRTUAL DOM?</h3>
+          <div class="qa-answer">
+            <p>React creates lightweight copy of DOM.</p>
+            <p>Then updates only changed parts.</p>
+            <p>Result:<br>✅ faster UI updates</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">REACT MENTAL MODEL</h3>
+          <div class="qa-answer">
+            <p>Think:</p>
+            <p>Data changes<br>     ↓<br>State updates<br>     ↓<br>UI re-renders automatically</p>
+            <p>That is React magic.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">MOST IMPORTANT HOOKS</h3>
+          <div class="qa-answer">
+            <p><strong>useState</strong></p>
+            <p>Store data.</p>
+            <p><strong>useEffect</strong></p>
+            <p>Run side effects.</p>
+            <p><strong>useRef</strong></p>
+            <p>Access DOM directly.</p>
+            <p><strong>useContext</strong></p>
+            <p>Global state sharing.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">AFTER REACT</h3>
+          <div class="qa-answer">
+            <p>Then learn:</p>
+            <p><strong>Next.js</strong></p>
+            <p>Because:</p>
+            <p>Next.js = React framework</p>
+            <p>Used for:</p>
+            <ul>
+              <li>routing</li>
+              <li>backend APIs</li>
+              <li>SEO</li>
+              <li>production apps</li>
+            </ul>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">MOST IMPORTANT FOR YOU</h3>
+          <div class="qa-answer">
+            <p>DO NOT try to memorize React.</p>
+            <p>Instead understand:<br>✅ component thinking<br>✅ state flow<br>✅ props flow<br>✅ rendering</p>
+            <p>That is real React understanding.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">BEST WAY TO LEARN REACT</h3>
+          <div class="qa-answer">
+            <p>Build projects:</p>
+            <ul>
+              <li>todo app</li>
+              <li>weather app</li>
+              <li>notes app</li>
+              <li>portfolio</li>
+              <li>dashboard</li>
+              <li>AI app</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- Empty State for Search -->
+    <div class="qa-empty-state" id="qa-empty-state">
+      <span class="qa-empty-icon">🔍</span>
+      <h4 class="qa-empty-title">No matching topics found</h4>
+      <p class="qa-empty-desc">Try typing different search keywords like "React", "variables", "state", or "hooks".</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="index.html" class="logo-group">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+            <path d="M2 17L12 22L22 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text text-white">Stack<span>Easy</span></span>
+        </a>
+        <p class="footer-about">
+          Explaining web development through beautiful, tactile micro-learning and relatable stories. Let's build together!
+        </p>
+      </div>
+
+      <div class="footer-links-side">
+        <div class="footer-col">
+          <span class="footer-title">Q&A Topics</span>
+          <ul>
+            <li><a href="questions.html#sec-frontend">Frontend UI</a></li>
+            <li><a href="questions.html#sec-backend">Backend Server</a></li>
+            <li><a href="questions.html#sec-database">Data Storage</a></li>
+            <li><a href="questions.html#sec-architecture">System Flow</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-title">Resources</span>
+          <ul>
+            <li><a href="index.html#explorer">Interactive Sandbox</a></li>
+            <li><a href="index.html#explorer">Restaurant Analogy</a></li>
+            <li><a href="index.html#faq">FAQ Hub</a></li>
+            <li><a href="#">Guides</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 StackEasy Platform. Handcrafted for awesome learners.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('qa-search-input');
+      const categoryPills = document.querySelectorAll('.qa-pill-btn');
+      const categorySections = document.querySelectorAll('.category-section');
+      const emptyState = document.getElementById('qa-empty-state');
+      
+      let activeCategory = 'all';
+      let searchQuery = '';
+
+      function filterContent() {
+        let visibleCardsCount = 0;
+
+        categorySections.forEach(section => {
+          const sectionCategory = section.getAttribute('data-category-group');
+          const cardsInSection = section.querySelectorAll('.qa-card');
+          let visibleCardsInSection = 0;
+
+          cardsInSection.forEach(card => {
+            const cardText = card.innerText.toLowerCase();
+            
+            // Check if card matches both category filter and search string
+            const matchesCategory = (activeCategory === 'all' || activeCategory === sectionCategory);
+            const matchesSearch = searchQuery === '' || cardText.includes(searchQuery);
+
+            if (matchesCategory && matchesSearch) {
+              card.style.display = 'flex';
+              visibleCardsInSection++;
+              visibleCardsCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Toggle visibility of the whole category header and block
+          if (visibleCardsInSection > 0) {
+            section.style.display = 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+
+        // Show/hide empty state
+        if (visibleCardsCount === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          emptyState.style.display = 'none';
+        }
+      }
+
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        filterContent();
+      });
+
+      categoryPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          categoryPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          
+          activeCategory = pill.getAttribute('data-category');
+          filterContent();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
