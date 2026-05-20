@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StackEasy | JavaScript Language</title>
-  <meta name="description" content="Learn the fundamentals of JavaScript, the most popular programming language for web development.">
+  <title>StackEasy | Universal Tech Stack Directory</title>
+  <meta name="description" content="Discover programming languages, libraries, and frameworks with tactile restaurant analogies. Explore dynamic roadmaps, detailed ecosystems, and master steps.">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles.css">
   
   <style>
+    /* ==========================================================================
+       Premium Universal Tech Stack Directory Specific Styles
+       ========================================================================== */
+    
     .qa-hero {
-      padding: 2.5rem 0 1.5rem 0;
+      padding: 3rem 0 2rem 0;
       text-align: center;
-      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.04) 0%, rgba(245, 239, 235, 0) 100%);
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.05) 0%, rgba(245, 239, 235, 0) 100%);
     }
 
     .qa-tagline {
@@ -26,151 +30,40 @@
       font-family: var(--font-body);
       font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      padding: 0.3rem 1.0rem;
+      padding: 0.35rem 1.1rem;
       border-radius: 50px;
-      margin-bottom: 1.0rem;
-      border: 1px solid rgba(255, 90, 31, 0.15);
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(255, 90, 31, 0.18);
     }
 
     .qa-title {
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       color: var(--color-forest-dark);
       margin-bottom: 0.8rem;
       letter-spacing: -1px;
     }
 
+    .qa-title span {
+      color: var(--color-orange-primary);
+    }
+
     .qa-subtitle {
-      font-size: 1.0rem;
+      font-size: 1.05rem;
       color: var(--color-text-muted);
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      line-height: 1.5;
-    }
-
-    .qa-grid-container {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-      margin-bottom: 6rem;
-    }
-
-    .category-section {
-      scroll-margin-top: 180px;
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      border-bottom: 2px solid rgba(15, 38, 21, 0.06);
-      padding-bottom: 1rem;
-    }
-
-    .category-icon {
-      font-size: 1.8rem;
-    }
-
-    .category-title {
-      font-size: 1.8rem;
-      color: var(--color-forest-dark);
-    }
-
-    .qa-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    @media (min-width: 1024px) {
-      .qa-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    .qa-card {
-      background-color: var(--color-white);
-      border-radius: var(--radius-md);
-      padding: 2.2rem;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid rgba(15, 38, 21, 0.04);
-      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .qa-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(255, 90, 31, 0.15);
-    }
-    .qa-question-text {
-      font-size: 1.4rem;
-      color: var(--color-forest-dark);
-      line-height: 1.25;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .qa-answer {
-      font-size: 1.02rem;
-      color: var(--color-text-dark);
       line-height: 1.6;
-      flex: 1;
-      margin-bottom: 1.5rem;
-    }
-    .qa-code-mockup {
-      background-color: #0f172a;
-      border-radius: var(--radius-sm);
-      padding: 1.2rem;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9rem;
-      color: #94a3b8;
-      overflow-x: auto;
-      margin: 1rem 0;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
-    }
-    .qa-table-wrapper {
-      overflow-x: auto;
-      margin: 1.2rem 0;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(15, 38, 21, 0.08);
     }
 
-    .qa-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      text-align: left;
-    }
-
-    .qa-table th {
-      background-color: var(--color-forest-dark);
-      color: var(--color-white);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      padding: 0.8rem 1.2rem;
-    }
-
-    .qa-table td {
-      padding: 0.8rem 1.2rem;
-      border-bottom: 1px solid rgba(15, 38, 21, 0.06);
-      background-color: var(--color-white);
-      line-height: 1.4;
-    }
-
-    /* Interactive Sticky Search and Categories Bar styling */
+    /* Interactive Sticky Search and Categories Bar */
     .qa-controls-wrapper {
       position: sticky;
-      top: 60px; /* Adjusted to fit the optimized nav height */
+      top: 60px; /* Aligned with desktop nav bar */
       z-index: 99;
       background-color: rgba(245, 239, 235, 0.95);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
       padding: 1.2rem 0;
       border-bottom: 1px solid rgba(15, 38, 21, 0.05);
       margin-bottom: 2.5rem;
@@ -193,24 +86,24 @@
       }
     }
 
-    /* Search Input */
+    /* Search Box */
     .qa-search-box {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       background-color: var(--color-white);
       border: 1px solid rgba(15, 38, 21, 0.12);
-      padding: 0.6rem 1.2rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 50px;
       width: 100%;
       max-width: 380px;
       box-shadow: var(--shadow-sm);
-      transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+      transition: all var(--transition-normal);
     }
 
     .qa-search-box:focus-within {
       border-color: var(--color-orange-primary);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-md), 0 0 0 3px rgba(255, 90, 31, 0.1);
     }
 
     .qa-search-box input {
@@ -223,21 +116,18 @@
       color: var(--color-text-dark);
     }
 
-    .qa-search-box input::placeholder {
-      color: var(--color-text-muted);
-    }
-
     .search-icon {
       width: 1.1rem;
       height: 1.1rem;
+      stroke: var(--color-text-muted);
       flex-shrink: 0;
     }
 
-    /* Elegant Dropdown Filters Styling */
+    /* Filters Group */
     .qa-filters-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.2rem;
+      gap: 1rem;
       width: 100%;
     }
 
@@ -251,7 +141,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      min-width: 170px;
+      min-width: 175px;
       flex: 1;
     }
 
@@ -262,7 +152,7 @@
     }
 
     .qa-filter-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -279,7 +169,7 @@
       border-radius: 50px;
       padding: 0.6rem 2.5rem 0.6rem 1.2rem;
       box-shadow: var(--shadow-sm);
-      transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+      transition: all var(--transition-normal);
       cursor: pointer;
     }
 
@@ -291,7 +181,7 @@
 
     .qa-filter-select {
       width: 100%;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--color-forest-dark);
       background: transparent;
@@ -317,27 +207,254 @@
       color: var(--color-orange-primary);
     }
 
-    /* Pulse Glow highlight for filtered/selected elements */
+    /* Grid Layouts */
+    .qa-grid-container {
+      margin-bottom: 6rem;
+    }
+
+    /* Tech Stack Directory Grid Layout (3 Column Desktop) */
+    .dir-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+    }
+
+    @media (min-width: 768px) {
+      .dir-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .dir-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .qa-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(15, 38, 21, 0.04);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      scroll-margin-top: 220px; /* Smooth padding when scrolled to */
+    }
+
+    .qa-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 90, 31, 0.25);
+    }
+
+    /* Classification Badges */
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      border: 1.5px solid currentColor;
+      width: fit-content;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge-language {
+      background-color: rgba(16, 185, 129, 0.08);
+      color: #047857;
+    }
+
+    .badge-library {
+      background-color: rgba(59, 130, 246, 0.08);
+      color: #1d4ed8;
+    }
+
+    .badge-framework {
+      background-color: rgba(139, 92, 246, 0.08);
+      color: #6d28d9;
+    }
+
+    .badge-runtime {
+      background-color: rgba(245, 158, 11, 0.08);
+      color: #b45309;
+    }
+
+    .badge-database {
+      background-color: rgba(99, 102, 241, 0.08);
+      color: #4f46e5;
+    }
+
+    /* Definition Layouts inside Tech Directory Cards */
+    .tech-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+    }
+
+    .tech-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--color-forest-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .tech-analogy-container {
+      background-color: rgba(15, 38, 21, 0.03);
+      border-left: 3.5px solid var(--color-orange-primary);
+      padding: 0.8rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-one-liner {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--color-text-dark);
+      line-height: 1.42;
+      margin-bottom: 0.35rem;
+    }
+
+    .tech-analogy-text {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .tech-section-title {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-muted);
+      margin-top: 1.2rem;
+      margin-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.06);
+      padding-bottom: 0.25rem;
+    }
+
+    .tech-why-list {
+      margin-bottom: 1.2rem;
+      padding-left: 0.2rem;
+    }
+
+    .tech-why-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.92rem;
+      color: var(--color-text-dark);
+      line-height: 1.45;
+      margin-bottom: 0.45rem;
+    }
+
+    .tech-why-bullet {
+      color: var(--color-orange-primary);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .tech-code-container {
+      position: relative;
+      margin-top: 0.4rem;
+    }
+
+    .tech-code-lang {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.9rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      pointer-events: none;
+      letter-spacing: 0.6px;
+    }
+
+    .tech-code {
+      background-color: #0f1624;
+      border-radius: var(--radius-sm);
+      padding: 1.1rem;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+      line-height: 1.45;
+      margin: 0.2rem 0 1.2rem 0;
+    }
+
+    .tech-relation-info {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      margin-top: auto;
+      padding-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-top: 1px dashed rgba(15, 38, 21, 0.08);
+    }
+
+    .tech-relation-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.5px;
+      color: var(--color-orange-primary);
+    }
+
+    .tech-click-hint {
+      font-size: 0.72rem;
+      color: var(--color-orange-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.6rem;
+      text-align: right;
+      display: block;
+      transition: transform var(--transition-fast);
+    }
+
+    .qa-card:hover .tech-click-hint {
+      transform: translateX(-4px);
+    }
+
+    /* Spectacular Pulse Glow highlight animation */
     @keyframes cardGlowPulse {
       0% {
         box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.4);
         border-color: rgba(255, 90, 31, 0.4);
-        transform: translateY(0);
+        transform: scale(1);
       }
-      50% {
-        box-shadow: 0 0 20px 8px rgba(255, 90, 31, 0.7);
+      30% {
+        box-shadow: 0 0 28px 14px rgba(255, 90, 31, 0.85);
         border-color: var(--color-orange-primary);
-        transform: translateY(-8px);
+        transform: scale(1.03);
       }
       100% {
         box-shadow: var(--shadow-lg);
-        border-color: rgba(15, 38, 21, 0.04);
-        transform: translateY(0);
+        border-color: rgba(15, 38, 21, 0.05);
+        transform: scale(1);
       }
     }
 
     .qa-card.highlight-pulse {
-      animation: cardGlowPulse 2.5s ease-in-out;
+      animation: cardGlowPulse 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      z-index: 10;
     }
 
     /* Empty state */
@@ -370,6 +487,344 @@
       color: var(--color-text-muted);
       max-width: 400px;
       margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       Premium Glassmorphism Details Popup Modal Specific Styles
+       ========================================================================== */
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 38, 21, 0.45);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg), 0 20px 50px rgba(15, 38, 21, 0.18);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      width: 100%;
+      max-width: 780px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(35px);
+      transition: transform var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.8rem;
+      right: 1.8rem;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+      line-height: 1;
+      background: none;
+      border: none;
+      outline: none;
+      z-index: 10;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--color-orange-primary);
+      transform: rotate(90deg);
+    }
+
+    .modal-content-padding {
+      padding: 3rem 2.5rem;
+    }
+
+    .modal-header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid rgba(15, 38, 21, 0.06);
+      padding-bottom: 1.5rem;
+    }
+
+    .modal-tech-title {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--color-forest-dark);
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Ecosystem Visualizer Chain */
+    .ecosystem-chain-container {
+      background: linear-gradient(135deg, rgba(255, 90, 31, 0.04) 0%, rgba(15, 38, 21, 0.02) 100%);
+      border: 1px solid rgba(255, 90, 31, 0.08);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .ecosystem-chain-title {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--color-text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .ecosystem-chain-intro {
+      font-size: 0.95rem;
+      color: var(--color-text-dark);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .ecosystem-flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .flow-node {
+      background-color: var(--color-white);
+      border: 1.5px solid rgba(15, 38, 21, 0.08);
+      border-radius: 50px;
+      padding: 0.5rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--color-forest-dark);
+      box-shadow: var(--shadow-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .flow-node.active-node {
+      border-color: var(--color-orange-primary);
+      background-color: rgba(255, 90, 31, 0.06);
+      color: var(--color-orange-primary);
+      box-shadow: 0 4px 12px rgba(255, 90, 31, 0.15);
+    }
+
+    .flow-arrow {
+      color: var(--color-orange-primary);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    /* Modal Roadmaps Steps */
+    .roadmap-steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .roadmap-step-card {
+      display: flex;
+      gap: 1.2rem;
+      background-color: rgba(15, 38, 21, 0.02);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+      transition: border-color var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .roadmap-step-card:hover {
+      border-color: rgba(255, 90, 31, 0.15);
+      background-color: rgba(255, 90, 31, 0.02);
+    }
+
+    .roadmap-step-num {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .roadmap-step-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .roadmap-step-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-forest-dark);
+    }
+
+    .roadmap-step-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-dark);
+      line-height: 1.5;
+    }
+
+    /* Concept & Relationship Breakdown Styles */
+    .relationship-container {
+      background: linear-gradient(135deg, rgba(15, 38, 21, 0.03) 0%, rgba(255, 90, 31, 0.02) 100%);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+
+    /* Concept Steps Legend */
+    .concept-steps-legend {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1.5px dashed rgba(15, 38, 21, 0.08);
+    }
+
+    @media (min-width: 768px) {
+      .concept-steps-legend {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+    }
+
+    .legend-step-card {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(15, 38, 21, 0.05);
+      border-radius: 12px;
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+    }
+
+    .legend-step-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 90, 31, 0.15);
+      background-color: var(--color-white);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .legend-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .legend-text {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: var(--color-text-dark);
+    }
+
+    .legend-text em {
+      font-weight: 600;
+      color: var(--color-orange-primary);
+      font-style: normal;
+    }
+
+    .relationship-specific-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-forest-dark);
+      margin-top: 0.5rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .relationship-specific-title span {
+      color: var(--color-orange-primary);
+    }
+
+    .relationship-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .relationship-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background-color: var(--color-white);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 38, 21, 0.05);
+      transition: all var(--transition-fast);
+    }
+
+    .relationship-step:hover {
+      border-color: rgba(255, 90, 31, 0.15);
+      transform: translateX(4px);
+    }
+
+    .relationship-step-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .relationship-step-desc {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--color-text-dark);
+      margin: 0;
+    }
+
+    .relationship-step-desc strong {
+      color: var(--color-forest-dark);
     }
   </style>
 </head>
@@ -431,11 +886,12 @@
 
   <main class="page-container">
     
+    <!-- Hero Section -->
     <section class="qa-hero">
-      <span class="qa-tagline">Language Fundamentals</span>
-      <h1 class="qa-title">JavaScript & React</h1>
+      <span class="qa-tagline">Stack Directory</span>
+      <h1 class="qa-title">Universal <span>Tech Stack</span> Directory</h1>
       <p class="qa-subtitle">
-        The language of the web and its most popular library for building user interfaces.
+        Your premium, high-fidelity dictionary for programming languages, libraries, and frameworks. Explaining complex technology using simple, tactile real-world analogies. Click any card to see its master roadmap and ecosystem connections!
       </p>
     </section>
 
@@ -448,7 +904,7 @@
             <circle cx="11" cy="11" r="8" stroke="#717E75" stroke-width="2"/>
             <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#717E75" stroke-width="2" stroke-linecap="round"/>
           </svg>
-          <input type="text" placeholder="Search topics..." id="qa-search-input" aria-label="Search questions">
+          <input type="text" placeholder="Search tech, analogies, or classes..." id="qa-search-input" aria-label="Search items">
         </div>
 
         <!-- Elegant Dropdown Filters -->
@@ -460,34 +916,60 @@
               <select id="filter-languages" class="qa-filter-select">
                 <option value="all">All Languages</option>
                 <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+                <option value="go">Go (Golang)</option>
+                <option value="rust">Rust</option>
+                <option value="sql">SQL</option>
               </select>
               <span class="qa-select-chevron">▼</span>
             </div>
           </div>
 
-          <!-- Select 2: JavaScript Libraries -->
+          <!-- Select 2: JS Ecosystem -->
           <div class="qa-filter-select-wrapper">
-            <label for="filter-js-libraries" class="qa-filter-label">JS Libraries</label>
+            <label for="filter-js-libraries" class="qa-filter-label">JS Ecosystem</label>
             <div class="qa-select-container">
               <select id="filter-js-libraries" class="qa-filter-select">
-                <option value="all">All JS Libraries</option>
+                <option value="all">All JS Ecosystem</option>
                 <option value="react">React</option>
+                <option value="nodejs">Node.js</option>
                 <option value="nextjs">Next.js</option>
+                <option value="vuejs">Vue.js</option>
+                <option value="angular">Angular</option>
+                <option value="expressjs">Express.js</option>
               </select>
               <span class="qa-select-chevron">▼</span>
             </div>
           </div>
 
-          <!-- Select 3: Other Libs & Frameworks -->
+          <!-- Select 3: Other Frameworks -->
           <div class="qa-filter-select-wrapper">
-            <label for="filter-other-frameworks" class="qa-filter-label">Other Libs & Frameworks</label>
+            <label for="filter-other-frameworks" class="qa-filter-label">Other Frameworks</label>
             <div class="qa-select-container">
               <select id="filter-other-frameworks" class="qa-filter-select">
-                <option value="all">All Libs & Frameworks</option>
-                <option value="nextjs">Next.js</option>
-                <option value="nodejs">Node.js</option>
-                <option value="expressjs">Express.js</option>
+                <option value="all">All Other Frameworks</option>
+                <option value="django">Django</option>
+                <option value="fastapi">FastAPI</option>
+                <option value="springboot">Spring Boot</option>
+                <option value="flask">Flask</option>
+              </select>
+              <span class="qa-select-chevron">▼</span>
+            </div>
+          </div>
+
+          <!-- Select 4: Databases -->
+          <div class="qa-filter-select-wrapper">
+            <label for="filter-databases" class="qa-filter-label">Databases</label>
+            <div class="qa-select-container">
+              <select id="filter-databases" class="qa-filter-select">
+                <option value="all">All Databases</option>
+                <option value="postgresql">PostgreSQL</option>
+                <option value="mysql">MySQL</option>
                 <option value="mongodb">MongoDB</option>
+                <option value="redis">Redis</option>
               </select>
               <span class="qa-select-chevron">▼</span>
             </div>
@@ -496,722 +978,761 @@
       </div>
     </section>
 
-    <section class="qa-grid-container">
-      <div class="category-section" data-category-group="javascript">
-        <div class="category-header">
-          <h2 class="category-title">JavaScript</h2>
-        </div>
-        <div class="qa-grid">
-          <div class="qa-card">
-            <h3 class="qa-question-text">Used for:</h3>
-            <div class="qa-answer">
-              <ul>
-                <li>websites</li>
-                <li>frontend</li>
-                <li>backend with Node.js</li>
-              </ul>
-              <p>Flexible and dynamic.</p>
-              <pre class="qa-code-mockup">let age = 20;<br>console.log(age);</pre>
-            </div>
+    <!-- Tech Stack Directory Grid Layout (Active View) -->
+    <div class="qa-grid-container">
+      <div class="dir-grid">
+        
+        <!-- 1. JavaScript -->
+        <div class="qa-card" data-topic="javascript" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">JavaScript</h3>
+            <span class="tech-badge badge-language">Language</span>
           </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">Simple Difference</h3>
-            <div class="qa-table-wrapper">
-              <table class="qa-table">
-                <thead>
-                  <tr>
-                    <th>Java</th>
-                    <th>JavaScript</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Compiled</td>
-                    <td>Interpreted</td>
-                  </tr>
-                  <tr>
-                    <td>Strict typing</td>
-                    <td>Dynamic typing</td>
-                  </tr>
-                  <tr>
-                    <td>Backend mostly</td>
-                    <td>Frontend + Backend</td>
-                  </tr>
-                  <tr>
-                    <td>OOP heavy</td>
-                    <td>Flexible</td>
-                  </tr>
-                  <tr>
-                    <td>Verbose</td>
-                    <td>Short syntax</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The internet's interactive nervous system—powers all browser clicks, popups, and updates.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> JavaScript is the active waiter in a restaurant who takes your order, changes the table settings, and handles payments on the fly.</p>
           </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> The only programming language natively supported by all web browsers.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Powers fully interactive frontend experiences and servers via Node.js.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Supported by a massive collection of open-source libraries and templates.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">JS</span>
+            <pre class="tech-code">const user = { name: "Alex", role: "Dev" };
+console.log(`Hello, ${user.name}!`);</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Web Standard / Base of JS Ecosystem
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
-      </div>
 
-      <div class="category-section" data-category-group="javascript">
-        <div class="category-header">
-          <h2 class="category-title">Before Learning JavaScript</h2>
+        <!-- 2. TypeScript -->
+        <div class="qa-card" data-topic="typescript" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">TypeScript</h3>
+            <span class="tech-badge badge-language">Language</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">JavaScript's safety-first older sibling—adds strict compile-time checks to catch bugs early.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> Like a blueprint that lists the exact size and material of every bolt before you start constructing a bridge.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Prevents runtime crashes by throwing errors during coding rather than in production.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Provides amazing autocomplete suggestions in modern IDEs.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Essential for large teams maintaining scalable, long-term enterprise codebases.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">TS</span>
+            <pre class="tech-code">interface User { name: string; age: number; }
+const greet = (u: User): string => `Hi, ${u.name}!`;</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Transpiles directly to JavaScript
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
-        <p class="qa-subtitle" style="max-width: 100%; text-align:left; margin-bottom: 2rem;">You should understand THESE concepts first. These are UNIVERSAL programming fundamentals.</p>
-        <div class="qa-grid">
-          <div class="qa-card">
-            <h3 class="qa-question-text">1. Variables</h3>
-            <div class="qa-answer">
-                <p>Store data.</p>
-                <pre class="qa-code-mockup">let name = "Bhupender";<br>const age = 20;</pre>
-                <p>Understand:</p>
-                <ul>
-                    <li>let</li>
-                    <li>const</li>
-                    <li>var</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">2. Data Types</h3>
-            <div class="qa-answer">
-                <p>Know basic types.</p>
-                <ul>
-                    <li>String</li>
-                    <li>Number</li>
-                    <li>Boolean</li>
-                    <li>Array</li>
-                    <li>Object</li>
-                    <li>null</li>
-                    <li>undefined</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">3. Conditions</h3>
-            <div class="qa-answer">
-                <pre class="qa-code-mockup">if(age > 18){<br>   console.log("Adult");<br>}else{<br>   console.log("Minor");<br>}</pre>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">4. Loops</h3>
-            <div class="qa-answer">
-                <p>MOST IMPORTANT.</p>
-                <pre class="qa-code-mockup">for(let i=0;i<5;i++){<br>   console.log(i);<br>}</pre>
-                <p>Also learn:</p>
-                <ul>
-                    <li>while</li>
-                    <li>for...of</li>
-                    <li>forEach</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">5. Functions</h3>
-            <div class="qa-answer">
-                <p>CORE OF JAVASCRIPT.</p>
-                <pre class="qa-code-mockup">function add(a,b){<br>   return a+b;<br>}</pre>
-                <p>Then learn:</p>
-                <p>arrow functions</p>
-                <pre class="qa-code-mockup">const add = (a,b) => a+b;</pre>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">6. Arrays</h3>
-            <div class="qa-answer">
-                <p>VERY IMPORTANT FOR DSA.</p>
-                <pre class="qa-code-mockup">const arr = [1,2,3];</pre>
-                <p>Learn:</p>
-                <ul>
-                    <li>push</li>
-                    <li>pop</li>
-                    <li>map</li>
-                    <li>filter</li>
-                    <li>reduce</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">7. Objects</h3>
-            <div class="qa-answer">
-                <p>MOST IMPORTANT FOR REAL PROJECTS.</p>
-                <pre class="qa-code-mockup">const user = {<br>   name: "Bhupender",<br>   age: 20<br>};</pre>
-                <p>Learn:</p>
-                <ul>
-                    <li>keys</li>
-                    <li>values</li>
-                    <li>destructuring</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">8. DOM (Frontend Magic)</h3>
-            <div class="qa-answer">
-                <p>This is where JavaScript controls websites.</p>
-                <pre class="qa-code-mockup">document.getElementById("btn")</pre>
-                <p>Used for:</p>
-                <ul>
-                    <li>button clicks</li>
-                    <li>animations</li>
-                    <li>changing UI</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">9. Async JavaScript</h3>
-            <div class="qa-answer">
-                <p>VERY IMPORTANT FOR INTERVIEWS.</p>
-                <p>Learn:</p>
-                <ul>
-                    <li>promises</li>
-                    <li>async/await</li>
-                    <li>fetch API</li>
-                </ul>
-                <p>Example</p>
-                <pre class="qa-code-mockup">async function getData(){<br><br>   const res = await fetch(url);<br><br>   const data = await res.json();<br><br>   console.log(data);<br>}</pre>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">10. ES6 Features</h3>
-            <div class="qa-answer">
-                <p>Modern JavaScript.</p>
-                <p>Must know:</p>
-                <ul>
-                    <li>arrow functions</li>
-                    <li>destructuring</li>
-                    <li>spread operator</li>
-                    <li>template literals</li>
-                    <li>modules</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">11. Event Loop (Advanced)</h3>
-            <div class="qa-answer">
-                <p>Interviewers LOVE this.</p>
-                <p>Understand:</p>
-                <ul>
-                    <li>synchronous</li>
-                    <li>asynchronous</li>
-                    <li>call stack</li>
-                    <li>callback queue</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">12. This Keyword</h3>
-            <div class="qa-answer">
-                <p>Confuses many developers.</p>
-                <p>Learn:</p>
-                <ul>
-                    <li>this</li>
-                    <li>bind</li>
-                    <li>call</li>
-                    <li>apply</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">13. Closures</h3>
-            <div class="qa-answer">
-                <p>VERY IMPORTANT INTERVIEW TOPIC.</p>
-                <p>Core idea:</p>
-                <p>Function remembers outer variables.</p>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">14. Prototypes</h3>
-            <div class="qa-answer">
-                <p>JavaScript inheritance system.</p>
-                <p>Important for:</p>
-                <ul>
-                    <li>advanced interviews</li>
-                    <li>deep JS understanding</li>
-                </ul>
-            </div>
-          </div>
-          <div class="qa-card">
-            <h3 class="qa-question-text">15. OOP in JavaScript</h3>
-            <div class="qa-answer">
-                <p>Learn:</p>
-                <ul>
-                    <li>class</li>
-                    <li>constructor</li>
-                    <li>inheritance</li>
-                </ul>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="category-section" data-category-group="javascript">
-        <div class="category-header">
-            <h2 class="category-title">Best Learning Order</h2>
+        <!-- 3. Python -->
+        <div class="qa-card" data-topic="python" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Python</h3>
+            <span class="tech-badge badge-language">Language</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The clear, readable guide of coding—beloved by data scientists, AI builders, and beginners.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> Written so cleanly that it looks like standard English notes, reading like simple verbal requests to an assistant.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Standard language for Artificial Intelligence, Machine Learning, and Data Science.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> High readability makes it incredibly quick to prototype ideas.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Powers versatile web servers using Django, FastAPI, and Flask.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Python</span>
+            <pre class="tech-code">def greet(name):
+    return f"Hello, {name}!"
+print(greet("Sarah"))</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> AI / Data Science / Python Web
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
-        <div class="qa-grid">
-            <div class="qa-card">
-                <h3 class="qa-question-text">Phase 1 — Basics</h3>
-                <div class="qa-answer">
-                    <ul>
-                        <li>variables</li>
-                        <li>loops</li>
-                        <li>conditions</li>
-                        <li>functions</li>
-                        <li>arrays</li>
-                        <li>objects</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="qa-card">
-                <h3 class="qa-question-text">Phase 2 — Intermediate</h3>
-                <div class="qa-answer">
-                    <ul>
-                        <li>DOM</li>
-                        <li>events</li>
-                        <li>async/await</li>
-                        <li>ES6</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="qa-card">
-                <h3 class="qa-question-text">Phase 3 — Advanced</h3>
-                <div class="qa-answer">
-                    <ul>
-                        <li>closures</li>
-                        <li>prototypes</li>
-                        <li>event loop</li>
-                        <li>this keyword</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="category-section" data-category-group="javascript">
-        <div class="qa-grid">
-            <div class="qa-card">
-                <h3 class="qa-question-text">Then Learn</h3>
-                <div class="qa-answer">
-                    <p><strong>React</strong></p>
-                    <p>After JavaScript becomes comfortable.</p>
-                    <p>DO NOT jump too early.</p>
-                </div>
-            </div>
-            <div class="qa-card">
-                <h3 class="qa-question-text">Most Important Thing</h3>
-                <div class="qa-answer">
-                    <p>JavaScript is less about:<br>❌ memorization</p>
-                    <p>More about:<br>✅ understanding behavior</p>
-                </div>
-            </div>
-            <div class="qa-card" style="grid-column: span 2;">
-                <h3 class="qa-question-text">Big Secret</h3>
-                <div class="qa-answer">
-                    <p>If you deeply master:</p>
-                    <ul>
-                        <li>functions</li>
-                        <li>objects</li>
-                        <li>async</li>
-                        <li>arrays</li>
-                    </ul>
-                    <p>Then:</p>
-                    <ul>
-                        <li>React</li>
-                        <li>Next.js</li>
-                        <li>Node.js</li>
-                    </ul>
-                    <p>become MUCH easier.</p>
-                </div>
-            </div>
+        <!-- 4. Java -->
+        <div class="qa-card" data-topic="java" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Java</h3>
+            <span class="tech-badge badge-language">Language</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The robust industrial concrete mixer—strict object-oriented structures for massive enterprise apps.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> An ultra-careful bank auditor who refuses to let you move a single brick until all forms are signed in triplicate.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Runs inside the JVM, enabling the "Write Once, Run Anywhere" philosophy.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Trusted by legacy banks, insurance companies, and enterprise backends.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Traditional base for Android app development and major database services.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Java</span>
+            <pre class="tech-code">public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Enterprise!");
+    }
+}</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> JVM (Java Virtual Machine) Ecosystem
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
-    </div>
 
-    <div class="category-section" data-category-group="react">
-      <div class="category-header">
-        <h2 class="category-title">JavaScript Library - React</h2>
-      </div>
-      <div class="qa-grid">
-        <div class="qa-card">
-          <h3 class="qa-question-text">WHAT IS REACT?</h3>
-          <div class="qa-answer">
-            <p>React is a JavaScript library for building UI.</p>
-            <p>UI means:</p>
-            <ul>
-              <li>buttons</li>
-              <li>cards</li>
-              <li>navbar</li>
-              <li>dashboard</li>
-              <li>pages</li>
-              <li>animations</li>
-            </ul>
+        <!-- 5. C++ -->
+        <div class="qa-card" data-topic="cpp" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">C++</h3>
+            <span class="tech-badge badge-language">Language</span>
           </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">SIMPLE IDEA OF REACT</h3>
-          <div class="qa-answer">
-            <p>Before React:</p>
-            <p>People used plain JavaScript to change HTML manually.</p>
-            <p>That became:<br>❌ messy<br>❌ hard to manage<br>❌ difficult for large apps</p>
-            <p>React solved this using:</p>
-            <p><strong>COMPONENTS</strong></p>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The raw manual transmission racecar—gives developers direct, unchecked hardware and memory control.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> Building a high-performance engine piece-by-piece from raw sheet metal. Insanely fast, but lacks a safety net.</p>
           </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">WHAT IS A COMPONENT?</h3>
-          <div class="qa-answer">
-            <p>A component is:</p>
-            <p>A reusable UI block.</p>
-            <p>Example:</p>
-            <ul>
-              <li>Navbar</li>
-              <li>Button</li>
-              <li>Card</li>
-              <li>Sidebar</li>
-            </ul>
-            <p>Each becomes separate component.</p>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Unrivaled computing speeds used for high-frequency trading and low-latency systems.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Powerhouse behind AAA video games, 3D renderers, and game engines (like Unreal).</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Controls bare-metal operating systems, web browsers, and device drivers.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">C++</span>
+            <pre class="tech-code">#include &lt;iostream&gt;
+int main() {
+    std::cout << "Hello, Speed!" << std::endl;
+    return 0;
+}</pre>
           </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">REAL EXAMPLE</h3>
-          <div class="qa-answer">
-            <p>Without React</p>
-            <p>You manually write huge HTML.</p>
-            <p>With React</p>
-            <p>You create reusable components.</p>
-            <pre class="qa-code-mockup">function Button(){<br>   return &lt;button&gt;Click Me&lt;/button&gt;<br>}<br><br>&lt;Button /&gt;<br>&lt;Button /&gt;<br>&lt;Button /&gt;</pre>
-            <p>Reusable.</p>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Systems Level / Compiled Directly
           </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">WHY REACT BECAME POPULAR</h3>
-          <div class="qa-answer">
-            <p>Because:</p>
-            <ul>
-              <li>✅ reusable</li>
-              <li>✅ fast</li>
-              <li>✅ organized</li>
-              <li>✅ scalable</li>
-              <li>✅ easier for large apps</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="category-section" data-category-group="react">
-      <div class="category-header">
-        <h2 class="category-title">REACT CORE CONCEPTS</h2>
-      </div>
-        <p class="qa-subtitle" style="max-width: 100%; text-align:left; margin-bottom: 2rem;">These are MOST IMPORTANT.</p>
-      <div class="qa-grid">
-        <div class="qa-card">
-          <h3 class="qa-question-text">1. COMPONENTS</h3>
-          <div class="qa-answer">
-            <p>Everything in React is component-based.</p>
-            <p>Example</p>
-            <pre class="qa-code-mockup">function Navbar(){<br>   return &lt;h1&gt;My Website&lt;/h1&gt;<br>}</pre>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">2. JSX</h3>
-          <div class="qa-answer">
-            <p>Looks like HTML inside JavaScript.</p>
-            <pre class="qa-code-mockup">const element = &lt;h1&gt;Hello&lt;/h1&gt;</pre>
-            <p>Actually:<br>not pure HTML<br>not pure JS</p>
-            <p>It is:</p>
-            <p><strong>JSX</strong></p>
-            <p>React converts it behind the scenes.</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">3. PROPS</h3>
-          <div class="qa-answer">
-            <p>Props = passing data.</p>
-            <p>Parent → child component communication.</p>
-            <p>Example</p>
-            <pre class="qa-code-mockup">function User(props){<br>   return &lt;h1&gt;{props.name}&lt;/h1&gt;<br>}<br><br>&lt;User name="Bhupender" /&gt;</pre>
-            <p>Output:</p>
-            <p>Bhupender</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">4. STATE (VERY IMPORTANT)</h3>
-          <div class="qa-answer">
-            <p>State = dynamic data.</p>
-            <p>Example:</p>
-            <ul>
-              <li>counter</li>
-              <li>likes</li>
-              <li>dark mode</li>
-              <li>login state</li>
-            </ul>
-            <p><strong>useState Hook</strong></p>
-            <pre class="qa-code-mockup">const [count, setCount] = useState(0);</pre>
-            <p>Understanding This<br>count → current value<br>setCount → update value<br>0 → initial value</p>
-            <p>Example</p>
-            <pre class="qa-code-mockup">function Counter(){<br><br>   const [count, setCount] = useState(0);<br><br>   return(<br>      &lt;button onClick={() => setCount(count + 1)}&gt;<br>         {count}<br>      &lt;/button&gt;<br>   )<br>}</pre>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">5. EVENTS</h3>
-          <div class="qa-answer">
-            <p>React handles clicks/events.</p>
-            <pre class="qa-code-mockup">&lt;button onClick={handleClick}&gt;</pre>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">6. CONDITIONAL RENDERING</h3>
-          <div class="qa-answer">
-            <p>Show UI based on condition.</p>
-            <pre class="qa-code-mockup">{isLogin ? &lt;Home /&gt; : &lt;Login /&gt;}</pre>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">7. LIST RENDERING</h3>
-          <div class="qa-answer">
-            <p>Render arrays.</p>
-            <pre class="qa-code-mockup">users.map(user => (<br>   &lt;p&gt;{user.name}&lt;/p&gt;<br>))</pre>
-            <p>VERY important.</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">8. useEffect (VERY IMPORTANT)</h3>
-          <div class="qa-answer">
-            <p>Handles:</p>
-            <ul>
-              <li>API calls</li>
-              <li>side effects</li>
-              <li>lifecycle logic</li>
-            </ul>
-            <p>Example</p>
-            <pre class="qa-code-mockup">useEffect(() => {<br><br>   fetchData();<br><br>}, [])</pre>
-            <p>Empty Array Means<br>Run only once when component loads</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">9. API FETCHING</h3>
-          <div class="qa-answer">
-            <p>React apps connect backend APIs.</p>
-            <pre class="qa-code-mockup">const res = await fetch(url);<br><br>const data = await res.json();</pre>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">10. COMPONENT FLOW</h3>
-          <div class="qa-answer">
-            <p>React apps work like:</p>
-            <pre class="qa-code-mockup">App<br> ├── Navbar<br> ├── Sidebar<br> ├── Cards<br> └── Footer</pre>
-            <p>Small components combine into big apps.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="category-section" data-category-group="react">
-      <div class="category-header">
-        <h2 class="category-title">REACT INTERVIEW QUESTIONS</h2>
-      </div>
-      <div class="qa-table-wrapper">
-        <table class="qa-table">
-          <thead>
-            <tr>
-              <th>Question</th>
-              <th>Important</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>What is React?</td>
-              <td>YES</td>
-            </tr>
-            <tr>
-              <td>What is component?</td>
-              <td>YES</td>
-            </tr>
-            <tr>
-              <td>What is state?</td>
-              <td>YES</td>
-            </tr>
-            <tr>
-              <td>Difference props vs state</td>
-              <td>VERY YES</td>
-            </tr>
-            <tr>
-              <td>What is useEffect?</td>
-              <td>YES</td>
-            </tr>
-            <tr>
-              <td>What is virtual DOM?</td>
-              <td>YES</td>
-            </tr>
-            <tr>
-              <td>What is JSX?</td>
-              <td>YES</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="category-section" data-category-group="react">
-      <div class="qa-grid">
-        <div class="qa-card">
-          <h3 class="qa-question-text">WHAT IS VIRTUAL DOM?</h3>
-          <div class="qa-answer">
-            <p>React creates lightweight copy of DOM.</p>
-            <p>Then updates only changed parts.</p>
-            <p>Result:<br>✅ faster UI updates</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">REACT MENTAL MODEL</h3>
-          <div class="qa-answer">
-            <p>Think:</p>
-            <p>Data changes<br>     ↓<br>State updates<br>     ↓<br>UI re-renders automatically</p>
-            <p>That is React magic.</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">MOST IMPORTANT HOOKS</h3>
-          <div class="qa-answer">
-            <p><strong>useState</strong></p>
-            <p>Store data.</p>
-            <p><strong>useEffect</strong></p>
-            <p>Run side effects.</p>
-            <p><strong>useRef</strong></p>
-            <p>Access DOM directly.</p>
-            <p><strong>useContext</strong></p>
-            <p>Global state sharing.</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">MOST IMPORTANT FOR YOU</h3>
-          <div class="qa-answer">
-            <p>DO NOT try to memorize React.</p>
-            <p>Instead understand:<br>✅ component thinking<br>✅ state flow<br>✅ props flow<br>✅ rendering</p>
-            <p>That is real React understanding.</p>
-          </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">BEST WAY TO LEARN REACT</h3>
-          <div class="qa-answer">
-            <p>Build projects:</p>
-            <ul>
-              <li>todo app</li>
-              <li>weather app</li>
-              <li>notes app</li>
-              <li>portfolio</li>
-              <li>dashboard</li>
-              <li>AI app</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="category-section" data-category-group="nextjs">
-      <div class="category-header">
-        <h2 class="category-title">React Framework - Next.js</h2>
-      </div>
-      <div class="qa-grid">
-        <div class="qa-card">
-          <h3 class="qa-question-text">WHAT IS NEXT.JS?</h3>
-          <div class="qa-answer">
-            <p><strong>Next.js is a full-stack React framework built ON TOP of React.</strong></p>
-            <p>If React teaches:</p>
-            <ul>
-              <li>components</li>
-              <li>state</li>
-              <li>hooks</li>
-            </ul>
-            <p>Then Next.js teaches:</p>
-            <ul>
-              <li>real production apps</li>
-              <li>routing</li>
-              <li>backend APIs</li>
-              <li>optimization</li>
-              <li>deployment</li>
-            </ul>
-            <p><strong>Simple Understanding:</strong></p>
-            <p>React is only a UI library. Next.js is a full React framework. It adds: routing, backend support, SEO, server rendering, and authentication support.</p>
-            <p><strong>Think Like This:</strong></p>
-            <p>JavaScript ➡️ React ➡️ Next.js</p>
+        <!-- 6. Go (Golang) -->
+        <div class="qa-card" data-topic="go" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Go</h3>
+            <span class="tech-badge badge-language">Language</span>
           </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">WHY NEXT.JS IS IMPORTANT</h3>
-          <div class="qa-answer">
-            <p>Modern companies use it heavily (Vercel, startups, SaaS apps, AI apps, dashboards).</p>
-            <p><strong>What Next.js Adds:</strong></p>
-            <p><strong>1. File-Based Routing</strong><br>Folders create routes automatically (e.g. <code>app/about/page.js</code> automatically becomes <code>/about</code>).</p>
-            <p><strong>2. Server + Client</strong><br>React mainly runs in browser. Next.js supports server rendering and client rendering for better SEO, speed, and performance.</p>
-            <p><strong>3. API Routes</strong><br>Create backend APIs inside Next.js (e.g. <code>app/api/user/route.js</code> becomes a <code>/api/user</code> endpoint).</p>
-            <p><strong>4. Full Stack Development</strong><br>Build frontend, backend, authentication, and database connections together.</p>
-            <p><strong>5. SEO (Very Important)</strong><br>React apps are sometimes weak for SEO. Next.js fixes this, making it good for Google indexing, blogs, businesses, and marketing sites.</p>
-            <p><strong>6. Optimization</strong><br>Automatically optimizes images, loading, and overall performance.</p>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">Google's sleek factory conveyor belt—simple, clean compiler designed for high-concurrency microservices.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A sushi conveyer belt system: extremely streamlined, highly standardized, and serving thousands of requests.</p>
           </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">IMPORTANT NEXT.JS CONCEPTS</h3>
-          <div class="qa-answer">
-            <p><strong>Routing Structure:</strong></p>
-            <pre style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px; font-size: 0.85rem; font-family: monospace;">app/
- ├── page.js
- └── about/
-       └── page.js</pre>
-            <p><strong>Link Component:</strong><br>Instead of regular <code>&lt;a&gt;</code> tags, use: <code>import Link from "next/link";</code></p>
-            <p><strong>Server vs Client Components:</strong></p>
-            <ul>
-              <li><strong>Server Components:</strong> Runs on server (faster, secure, default).</li>
-              <li><strong>Client Components:</strong> Interactive UI. Use <code>"use client"</code> at top.</li>
-            </ul>
-            <p><strong>Fetching Data:</strong><br><code>const data = await fetch(url);</code> can be done directly inside server components.</p>
-            <p><strong>Authentication:</strong><br>Learn sessions/JWTs. Popular tools: NextAuth, Clerk.</p>
-            <p><strong>Database Connection:</strong><br>MongoDB, PostgreSQL connected through backend API routes or server actions.</p>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Incredible execution speeds with a tiny memory footprint.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Superb built-in support for running millions of simultaneous processes (Goroutines).</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Core language for modern cloud technology, powering Docker and Kubernetes.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Go</span>
+            <pre class="tech-code">package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, Cloud!")
+}</pre>
           </div>
-        </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">AFTER NEXT.JS: FULLSTACK FLOW</h3>
-          <div class="qa-answer">
-            <p>After React & Next.js, learn the deeper backend ecosystem:</p>
-            <p><strong>Backend Deeper:</strong></p>
-            <ul>
-              <li><strong>Node.js:</strong> JavaScript runtime environment.</li>
-              <li><strong>Express.js:</strong> Lightweight backend API framework.</li>
-            </ul>
-            <p><strong>Databases:</strong></p>
-            <ul>
-              <li><strong>MongoDB:</strong> Best NoSQL beginner choice.</li>
-              <li><strong>PostgreSQL / MySQL:</strong> Powerful relational databases.</li>
-            </ul>
-            <p><strong>Deployment:</strong><br>Vercel, Netlify, Docker, or AWS basics.</p>
-            <p><strong>Complete Frontend/FullStack Flow:</strong></p>
-            <p>JavaScript ➡️ React ➡️ Next.js ➡️ Node.js ➡️ Express.js ➡️ MongoDB ➡️ Deployment</p>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Cloud Native / Backend Architecture
           </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
-        <div class="qa-card">
-          <h3 class="qa-question-text">INTERVIEWS & SENIOR AXIS</h3>
-          <div class="qa-answer">
-            <p><strong>Common Interview Questions:</strong></p>
-            <ul>
-              <li>Props vs State</li>
-              <li>SSR (Server-Side Rendering) vs CSR (Client-Side Rendering)</li>
-              <li>useEffect hook lifecycle</li>
-              <li>Routing mechanisms</li>
-              <li>API handling & Authentication</li>
-            </ul>
-            <p><strong>Most Important Takeaway:</strong></p>
-            <p>React teaches you <strong>component thinking</strong>. Next.js teaches you <strong>real-world application architecture</strong>.</p>
-            <p>That is why learning this combination is extremely powerful!</p>
+
+        <!-- 7. Rust -->
+        <div class="qa-card" data-topic="rust" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Rust</h3>
+            <span class="tech-badge badge-language">Language</span>
           </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The bulletproof titanium vault—guarantees absolute memory safety and speed without a garbage collector.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A hyper-intelligent building inspector who points out weak support beams in real-time, preventing collapses.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Equal to C++ in execution speeds while guaranteeing 100% memory safety.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Eliminates a whole class of crashes and security leaks at compile time.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Leading choice for WebAssembly, systems programming, and high-performance APIs.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Rust</span>
+            <pre class="tech-code">fn main() {
+    println!("Hello, Safety!");
+}</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Systems Programming / Modern Compiler Tech
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
         </div>
+
+        <!-- 8. SQL -->
+        <div class="qa-card" data-topic="sql" data-category-group="languages">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">SQL</h3>
+            <span class="tech-badge badge-language">Language</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The master database librarian—the dedicated language for organizing, inserting, and querying tables.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> Telling a highly efficient record clerk: "Retrieve the names of all users who signed up in May, sorted by age."</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> The universal industry standard for communicating with relational databases.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Incredibly optimized for joining and filtering through millions of data rows.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Crucial skill for full-stack API engineers, data analytics, and reporting.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">SQL</span>
+            <pre class="tech-code">SELECT name, age FROM users
+WHERE status = 'Active'
+ORDER BY age DESC;</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Database Systems (Postgres, MySQL, Oracle)
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 9. React -->
+        <div class="qa-card" data-topic="react" data-category-group="js-ecosystem">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">React</h3>
+            <span class="tech-badge badge-library">Library</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The LEGO architecture kit—enables frontend builders to build interactive layouts with modular blocks.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> Standardizing a set of bricks: you build a single "Card" or "Navbar" block once, and snap it in anywhere.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Organizes frontend development into atomic, highly reusable user components.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Keeps pages lightning fast using a lightweight representation called the Virtual DOM.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Huge market demand with a vast component library support and Meta backing.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">React JSX</span>
+            <pre class="tech-code">function Card({ title }) {
+  return &lt;div className="card"&gt;&lt;h3&gt;{title}&lt;/h3&gt;&lt;/div&gt;;
+}</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Created in JavaScript / Runs in Browser
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 10. Node.js -->
+        <div class="qa-card" data-topic="nodejs" data-category-group="js-ecosystem">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Node.js</h3>
+            <span class="tech-badge badge-runtime">Runtime</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The browser jailbreak engine—lets JavaScript run directly on your computer's operating system as a backend.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> Taking the electric motor out of a sleek Tesla car and using it to power a robust home generator.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Allows developers to build entire full-stack apps using a single programming language.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Built on Google's V8 engine, making it exceptionally fast for handling I/O operations.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Grants access to NPM, the largest registry of software packages in the world.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Node.js</span>
+            <pre class="tech-code">const http = require('http');
+const server = http.createServer((req, res) => {
+  res.end('Hello from the Server!');
+});
+server.listen(3000);</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> V8 JavaScript Engine Wrapper
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 11. Next.js -->
+        <div class="qa-card" data-topic="nextjs" data-category-group="js-ecosystem">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Next.js</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The production-ready fullstack rocket booster—built on top of React to handle routing and database connections.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> If React is a high-quality engine, Next.js is a fully assembled luxury sports car ready for the highway.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Incredible speed and SEO out of the box through server-side rendering (SSR).</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> File-based routing: creating a folder inside the app directory automatically creates a URL.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Allows backend database queries and frontend UI templates to co-exist in one project.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Next.js App Router</span>
+            <pre class="tech-code">// app/page.js
+export default function Home() {
+  return &lt;h1&gt;Welcome to our fast SEO site!&lt;/h1&gt;;
+}</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Built on React / Powered by Node.js
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 12. Vue.js -->
+        <div class="qa-card" data-topic="vuejs" data-category-group="js-ecosystem">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Vue.js</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The highly approachable frontend framework—designed with an incredibly gentle learning curve.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A smart-home kitchen set: very neat, logical, works instantly without reading heavy setups.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Seamlessly splits pages into Template (HTML), Script (JS), and Style (CSS) blocks.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Very quick to learn, offering simple bindings for fast visual changes.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Powerful core features that allow incremental adoption in existing sites.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Vue SFC</span>
+            <pre class="tech-code">&lt;template&gt;
+  &lt;button @click="count++"&gt;{{ count }}&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default { data() { return { count: 0 } } }
+&lt;/script&gt;</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> JavaScript Frontend Framework
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 13. Angular -->
+        <div class="qa-card" data-topic="angular" data-category-group="js-ecosystem">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Angular</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The all-inclusive corporate resort—provides a highly structured frontend environment with built-in tools.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A premium master-planned community: pre-designed paths, specific rules, and everything included.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Provides complete architectural tools (routing, forms, client servers) out of the box.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Enforces the use of TypeScript, leading to highly organized enterprise structures.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Maintained by Google, ensuring long-term compatibility and scaling stability.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Angular Component</span>
+            <pre class="tech-code">@Component({
+  selector: 'app-greet',
+  template: '&lt;h1&gt;Hello, {{name}}!&lt;/h1&gt;'
+})
+export class GreetComponent { name = 'User'; }</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> TypeScript / Google Web Stack
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 14. Express.js -->
+        <div class="qa-card" data-topic="expressjs" data-category-group="js-ecosystem">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Express.js</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The minimal backend router—acts as the lightweight operator to listen for API server requests.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A simple, fast mailroom clerk: takes incoming mail, checks the address, and passes it to the right desk.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Extremely fast, lightweight, and unopinionated backend controller.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> The de-facto standard for creating JSON API endpoints in JavaScript.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Easy to connect with databases (like MongoDB) and integrate middleware logs.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Express.js</span>
+            <pre class="tech-code">const express = require('express');
+const app = express();
+app.get('/api', (req, res) => res.json({ msg: "Hi!" }));
+app.listen(3000);</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Node.js Backend Framework
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 15. Django -->
+        <div class="qa-card" data-topic="django" data-category-group="other-frameworks">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Django</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The full-course Python feast—an extremely secure, all-inclusive backend framework with database panel included.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A five-star luxury hotel: comes pre-equipped with security, database layouts, and room services.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Batteries-included philosophy: provides database models and authorization panel by default.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Built-in protection systems designed to automatically defend against common hackers.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Powers massive scale websites like Instagram, Pinterest, and Disqus.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Django View</span>
+            <pre class="tech-code">from django.http import HttpResponse
+def hello(request):
+    return HttpResponse("Hello from Django!")</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Python Core Framework
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 16. FastAPI -->
+        <div class="qa-card" data-topic="fastapi" data-category-group="other-frameworks">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">FastAPI</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The modern backend rocket—built specifically for high-speed AI APIs with automatic documentation.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A smart checkout terminal: checks your order items instantly and outputs an organized receipt.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Lightning-fast processing speeds, matching the execution levels of Node.js and Go.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Automatically creates interactive Swagger API documentation for your developers.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Tailor-made for integrating Python machine learning tools and AI services.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">FastAPI</span>
+            <pre class="tech-code">from fastapi import FastAPI
+app = FastAPI()
+@app.get("/")
+def read_root():
+    return {"message": "Hello FastAPI!"}</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Python Modern ASGI Stack
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 17. Spring Boot -->
+        <div class="qa-card" data-topic="springboot" data-category-group="other-frameworks">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Spring Boot</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The armored bank vault of Java—scales easily to handle massive server traffic and heavy queries.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A major skyscraper contractor: provides massive structural blueprints and structural safety systems.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> The gold standard for backend microservices in large, complex enterprise systems.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Provides extremely deep configurations for connecting securely with massive databases.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Very stable and reliable, making it perfect for transactional financial services.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Spring Boot Java</span>
+            <pre class="tech-code">@RestController
+public class GreetController {
+    @GetMapping("/")
+    public String index() { return "Hello from Spring Boot!"; }
+}</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Java Framework / JVM
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 18. Flask -->
+        <div class="qa-card" data-topic="flask" data-category-group="other-frameworks">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Flask</h3>
+            <span class="tech-badge badge-framework">Framework</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The raw canvas of Python backend web servers—provides the bare minimum so you can paint your own architecture.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A blank pocket sketchbook: gives you a few blank pages and lets you write or sketch however you wish.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Minimalist setup that lets you deploy a simple Python web server in 5 lines of code.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Highly flexible: doesn't enforce databases, giving developers total design freedom.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Excellent for small microservices, quick proof-of-concepts, and light scripts.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Flask Python</span>
+            <pre class="tech-code">from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def hello():
+    return "Hello from Flask!"</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Python Micro-Framework
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 19. PostgreSQL -->
+        <div class="qa-card" data-topic="postgresql" data-category-group="databases">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">PostgreSQL</h3>
+            <span class="tech-badge badge-database">Database</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The advanced multi-room library vault—an enterprise-grade relational database for complex structured queries.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> An expert filing clerk with cross-referencing indexes who instantly retrieves nested tables, ensuring everything is structured perfectly.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Extreme reliability and transactional safety (ACID compliance) for financial and critical data.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Supports complex table relations, powerful indexing, and custom data types.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Built on open-source SQL, making it the top database choice for modern APIs.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">PostgreSQL SQL</span>
+            <pre class="tech-code">SELECT users.name, orders.total 
+FROM users 
+INNER JOIN orders ON users.id = orders.user_id 
+WHERE orders.status = 'Paid';</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Relational SQL / Core App Storage
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 20. MySQL -->
+        <div class="qa-card" data-topic="mysql" data-category-group="databases">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">MySQL</h3>
+            <span class="tech-badge badge-database">Database</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The classic corporate filing system—the world's most popular open-source SQL database powering millions of sites.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A highly standardized, fast-paced register: trusted by massive digital warehouses (like WordPress and Facebook) to keep inventory tables perfectly aligned.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Exceptionally fast read speeds and easy setup for standard dynamic web apps.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Universal support across hosting environments, cloud platforms, and framework ORMs.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> The robust database foundation for massive CMS systems like WordPress and Drupal.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">MySQL SQL</span>
+            <pre class="tech-code">INSERT INTO inventory (item_name, quantity) 
+VALUES ('Widget A', 150) 
+ON DUPLICATE KEY UPDATE quantity = quantity + 150;</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Classic Relational SQL / LAMP Stack
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 21. MongoDB -->
+        <div class="qa-card" data-topic="mongodb" data-category-group="databases">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">MongoDB</h3>
+            <span class="tech-badge badge-database">Database</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The flexible document drawer—stores dynamic, schema-free JSON objects rather than rigid tabular grids.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A modern folder cabinet where each customer's folder holds a unique set of nested sheets without forcing identical formats.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Stores data natively as JSON-like documents, mapping perfectly to JavaScript structures.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Flexible schema allows rapid prototyping and continuous API modifications.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Key database pillar of fullstack JavaScript stacks like MERN and MEVN.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">MongoDB JSON</span>
+            <pre class="tech-code">db.users.insertOne({
+  name: "Jane Doe",
+  roles: ["Admin", "Billing"],
+  profile: { age: 28, city: "Seattle" }
+});</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> Document NoSQL / JavaScript MERN Stack
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
+        <!-- 22. Redis -->
+        <div class="qa-card" data-topic="redis" data-category-group="databases">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Redis</h3>
+            <span class="tech-badge badge-database">Database</span>
+          </div>
+          <div class="tech-analogy-container">
+            <p class="tech-one-liner">The lightning-speed sticky note board—in-memory storage used for instant caching and real-time queues.</p>
+            <p class="tech-analogy-text"><strong>Analogy:</strong> A chef's whiteboard of active tables: read and updated in milliseconds, but cleared when the kitchen closes unless stored in main vaults.</p>
+          </div>
+          <div class="tech-section-title">Why is it used?</div>
+          <ul class="tech-why-list">
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Incredibly high speeds (under 1ms responses) by keeping all database keys in RAM.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Ideal for temporary user session keys, API token caching, and live leaderboards.</li>
+            <li class="tech-why-item"><span class="tech-why-bullet">✔</span> Built-in pub/sub messaging channels for real-time applications like chat rooms.</li>
+          </ul>
+          <div class="tech-section-title">Syntax Example</div>
+          <div class="tech-code-container">
+            <span class="tech-code-lang">Redis Commands</span>
+            <pre class="tech-code">SET active_session:user_123 "active" EX 3600
+GET active_session:user_123</pre>
+          </div>
+          <div class="tech-relation-info">
+            <span class="tech-relation-label">Ecosystem:</span> In-Memory Cache / Performance Booster
+          </div>
+          <span class="tech-click-hint">Click for Roadmap & Ecosystem ➔</span>
+        </div>
+
       </div>
     </div>
-    </section>
 
     <!-- Empty State for Search -->
     <div class="qa-empty-state" id="qa-empty-state">
       <span class="qa-empty-icon">🔍</span>
-      <h4 class="qa-empty-title">No matching topics found</h4>
-      <p class="qa-empty-desc">Try typing different search keywords like "React", "variables", "state", or "hooks".</p>
+      <h4 class="qa-empty-title">No matching tech cards found</h4>
+      <p class="qa-empty-desc">Try typing different search keywords like "React", "Rust", "analogy", "safe", or "framework".</p>
     </div>
 
   </main>
+
+  <!-- High-Fidelity Glassmorphism Popup Modal Overlay -->
+  <div id="tech-detail-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+    <div class="modal-box">
+      <!-- Close Button -->
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close details modal">&times;</button>
+      
+      <div class="modal-content-padding">
+        <!-- Header -->
+        <div class="modal-header">
+          <h2 class="modal-tech-title" id="modal-title">
+            <span id="modal-title-text">Technology Name</span>
+            <span class="tech-badge" id="modal-badge">Badge</span>
+          </h2>
+        </div>
+
+        <!-- Ecosystem Relations Chain Container -->
+        <div class="ecosystem-chain-container">
+          <h4 class="ecosystem-chain-title">Ecosystem Relation Chain</h4>
+          <p class="ecosystem-chain-intro" id="modal-chain-intro">
+            How this relates to other languages, libraries, and frameworks.
+          </p>
+          <div class="ecosystem-flow" id="modal-chain-flow">
+            <!-- Dynamically generated flows inside here -->
+          </div>
+        </div>
+
+        <!-- Concept & Relationship Breakdown -->
+        <div class="relationship-container" id="modal-relationship-container">
+          <div class="concept-legend-header">
+            <h4 class="ecosystem-chain-title" style="margin-bottom: 0.5rem;">💡 Hierarchy & Relationship Breakdown</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.2rem; line-height: 1.4;">
+              Every web technology fits into a structured <strong>Language ➔ Library ➔ Framework</strong> hierarchy. Here is how they connect in simple steps:
+            </p>
+          </div>
+          
+          <!-- Unified Visual Concept Steps Legend -->
+          <div class="concept-steps-legend">
+            <div class="legend-step-card">
+              <span class="legend-badge badge-language">1. Language</span>
+              <div class="legend-text">
+                <strong>The Core Engine.</strong> The programming language (like <em>JavaScript</em> or <em>Python</em>). It contains all rules and syntax, and it <strong>contains</strong> all libraries and frameworks in its ecosystem.
+              </div>
+            </div>
+            <div class="legend-step-card">
+              <span class="legend-badge badge-library">2. Library</span>
+              <div class="legend-text">
+                <strong>The Helper Toolbox.</strong> Reusable helper code packages (like <em>React</em>). A library is **part of** a language and can be **part of** a framework. You call it when you need it.
+              </div>
+            </div>
+            <div class="legend-step-card">
+              <span class="legend-badge badge-framework">3. Framework</span>
+              <div class="legend-text">
+                <strong>The Complete Factory.</strong> A pre-built skeletal structure (like <em>Next.js</em>, <em>Django</em>, or <em>Spring Boot</em>). A framework is **built on top of** a language and its libraries, dictating the layout of your application.
+              </div>
+            </div>
+            <div class="legend-step-card">
+              <span class="legend-badge badge-database">4. Database</span>
+              <div class="legend-text">
+                <strong>The Storage Vault.</strong> The data storage system (like <em>PostgreSQL</em> or <em>MongoDB</em>). It is queried using query languages (like <em>SQL</em>), called from server <em>libraries</em> (ORMs), and connected to <em>frameworks</em> to keep app data safe.
+              </div>
+            </div>
+          </div>
+          
+          <h5 class="relationship-specific-title">🔗 How <span id="modal-relationship-tech-name">This Tech</span> Fits In:</h5>
+          <div class="relationship-steps-list" id="modal-relationship-steps">
+            <!-- Dynamically generated relationship steps here -->
+          </div>
+        </div>
+
+        <!-- Master Step-by-Step Learning Guide -->
+        <div class="roadmap-section">
+          <h4 class="ecosystem-chain-title" style="margin-bottom: 1.2rem;">Simplified Master Roadmap</h4>
+          <div class="roadmap-steps-container" id="modal-roadmap-steps">
+            <!-- Dynamically generated roadmaps inside here -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="main-footer">
@@ -1258,125 +1779,688 @@
 
   <script src="app.js"></script>
   <script>
+    // Premium 18 Technologies Interactive Master Database
+    const techDatabase = {
+      javascript: {
+        title: "JavaScript",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "JavaScript serves as the universal core standard. It contains the following libraries, runtimes, and frameworks in its web stack ecosystem:",
+        chain: [
+          { name: "JavaScript (Core Language)", active: true },
+          { name: "React (UI Library)", active: false },
+          { name: "Next.js (Framework)", active: false }
+        ],
+        relations: [
+          { term: "The Core Language", desc: "JavaScript is the foundation. It runs natively in every web browser to handle logic, clicks, and page updates." },
+          { term: "Contains Libraries", desc: "It contains libraries like <strong>React</strong>, which are reusable bundles of JavaScript UI code blocks." },
+          { term: "Powers Frameworks", desc: "It powers frameworks like <strong>Next.js</strong> (built on top of React & JS) and <strong>Express.js</strong> (runs on Node.js runtime)." }
+        ],
+        steps: [
+          { title: "Master Fundamentals", desc: "Learn scoping rules, arrow function parameters, mapping/filtering arrays, and standard DOM selectors." },
+          { title: "Understand Async Mechanics", desc: "Get comfortable handling asynchronous fetch requests, standard promises, and modern async/await routines." },
+          { title: "Integrate Dynamic APIs", desc: "Connect frontend components directly with Express/Node API systems, fetching database strings dynamically." }
+        ]
+      },
+      typescript: {
+        title: "TypeScript",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "TypeScript runs as a secure typing wrapper on top of JavaScript. It is compiled and transpiled down to standard JavaScript:",
+        chain: [
+          { name: "JavaScript", active: false },
+          { name: "TypeScript (Safe Wrapper)", active: true },
+          { name: "Angular / React Apps", active: false }
+        ],
+        relations: [
+          { term: "The Safe Language", desc: "TypeScript is a programming language that is a strict syntactic superset of JavaScript, adding type safety." },
+          { term: "Belongs to JavaScript", desc: "It compiles/transpiles directly down into standard <strong>JavaScript</strong> so the browser can execute it." },
+          { term: "Enables Frameworks", desc: "It is the primary language used to build corporate frontend applications in <strong>Angular</strong> and <strong>React</strong>." }
+        ],
+        steps: [
+          { title: "Configure Typing", desc: "Declare strict types for parameters, define class models, and write object interface contracts." },
+          { title: "Generics & Compiler Safety", desc: "Utilize compile-time generic types and compile TS modules through the standard tsconfig file." },
+          { title: "Strict React Integration", desc: "Secure state management hooks and component props inside large fullstack enterprise setups." }
+        ]
+      },
+      python: {
+        title: "Python",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "Python is a multi-purpose server language. It holds the following powerful frameworks inside its backend and machine learning ecosystem:",
+        chain: [
+          { name: "Python (Language)", active: true },
+          { name: "Django / FastAPI / Flask (Frameworks)", active: false }
+        ],
+        relations: [
+          { term: "The Base Language", desc: "Python is the core programming language. It is designed to be highly readable and simple to learn." },
+          { term: "Contains Frameworks", desc: "It contains powerful server frameworks like <strong>Django</strong>, <strong>FastAPI</strong>, and <strong>Flask</strong> in its ecosystem." },
+          { term: "Powers Libraries", desc: "It powers machine learning and data libraries (like <em>NumPy</em> and <em>Pandas</em>) that run completely on Python syntax." }
+        ],
+        steps: [
+          { title: "Grasp Core Indentation", desc: "Learn indentation rules, clean loops, lists, dictionaries, functions, and standard file operations." },
+          { title: "API Integrations", desc: "Write background scripts, manage JSON parsing, and test simple REST configurations." },
+          { title: "Scale to API/Web Frameworks", desc: "Apply knowledge to deploy fast APIs using FastAPI, or complex SQL structures with Django." }
+        ]
+      },
+      java: {
+        title: "Java",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "Java is an OOP standard compiled inside the Virtual Machine. Its core enterprise microservice framework is:",
+        chain: [
+          { name: "Java (Language)", active: true },
+          { name: "Spring Boot (Framework)", active: false }
+        ],
+        relations: [
+          { term: "The Core Language", desc: "Java is the strict programming language. Every line must reside inside a class, forcing neat OOP structures." },
+          { term: "Contains Frameworks", desc: "It contains <strong>Spring Boot</strong>, the world's leading enterprise server framework." },
+          { term: "Powers Libraries", desc: "It powers robust backend libraries and database connectors written completely in Java rules." }
+        ],
+        steps: [
+          { title: "Master Strict Objects", desc: "Learn polymorphism, write interface structures, manage encapsulation, and configure maven pipelines." },
+          { title: "JVM Tuning & Threads", desc: "Understand standard garbage collection, secure thread pooling, and run compiler tests." },
+          { title: "Integrate Spring Boot", desc: "Deploy REST models using annotations to connect relational database transactions." }
+        ]
+      },
+      cpp: {
+        title: "C++",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "C++ is a performance-optimized systems language derived from C. It powers high-speed game and physics systems directly:",
+        chain: [
+          { name: "C (Ancestor)", active: false },
+          { name: "C++ (Systems Language)", active: true },
+          { name: "Unreal Engine / low-latency systems", active: false }
+        ],
+        relations: [
+          { term: "The Base Language", desc: "C++ is a high-performance compiled language that extends the older C language with OOP structures." },
+          { term: "Contains Libraries", desc: "It contains libraries like the Standard Template Library (STL) to handle superfast data calculations." },
+          { term: "Powers Frameworks", desc: "It powers graphics engines (like <strong>Unreal Engine</strong>) which act as game frameworks built completely on C++." }
+        ],
+        steps: [
+          { title: "Manage Pointer Memory", desc: "Master reference mechanics, address allocations (new/delete), and eliminate dangerous memory leak crashes." },
+          { title: "Leverage STL Libraries", desc: "Coordinate fast calculations utilizing C++ Standard Template Library (STL) stacks, maps, and templates." },
+          { title: "AAA Low-Latency Design", desc: "Compile highly optimized scripts for game loops, hardware routers, or high-performance graphics engines." }
+        ]
+      },
+      go: {
+        title: "Go",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "Go is Google's streamlined backend language. It is optimized to compile highly efficient servers for cloud deployments:",
+        chain: [
+          { name: "Go (Language)", active: true },
+          { name: "Kubernetes / Docker Microservices", active: false }
+        ],
+        relations: [
+          { term: "The Base Language", desc: "Go (Golang) is Google's streamlined compiled programming language built for speed and cloud servers." },
+          { term: "Contains Frameworks", desc: "It contains fast API frameworks like <strong>Gin</strong> and <strong>Fiber</strong> that handle HTTP routing easily." },
+          { term: "Powers Systems", desc: "It is the core language used to write infrastructure systems like <strong>Docker</strong> and <strong>Kubernetes</strong>." }
+        ],
+        steps: [
+          { title: "Streamlined Compiler Syntax", desc: "Build simple scripts, manage pointers safely without pointer math, and organize clean struct groupings." },
+          { title: "Harness Coroutine Concurrency", desc: "Deploy millions of lightweight processes concurrently using standard Goroutines and safe communication channels." },
+          { title: "Build Cloud Servers", desc: "Expose fast, highly secure cloud endpoints deployed inside containers like Docker." }
+        ]
+      },
+      rust: {
+        title: "Rust",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "Rust is a modern systems standard that guarantees absolute memory safety at time of compilation. It acts as a safe choice for:",
+        chain: [
+          { name: "Rust (Language)", active: true },
+          { name: "WebAssembly / Actix APIs", active: false }
+        ],
+        relations: [
+          { term: "The Safe Language", desc: "Rust is a modern systems programming language that guarantees memory safety without a garbage collector." },
+          { term: "Contains Libraries", desc: "It contains library packages called 'crates' (managed by Cargo) to handle networking, cryptography, and logic." },
+          { term: "Powers Frameworks", desc: "It powers high-speed web frameworks like <strong>Actix Web</strong> and compiles to <strong>WebAssembly</strong> to run in browser stacks." }
+        ],
+        steps: [
+          { title: "Conquer Ownership Checking", desc: "Comprehend strict scope ownership rules, variable lifespans, and memory borrowing checkers." },
+          { title: "Race-Free Concurrency", desc: "Build ultra-secure concurrent servers, completely protected from memory leaks at compile time." },
+          { title: "Expose WebAssembly Hooks", desc: "Transpile Rust modules to compile fast packages directly inside frontend browser files." }
+        ]
+      },
+      sql: {
+        title: "SQL",
+        badgeClass: "badge-language",
+        badgeText: "Language",
+        chainIntro: "SQL is the universal query standard for talking with relational database tables. It configures and queries columns in:",
+        chain: [
+          { name: "SQL (Query Standard)", active: true },
+          { name: "PostgreSQL / MySQL Databases", active: false }
+        ],
+        relations: [
+          { term: "The Database Language", desc: "SQL is a highly specialized query language. It cannot build standard apps; it only talks to database tables." },
+          { term: "Belongs to Databases", desc: "It is the language used natively by database engines like <strong>PostgreSQL</strong>, <strong>MySQL</strong>, and SQLite." },
+          { term: "Contains Framework ORMs", desc: "It is generated automatically by backend frameworks' ORMs (like <strong>Django's ORM</strong> or Hibernate in <strong>Spring Boot</strong>)." }
+        ],
+        steps: [
+          { title: "Write Queries", desc: "Master selecting columns, filter grids via WHERE conditions, and sort rows via ORDER BY clauses." },
+          { title: "Map Joins & Collections", desc: "Link multiple tables via INNER JOIN, calculate results via COUNT/SUM, and query nested models." },
+          { title: "Database Index Tuning", desc: "Add unique index columns to speed up searches across millions of row entries." }
+        ]
+      },
+      react: {
+        title: "React",
+        badgeClass: "badge-library",
+        badgeText: "Library",
+        chainIntro: "React is a UI library built in JavaScript. It serves as the base for major modern fullstack frameworks like Next.js:",
+        chain: [
+          { name: "JavaScript", active: false },
+          { name: "React (UI Library)", active: true },
+          { name: "Next.js (Framework)", active: false }
+        ],
+        relations: [
+          { term: "The UI Library", desc: "React is a JavaScript library (NOT a full framework or a standalone language) created by Meta to render frontend interfaces." },
+          { term: "Belongs to JavaScript", desc: "It is written entirely in <strong>JavaScript</strong> and runs inside the user's browser." },
+          { term: "Foundation of Frameworks", desc: "React acts as the core UI engine inside comprehensive full-stack frameworks like <strong>Next.js</strong>." }
+        ],
+        steps: [
+          { title: "Modular UI Building", desc: "Split mockups into reusable component buttons/cards and pass dynamic attributes down using props." },
+          { title: "Implement State Hooks", desc: "Inject useState to track dynamic data and useEffect to automate API data fetches." },
+          { title: "Style Frontend Interfaces", desc: "Connect routers and dynamic css classes to construct beautiful, fast web experiences." }
+        ]
+      },
+      nodejs: {
+        title: "Node.js",
+        badgeClass: "badge-runtime",
+        badgeText: "Runtime",
+        chainIntro: "Node.js is a runtime that compiles JavaScript outside the browser. It hosts server frameworks like Express.js:",
+        chain: [
+          { name: "JavaScript", active: false },
+          { name: "Node.js (Runtime)", active: true },
+          { name: "Express.js (Framework)", active: false }
+        ],
+        relations: [
+          { term: "The Runtime", desc: "Node.js is a runtime environment (NOT a language or framework) that lets JavaScript run directly on your operating system." },
+          { term: "Belongs to JavaScript", desc: "It wraps Google Chrome's V8 engine to run standard <strong>JavaScript</strong> code outside a browser." },
+          { term: "Hosts Frameworks", desc: "It hosts backend frameworks like <strong>Express.js</strong> and powers full-stack setups like <strong>Next.js</strong>." }
+        ],
+        steps: [
+          { title: "Setup Local Server", desc: "Install Node packages via NPM, learn modules, and coordinate local file operations." },
+          { title: "Create API Handlers", desc: "Coordinate server-side routes, stream data chunks, and handle error logging routines." },
+          { title: "Connect Relational Databases", desc: "Write secure database integrations with MongoDB or Postgres databases using Node models." }
+        ]
+      },
+      nextjs: {
+        title: "Next.js",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Next.js is a comprehensive fullstack framework built on top of React (Library) and powered by Node.js (Runtime):",
+        chain: [
+          { name: "JavaScript", active: false },
+          { name: "React (Library)", active: false },
+          { name: "Next.js (React Framework)", active: true }
+        ],
+        relations: [
+          { term: "The React Framework", desc: "Next.js is a full-stack web framework built on top of <strong>React</strong> (the UI library)." },
+          { term: "Belongs to JavaScript", desc: "It is written in <strong>JavaScript</strong> and uses the <strong>Node.js</strong> runtime to handle server routing." },
+          { term: "Complete Hierarchy", desc: "JavaScript (Language) ➔ React (Library) ➔ Next.js (Framework). Next.js provides the structure (routing, backend APIs) React lacks." }
+        ],
+        steps: [
+          { title: "Folder routing", desc: "Create routes instantly by setting up folder paths with page.js layouts in the app folder." },
+          { title: "Perform Server Queries", desc: "Execute secure SQL searches inside Server Components, keeping API keys protected." },
+          { title: "Configure SEO Metadata", desc: "Define meta tags, optimize responsive images, and build lightning-fast web deployments." }
+        ]
+      },
+      vuejs: {
+        title: "Vue.js",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Vue.js is an approachable frontend framework. It organizes UI templates, scripts, and styling rules in a single file:",
+        chain: [
+          { name: "JavaScript", active: false },
+          { name: "Vue.js (Framework)", active: true },
+          { name: "Nuxt.js (Meta-Framework)", active: false }
+        ],
+        relations: [
+          { term: "The UI Framework", desc: "Vue.js is a progressive frontend framework (NOT a language or library) used to build single-page apps." },
+          { term: "Belongs to JavaScript", desc: "It is written completely in <strong>JavaScript</strong>, offering a highly readable alternative to React's style." },
+          { term: "Powers Frameworks", desc: "It serves as the base for the full-stack meta-framework <strong>Nuxt.js</strong> (similar to Next.js in React)." }
+        ],
+        steps: [
+          { title: "Adopt Single Files", desc: "Write SFC components (.vue) splitting HTML layouts, Composition APIs, and CSS cleanly." },
+          { title: "Bind Variables", desc: "Track active parameters utilizing ref/reactive hooks, and bind forms instantly via v-model." },
+          { title: "Vue Router Integration", desc: "Deploy fast client-side applications configured with custom animation transitions." }
+        ]
+      },
+      angular: {
+        title: "Angular",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Angular is a strict enterprise framework built on TypeScript, packing all routing and state tools out of the box:",
+        chain: [
+          { name: "TypeScript", active: false },
+          { name: "Angular (Framework)", active: true }
+        ],
+        relations: [
+          { term: "The Web Framework", desc: "Angular is an all-in-one web framework designed by Google for strict, enterprise frontend apps." },
+          { term: "Belongs to TypeScript", desc: "It is written entirely in <strong>TypeScript</strong>, enforcing strict types for safety across complex codebases." },
+          { term: "Hierarchy Rule", desc: "TypeScript (Language) ➔ Angular (Framework). It needs no external libraries; all tools are built-in." }
+        ],
+        steps: [
+          { title: "Modular Architecture", desc: "Organize files under strict angular modules containing templates, styles, and controllers." },
+          { title: "Inject Data Services", desc: "Inject shared services across pages and monitor server streams utilizing RxJS observabilities." },
+          { title: "Deploy Corporate Forms", desc: "Implement corporate validation filters, lazy load packages, and connect server gateways." }
+        ]
+      },
+      expressjs: {
+        title: "Express.js",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Express.js is a micro API routing library designed to run on Node.js (Runtime) using JavaScript:",
+        chain: [
+          { name: "JavaScript", active: false },
+          { name: "Node.js (Runtime)", active: false },
+          { name: "Express.js (Framework)", active: true }
+        ],
+        relations: [
+          { term: "The Server Framework", desc: "Express.js is a minimalist backend web framework built for hosting HTTP servers and APIs." },
+          { term: "Belongs to Runtime", desc: "It runs on the <strong>Node.js</strong> runtime environment and is written in pure <strong>JavaScript</strong>." },
+          { term: "Hierarchy Rule", desc: "JavaScript (Language) ➔ Node.js (Runtime) ➔ Express.js (Framework). It is part of MERN/MEAN stack ecosystems." }
+        ],
+        steps: [
+          { title: "Set HTTP Routes", desc: "Configure route paths to receive GET and POST queries, returning JSON arrays back." },
+          { title: "Inject Security Middlewares", desc: "Filter requests using Middlewares to validate tokens, clean params, and block CORS issues." },
+          { title: "Scale to API Databases", desc: "Connect express routers cleanly to database schemas to serve scalable endpoints." }
+        ]
+      },
+      django: {
+        title: "Django",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Django is a fullstack batteries-included framework built on Python. It maps databases to templates securely:",
+        chain: [
+          { name: "Python", active: false },
+          { name: "Django (Framework)", active: true }
+        ],
+        relations: [
+          { term: "The Web Framework", desc: "Django is a 'batteries-included' backend web framework that provides absolute structure for databases." },
+          { term: "Belongs to Python", desc: "It is written completely in <strong>Python</strong> and depends entirely on Python's ecosystem, syntax, and logic." },
+          { term: "Hierarchy Rule", desc: "Python (Language) ➔ Django (Framework). It automatically generates the <strong>SQL</strong> queries to talk to databases." }
+        ],
+        steps: [
+          { title: "Define Python Models", desc: "Define database models in Python classes, run standard migrations, and explore rows via the admin panel." },
+          { title: "Connect MTV Actions", desc: "Write database queries inside Django ORM models and render dynamic values directly on screen templates." },
+          { title: "Enforce Built-in Security", desc: "Protect views from hacker hijackings utilizing Django's built-in tokens." }
+        ]
+      },
+      fastapi: {
+        title: "FastAPI",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "FastAPI is a high-speed Python web framework. It builds lightning-fast API layers for machine learning tools:",
+        chain: [
+          { name: "Python", active: false },
+          { name: "FastAPI (ASGI Framework)", active: true }
+        ],
+        relations: [
+          { term: "The API Framework", desc: "FastAPI is a lightning-fast modern framework focused on building high-performance server REST APIs." },
+          { term: "Belongs to Python", desc: "It is written in <strong>Python</strong>, using modern type hints to check and validate incoming data dynamically." },
+          { term: "Hierarchy Rule", desc: "Python (Language) ➔ FastAPI (Framework). It links machine learning models directly with JS frontend apps." }
+        ],
+        steps: [
+          { title: "Bind Pydantic Types", desc: "Declare API endpoints, mapping strict inputs inside Pydantic models for fast error-checking." },
+          { title: "Swagger Documentation", desc: "Instantly preview and test server routes using the automatically compiled Swagger UI." },
+          { title: "Expose AI Pipelines", desc: "Integrate Python AI algorithms and data analysis modules behind rapid, concurrent JSON APIs." }
+        ]
+      },
+      springboot: {
+        title: "Spring Boot",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Spring Boot is a production-grade enterprise framework built on Java. It auto-configures database and server mappings:",
+        chain: [
+          { name: "Java", active: false },
+          { name: "Spring Boot (Framework)", active: true }
+        ],
+        relations: [
+          { term: "The Enterprise Framework", desc: "Spring Boot is a heavy, robust backend server framework designed for multi-million-user systems." },
+          { term: "Belongs to Java", desc: "It is written entirely in <strong>Java</strong> and runs inside the standard Java Virtual Machine (JVM)." },
+          { term: "Hierarchy Rule", desc: "Java (Language) ➔ Spring Boot (Framework). It automates all standard Java enterprise configuration boilerplate." }
+        ],
+        steps: [
+          { title: "Inject XML-Free Configurations", desc: "Configure server components, set up mappings via annotations (@RestController, @GetMapping), and inject database beans." },
+          { title: "Map Database Transactions", desc: "Implement Spring JPA to easily map columns, write queries, and manage transactional database connections." },
+          { title: "Microservice Security", desc: "Secure enterprise services utilizing Spring Security models and JWT tokens." }
+        ]
+      },
+      flask: {
+        title: "Flask",
+        badgeClass: "badge-framework",
+        badgeText: "Framework",
+        chainIntro: "Flask is a minimal micro-framework built on Python. It starts without pre-defined databases, giving you maximum flexibility:",
+        chain: [
+          { name: "Python", active: false },
+          { name: "Flask (Framework)", active: true }
+        ],
+        relations: [
+          { term: "The Micro Framework", desc: "Flask is a minimalist, flexible backend framework that lets you build servers with total structural freedom." },
+          { term: "Belongs to Python", desc: "It is written in <strong>Python</strong> and uses simple Python functions to map server routes and pages." },
+          { term: "Hierarchy Rule", desc: "Python (Language) ➔ Flask (Framework). A light, nimble alternative to the heavyweight Django framework." }
+        ],
+        steps: [
+          { title: "Declare Light Server", desc: "Instantiate Flask routing and return simple HTML templates in 5 lines of Python." },
+          { title: "Assemble custom drivers", desc: "Plug in favored template engines (Jinja2) and SQL drivers (SQLAlchemy) according to your preferences." },
+          { title: "Deploy Prototypes", desc: "Assemble and deploy lightweight microservices or fast prototypes instantly." }
+        ]
+      },
+      postgresql: {
+        title: "PostgreSQL",
+        badgeClass: "badge-database",
+        badgeText: "Database",
+        chainIntro: "PostgreSQL is an advanced open-source relational database. It integrates seamlessly into modern backend ecosystems:",
+        chain: [
+          { name: "SQL (Query Language)", active: false },
+          { name: "PostgreSQL (Database)", active: true },
+          { name: "Express / Django / Spring (Frameworks)", active: false }
+        ],
+        relations: [
+          { term: "The Storage System", desc: "PostgreSQL is a relational database management system (RDBMS) that stores structured tables securely." },
+          { term: "Queried with SQL", desc: "It is queried using the standard <strong>SQL</strong> language to retrieve, filter, and join related tables." },
+          { term: "Connected to Frameworks", desc: "It connects to frameworks like <strong>Django</strong>, <strong>Express</strong>, or <strong>Spring Boot</strong> through SQL drivers or ORM libraries." }
+        ],
+        steps: [
+          { title: "Define Tables & Schemas", desc: "Design structured tables, set primary/foreign keys, and declare data types for columns." },
+          { title: "Optimize with Indexes", desc: "Create database indexes on frequently queried columns to speed up search lookups." },
+          { title: "Connect ORMs & Drivers", desc: "Integrate PostgreSQL with your server framework using Sequelize (Node), Django ORM (Python), or JPA (Java)." }
+        ]
+      },
+      mysql: {
+        title: "MySQL",
+        badgeClass: "badge-database",
+        badgeText: "Database",
+        chainIntro: "MySQL is a highly popular open-source relational database. It is a cornerstone of classic web stack ecosystems:",
+        chain: [
+          { name: "SQL (Query Language)", active: false },
+          { name: "MySQL (Database)", active: true },
+          { name: "LAMP / Node / Python backends", active: false }
+        ],
+        relations: [
+          { term: "The Relational Hub", desc: "MySQL is a standard database that organizes data into rows and columns within strictly defined tables." },
+          { term: "Communicates via SQL", desc: "It relies on standard <strong>SQL</strong> queries to search, add, or update relational records." },
+          { term: "Powers Classic Stacks", desc: "It is a vital part of the LAMP stack (Linux, Apache, MySQL, PHP) and easily integrates with <strong>Express.js</strong> and <strong>Django</strong>." }
+        ],
+        steps: [
+          { title: "Create Tables & Queries", desc: "Set up local databases, create relation tables, and practice primary queries." },
+          { title: "Implement Joins & Unions", desc: "Combine multiple tables with INNER/LEFT JOIN and construct subqueries to extract complex datasets." },
+          { title: "Configure Connection Pools", desc: "Manage server connection pools inside Express or Spring Boot to handle high-traffic database requests." }
+        ]
+      },
+      mongodb: {
+        title: "MongoDB",
+        badgeClass: "badge-database",
+        badgeText: "Database",
+        chainIntro: "MongoDB is a modern NoSQL database that stores data as JSON-like documents. It is a core pillar of the JavaScript fullstack ecosystem:",
+        chain: [
+          { name: "JavaScript / JSON", active: false },
+          { name: "MongoDB (Document Database)", active: true },
+          { name: "MERN Stack (React / Node / Express)", active: false }
+        ],
+        relations: [
+          { term: "The Document Store", desc: "MongoDB is a NoSQL database that stores data in flexible BSON (binary JSON) documents rather than strict grids." },
+          { term: "Uses JavaScript Object Notation", desc: "It uses a JSON-like format, making it incredibly natural to query directly from <strong>JavaScript</strong> and <strong>Node.js</strong>." },
+          { term: "MERN/MEVN Stack Base", desc: "It forms the database foundation for fullstack JS frameworks (MongoDB ➔ Express ➔ React/Vue ➔ Node)." }
+        ],
+        steps: [
+          { title: "JSON Document Modeling", desc: "Structure flexible collections and write nested objects/arrays to represent real-world entities." },
+          { title: "Mongoose Schema Setup", desc: "Use libraries like Mongoose in Node.js to enforce data validation and clean schemas." },
+          { title: "Aggregate & Scale Queries", desc: "Build powerful aggregation pipelines for complex sorting, grouping, and text searches." }
+        ]
+      },
+      redis: {
+        title: "Redis",
+        badgeClass: "badge-database",
+        badgeText: "Database",
+        chainIntro: "Redis is a high-speed, in-memory key-value database. It acts as an auxiliary performance booster alongside primary databases:",
+        chain: [
+          { name: "Primary Database (Postgres / Mongo)", active: false },
+          { name: "Redis (In-Memory Cache)", active: true },
+          { name: "High-Speed Real-time Apps", active: false }
+        ],
+        relations: [
+          { term: "The In-Memory Cache", desc: "Redis is an extremely fast database that keeps all data in RAM, making reads/writes take sub-milliseconds." },
+          { term: "Supports Key-Values", desc: "It stores simple pairs of keys and values, as well as data structures like lists, sets, and hashes." },
+          { term: "Speeds up Frameworks", desc: "It sits in front of frameworks like <strong>Next.js</strong> or <strong>Express.js</strong> to store session tokens, APIs, or chat rooms." }
+        ],
+        steps: [
+          { title: "Key-Value Command Basics", desc: "Master basic key actions like SET, GET, DEL, and configure expirations (TTL)." },
+          { title: "Cache API Endpoints", desc: "Implement API response caching in Node or Python, serving popular request strings in 1ms." },
+          { title: "Pub/Sub & Real-time Feeds", desc: "Utilize Redis's Publish/Subscribe queues to run live chat systems or message brokers." }
+        ]
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
       const searchInput = document.getElementById('qa-search-input');
       const filterLanguages = document.getElementById('filter-languages');
       const filterJsLibraries = document.getElementById('filter-js-libraries');
       const filterOtherFrameworks = document.getElementById('filter-other-frameworks');
-      const categorySections = document.querySelectorAll('.category-section');
-      const emptyState = document.getElementById('qa-empty-state');
+      const filterDatabases = document.getElementById('filter-databases');
       
-      let activeCategory = 'all';
+      const cards = document.querySelectorAll('.qa-card');
+      const emptyState = document.getElementById('qa-empty-state');
+
+      // Modal elements
+      const detailModal = document.getElementById('tech-detail-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalTitleText = document.getElementById('modal-title-text');
+      const modalBadge = document.getElementById('modal-badge');
+      const modalChainIntro = document.getElementById('modal-chain-intro');
+      const modalChainFlow = document.getElementById('modal-chain-flow');
+      const modalRelationshipSteps = document.getElementById('modal-relationship-steps');
+      const modalRoadmapSteps = document.getElementById('modal-roadmap-steps');
+
       let searchQuery = '';
 
-      function filterContent() {
-        let visibleCardsCount = 0;
+      // MODAL CONTROLLER
+      function openModal(techKey) {
+        const data = techDatabase[techKey];
+        if (!data) return;
 
-        categorySections.forEach(section => {
-          const sectionCategory = section.getAttribute('data-category-group');
-          const cardsInSection = section.querySelectorAll('.qa-card');
-          let visibleCardsInSection = 0;
+        // Populate Modal Title and Badge
+        modalTitleText.textContent = data.title;
+        modalBadge.className = `tech-badge ${data.badgeClass}`;
+        modalBadge.textContent = data.badgeText;
+        modalChainIntro.textContent = data.chainIntro;
 
-          cardsInSection.forEach(card => {
-            const cardText = card.innerText.toLowerCase();
-            
-            // Check if card matches both category filter and search string
-            const matchesCategory = (activeCategory === 'all' || activeCategory === sectionCategory);
-            const matchesSearch = searchQuery === '' || cardText.includes(searchQuery);
+        // Populate tech name inside the relationship title
+        const modalRelTechName = document.getElementById('modal-relationship-tech-name');
+        if (modalRelTechName) {
+          modalRelTechName.textContent = data.title;
+        }
 
-            if (matchesCategory && matchesSearch) {
-              card.style.display = 'flex';
-              visibleCardsInSection++;
-              visibleCardsCount++;
-            } else {
-              card.style.display = 'none';
-            }
+        // Generate Ecosystem Chain Flow
+        modalChainFlow.innerHTML = '';
+        data.chain.forEach((node, index) => {
+          // Create node element
+          const nodeSpan = document.createElement('span');
+          nodeSpan.className = `flow-node ${node.active ? 'active-node' : ''}`;
+          nodeSpan.textContent = node.name;
+          modalChainFlow.appendChild(nodeSpan);
+
+          // Add arrow if not the last node
+          if (index < data.chain.length - 1) {
+            const arrowSpan = document.createElement('span');
+            arrowSpan.className = 'flow-arrow';
+            arrowSpan.innerHTML = '➔';
+            modalChainFlow.appendChild(arrowSpan);
+          }
+        });
+
+        // Generate Concept & Relationship Breakdown
+        modalRelationshipSteps.innerHTML = '';
+        if (data.relations && data.relations.length > 0) {
+          data.relations.forEach((rel) => {
+            const stepDiv = document.createElement('div');
+            stepDiv.className = 'relationship-step';
+
+            const badgeSpan = document.createElement('span');
+            badgeSpan.className = 'relationship-step-badge';
+            badgeSpan.textContent = rel.term;
+
+            const descP = document.createElement('p');
+            descP.className = 'relationship-step-desc';
+            descP.innerHTML = rel.desc;
+
+            stepDiv.appendChild(badgeSpan);
+            stepDiv.appendChild(descP);
+            modalRelationshipSteps.appendChild(stepDiv);
           });
+        }
 
-          // Toggle visibility of the whole category header and block
-          if (visibleCardsInSection > 0) {
-            section.style.display = 'block';
+        // Generate Master Roadmap Steps
+        modalRoadmapSteps.innerHTML = '';
+        data.steps.forEach((step, index) => {
+          const stepCard = document.createElement('div');
+          stepCard.className = 'roadmap-step-card';
+
+          const stepNum = document.createElement('div');
+          stepNum.className = 'roadmap-step-num';
+          stepNum.textContent = index + 1;
+
+          const stepInfo = document.createElement('div');
+          stepInfo.className = 'roadmap-step-info';
+
+          const stepTitle = document.createElement('h5');
+          stepTitle.className = 'roadmap-step-title';
+          stepTitle.textContent = step.title;
+
+          const stepDesc = document.createElement('p');
+          stepDesc.className = 'roadmap-step-desc';
+          stepDesc.textContent = step.desc;
+
+          stepInfo.appendChild(stepTitle);
+          stepInfo.appendChild(stepDesc);
+
+          stepCard.appendChild(stepNum);
+          stepCard.appendChild(stepInfo);
+
+          modalRoadmapSteps.appendChild(stepCard);
+        });
+
+        // Activate Modal with beautiful fade/slide transition
+        detailModal.classList.add('active');
+        detailModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // Stop background scrolling
+      }
+
+      function closeModal() {
+        detailModal.classList.remove('active');
+        detailModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+
+      // Card Clicks - trigger detailed modal popup
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const techKey = card.getAttribute('data-topic');
+          openModal(techKey);
+        });
+      });
+
+      // Close modal events
+      modalCloseBtn.addEventListener('click', closeModal);
+      detailModal.addEventListener('click', (e) => {
+        // Close modal if clicked outside the content box
+        if (e.target === detailModal) {
+          closeModal();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && detailModal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+      // UNIFIED SEARCH AND FILTER FUNCTION
+      function filterContent() {
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const cardText = card.innerText.toLowerCase();
+          const matchesSearch = searchQuery === '' || cardText.includes(searchQuery);
+
+          if (matchesSearch) {
+            card.style.display = 'flex';
+            visibleCount++;
           } else {
-            section.style.display = 'none';
+            card.style.display = 'none';
           }
         });
 
         // Show/hide empty state
-        if (visibleCardsCount === 0) {
+        if (visibleCount === 0) {
           emptyState.style.display = 'block';
         } else {
           emptyState.style.display = 'none';
         }
       }
 
-      function handleSelectChange(changedSelect, otherSelect1, otherSelect2) {
-        const val = changedSelect.value;
-        
-        // Reset other select menus to "all" to prevent conflicting filters
-        otherSelect1.value = 'all';
-        otherSelect2.value = 'all';
+      // SELECT MENU INTERACTIONS
+      function handleSelectChange(selectedElement) {
+        const val = selectedElement.value;
+        if (val === 'all') return;
 
-        // Check if selected value is a subtopic like nodejs, expressjs, mongodb
-        if (val === 'nodejs' || val === 'expressjs' || val === 'mongodb') {
-          activeCategory = 'nextjs'; // These exist inside the Next.js section fullstack flow card
+        // Reset sibling dropdowns to maintain clean isolation
+        [filterLanguages, filterJsLibraries, filterOtherFrameworks, filterDatabases].forEach(dropdown => {
+          if (dropdown && dropdown !== selectedElement) {
+            dropdown.value = 'all';
+          }
+        });
+
+        // Clear any active search query to ensure the target card is visible
+        searchQuery = '';
+        searchInput.value = '';
+
+        // Find and spotlight the target card
+        const targetCard = document.querySelector(`.qa-card[data-topic="${val}"]`);
+        if (targetCard) {
+          // Unfilter directory so the target is showing
           filterContent();
 
-          // Scroll smoothly and pulse highlight the "AFTER NEXT.JS: FULLSTACK FLOW" card
+          // Smoothly scroll, center, and trigger the popup modal!
           setTimeout(() => {
-            let targetCard = null;
-            const cards = document.querySelectorAll('.qa-card');
-            cards.forEach(card => {
-              const header = card.querySelector('.qa-question-text');
-              if (header && header.textContent.includes('AFTER NEXT.JS: FULLSTACK FLOW')) {
-                targetCard = card;
-              }
-            });
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Trigger spectacular orange pulse glow
+            targetCard.classList.remove('highlight-pulse');
+            void targetCard.offsetWidth; // Force layout reflow to restart css animation
+            targetCard.classList.add('highlight-pulse');
 
-            if (targetCard) {
-              targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              targetCard.classList.remove('highlight-pulse');
-              void targetCard.offsetWidth; // Force layout recalculation to restart keyframe
-              targetCard.classList.add('highlight-pulse');
-            }
-          }, 150);
-          return;
-        }
-
-        activeCategory = val;
-        filterContent();
-
-        // If selecting Next.js, smoothly scroll to the Next.js section and highlight cards
-        if (val === 'nextjs') {
-          const nextjsSection = document.querySelector('.category-section[data-category-group="nextjs"]');
-          if (nextjsSection) {
+            // Open the popup modal automatically to wow the user!
             setTimeout(() => {
-              nextjsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              const nextjsCards = nextjsSection.querySelectorAll('.qa-card');
-              nextjsCards.forEach(card => {
-                card.classList.remove('highlight-pulse');
-                void card.offsetWidth; // Force layout recalculation
-                card.classList.add('highlight-pulse');
-              });
-            }, 150);
-          }
+              openModal(val);
+            }, 600); // Open right as the scroll & pulse spotlight finishes
+          }, 100);
         }
       }
 
+      // EVENT LISTENERS FOR CONTROLS
       searchInput.addEventListener('input', (e) => {
         searchQuery = e.target.value.toLowerCase().trim();
         filterContent();
       });
 
       filterLanguages.addEventListener('change', () => {
-        handleSelectChange(filterLanguages, filterJsLibraries, filterOtherFrameworks);
+        handleSelectChange(filterLanguages);
       });
 
       filterJsLibraries.addEventListener('change', () => {
-        handleSelectChange(filterJsLibraries, filterLanguages, filterOtherFrameworks);
+        handleSelectChange(filterJsLibraries);
       });
 
       filterOtherFrameworks.addEventListener('change', () => {
-        handleSelectChange(filterOtherFrameworks, filterLanguages, filterJsLibraries);
+        handleSelectChange(filterOtherFrameworks);
+      });
+
+      filterDatabases.addEventListener('change', () => {
+        handleSelectChange(filterDatabases);
       });
     });
   </script>
