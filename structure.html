@@ -199,6 +199,23 @@
     .badge-node { color: var(--color-backend-purple); background-color: rgba(129, 140, 248, 0.08); }
     .badge-mongodb { color: var(--color-database-green); background-color: rgba(52, 211, 153, 0.08); }
     .badge-nextjs { color: #000000; background-color: rgba(0, 0, 0, 0.05); }
+    .badge-typescript { color: #3178c6; background-color: rgba(49, 120, 198, 0.08); }
+    .badge-python { color: #3776ab; background-color: rgba(55, 118, 171, 0.08); }
+    .badge-java { color: #5382a1; background-color: rgba(83, 130, 161, 0.08); }
+    .badge-cpp { color: #00599c; background-color: rgba(0, 89, 156, 0.08); }
+    .badge-go { color: #00add8; background-color: rgba(0, 173, 216, 0.08); }
+    .badge-rust { color: #e05d44; background-color: rgba(224, 93, 68, 0.08); }
+    .badge-sql { color: #00758f; background-color: rgba(0, 117, 143, 0.08); }
+    .badge-vue { color: #4fc08d; background-color: rgba(79, 192, 141, 0.08); }
+    .badge-angular { color: #dd0031; background-color: rgba(221, 0, 49, 0.08); }
+    .badge-express { color: #444444; background-color: rgba(68, 68, 68, 0.08); }
+    .badge-django { color: #092e20; background-color: rgba(9, 46, 32, 0.08); }
+    .badge-fastapi { color: #009688; background-color: rgba(0, 150, 136, 0.08); }
+    .badge-springboot { color: #6db33f; background-color: rgba(109, 179, 63, 0.08); }
+    .badge-flask { color: #000000; background-color: rgba(0, 0, 0, 0.05); }
+    .badge-postgresql { color: #336791; background-color: rgba(51, 103, 145, 0.08); }
+    .badge-mysql { color: #00758f; background-color: rgba(0, 117, 143, 0.08); }
+    .badge-redis { color: #d82c20; background-color: rgba(216, 44, 32, 0.08); }
 
     .analogy-banner {
       background-color: var(--color-pill-bg);
@@ -998,18 +1015,640 @@
             ]
           }
         }
+      },
+      "typescript": {
+        name: "TypeScript",
+        brief: "TypeScript is JavaScript with strict compile-time type validation.",
+        badge: "Strict Typing",
+        badgeClass: "badge-typescript",
+        folderName: "src/",
+        analogy: "The <strong>blueprint specs & safety codes</strong> of a house. It ensures you cannot put a window where a door goes before building.",
+        explorerFiles: [
+          { name: "src/index.ts", key: "ts-index", isSub: false }
+        ],
+        filesData: {
+          "ts-index": {
+            name: "src/index.ts",
+            code: `<span class="code-comment">// TYPESCRIPT: Strict types for variables & functions</span>
+<span class="code-keyword">let</span> <span class="code-var">username</span>: <span class="code-tag">string</span> = <span class="code-string">"Alex"</span>;
+
+<span class="code-keyword">function</span> <span class="code-func">greet</span>(<span class="code-var">name</span>: <span class="code-tag">string</span>): <span class="code-tag">string</span> {
+  <span class="code-keyword">return</span> <span class="code-string">"Hello "</span> + <span class="code-var">name</span>;
+}
+
+<span class="code-keyword">const</span> <span class="code-var">result</span> = <span class="code-func">greet</span>(<span class="code-var">username</span>);`,
+            steps: [
+              { title: "1. Type Declarations", desc: "Variables are defined with explicit type markers (like <code>string</code> or <code>number</code>)." },
+              { title: "2. Function Contracts", desc: "Functions strictly declare the types of their inputs and output results." },
+              { title: "3. Build Protection", desc: "TypeScript checks the code for mismatched data types before compiling, preventing bugs." },
+              { title: "Understanding Flow", desc: "index.ts &rarr; tsc compilation &rarr; standard index.js file for browsers." }
+            ]
+          }
+        }
+      },
+      "python": {
+        name: "Python",
+        brief: "Python uses neat indentation scope instead of curly braces for clean scripts.",
+        badge: "Clean Indentation",
+        badgeClass: "badge-python",
+        analogy: "A <strong>step-by-step assembly handbook</strong>. No bracket clutter, just clean whitespace steps that anyone can read.",
+        explorerFiles: [
+          { name: "main.py", key: "py-main", isSub: false }
+        ],
+        filesData: {
+          "py-main": {
+            name: "main.py",
+            code: `<span class="code-comment"># PYTHON: Indentation defines functional blocks</span>
+<span class="code-var">username</span> = <span class="code-string">"Alex"</span>
+
+<span class="code-keyword">def</span> <span class="code-func">greet</span>(<span class="code-var">name</span>):
+    <span class="code-comment"># 4 spaces indent marks function body</span>
+    <span class="code-func">print</span>(<span class="code-string">f"Hello, {name}!"</span>)
+
+<span class="code-keyword">if</span> <span class="code-var">username</span> == <span class="code-string">"Alex"</span>:
+    <span class="code-func">greet</span>(<span class="code-var">username</span>)`,
+            steps: [
+              { title: "1. Whitespace Indent", desc: "Python uses indentation (4 spaces) instead of curly brackets <code>{ }</code> to structure code." },
+              { title: "2. Declaring def", desc: "Functions are created using the <code>def</code> keyword and a simple trailing colon." },
+              { title: "3. Dynamic Type checks", desc: "Variables are created instantly without any type keywords (inferred automatically)." },
+              { title: "Understanding Flow", desc: "main.py script &rarr; Python interpreter processes line-by-line &rarr; direct execution." }
+            ]
+          }
+        }
+      },
+      "java": {
+        name: "Java",
+        brief: "Java organizes everything into strict Object-Oriented classes.",
+        badge: "Strict OOP Class",
+        badgeClass: "badge-java",
+        folderName: "src/",
+        analogy: "An <strong>industrial manufacturing mold catalog</strong>. Everything must be declared inside a formal Blueprint class before creating objects.",
+        explorerFiles: [
+          { name: "src/Main.java", key: "java-main", isSub: false }
+        ],
+        filesData: {
+          "java-main": {
+            name: "src/Main.java",
+            code: `<span class="code-comment">// JAVA: Strict class architecture</span>
+<span class="code-keyword">public class</span> <span class="code-tag">Main</span> {
+    <span class="code-comment">// Application entry method execution point</span>
+    <span class="code-keyword">public static void</span> <span class="code-func">main</span>(<span class="code-tag">String</span>[] <span class="code-var">args</span>) {
+        <span class="code-tag">String</span> <span class="code-var">name</span> = <span class="code-string">"Alex"</span>;
+        <span class="code-tag">System</span>.<span class="code-var">out</span>.<span class="code-func">println</span>(<span class="code-string">"Hello, "</span> + <span class="code-var">name</span>);
+    }
+}`,
+            steps: [
+              { title: "1. Class Bound Files", desc: "All Java code MUST live inside a Class. The class name must match the filename exactly." },
+              { title: "2. The main Ignition", desc: "The application begins running exactly at the <code>public static void main</code> method." },
+              { title: "3. Explicit Type rules", desc: "Variables require strict type declarations (like <code>String</code>) before creation." },
+              { title: "Understanding Flow", desc: "Main.java &rarr; javac compiler &rarr; bytecode Main.class &rarr; JVM runner." }
+            ]
+          }
+        }
+      },
+      "cpp": {
+        name: "C++",
+        brief: "C++ offers high-performance system programming with direct memory access.",
+        badge: "Direct Hardware",
+        badgeClass: "badge-cpp",
+        folderName: "src/",
+        analogy: "A <strong>manual transmission race car</strong>. Raw, hyper-fast, direct control over engine parts without automatic speed limits.",
+        explorerFiles: [
+          { name: "src/main.cpp", key: "cpp-main", isSub: false }
+        ],
+        filesData: {
+          "cpp-main": {
+            name: "src/main.cpp",
+            code: `<span class="code-comment">// C++: Preprocessors and stream operations</span>
+<span class="code-keyword">#include</span> <span class="code-string">&lt;iostream&gt;</span>
+
+<span class="code-keyword">int</span> <span class="code-func">main</span>() {
+    <span class="code-tag">std</span>::<span class="code-tag">string</span> <span class="code-var">name</span> = <span class="code-string">"Alex"</span>;
+    <span class="code-tag">std</span>::<span class="code-var">cout</span> &lt;&lt; <span class="code-string">"Hello, "</span> &lt;&lt; <span class="code-var">name</span> &lt;&lt; <span class="code-tag">std</span>::<span class="code-var">endl</span>;
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}`,
+            steps: [
+              { title: "1. #include Header", desc: "Includes standard libraries (like <code>&lt;iostream&gt;</code> for console outputs) before building." },
+              { title: "2. int main Entry", desc: "The compiler targets the <code>main()</code> function as the starting block of the binary." },
+              { title: "3. Direct output streams", desc: "Uses standard streams (<code>std::cout</code> and output operator <code>&lt;&lt;</code>) to push text." },
+              { title: "Understanding Flow", desc: "main.cpp &rarr; compiler (g++) &rarr; native machine binary execution." }
+            ]
+          }
+        }
+      },
+      "go": {
+        name: "Go (Golang)",
+        brief: "Go is a package-driven compiled language with built-in lightweight concurrency.",
+        badge: "Concurrent Packages",
+        badgeClass: "badge-go",
+        analogy: "An <strong>assembly logistics depot</strong>. Highly organized workers (Goroutines) run concurrently without heavy overhead.",
+        explorerFiles: [
+          { name: "main.go", key: "go-main", isSub: false }
+        ],
+        filesData: {
+          "go-main": {
+            name: "main.go",
+            code: `<span class="code-comment">// GO: Package declarations & imports</span>
+<span class="code-keyword">package</span> <span class="code-var">main</span>
+
+<span class="code-keyword">import</span> <span class="code-string">"fmt"</span>
+
+<span class="code-keyword">func</span> <span class="code-func">main</span>() {
+    <span class="code-var">name</span> := <span class="code-string">"Alex"</span>
+    <span class="code-var">fmt</span>.<span class="code-func">Printf</span>(<span class="code-string">"Hello, %s\\n"</span>, <span class="code-var">name</span>)
+}`,
+            steps: [
+              { title: "1. Package Scope", desc: "Every Go file starts with a package label. <code>package main</code> denotes an executable file." },
+              { title: "2. Strict Imports", desc: "Imports modular packages (like <code>fmt</code> for formatted output) needed for task." },
+              { title: "3. Fast Variables", desc: "Uses the short declaration operator <code>:=</code> to initialize typed variables quickly." },
+              { title: "Understanding Flow", desc: "go build main.go &rarr; super-fast native executable binary creation." }
+            ]
+          }
+        }
+      },
+      "rust": {
+        name: "Rust",
+        brief: "Rust guarantees thread safety and memory correctness without a garbage collector.",
+        badge: "Memory Safety",
+        badgeClass: "badge-rust",
+        folderName: "src/",
+        analogy: "A <strong>highly strict building code inspector</strong>. Checks every single line of memory access rules before compiling.",
+        explorerFiles: [
+          { name: "Cargo.toml", key: "rust-toml", isSub: false },
+          { name: "src/main.rs", key: "rust-main", isSub: true }
+        ],
+        filesData: {
+          "rust-toml": {
+            name: "Cargo.toml",
+            code: `<span class="code-comment"># CARGO: Rust package and dependency manager</span>
+<span class="code-keyword">[package]</span>
+<span class="code-var">name</span> = <span class="code-string">"hello_rust"</span>
+<span class="code-var">version</span> = <span class="code-string">"0.1.0"</span>
+<span class="code-var">edition</span> = <span class="code-string">"2021"</span>
+
+<span class="code-keyword">[dependencies]</span>`,
+            steps: [
+              { title: "1. Cargo Manifest", desc: "<code>Cargo.toml</code> defines package details, dependencies, metadata, and compilation instructions." },
+              { title: "2. Cargo Engine", desc: "Acts as package manager, build tool, and test manager for all Rust modules." }
+            ]
+          },
+          "rust-main": {
+            name: "src/main.rs",
+            code: `<span class="code-comment">// RUST: Safe compile-time variable bindings</span>
+<span class="code-keyword">fn</span> <span class="code-func">main</span>() {
+    <span class="code-keyword">let</span> <span class="code-var">name</span> = <span class="code-string">"Alex"</span>;
+    <span class="code-func">println!</span>(<span class="code-string">"Hello, {}!"</span>, <span class="code-var">name</span>);
+}`,
+            steps: [
+              { title: "1. fn main Entry", desc: "Executes the main method block at startup inside <code>main.rs</code>." },
+              { title: "2. Safe Bindings", desc: "Variables are immutable by default, ensuring values cannot be modified accidentally." },
+              { title: "3. Safe Print macro", desc: "Uses <code>println!</code> macro, which performs safe formatting parameter checks at compile-time." },
+              { title: "Understanding Flow", desc: "cargo build &rarr; compile-time borrow checking &rarr; safe native code compiled." }
+            ]
+          }
+        }
+      },
+      "sql": {
+        name: "SQL",
+        brief: "SQL is a declarative language to design tables and query relational databases.",
+        badge: "Data Querying",
+        badgeClass: "badge-sql",
+        analogy: "A <strong>catalog filing index system</strong>. Query for specific rows and columns of books using precise search filters.",
+        explorerFiles: [
+          { name: "queries.sql", key: "sql-queries", isSub: false }
+        ],
+        filesData: {
+          "sql-queries": {
+            name: "queries.sql",
+            code: `<span class="code-comment">-- SQL: Relational schemas and data querying</span>
+<span class="code-keyword">CREATE TABLE</span> <span class="code-tag">users</span> (
+  <span class="code-var">id</span> <span class="code-tag">INT PRIMARY KEY</span>,
+  <span class="code-var">name</span> <span class="code-tag">VARCHAR(50)</span>
+);
+
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> <span class="code-tag">users</span> <span class="code-keyword">WHERE</span> <span class="code-var">name</span> = <span class="code-string">'Alex'</span>;`,
+            steps: [
+              { title: "1. CREATE TABLE Schema", desc: "Creates organized grids specifying columns, value types, and key constraints." },
+              { title: "2. PRIMARY KEY Constraint", desc: "Ensures that every record row has a unique identifier index for direct access." },
+              { title: "3. SELECT Query Filter", desc: "Uses logical filters (<code>WHERE</code>) to grab rows matching precise conditions." },
+              { title: "Understanding Flow", desc: "Query script &rarr; Relational Database Engine executes &rarr; returns neat tabular grid rows." }
+            ]
+          }
+        }
+      },
+      "vue": {
+        name: "Vue.js",
+        brief: "Vue.js features Single File Components combining markup, script, and styles.",
+        badge: "Reactive Components",
+        badgeClass: "badge-vue",
+        folderName: "src/",
+        analogy: "A <strong>3-in-1 modular container sheet</strong>. Keeps structural drywall, electric logic, and wall paint all in one visual drawer.",
+        explorerFiles: [
+          { name: "src/main.js", key: "vue-main", isSub: false },
+          { name: "src/App.vue", key: "vue-app", isSub: true }
+        ],
+        filesData: {
+          "vue-main": {
+            name: "src/main.js",
+            code: `<span class="code-comment">// VUE: Initialize application mount</span>
+<span class="code-keyword">import</span> { <span class="code-var">createApp</span> } <span class="code-keyword">from</span> <span class="code-string">"vue"</span>;
+<span class="code-keyword">import</span> <span class="code-var">App</span> <span class="code-keyword">from</span> <span class="code-string">"./App.vue"</span>;
+
+<span class="code-func">createApp</span>(<span class="code-var">App</span>).<span class="code-func">mount</span>(<span class="code-string">"#app"</span>);`,
+            steps: [
+              { title: "1. App Mount Booter", desc: "<code>main.js</code> imports Vue, loads the main component, and mounts it into standard index.html." },
+              { title: "2. Framework startup", desc: "Instantiates a reactive app shell matching UI elements with data models." }
+            ]
+          },
+          "vue-app": {
+            name: "src/App.vue",
+            code: `<span class="code-comment">&lt;!-- App.vue: Structured Single File Component --&gt;</span>
+<span class="code-tag">&lt;template&gt;</span>
+  <span class="code-tag">&lt;h1&gt;</span>Hello {{ <span class="code-var">name</span> }}<span class="code-tag">&lt;/h1&gt;</span>
+<span class="code-tag">&lt;/template&gt;</span>
+
+<span class="code-tag">&lt;script&gt;</span>
+<span class="code-keyword">export default</span> {
+  <span class="code-func">data</span>() {
+    <span class="code-keyword">return</span> { <span class="code-var">name</span>: <span class="code-string">"Alex"</span> };
+  }
+}
+<span class="code-tag">&lt;/script&gt;</span>
+
+<span class="code-tag">&lt;style</span> <span class="code-attr">scoped</span><span class="code-tag">&gt;</span>
+<span class="code-tag">h1</span> { <span class="code-keyword">color</span>: <span class="code-string">#4fc08d</span>; }
+<span class="code-tag">&lt;/style&gt;</span>`,
+            steps: [
+              { title: "1. Single File Component", desc: "Vue files utilize <code>.vue</code> extension, holding HTML, JS, and CSS together." },
+              { title: "2. HTML Template block", desc: "Defines visual tags using double brackets (<code>{{ name }}</code>) for binding variables." },
+              { title: "3. Logic Script block", desc: "Contains dynamic state parameters, computed variables, and controller methods." },
+              { title: "4. Scoped Styles block", desc: "Styles visual elements only inside this file, avoiding layout leakage." }
+            ]
+          }
+        }
+      },
+      "angular": {
+        name: "Angular",
+        brief: "Angular is a robust enterprise component framework built strictly with TypeScript.",
+        badge: "Strict Architecture",
+        badgeClass: "badge-angular",
+        folderName: "src/",
+        analogy: "A <strong>highly organized department store</strong>. Visual elements, layout styling, and control mechanisms live in separate folders.",
+        explorerFiles: [
+          { name: "src/main.ts", key: "ng-main", isSub: false },
+          { name: "src/app/app.component.ts", key: "ng-comp", isSub: true },
+          { name: "src/app/app.component.html", key: "ng-html", isSub: true }
+        ],
+        filesData: {
+          "ng-main": {
+            name: "src/main.ts",
+            code: `<span class="code-comment">// ANGULAR: Bootstrap dynamic web application</span>
+<span class="code-keyword">import</span> { <span class="code-var">platformBrowserDynamic</span> } <span class="code-keyword">from</span> <span class="code-string">"@angular/platform-browser-dynamic"</span>;
+<span class="code-keyword">import</span> { <span class="code-var">AppModule</span> } <span class="code-keyword">from</span> <span class="code-string">"./app/app.module"</span>;
+
+<span class="code-func">platformBrowserDynamic</span>().<span class="code-func">bootstrapModule</span>(<span class="code-var">AppModule</span>);`,
+            steps: [
+              { title: "1. Angular Booter", desc: "Starts application loading dynamically using the module blueprint definition." },
+              { title: "2. Module bootstrapping", desc: "Loads dependency configurations and assets for the user interface." }
+            ]
+          },
+          "ng-comp": {
+            name: "src/app/app.component.ts",
+            code: `<span class="code-comment">// COMPONENT CLASS: Manages component bindings</span>
+<span class="code-keyword">import</span> { <span class="code-var">Component</span> } <span class="code-keyword">from</span> <span class="code-string">"@angular/core"</span>;
+
+<span class="code-func">@Component</span>({
+  <span class="code-var">selector</span>: <span class="code-string">"app-root"</span>,
+  <span class="code-var">templateUrl</span>: <span class="code-string">"./app.component.html"</span>
+})
+<span class="code-keyword">export class</span> <span class="code-tag">AppComponent</span> {
+  <span class="code-var">name</span> = <span class="code-string">"Alex"</span>;
+}`,
+            steps: [
+              { title: "1. Decorator Binding", desc: "Uses <code>@Component</code> decorator metadata to connect this controller class with its HTML layout." },
+              { title: "2. TypeScript Controller", desc: "Class attributes (like <code>name</code>) store component UI values dynamically." }
+            ]
+          },
+          "ng-html": {
+            name: "src/app/app.component.html",
+            code: `<span class="code-comment">&lt;!-- COMPONENT HTML: Renders variables --&gt;</span>
+<span class="code-tag">&lt;h1&gt;</span>Hello {{ <span class="code-var">name</span> }}<span class="code-tag">&lt;/h1&gt;</span>`,
+            steps: [
+              { title: "1. Template Bindings", desc: "Uses double brackets <code>{{ name }}</code> to render TS controller variables directly." },
+              { title: "Understanding Flow", desc: "main.ts starts AppModule &rarr; boots component TS class &rarr; maps & outputs HTML markup." }
+            ]
+          }
+        }
+      },
+      "express": {
+        name: "Express.js",
+        brief: "Express is a minimalist routing shell layered on top of Node.js backend servers.",
+        badge: "API Routing Shell",
+        badgeClass: "badge-express",
+        folderName: "server/",
+        analogy: "A <strong>route coordinator desk</strong>. Inspects incoming traffic URLs and directs calls to dedicated calculation rooms.",
+        explorerFiles: [
+          { name: "server/app.js", key: "express-app", isSub: false }
+        ],
+        filesData: {
+          "express-app": {
+            name: "server/app.js",
+            code: `<span class="code-comment">// EXPRESS: Setup API routes & server port</span>
+<span class="code-keyword">const</span> <span class="code-var">express</span> = <span class="code-func">require</span>(<span class="code-string">"express"</span>);
+<span class="code-keyword">const</span> <span class="code-var">app</span> = <span class="code-func">express</span>();
+
+<span class="code-var">app</span>.<span class="code-func">get</span>(<span class="code-string">"/api/users"</span>, (<span class="code-var">req</span>, <span class="code-var">res</span>) =&gt; {
+  <span class="code-var">res</span>.<span class="code-func">json</span>([{ <span class="code-var">id</span>: <span class="code-string">1</span>, <span class="code-var">name</span>: <span class="code-string">"Alex"</span> }]);
+});
+
+<span class="code-var">app</span>.<span class="code-func">listen</span>(<span class="code-string">5000</span>);`,
+            steps: [
+              { title: "1. Setup express App", desc: "Imports the Express library and creates an instance (<code>app</code>) of the backend shell." },
+              { title: "2. Routing Maps", desc: "Binds HTTP request methods (like <code>GET /api/users</code>) to processing actions." },
+              { title: "3. JSON Data Responders", desc: "Uses <code>res.json()</code> to format and transmit standard JSON payloads back to clients." },
+              { title: "4. Port Listener", desc: "Listens on port 5000 via <code>app.listen()</code> to wait for client HTTP requests." }
+            ]
+          }
+        }
+      },
+      "django": {
+        name: "Django",
+        brief: "Django is a Python batteries-included framework with absolute MVC structure.",
+        badge: "MVC Architecture",
+        badgeClass: "badge-django",
+        folderName: "mysite/",
+        analogy: "A <strong>franchise business layout</strong>. Pre-arranged admin panels, database connectors, and security gates, ready to work.",
+        explorerFiles: [
+          { name: "manage.py", key: "dj-manage", isSub: false },
+          { name: "mysite/urls.py", key: "dj-urls", isSub: true },
+          { name: "mysite/views.py", key: "dj-views", isSub: true }
+        ],
+        filesData: {
+          "dj-manage": {
+            name: "manage.py",
+            code: `<span class="code-comment"># MANAGE: CLI wrapper manager</span>
+<span class="code-keyword">import</span> <span class="code-var">sys</span>
+<span class="code-comment"># Launches Django terminal administration tasks</span>`,
+            steps: [
+              { title: "1. Django CLI Manager", desc: "<code>manage.py</code> handles starting server (<code>runserver</code>), creating database tables, and generating migrations." }
+            ]
+          },
+          "dj-urls": {
+            name: "mysite/urls.py",
+            code: `<span class="code-comment"># URLS: Central routing controller maps URL patterns</span>
+<span class="code-keyword">from</span> <span class="code-var">django.urls</span> <span class="code-keyword">import</span> <span class="code-var">path</span>
+<span class="code-keyword">from</span> <span class="code-var">.</span> <span class="code-keyword">import</span> <span class="code-var">views</span>
+
+<span class="code-var">urlpatterns</span> = [
+    <span class="code-var">path</span>(<span class="code-string">"greet/"</span>, <span class="code-var">views</span>.<span class="code-var">greet_user</span>),
+]`,
+            steps: [
+              { title: "1. Centralized Routing", desc: "<code>urls.py</code> monitors incoming HTTP requests and matches them with processing views." }
+            ]
+          },
+          "dj-views": {
+            name: "mysite/views.py",
+            code: `<span class="code-comment"># VIEWS: Action handlers send HTTP response</span>
+<span class="code-keyword">from</span> <span class="code-var">django.http</span> <span class="code-keyword">import</span> <span class="code-var">JsonResponse</span>
+
+<span class="code-keyword">def</span> <span class="code-func">greet_user</span>(<span class="code-var">request</span>):
+    <span class="code-keyword">return</span> <span class="code-func">JsonResponse</span>({<span class="code-string">"message"</span>: <span class="code-string">"Hello Alex"</span>})`,
+            steps: [
+              { title: "1. HTTP Request handlers", desc: "<code>views.py</code> contains controller functions executing backend database logic." },
+              { title: "2. Formatted Responders", desc: "Returns JSON formats or renders visual HTML templates on execution." },
+              { title: "Understanding Flow", desc: "Client requests 'greet/' &rarr; urls.py routes &rarr; views.py processes &rarr; JSON returned." }
+            ]
+          }
+        }
+      },
+      "fastapi": {
+        name: "FastAPI",
+        brief: "FastAPI provides high-performance async APIs with automatic Pydantic models checks.",
+        badge: "Asynchronous APIs",
+        badgeClass: "badge-fastapi",
+        folderName: "app/",
+        analogy: "A <strong>digital fast-food drive-thru</strong>. Orders are checked instantly using automatic templates before they are made.",
+        explorerFiles: [
+          { name: "app/main.py", key: "fast-main", isSub: false }
+        ],
+        filesData: {
+          "fast-main": {
+            name: "app/main.py",
+            code: `<span class="code-comment"># FASTAPI: Modern async Python REST endpoints</span>
+<span class="code-keyword">from</span> <span class="code-var">fastapi</span> <span class="code-keyword">import</span> <span class="code-var">FastAPI</span>
+
+<span class="code-var">app</span> = <span class="code-func">FastAPI</span>()
+
+<span class="code-func">@app.get</span>(<span class="code-string">"/items/{item_id}"</span>)
+<span class="code-keyword">async def</span> <span class="code-func">read_item</span>(<span class="code-var">item_id</span>: <span class="code-tag">int</span>):
+    <span class="code-keyword">return</span> {<span class="code-string">"item_id"</span>: <span class="code-var">item_id</span>, <span class="code-string">"status"</span>: <span class="code-string">"active"</span>}`,
+            steps: [
+              { title: "1. Framework setup", desc: "Instantiates FastAPI container to initialize the server environment." },
+              { title: "2. Endpoint Decorators", desc: "Uses decorators (like <code>@app.get</code>) to bind URL paths directly to Python functions." },
+              { title: "3. Async execution", desc: "Runs non-blocking async functions (<code>async def</code>) to handle thousands of requests." },
+              { title: "4. Parameter validation", desc: "Declares types (like <code>item_id: int</code>) which auto-validate URL data instantly." }
+            ]
+          }
+        }
+      },
+      "springboot": {
+        name: "Spring Boot",
+        brief: "Spring Boot is an auto-configured enterprise-level Java server framework.",
+        badge: "Enterprise Server",
+        badgeClass: "badge-springboot",
+        folderName: "src/",
+        analogy: "An <strong>automated conveyor assembly line</strong>. Auto-wires database pools, server security, and routers on boot.",
+        explorerFiles: [
+          { name: "src/DemoApplication.java", key: "sb-app", isSub: false },
+          { name: "src/UserController.java", key: "sb-controller", isSub: true }
+        ],
+        filesData: {
+          "sb-app": {
+            name: "src/DemoApplication.java",
+            code: `<span class="code-comment">// SPRING BOOT: Auto-configures server infrastructure</span>
+<span class="code-keyword">package</span> <span class="code-var">com.example.demo</span>;
+
+<span class="code-keyword">import</span> <span class="code-var">org.springframework.boot.SpringApplication</span>;
+<span class="code-keyword">import</span> <span class="code-var">org.springframework.boot.autoconfigure.SpringBootApplication</span>;
+
+<span class="code-func">@SpringBootApplication</span>
+<span class="code-keyword">public class</span> <span class="code-tag">DemoApplication</span> {
+    <span class="code-keyword">public static void</span> <span class="code-func">main</span>(<span class="code-tag">String</span>[] <span class="code-var">args</span>) {
+        <span class="code-tag">SpringApplication</span>.<span class="code-func">run</span>(<span class="code-tag">DemoApplication</span>.<span class="code-keyword">class</span>, <span class="code-var">args</span>);
+    }
+}`,
+            steps: [
+              { title: "1. Main server Ignition", desc: "<code>DemoApplication</code> bootstraps the Tomcat server engine using <code>SpringApplication.run()</code>." },
+              { title: "2. Auto Configuration decorator", desc: "The <code>@SpringBootApplication</code> decorator configures databases, settings, and beans dynamically." }
+            ]
+          },
+          "sb-controller": {
+            name: "src/UserController.java",
+            code: `<span class="code-comment">// CONTROLLER: Maps HTTP requests to methods</span>
+<span class="code-keyword">package</span> <span class="code-var">com.example.demo</span>;
+
+<span class="code-keyword">import</span> <span class="code-var">org.springframework.web.bind.annotation.GetMapping</span>;
+<span class="code-keyword">import</span> <span class="code-var">org.springframework.web.bind.annotation.RestController</span>;
+
+<span class="code-func">@RestController</span>
+<span class="code-keyword">public class</span> <span class="code-tag">UserController</span> {
+    <span class="code-func">@GetMapping</span>(<span class="code-string">"/hello"</span>)
+    <span class="code-keyword">public</span> <span class="code-tag">String</span> <span class="code-func">sayHello</span>() {
+        <span class="code-keyword">return</span> <span class="code-string">"Hello Alex"</span>;
+    }
+}`,
+            steps: [
+              { title: "1. REST Controller class", desc: "The <code>@RestController</code> annotation establishes the class as an HTTP API entry point." },
+              { title: "2. GET Route binding", desc: "The <code>@GetMapping('/hello')</code> annotation connects GET calls to the return method." },
+              { title: "Understanding Flow", desc: "Boot Application starts server &rarr; scans Controllers &rarr; maps REST endpoints." }
+            ]
+          }
+        }
+      },
+      "flask": {
+        name: "Flask",
+        brief: "Flask is a lightweight, micro-routing Python framework.",
+        badge: "Micro Server",
+        badgeClass: "badge-flask",
+        folderName: "app/",
+        analogy: "A <strong>modular portable camping stove</strong>. Pull it out, declare a single routing script, and your backend server is ready.",
+        explorerFiles: [
+          { name: "app/app.py", key: "flask-app", isSub: false }
+        ],
+        filesData: {
+          "flask-app": {
+            name: "app/app.py",
+            code: `<span class="code-comment"># FLASK: Micro routing application setup</span>
+<span class="code-keyword">from</span> <span class="code-var">flask</span> <span class="code-keyword">import</span> <span class="code-var">Flask</span>, <span class="code-var">jsonify</span>
+<span class="code-var">app</span> = <span class="code-func">Flask</span>(<span class="code-var">__name__</span>)
+
+<span class="code-func">@app.route</span>(<span class="code-string">"/api"</span>)
+<span class="code-keyword">def</span> <span class="code-func">hello</span>():
+    <span class="code-keyword">return</span> <span class="code-func">jsonify</span>(<span class="code-var">message</span>=<span class="code-string">"Hello Alex"</span>)
+
+<span class="code-keyword">if</span> <span class="code-var">__name__</span> == <span class="code-string">"__main__"</span>:
+    <span class="code-var">app</span>.<span class="code-func">run</span>(<span class="code-var">port</span>=<span class="code-string">5000</span>)`,
+            steps: [
+              { title: "1. Minimalist Init", desc: "Initializes a minimal Flask server instance using <code>Flask(__name__)</code>." },
+              { title: "2. Routing decorators", desc: "Binds server URLs directly to Python functions using <code>@app.route()</code>." },
+              { title: "3. Direct Jsonify utility", desc: "Converts standard dictionaries into JSON responses using <code>jsonify()</code>." },
+              { title: "Understanding Flow", desc: "app.py starts server &rarr; listens on port 5000 &rarr; processes routes dynamically." }
+            ]
+          }
+        }
+      },
+      "postgresql": {
+        name: "PostgreSQL",
+        brief: "PostgreSQL is a powerful relational SQL database with absolute ACID compliance.",
+        badge: "ACID Database",
+        badgeClass: "badge-postgresql",
+        analogy: "A <strong>highly secure vault room</strong>. Every transaction ledger entry is guaranteed to be completely finished or safely cancelled.",
+        explorerFiles: [
+          { name: "db-schema.sql", key: "pg-schema", isSub: false }
+        ],
+        filesData: {
+          "pg-schema": {
+            name: "db-schema.sql",
+            code: `<span class="code-comment">-- POSTGRESQL: Secure schemas with strict index indexes</span>
+<span class="code-keyword">CREATE TABLE</span> <span class="code-tag">accounts</span> (
+  <span class="code-var">user_id</span> <span class="code-tag">SERIAL PRIMARY KEY</span>,
+  <span class="code-var">balance</span> <span class="code-tag">NUMERIC(10, 2) NOT NULL</span>
+);
+
+<span class="code-keyword">INSERT INTO</span> <span class="code-tag">accounts</span> (<span class="code-var">balance</span>) <span class="code-keyword">VALUES</span> (<span class="code-string">1500.00</span>);`,
+            steps: [
+              { title: "1. Rigid Grid Table", desc: "Creates organized grids specifying columns, exact numeric sizes, and check rules." },
+              { title: "2. SERIAL Sequence", desc: "Generates self-incrementing index numbers automatically for ID primary keys." },
+              { title: "3. NOT NULL protection", desc: "Prevents empty cells or bad data records from corrupting transactions." },
+              { title: "Understanding Flow", desc: "Client sends query &rarr; locks record rows &rarr; executes &rarr; writes transaction safely to disk." }
+            ]
+          }
+        }
+      },
+      "mysql": {
+        name: "MySQL",
+        brief: "MySQL is an open-source relational database built for speed and structured indexing.",
+        badge: "Fast Relational",
+        badgeClass: "badge-mysql",
+        analogy: "A <strong>massive warehouse index cabinet</strong>. Optimized for fast inventory checks, reading records, and neat column reports.",
+        explorerFiles: [
+          { name: "mysql-schema.sql", key: "mysql-schema", isSub: false }
+        ],
+        filesData: {
+          "mysql-schema": {
+            name: "mysql-schema.sql",
+            code: `<span class="code-comment">-- MYSQL: Schema structures with indexes</span>
+<span class="code-keyword">CREATE TABLE</span> <span class="code-tag">products</span> (
+  <span class="code-var">product_id</span> <span class="code-tag">INT AUTO_INCREMENT</span>,
+  <span class="code-var">title</span> <span class="code-tag">VARCHAR(100)</span>,
+  <span class="code-tag">PRIMARY KEY</span> (<span class="code-var">product_id</span>)
+);
+
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> <span class="code-tag">products</span> <span class="code-keyword">WHERE</span> <span class="code-var">title</span> <span class="code-keyword">LIKE</span> <span class="code-string">'Smart%'</span>;`,
+            steps: [
+              { title: "1. Table Schema", desc: "Designs spreadsheets using <code>CREATE TABLE</code> and mapping column index types." },
+              { title: "2. AUTO_INCREMENT tag", desc: "Instructs MySQL engine to increment primary keys automatically on inserts." },
+              { title: "3. Text Pattern searches", desc: "Uses wildcards (like <code>LIKE 'Smart%'</code>) to perform fast matches on column titles." },
+              { title: "Understanding Flow", desc: "Client query &rarr; database matches indexes &rarr; returns tabular rows instantly." }
+            ]
+          }
+        }
+      },
+      "redis": {
+        name: "Redis",
+        brief: "Redis is an in-memory key-value database built for caching.",
+        badge: "In-Memory Cache",
+        badgeClass: "badge-redis",
+        analogy: "A <strong>sticky notepad on your desk</strong>. Holds quick key-value notes in computer RAM memory so they can be read in microseconds.",
+        explorerFiles: [
+          { name: "commands.txt", key: "redis-commands", isSub: false }
+        ],
+        filesData: {
+          "redis-commands": {
+            name: "commands.txt",
+            code: `<span class="code-comment"># REDIS: Ultra-fast key-value cache operations</span>
+<span class="code-keyword">SET</span> <span class="code-var">session:user</span> <span class="code-string">"Alex"</span>
+<span class="code-keyword">GET</span> <span class="code-var">session:user</span>
+
+<span class="code-comment"># Cache query key with expiration limit (60 seconds)</span>
+<span class="code-keyword">SETEX</span> <span class="code-var">rate_limit:127.0.0.1</span> <span class="code-string">60</span> <span class="code-string">"1"</span>`,
+            steps: [
+              { title: "1. Key-Value Storage", desc: "Saves raw values mapped directly to string index paths (no complex relational tables)." },
+              { title: "2. Memory-driven (RAM)", desc: "Since records sit in RAM instead of slow storage drives, access takes microseconds." },
+              { title: "3. TTL Cache Expirations", desc: "Uses expiration commands (<code>SETEX</code>) to auto-delete caching keys when time runs out." },
+              { title: "Understanding Flow", desc: "Check cache &rarr; key found? Return cached value (Hit) &rarr; empty? Fetch from SQL (Miss)." }
+            ]
+          }
+        }
       }
     };
 
     // Direct side-by-side architectural summary comparisons dataset
     const matrixDatabase = [
       { tech: "HTML", entry: "index.html", modules: "None (Raw markup)", routing: "None", logic: "Visible UI tags", db: "None", core: "Browser DOM representation" },
-      { tech: "CSS", entry: "style.css", modules: "None (Raw styling)", routing: "None", logic: "Visual styles mapping", db: "None", core: "<link rel='stylesheet'>" },
+      { tech: "CSS", entry: "style.css", modules: "None (Raw styling)", routing: "None", logic: "Visual styles mapping", db: "None", core: "&lt;link rel='stylesheet'&gt;" },
       { tech: "JavaScript", entry: "script.js", modules: "None (Vanilla scripting)", routing: "None", logic: "Event listener loop", db: "None", core: "Find &rarr; Listen &rarr; Run callback" },
-      { tech: "React", entry: "main.js", modules: "Reusable Components (.js)", routing: "None (Props layout)", logic: "Component layout functions", db: "None", core: "Import/Export system connects" },
+      { tech: "TypeScript", entry: "src/index.ts", modules: "Interfaces & Classes (.ts)", routing: "None", logic: "Strict type validation", db: "None", core: "tsc compiles to standard JS" },
+      { tech: "Python", entry: "main.py", modules: "Modules (.py)", routing: "None", logic: "Whitespace indent blocks", db: "None", core: "Python interpreter executions" },
+      { tech: "Java", entry: "src/Main.java", modules: "Classes & Packages", routing: "None", logic: "OOP Class structures", db: "JDBC Driver", core: "JVM runs bytecode (.class)" },
+      { tech: "C++", entry: "src/main.cpp", modules: "Headers (.h) & Source (.cpp)", routing: "None", logic: "Low-level system logic", db: "MySQL C++ Connector", core: "g++ compiles to native binary" },
+      { tech: "Go (Golang)", entry: "main.go", modules: "Packages (.go)", routing: "None", logic: "Concurrent Goroutines", db: "database/sql driver", core: "go run compiles and runs" },
+      { tech: "Rust", entry: "src/main.rs", modules: "Modules (mod.rs)", routing: "None (Cargo.toml)", logic: "Strict memory borrow checks", db: "SQLx / Diesel ORM", core: "cargo run builds & runs binary" },
+      { tech: "SQL", entry: "queries.sql", modules: "Database tables & indices", routing: "None", logic: "Declarative query filters", db: "Relational DBs", core: "Execution queries engine" },
+      { tech: "React.js", entry: "src/main.js", modules: "Reusable Components (.js)", routing: "None (Props layout)", logic: "Component layout functions", db: "None", core: "Import/Export system connects" },
       { tech: "Node.js (Express)", entry: "server.js", modules: "Express routes & controllers", routing: "Express endpoints", logic: "Controller request handler", db: "Connector models", core: "app.listen(3000) starts" },
+      { tech: "Next.js", entry: "app/page.js", modules: "Automated folder layout", routing: "Automatic page routing", logic: "Automatic SSR compilation", db: "Backend API routes", core: "app/ Folder routes everything" },
+      { tech: "Vue.js", entry: "src/main.js", modules: "Single File Components (.vue)", routing: "Vue Router", logic: "Reactive data binding", db: "None", core: "app.mount('#app') builds" },
+      { tech: "Angular", entry: "src/main.ts", modules: "NgModules & Components", routing: "Angular RouterModule", logic: "TypeScript logic classes", db: "None", core: "ng serve bootstraps AppModule" },
+      { tech: "Express.js", entry: "server/app.js", modules: "Middlewares & Router", routing: "Router endpoints", logic: "HTTP method controllers", db: "ORM / ODM connectors", core: "app.listen(port) starts" },
+      { tech: "Django", entry: "manage.py", modules: "Apps (models, views, urls)", routing: "urls.py maps paths", logic: "views.py handlers", db: "Built-in Django ORM", core: "manage.py runserver boots" },
+      { tech: "FastAPI", entry: "app/main.py", modules: "APIRouter & Pydantic schemas", routing: "Decorators (@app.get)", logic: "Asynchronous handlers", db: "SQLAlchemy / Tortoise ORM", core: "uvicorn starts async loop" },
+      { tech: "Spring Boot", entry: "src/DemoApplication.java", modules: "Beans & Controllers", routing: "@RestController mappings", logic: "Java controller methods", db: "Spring Data JPA / Hibernate", core: "mvn spring-boot:run starts" },
+      { tech: "Flask", entry: "app/app.py", modules: "Flask Blueprints", routing: "@app.route decorators", logic: "Python view functions", db: "Flask-SQLAlchemy ORM", core: "flask run starts dev server" },
       { tech: "MongoDB", entry: "models/User.js", modules: "Mongoose models Schema", routing: "None", logic: "Data structure validating", db: "Collections database", core: "mongoose.connect() binds" },
-      { tech: "Next.js", entry: "app/page.js", modules: "Automated folder layout", routing: "Automatic page routing", logic: "Automatic SSR compilation", db: "Backend API routes", core: "app/ Folder routes everything" }
+      { tech: "PostgreSQL", entry: "db-schema.sql", modules: "Relational Tables", routing: "None", logic: "SQL Functions / Triggers", db: "PostgreSQL Engine", core: "psql interacts with storage" },
+      { tech: "MySQL", entry: "mysql-schema.sql", modules: "Relational Tables", routing: "None", logic: "SQL Stored Procedures", db: "MySQL Engine", core: "mysql client queries tables" },
+      { tech: "Redis", entry: "commands.txt", modules: "Key-Value Stores", routing: "None", logic: "In-memory caching commands", db: "Redis Server Store", core: "redis-server holds cache in RAM" }
     ];
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -1054,6 +1693,23 @@
         if (key === "node") icon = "🟢";
         if (key === "mongodb") icon = "🍃";
         if (key === "nextjs") icon = "▲";
+        if (key === "typescript") icon = "🟦";
+        if (key === "python") icon = "🐍";
+        if (key === "java") icon = "☕";
+        if (key === "cpp") icon = "⚙️";
+        if (key === "go") icon = "🐹";
+        if (key === "rust") icon = "🦀";
+        if (key === "sql") icon = "🗄️";
+        if (key === "vue") icon = "🟢";
+        if (key === "angular") icon = "🅰️";
+        if (key === "express") icon = "⚡";
+        if (key === "django") icon = "🎯";
+        if (key === "fastapi") icon = "⚡";
+        if (key === "springboot") icon = "🍃";
+        if (key === "flask") icon = "🧪";
+        if (key === "postgresql") icon = "🐘";
+        if (key === "mysql") icon = "🐬";
+        if (key === "redis") icon = "🟥";
 
         btn.innerHTML = `<span class="tech-tab-icon">${icon}</span> ${item.name}`;
         tabList.appendChild(btn);
@@ -1099,8 +1755,8 @@
         treeContainer.innerHTML = "";
 
         // First, check if there are sub-levels to make a folder representation
-        let needsSrcFolder = techKey === "react" || techKey === "node" || techKey === "nextjs";
-        let folderName = techKey === "react" ? "src/" : (techKey === "node" ? "server/" : "app/");
+        let needsSrcFolder = !!data.folderName;
+        let folderName = data.folderName || "";
 
         if (needsSrcFolder) {
           const folderDiv = document.createElement("div");
