@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StackEasy | Developer Code & File Structures</title>
+  <meta name="description" content="Master the folder layouts, entry files, code templates, and logical architectures across HTML, CSS, JavaScript, React, Node.js, MongoDB, and Next.js.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Custom style overrides and specific styling for Structure Explorer page */
+    .struct-hero {
+      padding: 3rem 0 1.5rem 0;
+      text-align: center;
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.05) 0%, rgba(245, 239, 235, 0) 100%);
+    }
+
+    .struct-tagline {
+      display: inline-block;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.35rem 1.1rem;
+      border-radius: 50px;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(255, 90, 31, 0.15);
+    }
+
+    .struct-title {
+      font-size: 2.4rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.6rem;
+      letter-spacing: -1px;
+    }
+
+    .struct-subtitle {
+      font-size: 1.0rem;
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+
+    /* Tab Layout & Grid Container */
+    .struct-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (min-width: 1024px) {
+      .struct-container {
+        grid-template-columns: 280px 1fr;
+      }
+    }
+
+    /* Left Sidebar Tech Selector Tabs */
+    .struct-sidebar {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      box-shadow: var(--shadow-sm);
+      padding: 1.5rem 1rem;
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+      z-index: 10;
+    }
+
+    .struct-sidebar-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      padding-left: 0.8rem;
+      border-left: 3px solid var(--color-orange-primary);
+    }
+
+    .tech-tab-list {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+    }
+
+    @media (min-width: 1024px) {
+      .tech-tab-list {
+        flex-direction: column;
+        overflow-x: visible;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .tech-tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--color-text-dark);
+      background-color: transparent;
+      border: 1px solid transparent;
+      text-align: left;
+      width: 100%;
+      min-width: max-content;
+      transition: var(--transition-fast);
+    }
+
+    @media (min-width: 1024px) {
+      .tech-tab-btn {
+        min-width: 100%;
+      }
+    }
+
+    .tech-tab-btn:hover {
+      background-color: rgba(15, 38, 21, 0.04);
+      color: var(--color-forest-dark);
+    }
+
+    .tech-tab-btn.active {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tech-tab-icon {
+      font-size: 1.1rem;
+    }
+
+    .tech-tab-btn.active .tech-tab-icon {
+      filter: drop-shadow(0 0 3px rgba(255, 90, 31, 0.8));
+    }
+
+    /* Main Dashboard Details Area */
+    .struct-dashboard {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      box-shadow: var(--shadow-md);
+      padding: 2.2rem;
+      min-height: 550px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      transition: opacity var(--transition-fast) ease-in-out;
+    }
+
+    .dashboard-header {
+      border-bottom: 2px solid rgba(15, 38, 21, 0.05);
+      padding-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    @media (min-width: 768px) {
+      .dashboard-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      border: 1px solid currentColor;
+    }
+
+    /* Custom colored badges */
+    .badge-html { color: #f06529; background-color: rgba(240, 101, 41, 0.08); }
+    .badge-css { color: #2965f1; background-color: rgba(41, 101, 241, 0.08); }
+    .badge-javascript { color: #eab308; background-color: rgba(234, 179, 8, 0.08); }
+    .badge-react { color: var(--color-frontend-blue); background-color: rgba(56, 189, 248, 0.08); }
+    .badge-node { color: var(--color-backend-purple); background-color: rgba(129, 140, 248, 0.08); }
+    .badge-mongodb { color: var(--color-database-green); background-color: rgba(52, 211, 153, 0.08); }
+    .badge-nextjs { color: #000000; background-color: rgba(0, 0, 0, 0.05); }
+
+    .analogy-banner {
+      background-color: var(--color-pill-bg);
+      border-left: 4px solid var(--color-orange-primary);
+      padding: 1.2rem 1.6rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text-dark);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .analogy-banner strong {
+      color: var(--color-forest-dark);
+    }
+
+    /* Two-column Interactive Workspace Panel */
+    .workspace-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .workspace-panel {
+        grid-template-columns: 280px 1fr;
+      }
+    }
+
+    /* Left Panel: Files and Directory Explorer (VS Code Mockup) */
+    .file-explorer {
+      background-color: #0f172a;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1.2rem;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      box-shadow: var(--shadow-sm);
+      overflow-y: auto;
+      height: 380px;
+    }
+
+    .explorer-header {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748b;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.5rem;
+    }
+
+    .explorer-tree {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .tree-folder {
+      color: #f59e0b;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    .tree-folder:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .tree-file {
+      color: #e2e8f0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.5rem;
+      padding-left: 1.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tree-file.sub-level {
+      padding-left: 2.5rem;
+    }
+
+    .tree-file:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--color-white);
+    }
+
+    .tree-file.active-file {
+      background-color: rgba(255, 90, 31, 0.15);
+      color: #ffffff;
+      border-left: 2px solid var(--color-orange-primary);
+      font-weight: 600;
+    }
+
+    /* Right Panel: Beautiful Dark Code Editor Mockup */
+    .editor-container {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: #0f172a;
+      box-shadow: var(--shadow-lg);
+      height: 380px;
+      overflow: hidden;
+    }
+
+    .editor-tab-bar {
+      background-color: #1e293b;
+      display: flex;
+      align-items: center;
+      height: 38px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-left: 0.5rem;
+    }
+
+    .editor-tab {
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 6px 6px 0 0;
+      border-top: 2px solid var(--color-orange-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      height: 100%;
+    }
+
+    .editor-code-body {
+      flex: 1;
+      padding: 1.2rem;
+      overflow: auto;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      line-height: 1.5;
+    }
+
+    /* Code Highlighting Custom Colors */
+    .code-comment { color: #64748b; font-style: italic; }
+    .code-keyword { color: #f43f5e; font-weight: 600; }
+    .code-string { color: #a7f3d0; }
+    .code-tag { color: #38bdf8; font-weight: 600; }
+    .code-attr { color: #fbbf24; }
+    .code-var { color: #ffffff; }
+    .code-func { color: #a78bfa; }
+
+    /* Step Guide Definitions Panel */
+    .concept-guide-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .concept-guide-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--color-forest-dark);
+      border-bottom: 2px solid rgba(15, 38, 21, 0.05);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .concept-steps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .concept-step-card {
+      background-color: var(--color-pill-bg);
+      border: 1px solid rgba(15, 38, 21, 0.05);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      transition: transform var(--transition-fast);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .concept-step-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-num-bubble {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.95rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 5px rgba(15, 38, 21, 0.1);
+    }
+
+    .step-card-content h5 {
+      font-family: var(--font-heading);
+      font-size: 1.0rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .step-card-content p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--color-text-dark);
+    }
+
+    /* Comparison Dashboard Section */
+    .matrix-section {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      box-shadow: var(--shadow-sm);
+      padding: 2.2rem;
+      margin-bottom: 5rem;
+    }
+
+    .matrix-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .matrix-title {
+      font-size: 1.6rem;
+      color: var(--color-forest-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .matrix-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      min-width: 900px;
+    }
+
+    .matrix-table th {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      padding: 1.0rem 1.2rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+    }
+
+    .matrix-table td {
+      padding: 1.0rem 1.2rem;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.06);
+      background-color: var(--color-white);
+      line-height: 1.5;
+    }
+
+    .matrix-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .matrix-table tr:hover td {
+      background-color: rgba(15, 38, 21, 0.02);
+    }
+
+    .matrix-tech-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--color-forest-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="index.html" class="logo-group" id="logo-main">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+          <path d="M2 17L12 22L22 17" stroke="#0F2615" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="7" r="1.5" fill="#FFFFFF"/>
+        </svg>
+        <span class="logo-text">Stack<span>Easy</span></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
+          <li><a href="tree.html" class="nav-link">Tree</a></li>
+          <li><a href="structure.html" class="nav-link active">Structure</a></li>
+          <li><a href="questions.html" class="nav-link">Questions</a></li>
+          <li><a href="interview.html" class="nav-link nav-interview-trigger">Interview</a></li>
+          <li class="nav-languages-item"><a href="languages.html" class="nav-link">Languages</a></li>
+          <li><a href="interview2.html" class="nav-link">Interview 2.0</a></li>
+          <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA -->
+      <div class="nav-actions">
+        <a href="index.html#customizer" class="btn-nav-cta">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="index.html#fullstack" class="drawer-link">FullStack</a></li>
+      <li><a href="tree.html" class="drawer-link">Tree</a></li>
+      <li><a href="structure.html" class="drawer-link active">Structure</a></li>
+      <li><a href="questions.html" class="drawer-link">Questions</a></li>
+      <li><a href="interview.html" class="drawer-link">Interview</a></li>
+      <li><a href="interview2.html" class="drawer-link">Interview 2.0</a></li>
+      <li><a href="languages.html" class="drawer-link">Languages</a></li>
+      <li><a href="index.html#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+  </div>
+
+  <main class="page-container">
+    
+    <!-- Hero Header -->
+    <section class="struct-hero">
+      <span class="struct-tagline">Visual Code Architectures</span>
+      <h1 class="struct-title">Premium Code & File Explorer</h1>
+      <p class="struct-subtitle">
+        Understand how files are organized and how basic syntax flows inside modern full-stack systems. Click on any technology tab to explore their directory templates, live code examples, and component maps!
+      </p>
+    </section>
+
+    <!-- Main Tabbed Visualizer Container -->
+    <section class="struct-container">
+      
+      <!-- Left Sidebar Switcher -->
+      <aside class="struct-sidebar">
+        <div class="struct-sidebar-title">Select Stack Technology</div>
+        <div class="tech-tab-list" id="tech-tab-list">
+          <!-- Button templates rendered by Javascript -->
+        </div>
+      </aside>
+
+      <!-- Right Dashboard Panel -->
+      <div class="struct-dashboard" id="struct-dashboard">
+        
+        <!-- Header Section with Badge -->
+        <div class="dashboard-header">
+          <div>
+            <h2 id="tech-name" style="font-size: 1.8rem; color: var(--color-forest-dark);">Technology Name</h2>
+            <p id="tech-brief" style="font-size: 0.95rem; color: var(--color-text-muted); margin-top: 0.2rem;">One-line brief description goes here...</p>
+          </div>
+          <span class="tech-badge" id="tech-badge">Frontend Skeleton</span>
+        </div>
+
+        <!-- Tactile Analogy Banner -->
+        <div class="analogy-banner" id="analogy-banner">
+          Tactile analogy description goes here...
+        </div>
+
+        <!-- Directory & Code Panel -->
+        <div class="workspace-panel">
+          
+          <!-- VS Code Mockup File Tree -->
+          <div class="file-explorer">
+            <div class="explorer-header">
+              <span>📁 Workspace Directory</span>
+              <span>v1.0</span>
+            </div>
+            <div class="explorer-tree" id="explorer-tree">
+              <!-- Folder contents populated by Javascript -->
+            </div>
+          </div>
+
+          <!-- Dark Code Editor -->
+          <div class="editor-container">
+            <div class="editor-tab-bar">
+              <div class="editor-tab">
+                <span>📄</span>
+                <span id="active-filename">index.html</span>
+              </div>
+            </div>
+            <pre class="editor-code-body" id="editor-code-body">
+              <!-- Syntax highlighted code output -->
+            </pre>
+          </div>
+
+        </div>
+
+        <!-- Concept Steps Detail Box -->
+        <div class="concept-guide-panel">
+          <h4 class="concept-guide-title">File Structure & Code Breakdown</h4>
+          <div class="concept-steps-grid" id="concept-steps-grid">
+            <!-- Breakdowns populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Comparison Matrix Section -->
+    <section class="matrix-section">
+      <div class="matrix-header">
+        <h2 class="matrix-title">
+          <span>📊</span>
+          Full Stack Architecture Matrix
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.5;">
+          A direct comparison mapping standard files, layout components, and data paths across the modern developer stack:
+        </p>
+      </div>
+
+      <div class="matrix-table-wrapper">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Technology</th>
+              <th>Entry File</th>
+              <th>Reusable Modules</th>
+              <th>Routing / Paths</th>
+              <th>Processing Logic</th>
+              <th>Database Connection</th>
+              <th>Core Connection</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-tbody">
+            <!-- Table rows populated dynamically by Javascript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="index.html" class="logo-group">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+            <path d="M2 17L12 22L22 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text text-white">Stack<span>Easy</span></span>
+        </a>
+        <p class="footer-about">
+          Explaining web development through beautiful, tactile micro-learning and relatable stories. Let's build together!
+        </p>
+      </div>
+
+      <div class="footer-links-side">
+        <div class="footer-col">
+          <span class="footer-title">Q&A Topics</span>
+          <ul>
+            <li><a href="questions.html#sec-frontend">Frontend UI</a></li>
+            <li><a href="questions.html#sec-backend">Backend Server</a></li>
+            <li><a href="questions.html#sec-database">Data Storage</a></li>
+            <li><a href="questions.html#sec-architecture">System Flow</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-title">Resources</span>
+          <ul>
+            <li><a href="tree.html">Visual Full Stack Tree</a></li>
+            <li><a href="index.html#explorer">Restaurant Analogy</a></li>
+            <li><a href="index.html#faq">FAQ Hub</a></li>
+            <li><a href="questions.html">Q&A Hub</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 StackEasy Platform. Handcrafted for awesome learners.</p>
+    </div>
+  </footer>
+
+  <!-- Dictionaries for Code Structure Explorer -->
+  <script>
+    // Complete structured database for the 7 key technologies
+    const structureDatabase = {
+      "html": {
+        name: "HTML",
+        brief: "HTML has a fixed structure defining visible webpage elements.",
+        badge: "Fixed Structure",
+        badgeClass: "badge-html",
+        analogy: "The <strong>architectural structure & drywall</strong> of a house. It defines where rooms, empty doors, and windows go.",
+        explorerFiles: [
+          { name: "index.html", key: "index-html", isSub: false }
+        ],
+        filesData: {
+          "index-html": {
+            name: "index.html",
+            code: `<span class="code-tag">&lt;html&gt;</span>
+  <span class="code-tag">&lt;head&gt;</span>
+    <span class="code-comment">&lt;!-- HEAD SECTION: title, CSS links, meta tags, fonts --&gt;</span>
+    <span class="code-tag">&lt;title&gt;</span>My Website<span class="code-tag">&lt;/title&gt;</span>
+    <span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"style.css"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/head&gt;</span>
+  <span class="code-tag">&lt;body&gt;</span>
+    <span class="code-comment">&lt;!-- BODY SECTION: Visible content --&gt;</span>
+    <span class="code-tag">&lt;h1&gt;</span>Hello<span class="code-tag">&lt;/h1&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>Paragraph<span class="code-tag">&lt;/p&gt;</span>
+    <span class="code-tag">&lt;button&gt;</span>Click<span class="code-tag">&lt;/button&gt;</span>
+
+    <span class="code-comment">&lt;!-- SCRIPT SECTION: Connects JavaScript at bottom --&gt;</span>
+    <span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-string">"script.js"</span><span class="code-tag">&gt;&lt;/script&gt;</span>
+  <span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span>`,
+            steps: [
+              { title: "1. HTML Structure", desc: "HTML has a fixed structure defining where head, body, and scripts belong." },
+              { title: "2. Head Section", desc: "Used for non-visible page settings: title, CSS stylesheet links, meta tags, and fonts." },
+              { title: "3. Body Section", desc: "Contains all the visible UI content displayed to the user: text headers, paragraphs, and buttons." },
+              { title: "4. Script Section", desc: "Usually placed at the bottom of the body. Connects external JavaScript file (<code>script.js</code>) containing page logic." },
+              { title: "Complete HTML Flow", desc: "Head (CSS / SEO / title) &rarr; Body (UI content) &rarr; Script (Logic)." }
+            ]
+          }
+        }
+      },
+      "css": {
+        name: "CSS",
+        brief: "CSS styles the presentation layout using selector blocks.",
+        badge: "Visual Design",
+        badgeClass: "badge-css",
+        analogy: "The <strong>paint, lighting, and decoration</strong> of a house. It defines how pretty, aligned, and styled the walls and furniture look.",
+        explorerFiles: [
+          { name: "style.css", key: "style-css", isSub: false }
+        ],
+        filesData: {
+          "style-css": {
+            name: "style.css",
+            code: `<span class="code-comment">/* CSS STRUCTURE: selector { property: value; } */</span>
+<span class="code-tag">button</span> {
+  <span class="code-keyword">background</span>: <span class="code-string">red</span>;
+  <span class="code-keyword">color</span>: <span class="code-string">white</span>;
+}`,
+            steps: [
+              { title: "1. CSS Structure", desc: "CSS files are built using selector rule sets: <code>selector { property: value; }</code>." },
+              { title: "2. Selector (button)", desc: "Target element: Tells the browser exactly which HTML elements/tags will be styled." },
+              { title: "3. Property (background / color)", desc: "What to change: Specifies the style characteristic or layout feature being targeted." },
+              { title: "4. Value (red / white)", desc: "Style value: The concrete color, sizing, or alignment choice being applied." },
+              { title: "Understanding Flow", desc: "button &rarr; target element <br> background &rarr; what to change <br> red &rarr; value." }
+            ]
+          }
+        }
+      },
+      "javascript": {
+        name: "JavaScript",
+        brief: "JavaScript adds dynamic scripting, events, and interactivity.",
+        badge: "Interactive Logic",
+        badgeClass: "badge-javascript",
+        analogy: "The <strong>electricity, plumbing, and appliances</strong> of a house. It makes elements interactive, responsive, and functional.",
+        explorerFiles: [
+          { name: "script.js", key: "script-js", isSub: false }
+        ],
+        filesData: {
+          "script-js": {
+            name: "script.js",
+            code: `<span class="code-comment">// JAVASCRIPT STRUCTURE usually contains: Variables, Functions, Events, Logic, API calls</span>
+<span class="code-keyword">const</span> <span class="code-var">button</span> = <span class="code-tag">document</span>.<span class="code-func">getElementById</span>(<span class="code-string">"btn"</span>);
+
+<span class="code-var">button</span>.<span class="code-func">addEventListener</span>(<span class="code-string">"click"</span>, () =&gt; {
+  <span class="code-func">alert</span>(<span class="code-string">"Clicked"</span>);
+});`,
+            steps: [
+              { title: "1. JavaScript Structure", desc: "Usually contains: Variables (storage), Functions (actions), Events (triggers), Logic, and API calls." },
+              { title: "2. Variable (Find Button)", desc: "Finds the button element on the webpage by its ID and stores it inside a variable." },
+              { title: "3. Event (Listen for click)", desc: "Listens for user clicks on the button element using <code>addEventListener</code>." },
+              { title: "4. Logic (Run Function)", desc: "Runs an action function containing page logic (like showing an alert popup) on trigger." },
+              { title: "Understanding Flow", desc: "Find button &rarr; Listen for click &rarr; Run function." }
+            ]
+          }
+        }
+      },
+      "react": {
+        name: "React.js",
+        brief: "React structures pages using modular, reusable components.",
+        badge: "Modular Lego Bricks",
+        badgeClass: "badge-react",
+        analogy: "The <strong>prefab building blocks</strong> of a modern house. Snap separate, custom blocks (Navbar, Home, Footer) together to build the whole building quickly.",
+        explorerFiles: [
+          { name: "main.js", key: "main-js", isSub: false },
+          { name: "App.js", key: "app-js", isSub: false },
+          { name: "components/Navbar.js", key: "navbar-js", isSub: true }
+        ],
+        filesData: {
+          "main-js": {
+            name: "main.js",
+            code: `<span class="code-comment">// MAIN.JS: FIRST FILE that starts app</span>
+<span class="code-keyword">import</span> <span class="code-var">React</span> <span class="code-keyword">from</span> <span class="code-string">"react"</span>;
+<span class="code-keyword">import</span> <span class="code-var">ReactDOM</span> <span class="code-keyword">from</span> <span class="code-string">"react-dom"</span>;
+
+<span class="code-keyword">import</span> <span class="code-var">App</span> <span class="code-keyword">from</span> <span class="code-string">"./App"</span>;`,
+            steps: [
+              { title: "1. Entry Ignition File", desc: "<code>main.js</code> is the absolute FIRST file that starts the React application on page load." },
+              { title: "2. Imports & Connections", desc: "Brings React engine libraries and connects to the core <code>App.js</code> file." },
+              { title: "Understanding Flow", desc: "main.js &rarr; loads App.js &rarr; App loads components." }
+            ]
+          },
+          "app-js": {
+            name: "App.js",
+            code: `<span class="code-comment">// APP.JS: Main structure / controller layout</span>
+<span class="code-keyword">import</span> <span class="code-var">Navbar</span> <span class="code-keyword">from</span> <span class="code-string">"./components/Navbar"</span>;
+
+<span class="code-keyword">function</span> <span class="code-func">App</span>() {
+  <span class="code-keyword">return</span> (
+    &lt;&gt;
+      &lt;<span class="code-tag">Navbar</span> /&gt;
+      &lt;<span class="code-tag">Home</span> /&gt;
+      &lt;<span class="code-tag">Footer</span> /&gt;
+    &lt;/&gt;
+  );
+}
+
+<span class="code-keyword">export default</span> <span class="code-var">App</span>;`,
+            steps: [
+              { title: "1. Main Controller Layout", desc: "<code>App.js</code> is the central controller/skeleton structure of the entire React UI layout." },
+              { title: "2. Assemblies", desc: "Combines and orders distinct modular widgets like Navbar, Home, and Footer components." },
+              { title: "React Flow", desc: "main.js &rarr; App.js &rarr; Components." }
+            ]
+          },
+          "navbar-js": {
+            name: "components/Navbar.js",
+            code: `<span class="code-comment">// COMPONENT FILE: Reusable UI component</span>
+<span class="code-keyword">function</span> <span class="code-func">Navbar</span>() {
+  <span class="code-keyword">return</span> (
+    &lt;<span class="code-tag">h1</span>&gt;Navbar&lt;/<span class="code-tag">h1</span>&gt;
+  );
+}
+
+<span class="code-keyword">export default</span> <span class="code-var">Navbar</span>;`,
+            steps: [
+              { title: "1. Components Concept", desc: "React relies entirely on modular, independent building blocks called COMPONENTS." },
+              { title: "2. Import System", desc: "Used to connect files together. E.g., <code>import Navbar from './Navbar';</code> means bring Navbar file here." },
+              { title: "3. Export System", desc: "Used to share files. E.g., <code>export default Navbar;</code> means allow other files to use this component." },
+              { title: "React Flow", desc: "main.js &rarr; App.js &rarr; Components." }
+            ]
+          }
+        }
+      },
+      "node": {
+        name: "Node.js (Express)",
+        brief: "Node.js runs your backend server, routing endpoints to controller logic.",
+        badge: "Backend Kitchen",
+        badgeClass: "badge-node",
+        analogy: "The <strong>restaurant's private kitchen</strong>. It handles cooking, processes food requests, and delivers packaged dishes.",
+        explorerFiles: [
+          { name: "server.js", key: "server-js", isSub: false },
+          { name: "routes/user.js", key: "routes-js", isSub: true }
+        ],
+        filesData: {
+          "server-js": {
+            name: "server.js",
+            code: `<span class="code-comment">// SERVER.JS: Main backend server entry file</span>
+<span class="code-keyword">const</span> <span class="code-var">express</span> = <span class="code-func">require</span>(<span class="code-string">"express"</span>);
+<span class="code-keyword">const</span> <span class="code-var">app</span> = <span class="code-func">express</span>();
+
+<span class="code-var">app</span>.<span class="code-func">listen</span>(<span class="code-string">3000</span>);`,
+            steps: [
+              { title: "1. Main Backend File", desc: "<code>server.js</code> is the central entry point file that starts the backend app." },
+              { title: "2. Express Instance", desc: "Imports the Express backend framework and instantiates a backend application instance (<code>app</code>)." },
+              { title: "3. Server Port Listener", desc: "Starts server socket listening on port 3000 to listen for incoming client web requests." },
+              { title: "Understanding Flow", desc: "Create backend app &rarr; Start server." }
+            ]
+          },
+          "routes-js": {
+            name: "routes/user.js",
+            code: `<span class="code-comment">// ROUTES: Handle endpoints and process URL requests</span>
+<span class="code-var">app</span>.<span class="code-func">get</span>(<span class="code-string">"/"</span>, (<span class="code-var">req</span>, <span class="code-var">res</span>) =&gt; {
+  <span class="code-var">res</span>.<span class="code-func">send</span>(<span class="code-string">"Hello"</span>);
+});`,
+            steps: [
+              { title: "1. Express Structure", desc: "Folder hierarchy: server/ ├── routes/ ├── controllers/ ├── models/ ├── server.js" },
+              { title: "2. Routes Folder", desc: "Handles URL endpoints: monitors incoming traffic pathways and directs requests to matching controllers." },
+              { title: "3. Controllers", desc: "Contains processing logic: handles specific action routines like login and signup calculations." },
+              { title: "4. Models Schema", desc: "Defines database structure and schemas to layout how stored records look." },
+              { title: "Understanding Flow", desc: "Frontend requests '/' &rarr; Backend responds." }
+            ]
+          }
+        }
+      },
+      "mongodb": {
+        name: "MongoDB",
+        brief: "MongoDB stores data records in Collections validated by schemas.",
+        badge: "Database Cabinet",
+        badgeClass: "badge-mongodb",
+        analogy: "The <strong>smart warehouse inventory room</strong>. It organizes raw data into clear, secure cabinets.",
+        explorerFiles: [
+          { name: "models/User.js", key: "user-model", isSub: false }
+        ],
+        filesData: {
+          "user-model": {
+            name: "models/User.js",
+            code: `<span class="code-comment">// MONGOOSE MODEL Schema defines data structure</span>
+<span class="code-keyword">const</span> <span class="code-var">userSchema</span> = {
+  <span class="code-var">name</span>: <span class="code-keyword">String</span>,
+  <span class="code-var">email</span>: <span class="code-keyword">String</span>
+};`,
+            steps: [
+              { title: "1. Database Collections", desc: "MongoDB is a database storing data in collections. E.g., Users Collection containing name, email, password." },
+              { title: "2. Mongoose Schema Blueprint", desc: "Configures a user schema showing name (String) and email (String) format types." },
+              { title: "Understanding Flow", desc: "Defines how database data looks &rarr; validated records are stored securely in collections." }
+            ]
+          }
+        }
+      },
+      "nextjs": {
+        name: "Next.js",
+        brief: "Next.js features automatic folder-based routing and full-stack integration.",
+        badge: "Smart Framework",
+        badgeClass: "badge-nextjs",
+        analogy: "A <strong>completely automated smart home</strong>. React components, backend APIs, and server-routing are prebuilt under one single roof.",
+        explorerFiles: [
+          { name: "app/page.js", key: "next-home", isSub: false },
+          { name: "app/about/page.js", key: "next-about", isSub: true },
+          { name: "app/api/user/route.js", key: "next-api", isSub: true }
+        ],
+        filesData: {
+          "next-home": {
+            name: "app/page.js",
+            code: `<span class="code-comment">// app/page.js automatically creates webpage route for Homepage (/)</span>
+<span class="code-keyword">export default function</span> <span class="code-func">Page</span>() {
+  <span class="code-keyword">return</span> (
+    &lt;<span class="code-tag">h1</span>&gt;Home Page Content&lt;/<span class="code-tag">h1</span>&gt;
+  );
+}`,
+            steps: [
+              { title: "1. Next.js App Folder", desc: "Next.js features a special folder routing architecture called the App directory structure." },
+              { title: "2. Automatic Webpage Route", desc: "Creating a <code>page.js</code> inside the root app folder automatically renders it as the main homepage route (/)." },
+              { title: "Understanding Flow", desc: "page.js &rarr; creates webpage route automatically without routing configuration libraries." }
+            ]
+          },
+          "next-about": {
+            name: "app/about/page.js",
+            code: `<span class="code-comment">// Nested folder creates path: /about automatically</span>
+<span class="code-keyword">export default function</span> <span class="code-func">AboutPage</span>() {
+  <span class="code-keyword">return</span> (
+    &lt;<span class="code-tag">h1</span>&gt;About Page Content&lt;/<span class="code-tag">h1</span>&gt;
+  );
+}`,
+            steps: [
+              { title: "1. Nested Route Folders", desc: "Creating a subfolder like <code>app/about/</code> maps to matching URL routes automatically." },
+              { title: "2. Simple Webpage Route", desc: "Placing a <code>page.js</code> inside the <code>about/</code> folder binds it as the webpage route at <code>/about</code>." },
+              { title: "Understanding Flow", desc: "Nested about/ folder + page.js &rarr; binds public /about web route layout." }
+            ]
+          },
+          "next-api": {
+            name: "app/api/user/route.js",
+            code: `<span class="code-comment">// app/api/user/route.js creates backend endpoint: /api/user</span>
+<span class="code-keyword">export async function</span> <span class="code-func">GET</span>(<span class="code-var">request</span>) {
+  <span class="code-keyword">return new</span> <span class="code-tag">Response</span>(<span class="code-string">"User API Response"</span>);
+}`,
+            steps: [
+              { title: "1. API Routes System", desc: "Next.js lets you build backend server API route endpoints side-by-side with your page UI components." },
+              { title: "2. Automatic Backend URL", desc: "Creating <code>app/api/user/route.js</code> automatically establishes the backend endpoint at <code>/api/user</code>." },
+              { title: "Understanding Flow", desc: "app/api/user/route.js &rarr; creates /api/user endpoint interface automatically." }
+            ]
+          }
+        }
+      }
+    };
+
+    // Direct side-by-side architectural summary comparisons dataset
+    const matrixDatabase = [
+      { tech: "HTML", entry: "index.html", modules: "None (Raw markup)", routing: "None", logic: "Visible UI tags", db: "None", core: "Browser DOM representation" },
+      { tech: "CSS", entry: "style.css", modules: "None (Raw styling)", routing: "None", logic: "Visual styles mapping", db: "None", core: "<link rel='stylesheet'>" },
+      { tech: "JavaScript", entry: "script.js", modules: "None (Vanilla scripting)", routing: "None", logic: "Event listener loop", db: "None", core: "Find &rarr; Listen &rarr; Run callback" },
+      { tech: "React", entry: "main.js", modules: "Reusable Components (.js)", routing: "None (Props layout)", logic: "Component layout functions", db: "None", core: "Import/Export system connects" },
+      { tech: "Node.js (Express)", entry: "server.js", modules: "Express routes & controllers", routing: "Express endpoints", logic: "Controller request handler", db: "Connector models", core: "app.listen(3000) starts" },
+      { tech: "MongoDB", entry: "models/User.js", modules: "Mongoose models Schema", routing: "None", logic: "Data structure validating", db: "Collections database", core: "mongoose.connect() binds" },
+      { tech: "Next.js", entry: "app/page.js", modules: "Automated folder layout", routing: "Automatic page routing", logic: "Automatic SSR compilation", db: "Backend API routes", core: "app/ Folder routes everything" }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // --- 1. Mobile Drawer Navigation ---
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      
+      if (mobileMenuBtn && mobileDrawer) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('open');
+          
+          // Animate hamburger toggle lines
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          if (mobileDrawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+          } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
+        });
+      }
+
+      // --- 2. Populate sidebar switcher tabs ---
+      const tabList = document.getElementById("tech-tab-list");
+      const techKeys = Object.keys(structureDatabase);
+
+      techKeys.forEach((key, index) => {
+        const item = structureDatabase[key];
+        const btn = document.createElement("button");
+        btn.className = `tech-tab-btn ${index === 0 ? 'active' : ''}`;
+        btn.setAttribute("data-tech", key);
+        
+        let icon = "💻";
+        if (key === "html") icon = "🌐";
+        if (key === "css") icon = "🎨";
+        if (key === "javascript") icon = "⚡";
+        if (key === "react") icon = "⚛️";
+        if (key === "node") icon = "🟢";
+        if (key === "mongodb") icon = "🍃";
+        if (key === "nextjs") icon = "▲";
+
+        btn.innerHTML = `<span class="tech-tab-icon">${icon}</span> ${item.name}`;
+        tabList.appendChild(btn);
+      });
+
+      // --- 3. Populate matrix table content ---
+      const matrixBody = document.getElementById("matrix-tbody");
+      matrixDatabase.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="matrix-tech-name">${item.tech}</td>
+          <td><code>${item.entry}</code></td>
+          <td>${item.modules}</td>
+          <td>${item.routing}</td>
+          <td>${item.logic}</td>
+          <td>${item.db}</td>
+          <td><code>${item.core}</code></td>
+        `;
+        matrixBody.appendChild(tr);
+      });
+
+      // --- 4. Interactive Display logic engine ---
+      let currentTech = "html";
+      let currentFile = "index-html";
+
+      function updateDashboard(techKey, fileKey = null) {
+        const data = structureDatabase[techKey];
+        if (!data) return;
+
+        // Apply visual updates to dashboard nodes
+        document.getElementById("tech-name").innerText = data.name;
+        document.getElementById("tech-brief").innerText = data.brief;
+        
+        const badgeEl = document.getElementById("tech-badge");
+        badgeEl.innerText = data.badge;
+        badgeEl.className = "tech-badge";
+        badgeEl.classList.add(data.badgeClass);
+
+        document.getElementById("analogy-banner").innerHTML = data.analogy;
+
+        // Populate VS Code sidebar file list
+        const treeContainer = document.getElementById("explorer-tree");
+        treeContainer.innerHTML = "";
+
+        // First, check if there are sub-levels to make a folder representation
+        let needsSrcFolder = techKey === "react" || techKey === "node" || techKey === "nextjs";
+        let folderName = techKey === "react" ? "src/" : (techKey === "node" ? "server/" : "app/");
+
+        if (needsSrcFolder) {
+          const folderDiv = document.createElement("div");
+          folderDiv.className = "tree-folder";
+          folderDiv.innerHTML = `<span>📁</span> ${folderName}`;
+          treeContainer.appendChild(folderDiv);
+        }
+
+        // Set default active file if none specified
+        if (!fileKey || !data.filesData[fileKey]) {
+          fileKey = data.explorerFiles[0].key;
+        }
+        currentFile = fileKey;
+
+        data.explorerFiles.forEach(file => {
+          const fileEl = document.createElement("div");
+          fileEl.className = `tree-file ${file.isSub ? 'sub-level' : ''} ${file.key === fileKey ? 'active-file' : ''}`;
+          fileEl.setAttribute("data-filekey", file.key);
+          fileEl.innerHTML = `<span>📄</span> ${file.name}`;
+          
+          fileEl.addEventListener("click", () => {
+            document.querySelectorAll(".tree-file").forEach(f => f.classList.remove("active-file"));
+            fileEl.classList.add("active-file");
+            renderEditorCode(techKey, file.key);
+          });
+
+          treeContainer.appendChild(fileEl);
+        });
+
+        // Run default editor code render
+        renderEditorCode(techKey, fileKey);
+      }
+
+      function renderEditorCode(techKey, fileKey) {
+        const techObj = structureDatabase[techKey];
+        const fileObj = techObj.filesData[fileKey];
+        if (!fileObj) return;
+
+        // Set tab bar header file name
+        document.getElementById("active-filename").innerText = fileObj.name;
+        
+        // Load formatted code
+        document.getElementById("editor-code-body").innerHTML = fileObj.code;
+
+        // Populate guide step breakdown cards
+        const stepsContainer = document.getElementById("concept-steps-grid");
+        stepsContainer.innerHTML = "";
+
+        fileObj.steps.forEach((step, index) => {
+          const card = document.createElement("div");
+          card.className = "concept-step-card";
+          card.innerHTML = `
+            <div class="step-num-bubble">${index + 1}</div>
+            <div class="step-card-content">
+              <h5>${step.title}</h5>
+              <p>${step.desc}</p>
+            </div>
+          `;
+          stepsContainer.appendChild(card);
+        });
+      }
+
+      // Hook up selectors clicks listeners
+      document.getElementById("tech-tab-list").addEventListener("click", (e) => {
+        const tabBtn = e.target.closest(".tech-tab-btn");
+        if (!tabBtn) return;
+
+        document.querySelectorAll(".tech-tab-btn").forEach(b => b.classList.remove("active"));
+        tabBtn.classList.add("active");
+
+        const techKey = tabBtn.getAttribute("data-tech");
+        currentTech = techKey;
+
+        // Trigger smooth dashboard fade in visual transitions
+        const dashboard = document.getElementById("struct-dashboard");
+        dashboard.style.opacity = 0;
+        
+        setTimeout(() => {
+          updateDashboard(techKey);
+          dashboard.style.opacity = 1;
+        }, 150);
+      });
+
+      // Launch default dashboard load
+      updateDashboard("html");
+
+    });
+  </script>
+
+</body>
+</html>
