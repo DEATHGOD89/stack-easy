@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StackEasy | Interactive Full Stack Tree</title>
+  <meta name="description" content="Explore a complete, interactive, and zoomable visual map of all full stack development layers, frameworks, databases, and file extensions.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* ==========================================================================
+       Tree Page Specific Visual Layouts & Canvas
+       ========================================================================== */
+    
+    .tree-hero {
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.04) 0%, rgba(245, 239, 235, 0) 100%);
+    }
+
+    .tree-tagline {
+      display: inline-block;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.3rem 1.0rem;
+      border-radius: 50px;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(255, 90, 31, 0.15);
+    }
+
+    .tree-title {
+      font-size: 2.2rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.6rem;
+      letter-spacing: -1px;
+    }
+
+    .tree-subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      max-width: 650px;
+      margin: 0 auto 1.0rem auto;
+      line-height: 1.5;
+    }
+
+    /* Controls Bar */
+    .tree-controls-wrapper {
+      position: sticky;
+      top: 70px;
+      z-index: 99;
+      background-color: rgba(245, 239, 235, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .tree-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .tree-controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* Search & Highlight Box */
+    .tree-search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background-color: var(--color-white);
+      border: 1px solid rgba(15, 38, 21, 0.12);
+      padding: 0.7rem 1.2rem;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    .tree-search-box:focus-within {
+      border-color: var(--color-orange-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tree-search-box input {
+      width: 100%;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Action Buttons */
+    .tree-btns-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tree-btn {
+      background-color: var(--color-white);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      color: var(--color-forest-dark);
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tree-btn:hover {
+      background-color: var(--color-pill-bg);
+      transform: translateY(-1px);
+    }
+
+    .tree-btn:active {
+      transform: translateY(0);
+    }
+
+    .tree-btn.accent {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      border-color: var(--color-forest-dark);
+    }
+
+    .tree-btn.accent:hover {
+      background-color: var(--color-forest-med);
+    }
+
+    /* Blueprint Viewport & Canvas Workspace */
+    .tree-viewport {
+      width: 100%;
+      height: 650px;
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      margin-bottom: 3rem;
+      /* Dotted blueprint grid pattern */
+      background-image: radial-gradient(rgba(15, 38, 21, 0.08) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+
+    .tree-viewport:active {
+      cursor: grabbing;
+    }
+
+    /* Outer Wrapper for smooth transforms */
+    .tree-canvas {
+      position: absolute;
+      width: 2800px;
+      height: 1800px;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      padding: 4rem;
+      user-select: none;
+      transition: transform 0.05s ease-out;
+    }
+
+    /* Core Root Hub Block */
+    .tree-root-hub {
+      position: absolute;
+      left: 1300px;
+      top: 800px;
+      transform: translate(-50%, -50%);
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      padding: 1.8rem 3.5rem;
+      border-radius: 50px;
+      box-shadow: 0 15px 35px rgba(15, 38, 21, 0.25), 0 0 20px rgba(255, 90, 31, 0.2);
+      border: 3px solid var(--color-orange-primary);
+      text-align: center;
+      z-index: 10;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .tree-root-hub h2 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      font-family: var(--font-heading);
+      margin-bottom: 0.2rem;
+    }
+
+    .tree-root-hub span {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-orange-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Outer branches nodes layout */
+    .branch-card {
+      position: absolute;
+      width: 280px;
+      background-color: var(--color-white);
+      border-radius: var(--radius-sm);
+      border: 2px solid rgba(15, 38, 21, 0.08);
+      box-shadow: var(--shadow-sm);
+      padding: 1.2rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+      z-index: 5;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .branch-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .branch-card.active-pulse {
+      animation: badge-pulse 1.5s infinite alternate;
+      border-width: 3px;
+    }
+
+    .branch-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.06);
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .branch-num {
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--color-orange-primary);
+    }
+
+    .branch-title {
+      font-size: 1.1rem;
+      color: var(--color-forest-dark);
+      font-weight: 700;
+      font-family: var(--font-heading);
+    }
+
+    /* Badges & sub elements rendering */
+    .tree-section-group {
+      margin-bottom: 0.8rem;
+    }
+
+    .tree-section-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .tree-group-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .tree-badges-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tree-node-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background-color: rgba(15, 38, 21, 0.04);
+      color: var(--color-text-dark);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .tree-node-badge:hover {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      transform: scale(1.05);
+    }
+
+    .tree-node-badge.highlighted {
+      animation: text-pulse 1.2s infinite alternate;
+      border-color: var(--color-orange-primary) !important;
+      background-color: rgba(255, 90, 31, 0.1) !important;
+      color: var(--color-orange-primary) !important;
+      font-weight: 800;
+    }
+
+    /* Colors and Classes corresponding to categories */
+    .branch-card.frontend { border-left: 5px solid var(--color-frontend-blue); }
+    .branch-card.frontend .branch-num { color: var(--color-frontend-blue); }
+    .branch-card.frontend .tree-node-badge:hover { background-color: var(--color-frontend-blue); }
+
+    .branch-card.backend { border-left: 5px solid var(--color-backend-purple); }
+    .branch-card.backend .branch-num { color: var(--color-backend-purple); }
+    .branch-card.backend .tree-node-badge:hover { background-color: var(--color-backend-purple); }
+
+    .branch-card.database { border-left: 5px solid var(--color-database-green); }
+    .branch-card.database .branch-num { color: var(--color-database-green); }
+    .branch-card.database .tree-node-badge:hover { background-color: var(--color-database-green); }
+
+    .branch-card.auth { border-left: 5px solid #fbbf24; }
+    .branch-card.auth .branch-num { color: #fbbf24; }
+    .branch-card.auth .tree-node-badge:hover { background-color: #fbbf24; color: var(--color-forest-dark); }
+
+    .branch-card.apis { border-left: 5px solid #f97316; }
+    .branch-card.apis .branch-num { color: #f97316; }
+    .branch-card.apis .tree-node-badge:hover { background-color: #f97316; }
+
+    .branch-card.devops { border-left: 5px solid #ec4899; }
+    .branch-card.devops .branch-num { color: #ec4899; }
+    .branch-card.devops .tree-node-badge:hover { background-color: #ec4899; }
+
+    .branch-card.tools { border-left: 5px solid #64748b; }
+    .branch-card.tools .branch-num { color: #64748b; }
+    .branch-card.tools .tree-node-badge:hover { background-color: #64748b; }
+
+    .branch-card.filetypes { border-left: 5px solid var(--color-forest-dark); }
+    .branch-card.filetypes .branch-num { color: var(--color-forest-dark); }
+    .branch-card.filetypes .tree-node-badge:hover { background-color: var(--color-forest-dark); }
+
+    /* SVG Connections overlay */
+    .tree-svg-connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* DND Floating details card */
+    .tree-details-card {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 350px;
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(15, 38, 21, 0.1);
+      z-index: 200;
+      padding: 1.5rem;
+      transform: translateY(120%);
+      transition: transform var(--transition-normal);
+    }
+
+    .tree-details-card.open {
+      transform: translateY(0);
+    }
+
+    .details-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      cursor: pointer;
+    }
+
+    .details-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+    }
+
+    .details-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .details-body {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--color-text-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .details-body strong {
+      color: var(--color-forest-dark);
+    }
+
+    .details-filetype-highlight {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: rgba(15, 38, 21, 0.05);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    /* Mini Instruction Map Legend overlay */
+    .tree-legend {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+      z-index: 10;
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      pointer-events: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Collapsible Raw ASCII View Section */
+    .ascii-section-container {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      box-shadow: var(--shadow-sm);
+      padding: 2.2rem;
+      margin-bottom: 5rem;
+    }
+
+    .ascii-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid rgba(15, 38, 21, 0.06);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ascii-title {
+      font-size: 1.5rem;
+      color: var(--color-forest-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .ascii-code-box {
+      background-color: #0f172a;
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.88rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      line-height: 1.45;
+      max-height: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .ascii-code-box span.folder-root { color: #f43f5e; font-weight: bold; }
+    .ascii-code-box span.folder-branch { color: #fbbf24; font-weight: bold; }
+    .ascii-code-box span.folder-sub { color: #a7f3d0; }
+    .ascii-code-box span.folder-item { color: #ffffff; }
+
+    /* Animations */
+    @keyframes badge-pulse {
+      0% { border-color: rgba(255, 90, 31, 0.2); box-shadow: 0 0 5px rgba(255, 90, 31, 0.1); }
+      100% { border-color: rgba(255, 90, 31, 0.8); box-shadow: 0 0 18px rgba(255, 90, 31, 0.4); }
+    }
+
+    @keyframes text-pulse {
+      0% { transform: scale(1); box-shadow: 0 0 2px rgba(255, 90, 31, 0.1); }
+      100% { transform: scale(1.08); box-shadow: 0 0 10px rgba(255, 90, 31, 0.3); }
+    }
+
+    /* Active Draggable Styles */
+    .branch-card.dragging {
+      z-index: 1000 !important;
+      cursor: grabbing !important;
+      box-shadow: var(--shadow-xl), 0 20px 40px rgba(15, 38, 21, 0.15) !important;
+      border-color: var(--color-orange-primary) !important;
+      transform: scale(1.02) !important;
+      transition: none !important;
+    }
+
+    .tree-root-hub.dragging {
+      z-index: 1000 !important;
+      cursor: grabbing !important;
+      box-shadow: 0 20px 40px rgba(15, 38, 21, 0.35), 0 0 30px rgba(255, 90, 31, 0.4) !important;
+      border-color: var(--color-orange-primary) !important;
+      transform: translate(-50%, -50%) scale(1.03) !important;
+      transition: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="index.html" class="logo-group" id="logo-main">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+          <path d="M2 17L12 22L22 17" stroke="#0F2615" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="7" r="1.5" fill="#FFFFFF"/>
+        </svg>
+        <span class="logo-text">Stack<span>Easy</span></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
+          <li><a href="tree.html" class="nav-link active">Tree</a></li>
+          <li><a href="questions.html" class="nav-link">Questions</a></li>
+          <li><a href="interview.html" class="nav-link">Interview</a></li>
+          <li><a href="interview2.html" class="nav-link">Interview 2.0</a></li>
+          <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA -->
+      <div class="nav-actions">
+        <a href="index.html#customizer" class="btn-nav-cta">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="index.html#fullstack" class="drawer-link">FullStack</a></li>
+      <li><a href="tree.html" class="drawer-link active">Tree</a></li>
+      <li><a href="questions.html" class="drawer-link">Questions</a></li>
+      <li><a href="interview.html" class="drawer-link">Interview</a></li>
+      <li><a href="interview2.html" class="drawer-link">Interview 2.0</a></li>
+      <li><a href="index.html#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+  </div>
+
+  <main class="page-container">
+    
+    <!-- Hero Header -->
+    <section class="tree-hero">
+      <span class="tree-tagline">Visual Landscape Mapping</span>
+      <h1 class="tree-title">The Full Stack Developer Tree</h1>
+      <p class="tree-subtitle">
+        Zoom, pan, and click to explore every branch of the modern web developer ecosystem. Click items to reveal detailed definitions.
+      </p>
+    </section>
+
+    <!-- Interactive Sticky Search and Controls Bar -->
+    <section class="tree-controls-wrapper">
+      <div class="tree-controls">
+        <!-- Live Filter Highlighter -->
+        <div class="tree-search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="#717E75" stroke-width="2"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#717E75" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" placeholder="Highlight tool or extension (e.g. React)..." id="tree-search-input" aria-label="Search tree nodes">
+        </div>
+
+        <!-- Controls (Zoom In, Zoom Out, Fit) -->
+        <div class="tree-btns-group">
+          <button class="tree-btn" id="btn-zoom-in" title="Zoom In">
+            <span>➕</span> Zoom In
+          </button>
+          <button class="tree-btn" id="btn-zoom-out" title="Zoom Out">
+            <span>➖</span> Zoom Out
+          </button>
+          <button class="tree-btn accent" id="btn-zoom-fit" title="Fit to Viewport">
+            <span>🔍</span> Fit & Center
+          </button>
+          <a href="#raw-ascii-view" class="tree-btn" title="View text tree">
+            <span>📄</span> Raw ASCII Tree
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dotted Blueprint Drag-and-Zoom Canvas Sandbox -->
+    <section class="tree-viewport" id="tree-viewport">
+      
+      <div class="tree-canvas" id="tree-canvas">
+        
+        <!-- SVG connecting lines drawn dynamically by Javascript -->
+        <svg class="tree-svg-connections" id="tree-svg-connections"></svg>
+
+        <!-- Central Core Root Node -->
+        <div class="tree-root-hub" id="root-node">
+          <span>Root Core</span>
+          <h2>FULL STACK</h2>
+          <span>DEVELOPMENT</span>
+        </div>
+
+        <!-- ==========================================
+             BRANCHES - Placed Absolute relative to Root
+             ========================================== -->
+
+        <!-- BRANCH 1: FRONTEND (Client Side) -->
+        <div class="branch-card frontend" id="branch-frontend" style="left: 800px; top: 380px;">
+          <div class="branch-card-header">
+            <span class="branch-num">01</span>
+            <h3 class="branch-title">FRONTEND (Client UI)</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">Languages</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="html">HTML</span>
+              <span class="tree-node-badge" data-key="css">CSS</span>
+              <span class="tree-node-badge" data-key="js">JavaScript</span>
+              <span class="tree-node-badge" data-key="ts">TypeScript</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Frameworks & Libs</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="react">React</span>
+              <span class="tree-node-badge" data-key="nextjs">Next.js</span>
+              <span class="tree-node-badge" data-key="vue">Vue</span>
+              <span class="tree-node-badge" data-key="angular">Angular</span>
+              <span class="tree-node-badge" data-key="svelte">Svelte</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Styling</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="tailwind">Tailwind CSS</span>
+              <span class="tree-node-badge" data-key="bootstrap">Bootstrap</span>
+              <span class="tree-node-badge" data-key="sass">Sass/SCSS</span>
+              <span class="tree-node-badge" data-key="mui">Material UI</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Key Files</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="index-html">index.html</span>
+              <span class="tree-node-badge" data-key="style-css">style.css</span>
+              <span class="tree-node-badge" data-key="app-js">app.js</span>
+              <span class="tree-node-badge" data-key="app-jsx">App.jsx</span>
+              <span class="tree-node-badge" data-key="main-tsx">main.tsx</span>
+              <span class="tree-node-badge" data-key="navbar-jsx">Navbar.jsx</span>
+              <span class="tree-node-badge" data-key="globals-css">globals.css</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Concepts</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="components">Components</span>
+              <span class="tree-node-badge" data-key="state">State</span>
+              <span class="tree-node-badge" data-key="props">Props</span>
+              <span class="tree-node-badge" data-key="routing">Routing</span>
+              <span class="tree-node-badge" data-key="responsive">Responsive Design</span>
+              <span class="tree-node-badge" data-key="api-calls">API Calls</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 2: BACKEND (Server Side) -->
+        <div class="branch-card backend" id="branch-backend" style="left: 1140px; top: 220px;">
+          <div class="branch-card-header">
+            <span class="branch-num">02</span>
+            <h3 class="branch-title">BACKEND (Server Brain)</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">Languages</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="node">Node.js (JS)</span>
+              <span class="tree-node-badge" data-key="ts-back">TypeScript</span>
+              <span class="tree-node-badge" data-key="python">Python</span>
+              <span class="tree-node-badge" data-key="java">Java</span>
+              <span class="tree-node-badge" data-key="php">PHP</span>
+              <span class="tree-node-badge" data-key="go">Go</span>
+              <span class="tree-node-badge" data-key="csharp">C#</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Frameworks</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="express">Express.js</span>
+              <span class="tree-node-badge" data-key="nestjs">NestJS</span>
+              <span class="tree-node-badge" data-key="django">Django</span>
+              <span class="tree-node-badge" data-key="flask">Flask</span>
+              <span class="tree-node-badge" data-key="spring">Spring Boot</span>
+              <span class="tree-node-badge" data-key="laravel">Laravel</span>
+              <span class="tree-node-badge" data-key="asp">ASP.NET</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Key Files</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="server-js">server.js</span>
+              <span class="tree-node-badge" data-key="app-py">app.js (server)</span>
+              <span class="tree-node-badge" data-key="routes-js">routes.js</span>
+              <span class="tree-node-badge" data-key="auth-js">auth.js</span>
+              <span class="tree-node-badge" data-key="api-ts">api.ts</span>
+              <span class="tree-node-badge" data-key="controller-js">controller.js</span>
+              <span class="tree-node-badge" data-key="middleware-js">middleware.js</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Concepts</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="rest-api">REST API</span>
+              <span class="tree-node-badge" data-key="auth-concept">Authentication</span>
+              <span class="tree-node-badge" data-key="jwt-concept">JWT</span>
+              <span class="tree-node-badge" data-key="crud">CRUD Operations</span>
+              <span class="tree-node-badge" data-key="middleware">Middleware</span>
+              <span class="tree-node-badge" data-key="sessions">Sessions</span>
+              <span class="tree-node-badge" data-key="upload">File Upload</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 3: DATABASE -->
+        <div class="branch-card database" id="branch-database" style="left: 1480px; top: 380px;">
+          <div class="branch-card-header">
+            <span class="branch-num">03</span>
+            <h3 class="branch-title">DATABASE (Storage)</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">SQL Databases</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="mysql">MySQL</span>
+              <span class="tree-node-badge" data-key="postgres">PostgreSQL</span>
+              <span class="tree-node-badge" data-key="sqlite">SQLite</span>
+              <span class="tree-node-badge" data-key="mariadb">MariaDB</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">NoSQL Databases</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="mongodb">MongoDB</span>
+              <span class="tree-node-badge" data-key="firebase">Firebase</span>
+              <span class="tree-node-badge" data-key="supabase">Supabase</span>
+              <span class="tree-node-badge" data-key="redis">Redis</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Key Files</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="schema-sql">schema.sql</span>
+              <span class="tree-node-badge" data-key="models-js">models.js</span>
+              <span class="tree-node-badge" data-key="database-js">database.js</span>
+              <span class="tree-node-badge" data-key="firebase-json">firebase.json</span>
+              <span class="tree-node-badge" data-key="migrations">migrations/</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Concepts</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="tables">Tables</span>
+              <span class="tree-node-badge" data-key="collections">Collections</span>
+              <span class="tree-node-badge" data-key="queries">Queries</span>
+              <span class="tree-node-badge" data-key="relations">Relations</span>
+              <span class="tree-node-badge" data-key="indexing">Indexing</span>
+              <span class="tree-node-badge" data-key="storage">Data Storage</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 4: AUTHENTICATION -->
+        <div class="branch-card auth" id="branch-auth" style="left: 1720px; top: 680px;">
+          <div class="branch-card-header">
+            <span class="branch-num">04</span>
+            <h3 class="branch-title">AUTHENTICATION</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">Systems</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="jwt-sys">JWT</span>
+              <span class="tree-node-badge" data-key="oauth">OAuth 2.0</span>
+              <span class="tree-node-badge" data-key="firebase-auth">Firebase Auth</span>
+              <span class="tree-node-badge" data-key="clerk">Clerk</span>
+              <span class="tree-node-badge" data-key="auth-js-sys">Auth.js (NextAuth)</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Key Files</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="login-js">login.js</span>
+              <span class="tree-node-badge" data-key="signup-js">signup.js</span>
+              <span class="tree-node-badge" data-key="authmiddleware-js">authMiddleware.js</span>
+              <span class="tree-node-badge" data-key="session-js">session.js</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Concepts</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="login-concept">Login Flow</span>
+              <span class="tree-node-badge" data-key="signup-concept">Signup Flow</span>
+              <span class="tree-node-badge" data-key="tokens">Tokens (JWT)</span>
+              <span class="tree-node-badge" data-key="cookies">Cookies Storage</span>
+              <span class="tree-node-badge" data-key="user-sessions">User Sessions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 5: APIs -->
+        <div class="branch-card apis" id="branch-apis" style="left: 1480px; top: 980px;">
+          <div class="branch-card-header">
+            <span class="branch-num">05</span>
+            <h3 class="branch-title">APIs (Communication)</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">Types</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="rest-types">REST API</span>
+              <span class="tree-node-badge" data-key="graphql">GraphQL</span>
+              <span class="tree-node-badge" data-key="websockets">WebSockets</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Key Files</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="api-js-file">api.js</span>
+              <span class="tree-node-badge" data-key="fetchdata-js">fetchData.js</span>
+              <span class="tree-node-badge" data-key="routes-js-api">routes.js (API)</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Concepts</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="get-req">GET Method</span>
+              <span class="tree-node-badge" data-key="post-req">POST Method</span>
+              <span class="tree-node-badge" data-key="put-req">PUT Method</span>
+              <span class="tree-node-badge" data-key="delete-req">DELETE Method</span>
+              <span class="tree-node-badge" data-key="json-format">JSON Data Format</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 6: DEVOPS & DEPLOYMENT -->
+        <div class="branch-card devops" id="branch-devops" style="left: 1140px; top: 1140px;">
+          <div class="branch-card-header">
+            <span class="branch-num">06</span>
+            <h3 class="branch-title">DEVOPS & DEPLOYMENT</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">Platforms</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="vercel">Vercel</span>
+              <span class="tree-node-badge" data-key="netlify">Netlify</span>
+              <span class="tree-node-badge" data-key="railway">Railway</span>
+              <span class="tree-node-badge" data-key="render">Render</span>
+              <span class="tree-node-badge" data-key="firebase-hosting">Firebase Host</span>
+              <span class="tree-node-badge" data-key="aws">AWS Cloud</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Key Files</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="vercel-json">vercel.json</span>
+              <span class="tree-node-badge" data-key="netlify-toml">netlify.toml</span>
+              <span class="tree-node-badge" data-key="dockerfile">Dockerfile</span>
+              <span class="tree-node-badge" data-key="github-workflows">.github/ (CI)</span>
+            </div>
+          </div>
+
+          <div class="tree-section-group">
+            <div class="tree-group-title">Concepts</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="hosting">Cloud Hosting</span>
+              <span class="tree-node-badge" data-key="cicd">CI/CD Pipelines</span>
+              <span class="tree-node-badge" data-key="domain">Custom Domains</span>
+              <span class="tree-node-badge" data-key="ssl">SSL Certificates</span>
+              <span class="tree-node-badge" data-key="env-vars">Env Variables</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 7: TOOLS -->
+        <div class="branch-card tools" id="branch-tools" style="left: 800px; top: 980px;">
+          <div class="branch-card-header">
+            <span class="branch-num">07</span>
+            <h3 class="branch-title">ESSENTIAL TOOLS</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">Developer Utilities</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="git-tool">Git</span>
+              <span class="tree-node-badge" data-key="github-tool">GitHub</span>
+              <span class="tree-node-badge" data-key="vscode">VS Code</span>
+              <span class="tree-node-badge" data-key="npm-tool">npm</span>
+              <span class="tree-node-badge" data-key="yarn-tool">yarn</span>
+              <span class="tree-node-badge" data-key="pnpm-tool">pnpm</span>
+              <span class="tree-node-badge" data-key="postman">Postman</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRANCH 8: FILE TYPES -->
+        <div class="branch-card filetypes" id="branch-filetypes" style="left: 560px; top: 680px;">
+          <div class="branch-card-header">
+            <span class="branch-num">08</span>
+            <h3 class="branch-title">WORKSPACE FILES</h3>
+          </div>
+          
+          <div class="tree-section-group">
+            <div class="tree-group-title">File Extensions Sheets</div>
+            <div class="tree-badges-list">
+              <span class="tree-node-badge" data-key="f-html">.html</span>
+              <span class="tree-node-badge" data-key="f-css">.css</span>
+              <span class="tree-node-badge" data-key="f-scss">.scss</span>
+              <span class="tree-node-badge" data-key="f-js">.js</span>
+              <span class="tree-node-badge" data-key="f-ts">.ts</span>
+              <span class="tree-node-badge" data-key="f-jsx">.jsx</span>
+              <span class="tree-node-badge" data-key="f-tsx">.tsx</span>
+              <span class="tree-node-badge" data-key="f-json">.json</span>
+              <span class="tree-node-badge" data-key="f-env">.env</span>
+              <span class="tree-node-badge" data-key="f-sql">.sql</span>
+              <span class="tree-node-badge" data-key="f-md">.md</span>
+              <span class="tree-node-badge" data-key="f-png">.png</span>
+              <span class="tree-node-badge" data-key="f-svg">.svg</span>
+              <span class="tree-node-badge" data-key="f-ico">.ico</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Instruction Legend Overlay -->
+      <div class="tree-legend">
+        <div class="legend-item">
+          <span class="legend-dot" style="background-color: var(--color-orange-primary);"></span>
+          <span>Click any tech badge to see details</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background-color: var(--color-forest-dark);"></span>
+          <span>Left-click and drag canvas to Pan</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background-color: var(--color-frontend-blue);"></span>
+          <span>Scroll-wheel or buttons to Zoom</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Floating Details Card Panel for Node Clicks -->
+    <div class="tree-details-card" id="tree-details-card">
+      <span class="details-close-btn" id="details-close-btn">&times;</span>
+      <span class="details-tag" id="details-tag">Technology Definition</span>
+      <h4 class="details-title" id="details-title">Select an item</h4>
+      <p class="details-body" id="details-body">Click on any visual badge inside the tree nodes to reveal its full, plain English developer summary and key role.</p>
+    </div>
+
+    <!-- ==========================================
+         RAW COLLAPSIBLE TEXT BRANCH ASCII VIEW
+         ========================================== -->
+    <section class="ascii-section-container" id="raw-ascii-view">
+      <div class="ascii-header">
+        <div class="ascii-title">
+          <span>📄</span>
+          <h2>Raw Hierarchical ASCII Tree</h2>
+        </div>
+        <button class="tree-btn accent" id="btn-copy-ascii">📋 Copy Raw Tree</button>
+      </div>
+
+      <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+        A standardized terminal file tree format. Perfect for downloading, saving in notebooks, or pasting directly inside documentation logs:
+      </p>
+
+      <pre class="ascii-code-box" id="ascii-raw-content"><span class="folder-root">FULL STACK DEVELOPMENT</span>
+│
+├── <span class="folder-branch">1. FRONTEND (Client Side / UI)</span>
+│   │
+│   ├── <span class="folder-sub">Languages</span>
+│   │   ├── <span class="folder-item">HTML</span>
+│   │   ├── <span class="folder-item">CSS</span>
+│   │   ├── <span class="folder-item">JavaScript</span>
+│   │   └── <span class="folder-item">TypeScript</span>
+│   │
+│   ├── <span class="folder-sub">Frameworks/Libraries</span>
+│   │   ├── <span class="folder-item">React</span>
+│   │   ├── <span class="folder-item">Next.js</span>
+│   │   ├── <span class="folder-item">Vue</span>
+│   │   ├── <span class="folder-item">Angular</span>
+│   │   └── <span class="folder-item">Svelte</span>
+│   │
+│   ├── <span class="folder-sub">Styling</span>
+│   │   ├── <span class="folder-item">Tailwind CSS</span>
+│   │   ├── <span class="folder-item">Bootstrap</span>
+│   │   ├── <span class="folder-item">Sass/SCSS</span>
+│   │   └── <span class="folder-item">Material UI</span>
+│   │
+│   ├── <span class="folder-sub">Files</span>
+│   │   ├── <span class="folder-item">index.html</span>
+│   │   ├── <span class="folder-item">style.css</span>
+│   │   ├── <span class="folder-item">app.js</span>
+│   │   ├── <span class="folder-item">App.jsx</span>
+│   │   ├── <span class="folder-item">main.tsx</span>
+│   │   ├── <span class="folder-item">Navbar.jsx</span>
+│   │   └── <span class="folder-item">globals.css</span>
+│   │
+│   └── <span class="folder-sub">Concepts</span>
+│       ├── <span class="folder-item">Components</span>
+│       ├── <span class="folder-item">State</span>
+│       ├── <span class="folder-item">Props</span>
+│       ├── <span class="folder-item">Routing</span>
+│       ├── <span class="folder-item">Responsive Design</span>
+│       └── <span class="folder-item">API Calls</span>
+│
+├── <span class="folder-branch">2. BACKEND (Server Side)</span>
+│   │
+│   ├── <span class="folder-sub">Languages</span>
+│   │   ├── <span class="folder-item">JavaScript (Node.js)</span>
+│   │   ├── <span class="folder-item">TypeScript</span>
+│   │   ├── <span class="folder-item">Python</span>
+│   │   ├── <span class="folder-item">Java</span>
+│   │   ├── <span class="folder-item">PHP</span>
+│   │   ├── <span class="folder-item">Go</span>
+│   │   └── <span class="folder-item">C#</span>
+│   │
+│   ├── <span class="folder-sub">Frameworks</span>
+│   │   ├── <span class="folder-item">Express.js</span>
+│   │   ├── <span class="folder-item">NestJS</span>
+│   │   ├── <span class="folder-item">Django</span>
+│   │   ├── <span class="folder-item">Flask</span>
+│   │   ├── <span class="folder-item">Spring Boot</span>
+│   │   ├── <span class="folder-item">Laravel</span>
+│   │   └── <span class="folder-item">ASP.NET</span>
+│   │
+│   ├── <span class="folder-sub">Files</span>
+│   │   ├── <span class="folder-item">server.js</span>
+│   │   ├── <span class="folder-item">app.js (server)</span>
+│   │   ├── <span class="folder-item">routes.js</span>
+│   │   ├── <span class="folder-item">auth.js</span>
+│   │   ├── <span class="folder-item">api.ts</span>
+│   │   ├── <span class="folder-item">controller.js</span>
+│   │   └── <span class="folder-item">middleware.js</span>
+│   │
+│   └── <span class="folder-sub">Concepts</span>
+│       ├── <span class="folder-item">REST API</span>
+│       ├── <span class="folder-item">Authentication</span>
+│       ├── <span class="folder-item">JWT</span>
+│       ├── <span class="folder-item">CRUD</span>
+│       ├── <span class="folder-item">Middleware</span>
+│       ├── <span class="folder-item">Sessions</span>
+│       └── <span class="folder-item">File Upload</span>
+│
+├── <span class="folder-branch">3. DATABASE</span>
+│   │
+│   ├── <span class="folder-sub">SQL Databases</span>
+│   │   ├── <span class="folder-item">MySQL</span>
+│   │   ├── <span class="folder-item">PostgreSQL</span>
+│   │   ├── <span class="folder-item">SQLite</span>
+│   │   └── <span class="folder-item">MariaDB</span>
+│   │
+│   ├── <span class="folder-sub">NoSQL Databases</span>
+│   │   ├── <span class="folder-item">MongoDB</span>
+│   │   ├── <span class="folder-item">Firebase</span>
+│   │   ├── <span class="folder-item">Supabase</span>
+│   │   └── <span class="folder-item">Redis</span>
+│   │
+│   ├── <span class="folder-sub">Files</span>
+│   │   ├── <span class="folder-item">schema.sql</span>
+│   │   ├── <span class="folder-item">models.js</span>
+│   │   ├── <span class="folder-item">database.js</span>
+│   │   ├── <span class="folder-item">firebase.json</span>
+│   │   └── <span class="folder-item">migrations/</span>
+│   │
+│   └── <span class="folder-sub">Concepts</span>
+│       ├── <span class="folder-item">Tables</span>
+│       ├── <span class="folder-item">Collections</span>
+│       ├── <span class="folder-item">Queries</span>
+│       ├── <span class="folder-item">Relations</span>
+│       ├── <span class="folder-item">Indexing</span>
+│       └── <span class="folder-item">Data Storage</span>
+│
+├── <span class="folder-branch">4. AUTHENTICATION</span>
+│   │
+│   ├── <span class="folder-sub">Systems</span>
+│   │   ├── <span class="folder-item">JWT</span>
+│   │   ├── <span class="folder-item">OAuth</span>
+│   │   ├── <span class="folder-item">Firebase Auth</span>
+│   │   ├── <span class="folder-item">Clerk</span>
+│   │   └── <span class="folder-item">Auth.js</span>
+│   │
+│   ├── <span class="folder-sub">Files</span>
+│   │   ├── <span class="folder-item">login.js</span>
+│   │   ├── <span class="folder-item">signup.js</span>
+│   │   ├── <span class="folder-item">authMiddleware.js</span>
+│   │   └── <span class="folder-item">session.js</span>
+│   │
+│   └── <span class="folder-sub">Concepts</span>
+│       ├── <span class="folder-item">Login</span>
+│       ├── <span class="folder-item">Signup</span>
+│       ├── <span class="folder-item">Tokens</span>
+│       ├── <span class="folder-item">Cookies</span>
+│       └── <span class="folder-item">User Sessions</span>
+│
+├── <span class="folder-branch">5. APIs</span>
+│   │
+│   ├── <span class="folder-sub">Types</span>
+│   │   ├── <span class="folder-item">REST API</span>
+│   │   ├── <span class="folder-item">GraphQL</span>
+│   │   └── <span class="folder-item">WebSockets</span>
+│   │
+│   ├── <span class="folder-sub">Files</span>
+│   │   ├── <span class="folder-item">api.js</span>
+│   │   ├── <span class="folder-item">fetchData.js</span>
+│   │   └── <span class="folder-item">routes.js</span>
+│   │
+│   └── <span class="folder-sub">Concepts</span>
+│       ├── <span class="folder-item">GET</span>
+│       ├── <span class="folder-item">POST</span>
+│       ├── <span class="folder-item">PUT</span>
+│       ├── <span class="folder-item">DELETE</span>
+│       └── <span class="folder-item">JSON</span>
+│
+├── <span class="folder-branch">6. DEVOPS / DEPLOYMENT</span>
+│   │
+│   ├── <span class="folder-sub">Platforms</span>
+│   │   ├── <span class="folder-item">Vercel</span>
+│   │   ├── <span class="folder-item">Netlify</span>
+│   │   ├── <span class="folder-item">Railway</span>
+│   │   ├── <span class="folder-item">Render</span>
+│   │   ├── <span class="folder-item">Firebase</span>
+│   │   └── <span class="folder-item">AWS</span>
+│   │
+│   ├── <span class="folder-sub">Files</span>
+│   │   ├── <span class="folder-item">vercel.json</span>
+│   │   ├── <span class="folder-item">netlify.toml</span>
+│   │   ├── <span class="folder-item">Dockerfile</span>
+│   │   └── <span class="folder-item">.github/</span>
+│   │
+│   └── <span class="folder-sub">Concepts</span>
+│       ├── <span class="folder-item">Hosting</span>
+│       ├── <span class="folder-item">CI/CD</span>
+│       ├── <span class="folder-item">Domain</span>
+│       ├── <span class="folder-item">SSL</span>
+│       └── <span class="folder-item">Environment Variables</span>
+│
+├── <span class="folder-branch">7. TOOLS</span>
+│   │
+│   ├── <span class="folder-item">Git</span>
+│   ├── <span class="folder-item">GitHub</span>
+│   ├── <span class="folder-item">VS Code</span>
+│   ├── <span class="folder-item">npm</span>
+│   ├── <span class="folder-item">yarn</span>
+│   ├── <span class="folder-item">pnpm</span>
+│   └── <span class="folder-item">Postman</span>
+│
+└── <span class="folder-branch">8. FILE TYPES</span>
+    │
+    ├── <span class="folder-item">.html  → HTML Structure</span>
+    ├── <span class="folder-item">.css   → Styling</span>
+    ├── <span class="folder-item">.scss  → Advanced CSS</span>
+    ├── <span class="folder-item">.js    → JavaScript</span>
+    ├── <span class="folder-item">.ts    → TypeScript</span>
+    ├── <span class="folder-item">.jsx   → React JSX</span>
+    ├── <span class="folder-item">.tsx   → React + TypeScript</span>
+    ├── <span class="folder-item">.json  → Config/Data</span>
+    ├── <span class="folder-item">.env   → Secret Keys</span>
+    ├── <span class="folder-item">.sql   → Database Queries</span>
+    ├── <span class="folder-item">.md    → Documentation</span>
+    ├── <span class="folder-item">.png   → Images</span>
+    ├── <span class="folder-item">.svg   → Vector Icons</span>
+    └── <span class="folder-item">.ico   → Website Icon</span></pre>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="index.html" class="logo-group">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+            <path d="M2 17L12 22L22 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text text-white">Stack<span>Easy</span></span>
+        </a>
+        <p class="footer-about">
+          Explaining web development through beautiful, tactile micro-learning and relatable stories. Let's build together!
+        </p>
+      </div>
+
+      <div class="footer-links-side">
+        <div class="footer-col">
+          <span class="footer-title">Q&A Topics</span>
+          <ul>
+            <li><a href="questions.html#sec-frontend">Frontend UI</a></li>
+            <li><a href="questions.html#sec-backend">Backend Server</a></li>
+            <li><a href="questions.html#sec-database">Data Storage</a></li>
+            <li><a href="questions.html#sec-architecture">System Flow</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-title">Resources</span>
+          <ul>
+            <li><a href="tree.html">Visual Full Stack Tree</a></li>
+            <li><a href="index.html#explorer">Restaurant Analogy</a></li>
+            <li><a href="index.html#faq">FAQ Hub</a></li>
+            <li><a href="questions.html">Q&A Hub</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 StackEasy Platform. Handcrafted for awesome learners.</p>
+    </div>
+  </footer>
+
+  <!-- Dictionaries for popup explanations -->
+  <script>
+    const techData = {
+      // 1. FRONTEND
+      "html": {
+        tag: "Frontend Language",
+        title: "HTML (HyperText Markup Language)",
+        desc: "The **core bone structure** of any website. It creates headers, paragraph text blocks, custom divisions (`<div>`), links, and handles structural image grids. It is compiled by browsers to set up basic content scaffolds before any visual styling is applied."
+      },
+      "css": {
+        tag: "Frontend Language",
+        title: "CSS (Cascading Style Sheets)",
+        desc: "The **makeup, styling, and structural design layer** of web pages. It defines color schemes, custom Outfit/Inter typography bindings, button alignments, flexible grid layouts (Flexbox/CSS Grid), fluid hover card animations, and responsive screen scaling."
+      },
+      "js": {
+        tag: "Frontend Language",
+        title: "JavaScript (Client-Side)",
+        desc: "The **functional motor engine** of web browsers. It provides interactive movement—capturing client cursor clicks, opening mobile sliding drawer states, simulating simulator network APIs fetch chains, and rendering local UI alerts instantly without reloading pages."
+      },
+      "ts": {
+        tag: "Frontend Language",
+        title: "TypeScript",
+        desc: "An advanced, **type-safe superset of JavaScript**. It restricts variable values (e.g. enforcing numbers vs string characters) and catching typing bugs directly inside your code editor *before* compiling files. Prevents 80% of common client-side crashes."
+      },
+      "react": {
+        tag: "Frontend Library",
+        title: "React.js",
+        desc: "A massive, component-driven **visual UI building library** built by Meta. It organizes HTML layouts into modular, reusable blocks (Components) that recalculate local state hooks and redraw browser elements on-screen with extreme rendering speeds."
+      },
+      "nextjs": {
+        tag: "Frontend Framework",
+        title: "Next.js",
+        desc: "A highly optimized production **React framework** that introduces prebuilt website file structures, automated path routers, instant server-side page rendering (SSR), search engine indexing optimization (SEO), and custom endpoint serverless APIs."
+      },
+      "vue": {
+        tag: "Frontend Framework",
+        title: "Vue.js",
+        desc: "A lightweight, progressive **JavaScript framework** used to build clean single-page client panels. Highly approachable for beginners with structured HTML templates, reactive states tracking, and flexible styling scopes."
+      },
+      "angular": {
+        tag: "Frontend Framework",
+        title: "Angular (Google)",
+        desc: "A heavy-duty, **TypeScript-based enterprise framework** engineered by Google. It enforces rigid structural best practices out-of-the-box, providing built-in router modules, security checking pipelines, and HTTP controllers."
+      },
+      "svelte": {
+        tag: "Frontend Compiler",
+        title: "Svelte",
+        desc: "A modern **JavaScript compiler** that builds client UI elements. Unlike React, Svelte has no virtual DOM; it compiles your components down to tiny, raw vanilla JS scripts during build time, yielding incredible performance speeds."
+      },
+      "tailwind": {
+        tag: "Styling Framework",
+        title: "Tailwind CSS",
+        desc: "A **utility-first CSS framework** where style tags are written directly inside HTML layouts using shorthand keywords (e.g. `bg-black p-5 rounded-xl`). Eliminates the need to write separate custom CSS sheets and messy naming selectors."
+      },
+      "bootstrap": {
+        tag: "Styling Framework",
+        title: "Bootstrap CSS",
+        desc: "A pioneer **responsive layout library** loaded with pre-styled component packages (cards, nav headers, form grids, alerts). Quick for prototyping, but results in a standard, easily recognizable 'Bootstrap look' unless heavily tweaked."
+      },
+      "sass": {
+        tag: "Advanced CSS",
+        title: "Sass / SCSS",
+        desc: "A powerful **CSS preprocessor extension** introducing programmatic styles structures. Allows nesting rules layout structures inside parent rules, storing colors inside variables (`$primary-orange`), and importing separate modules easily."
+      },
+      "mui": {
+        tag: "React UI Components",
+        title: "Material UI (MUI)",
+        desc: "A rich **React component design system** based on Google's clean 'Material Design' visual tokens. Provides ready-to-use buttons, icons, modals, and input sliders with beautiful micro-interactions out of the box."
+      },
+      "index-html": {
+        tag: "Frontend File",
+        title: "index.html",
+        desc: "The **absolute entry point** of a website. The first file a browser requests and parses. It links the external CSS style sheets and imports JavaScript compiler bundles."
+      },
+      "style-css": {
+        tag: "Frontend File",
+        title: "style.css",
+        desc: "A standard **global stylesheet** containing styling rules, layout declarations, animations keyframes, and color definitions that shape the visuals across pages."
+      },
+      "app-js": {
+        tag: "Frontend File",
+        title: "app.js",
+        desc: "The **primary JavaScript script** on the client side, responsible for toggling drawers, processing form submissions, and connecting event listeners."
+      },
+      "app-jsx": {
+        tag: "React Component",
+        title: "App.jsx",
+        desc: "The **root component** in a React project. It defines the core UI layout tree and serves as the visual shell wrapping other components."
+      },
+      "main-tsx": {
+        tag: "TypeScript React",
+        title: "main.tsx",
+        desc: "The **TypeScript entry script** in a modern Vite/React stack. It binds the React virtual app instance directly to the physical `index.html` div element."
+      },
+      "navbar-jsx": {
+        tag: "React Component",
+        title: "Navbar.jsx",
+        desc: "A modular, reusable **navigation component** in a React project, containing top navigation link tags and drawer toggles."
+      },
+      "globals-css": {
+        tag: "Next.js / Tailwind CSS",
+        title: "globals.css",
+        desc: "The central file in a Next.js or Tailwind project where global theme directives and utility variables are imported."
+      },
+      "components": {
+        tag: "Frontend Concept",
+        title: "Components",
+        desc: "Modular, **reusable code building blocks** (like a button, navbar, or product card). Written once and imported anywhere, preventing redundant copy-pasting of HTML."
+      },
+      "state": {
+        tag: "Frontend Concept",
+        title: "State (UI Memory)",
+        desc: "An active **data-store object** representing the current state of a component (e.g. active tab selection, logged-in status). When state variables change, the UI automatically updates."
+      },
+      "props": {
+        tag: "Frontend Concept",
+        title: "Props (Data Flow)",
+        desc: "Short for **Properties**. They act as parameters passed down from parent components to child components (e.g., passing a specific text message to style a custom Button)."
+      },
+      "routing": {
+        tag: "Frontend Concept",
+        title: "Routing (URL Navigation)",
+        desc: "The engine that maps URL pathways (like `/orders` or `/profile`) to specific page components without triggering a slow browser refresh cycle."
+      },
+      "responsive": {
+        tag: "Frontend Concept",
+        title: "Responsive Design",
+        desc: "The practice of using CSS flexbox grids and media queries to automatically resize and align layouts cleanly on phones, tablets, and wide monitors."
+      },
+      "api-calls": {
+        tag: "Frontend Concept",
+        title: "API Calls (fetch / axios)",
+        desc: "Using browser HTTP protocols to request data from external servers, fetching raw database JSON items to feed visual lists."
+      },
+
+      // 2. BACKEND
+      "node": {
+        tag: "Backend Runtime",
+        title: "Node.js Runtime",
+        desc: "A high-performance runtime engine built on Google V8 that **liberates JavaScript from browsers**. It allows developers to write server APIs, database connections, and system scripts using JS."
+      },
+      "ts-back": {
+        tag: "Backend Language",
+        title: "TypeScript (Server-Side)",
+        desc: "Applying TypeScript type-safety constraints to server-side code. Ensures API data formats, parameters, and database schemas strictly match definitions before executing server tasks."
+      },
+      "python": {
+        tag: "Backend Language",
+        title: "Python",
+        desc: "A highly approachable server-side language famous for its clean syntax. Powers complex data analysis engines, AI systems, machine learning models, and standard web servers (Django/Flask)."
+      },
+      "java": {
+        tag: "Backend Language",
+        title: "Java",
+        desc: "An enterprise-grade, object-oriented language. Famously used by banks, large corporations, and Android apps due to its extreme security, stability, and speed under heavy loads."
+      },
+      "php": {
+        tag: "Backend Language",
+        title: "PHP",
+        desc: "A server scripting language that powers over 70% of websites (including WordPress). Modern PHP is fast, flexible, and natively designed to render databases data into HTML pages."
+      },
+      "go": {
+        tag: "Backend Language",
+        title: "Go (Golang by Google)",
+        desc: "A highly optimized, compiled language designed by Google for **microservices and massive concurrency**. Incredible speed, tiny memory footprint, and perfect for cloud-native setups."
+      },
+      "csharp": {
+        tag: "Backend Language",
+        title: "C# (.NET)",
+        desc: "Microsoft's flagship object-oriented language. Paired with the .NET framework, it powers high-performance corporate APIs, desktop apps, and gaming servers (Unity)."
+      },
+      "express": {
+        tag: "Backend Framework",
+        title: "Express.js",
+        desc: "The standard **minimalist server framework for Node.js**. It provides clean routing systems to handle HTTP methods (like GET and POST) and server-side middleware checking panels."
+      },
+      "nestjs": {
+        tag: "Backend Framework",
+        title: "NestJS",
+        desc: "A powerful, rigid **TypeScript server framework**. Heavily structured like Angular, enforcing clean architecture rules, modular layout patterns, and dependency injection systems."
+      },
+      "django": {
+        tag: "Backend Framework",
+        title: "Django (Python)",
+        desc: "A high-level Python web framework enforcing the 'batteries-included' philosophy. It provides built-in database administration dashboards, authentication managers, and security layers out-of-the-box."
+      },
+      "flask": {
+        tag: "Backend Framework",
+        title: "Flask (Python)",
+        desc: "A lightweight, **micro Python framework**. It provides only the bare minimum server essentials, allowing developers absolute freedom to select their preferred database connectors and folder structures."
+      },
+      "spring": {
+        tag: "Backend Framework",
+        title: "Spring Boot (Java)",
+        desc: "The premier Java framework designed to build secure, robust corporate microservices. Features automated configurations, database binding mechanisms, and enterprise security modules."
+      },
+      "laravel": {
+        tag: "Backend Framework",
+        title: "Laravel (PHP)",
+        desc: "A gorgeous, highly expressive web framework for PHP. Popular for its readable syntax, elegant database adapters (Eloquent ORM), built-in security, and fast visual rendering tools."
+      },
+      "asp": {
+        tag: "Backend Framework",
+        title: "ASP.NET Core (C#)",
+        desc: "Microsoft's modern, open-source framework for building lightning-fast, cross-platform APIs and enterprise cloud services using C#."
+      },
+      "server-js": {
+        tag: "Backend File",
+        title: "server.js / index.js",
+        desc: "The **main entry file for Node.js servers**. It starts the server port listener, registers express routing files, and establishes database connections."
+      },
+      "app-py": {
+        tag: "Backend File",
+        title: "app.py",
+        desc: "The standard **main entry script for Python servers** (like Flask or Django configurations), binding core port routing listeners."
+      },
+      "routes-js": {
+        tag: "Backend File",
+        title: "routes.js",
+        desc: "A dedicated server routing file that maps URLs (like `/api/users`) to specific execution functions (Controllers)."
+      },
+      "auth-js": {
+        tag: "Backend File",
+        title: "auth.js",
+        desc: "Contains secure **backend authentication logic**, including password hashing, password comparisons, and JWT signature creation."
+      },
+      "api-ts": {
+        tag: "Backend File",
+        title: "api.ts",
+        desc: "A type-safe TypeScript routing or API calculation configuration defining exactly what keys and data shapes requests must submit."
+      },
+      "controller-js": {
+        tag: "Backend File",
+        title: "controller.js",
+        desc: "Houses the **actual brain logic** of an API. It gets triggered by a route, queries the database, formats the data, and returns the response."
+      },
+      "middleware-js": {
+        tag: "Backend File",
+        title: "middleware.js",
+        desc: "A **security filter file** that intercept requests. Runs checks (like verifying if a user is logged in) before letting requests reach the server database."
+      },
+      "rest-api": {
+        tag: "Backend Concept",
+        title: "REST API Architecture",
+        desc: "A standardized pattern where client browsers interact with backend servers using standard **HTTP verbs** (GET to read, POST to write, PUT to update, DELETE to wipe data)."
+      },
+      "auth-concept": {
+        tag: "Backend Concept",
+        title: "Authentication (Auth)",
+        desc: "The secure server process of **verifying who a user is** (via emails/passwords) and establishing active login states."
+      },
+      "jwt-concept": {
+        tag: "Backend Concept",
+        title: "JWT (JSON Web Tokens)",
+        desc: "A secure, encrypted text ticket issued by servers to clients upon login. The browser saves it in cookies or memory, attaching it to headers to authenticate requests automatically."
+      },
+      "crud": {
+        tag: "Backend Concept",
+        title: "CRUD Operations",
+        desc: "The four core database interactions: **Create** (POST), **Read** (GET), **Update** (PUT), and **Delete** (DELETE). Every data-driven app relies on this cycle."
+      },
+      "middleware": {
+        tag: "Backend Concept",
+        title: "Middleware Gatekeeper",
+        desc: "Functions that execute in sequence on the server between receiving a request and returning a response. Crucial for logging, parsing inputs, and security filters."
+      },
+      "sessions": {
+        tag: "Backend Concept",
+        title: "Server Sessions",
+        desc: "Tracking active users by storing a unique session ID in server RAM/databases, matching a browser cookie to keep users logged in."
+      },
+      "upload": {
+        tag: "Backend Concept",
+        title: "File Uploads",
+        desc: "The process of receiving files (images, PDFs) from a client form, saving them securely to cloud storage (like AWS S3), and storing the file URL in the database."
+      },
+
+      // 3. DATABASE
+      "mysql": {
+        tag: "SQL Database",
+        title: "MySQL",
+        desc: "The world's most popular open-source relational database. Organizes data into rigid, structured **Tables** with schemas, using standard SQL syntax."
+      },
+      "postgres": {
+        tag: "SQL Database",
+        title: "PostgreSQL",
+        desc: "An advanced, highly powerful open-source SQL database. Famous for handling incredibly complex queries, high data integrity, and complex relations under huge enterprise scales."
+      },
+      "sqlite": {
+        tag: "SQL Database",
+        title: "SQLite",
+        desc: "A self-contained, **zero-configuration file-based SQL database**. Instead of running on a separate server, the entire database is stored in a single local file. Perfect for mobile apps or quick local testing."
+      },
+      "mariadb": {
+        tag: "SQL Database",
+        title: "MariaDB",
+        desc: "A fast, open-source database created by the original developers of MySQL. Provides high performance, security enhancements, and compatibility drop-in replacements."
+      },
+      "mongodb": {
+        tag: "NoSQL Database",
+        title: "MongoDB",
+        desc: "A NoSQL database that stores data inside flexible, JSON-like **Documents**. Super popular for modern JavaScript stacks because there are no strict column structures, allowing rapid updates."
+      },
+      "firebase": {
+        tag: "Serverless Database / BaaS",
+        title: "Firebase Firestore",
+        desc: "Google's real-time, serverless NoSQL cloud database. Connects directly to frontend code and synchronizes updates across devices in milliseconds."
+      },
+      "supabase": {
+        tag: "Open Source BaaS / SQL",
+        title: "Supabase Postgres",
+        desc: "A modern open-source alternative to Firebase built on PostgreSQL. Gives you real-time data sync, instant user authentication APIs, and file storage using SQL."
+      },
+      "redis": {
+        tag: "In-Memory NoSQL Store",
+        title: "Redis Key-Value DB",
+        desc: "An ultra-fast, **in-memory database** storing data as key-value pairs in RAM. Primarily used for caching heavy query responses and managing session queues with sub-millisecond speeds."
+      },
+      "schema-sql": {
+        tag: "Database File",
+        title: "schema.sql",
+        desc: "A database setup file containing the exact SQL blueprints to construct tables, columns, constraints, and relational bridges."
+      },
+      "models-js": {
+        tag: "Database File",
+        title: "models/user.js",
+        desc: "Defines the **logical schema shape** of documents inside an app (e.g. defining that a User must have a string email and a hashed password) using Mongoose ORM."
+      },
+      "database-js": {
+        tag: "Database File",
+        title: "database.js / db.js",
+        desc: "Contains server-side script connectors establishing active sockets linking your API to the database hosting provider."
+      },
+      "firebase-json": {
+        tag: "Database / Hosting Config",
+        title: "firebase.json",
+        desc: "A project configuration file specifying hosting routing, database rules, and automated cloud functions for Firebase projects."
+      },
+      "migrations": {
+        tag: "Database File Group",
+        title: "migrations/ directory",
+        desc: "A folder containing a chronological history of database schema changes. Lets teams update tables synchronously without losing data."
+      },
+      "tables": {
+        tag: "Database Concept",
+        title: "Relational Tables",
+        desc: "Rigid column-and-row data spreadsheets used by SQL databases. Guarantees that every record matches a strict format."
+      },
+      "collections": {
+        tag: "Database Concept",
+        title: "NoSQL Collections",
+        desc: "The equivalent of tables in NoSQL. Collections house hundreds of flexible JSON documents with varying properties."
+      },
+      "queries": {
+        tag: "Database Concept",
+        title: "Database Queries",
+        desc: "Requests sent to search, filter, update, or delete records (e.g. `SELECT * FROM users WHERE age > 18`)."
+      },
+      "relations": {
+        tag: "Database Concept",
+        title: "Relational Bridges",
+        desc: "Linking tables together using unique identifier keys (e.g. linking an Order to a specific User ID via a Foreign Key)."
+      },
+      "indexing": {
+        tag: "Database Concept",
+        title: "Data Indexing",
+        desc: "Creating an internal quick-lookup index on columns (like searching a book index instead of scanning every page). Speeds up query times by 100x."
+      },
+      "storage": {
+        tag: "Database Concept",
+        title: "Data Persistence",
+        desc: "Ensuring that data stays permanently written to physical server disk drives even if servers crash or reboot."
+      },
+
+      // 4. AUTHENTICATION
+      "jwt-sys": {
+        tag: "Auth System",
+        title: "JWT Authorization Tokens",
+        desc: "An industry standard method for signing secure authentication payloads that can be verified locally by APIs using secret keys."
+      },
+      "oauth": {
+        tag: "Auth System",
+        title: "OAuth 2.0 (Social Sign-in)",
+        desc: "A protocol letting users log in using external giants (Google, GitHub, Apple) without exposing their raw passwords to your app."
+      },
+      "firebase-auth": {
+        tag: "Auth Service",
+        title: "Firebase Authentication",
+        desc: "A pre-built security service handling email logins, SMS verification, and social bindings without requiring custom backend cryptography."
+      },
+      "clerk": {
+        tag: "Auth Service",
+        title: "Clerk User Management",
+        desc: "A modern, complete user auth suite providing beautiful prebuilt login forms, user profile widgets, and secure sessions."
+      },
+      "auth-js-sys": {
+        tag: "Auth Library",
+        title: "Auth.js (formerly NextAuth)",
+        desc: "A powerful security library for Next.js and other frameworks, simplifying credentials login, OAuth setups, and secure cookies handling."
+      },
+      "login-js": {
+        tag: "Auth File",
+        title: "login.js / login.jsx",
+        desc: "The visual login form component or the matching API route validating incoming user credentials."
+      },
+      "signup-js": {
+        tag: "Auth File",
+        title: "signup.js / signup.jsx",
+        desc: "The registration component or API endpoint hashing passwords and saving new user profiles to the database."
+      },
+      "authmiddleware-js": {
+        tag: "Auth File",
+        title: "authMiddleware.js",
+        desc: "A custom server filter parsing request headers, validating JWT tickets, and appending user profiles to requests."
+      },
+      "session-js": {
+        tag: "Auth File",
+        title: "session.js",
+        desc: "A helper file managing client-side browser tokens storage or handling secure cookies expirations."
+      },
+      "login-concept": {
+        tag: "Auth Concept",
+        title: "Secure Login Flow",
+        desc: "The flow where users submit credentials, the server hashes and compares passwords, and issues a secure access token."
+      },
+      "signup-concept": {
+        tag: "Auth Concept",
+        title: "Secure Signup Flow",
+        desc: "Validating user input, encrypting passwords using secure hashing algorithms (like bcrypt), and saving records safely."
+      },
+      "tokens": {
+        tag: "Auth Concept",
+        title: "Access Tokens",
+        desc: "Encrypted string tokens representing authorized access permissions. Handed to clients and checked by servers."
+      },
+      "cookies": {
+        tag: "Auth Concept",
+        title: "HTTP Cookies Storage",
+        desc: "Small data packets stored automatically inside browser engines. Secure HTTPOnly cookies prevent hacker scripts from stealing logins."
+      },
+      "user-sessions": {
+        tag: "Auth Concept",
+        title: "Active User Sessions",
+        desc: "The absolute state duration where a user remains validated and permitted to interact with restricted server databases."
+      },
+
+      // 5. APIs
+      "rest-types": {
+        tag: "API Type",
+        title: "REST APIs (Representational State Transfer)",
+        desc: "The classic API design standard, organizing data around strict URL pathways (endpoints) and standard HTTP methods."
+      },
+      "graphql": {
+        tag: "API Type",
+        title: "GraphQL (Query Language)",
+        desc: "A modern alternative to REST designed by Meta. Allows clients to request the exact data fields they need in a single request, preventing over-fetching."
+      },
+      "websockets": {
+        tag: "API Type",
+        title: "WebSockets (Real-time)",
+        desc: "An active, bi-directional communication socket. Keeps an open connection between client and server, enabling instant real-time chats or live dashboards."
+      },
+      "api-js-file": {
+        tag: "API File",
+        title: "api.js",
+        desc: "A script configuring central API base options, headers, tokens, and custom fetch clients (like Axios)."
+      },
+      "fetchdata-js": {
+        tag: "API File",
+        title: "fetchData.js",
+        desc: "Contains client-side functions sending fetch requests to endpoints and returning structured JSON data."
+      },
+      "routes-js-api": {
+        tag: "API File",
+        title: "routes/api.js",
+        desc: "Declares clean Express or Next.js route paths to organize backend API responses."
+      },
+      "get-req": {
+        tag: "API Method",
+        title: "GET Request",
+        desc: "The HTTP method used exclusively to **read data** (e.g. requesting to view orders or load posts) without altering server databases."
+      },
+      "post-req": {
+        tag: "API Method",
+        title: "POST Request",
+        desc: "The HTTP method used exclusively to **write new data** (e.g. registering a user or submitting a checkout order form)."
+      },
+      "put-req": {
+        tag: "API Method",
+        title: "PUT Request",
+        desc: "The HTTP method used exclusively to **update existing records** (e.g. editing a profile biography or changing settings)."
+      },
+      "delete-req": {
+        tag: "API Method",
+        title: "DELETE Request",
+        desc: "The HTTP method used to **permanently delete** records from the database."
+      },
+      "json-format": {
+        tag: "API Format",
+        title: "JSON Data Format",
+        desc: "Short for **JavaScript Object Notation**. A clean, human-readable text format mapping keys to values. The universal language of APIs."
+      },
+
+      // 6. DEVOPS
+      "vercel": {
+        tag: "DevOps Platform",
+        title: "Vercel Hosting",
+        desc: "A cloud platform optimized for modern frontend projects. Integrates with GitHub to deploy updates automatically on every push."
+      },
+      "netlify": {
+        tag: "DevOps Platform",
+        title: "Netlify Hosting",
+        desc: "A clean cloud hosting platform for static assets and serverless frontends, featured with automated forms support."
+      },
+      "railway": {
+        tag: "DevOps Platform",
+        title: "Railway Cloud",
+        desc: "An incredibly approachable cloud hosting platform for full stack apps and databases. Deploys servers and databases instantly."
+      },
+      "render": {
+        tag: "DevOps Platform",
+        title: "Render Cloud",
+        desc: "A modern, developer-friendly cloud hosting platform for running backend Node.js, Python, or Ruby servers, complete with database hosting."
+      },
+      "firebase-hosting": {
+        tag: "DevOps Platform",
+        title: "Firebase Hosting",
+        desc: "Google's fast static hosting service, serving assets from global CDN nodes with automated SSL generation."
+      },
+      "aws": {
+        tag: "DevOps Platform",
+        title: "Amazon Web Services (AWS)",
+        desc: "The absolute giant of cloud infrastructure. Provides massive virtual servers (EC2), databases, file buckets (S3), and serverless functions."
+      },
+      "vercel-json": {
+        tag: "DevOps File",
+        title: "vercel.json",
+        desc: "Configures custom headers, redirect paths, routing rewrites, and serverless options for Vercel deployments."
+      },
+      "netlify-toml": {
+        tag: "DevOps File",
+        title: "netlify.toml",
+        desc: "The manifest file specifying build folders, dev commands, and custom proxy rules for Netlify builds."
+      },
+      "dockerfile": {
+        tag: "DevOps File",
+        title: "Dockerfile",
+        desc: "A script containing the exact commands to package your app into a self-contained, isolated virtual container (Docker) that runs identically on any server."
+      },
+      "github-workflows": {
+        tag: "DevOps File",
+        title: ".github/workflows/deploy.yml",
+        desc: "Specifies **CI/CD pipelines** that run automated test checks and deploy servers automatically upon every GitHub commit."
+      },
+      "hosting": {
+        tag: "DevOps Concept",
+        title: "Cloud Hosting",
+        desc: "Renting virtual space on high-speed remote cloud servers to serve your files and code to the public 24/7."
+      },
+      "cicd": {
+        tag: "DevOps Concept",
+        title: "CI/CD (Continuous Integration & Deployment)",
+        desc: "Automated pipelines that run code tests and handle cloud server deployments on every repository push."
+      },
+      "domain": {
+        tag: "DevOps Concept",
+        title: "Custom Domains",
+        desc: "Mapping readable URLs (like `stackeasy.com`) to the numerical IP address of your remote hosting servers."
+      },
+      "ssl": {
+        tag: "DevOps Concept",
+        title: "SSL Certificates (HTTPS)",
+        desc: "Encrypting network traffic between browsers and servers, securing data transfers, and rendering the secure lock icon in browsers."
+      },
+      "env-vars": {
+        tag: "DevOps Concept",
+        title: "Environment Variables",
+        desc: "Injecting secure passwords and keys (like Stripe API credentials) directly into cloud hosting environments, keeping them out of source code."
+      },
+
+      // 7. TOOLS
+      "git-tool": {
+        tag: "Essential Tool",
+        title: "Git Version Control",
+        desc: "A local tool tracking code history. Creates chronological 'save points' (commits), letting you roll back files if anything breaks."
+      },
+      "github-tool": {
+        tag: "Essential Tool",
+        title: "GitHub Hub",
+        desc: "A secure cloud hosting platform for Git repositories. Crucial for team collaboration, code reviews, and remote backups."
+      },
+      "vscode": {
+        tag: "Essential Tool",
+        title: "VS Code Editor",
+        desc: "The ultimate open-source code editor built by Microsoft. Extensible with syntax highlighting, linters, and direct terminals."
+      },
+      "npm-tool": {
+        tag: "Package Manager",
+        title: "npm (Node Package Manager)",
+        desc: "The default package manager for Node.js. Used to install, share, and update thousands of open-source libraries instantly."
+      },
+      "yarn-tool": {
+        tag: "Package Manager",
+        title: "Yarn Package Manager",
+        desc: "A fast, secure alternative to npm created by Facebook, featuring package caching and secure lockfiles."
+      },
+      "pnpm-tool": {
+        tag: "Package Manager",
+        title: "pnpm Package Manager",
+        desc: "An ultra-fast package manager that saves massive disk space by sharing single copies of files across all your local projects."
+      },
+      "postman": {
+        tag: "Essential Tool",
+        title: "Postman API Client",
+        desc: "A visual developer tool to send GET, POST, and PUT requests to API routes, testing response shapes before writing frontend code."
+      },
+
+      // 8. FILE TYPES
+      "f-html": {
+        tag: "File Type",
+        title: "HTML Format (.html)",
+        desc: "The backbone markup file parsing semantic elements layouts for browsers."
+      },
+      "f-css": {
+        tag: "File Type",
+        title: "CSS Stylesheet (.css)",
+        desc: "A standard styling file containing color layout rules."
+      },
+      "f-scss": {
+        tag: "File Type",
+        title: "Sass Extension (.scss)",
+        desc: "An advanced CSS preprocessor file that compiles down to standard `.css`."
+      },
+      "f-js": {
+        tag: "File Type",
+        title: "JavaScript File (.js)",
+        desc: "Executes standard client calculations or backend Express server routes."
+      },
+      "f-ts": {
+        tag: "File Type",
+        title: "TypeScript File (.ts)",
+        desc: "A type-safe code logic file catching typing errors before execution."
+      },
+      "f-jsx": {
+        tag: "File Type",
+        title: "React JSX (.jsx)",
+        desc: "A component file containing HTML tags structure inside JS functions."
+      },
+      "f-tsx": {
+        tag: "File Type",
+        title: "TypeScript React (.tsx)",
+        desc: "Type-safe React component files containing visual layouts and static types check rules."
+      },
+      "f-json": {
+        tag: "File Type",
+        title: "JSON Config (.json)",
+        desc: "A project manifest storing settings, scripts commands, and dependencies lists."
+      },
+      "f-env": {
+        tag: "File Type",
+        title: "Environment Secrets (.env)",
+        desc: "A highly secure local configuration file shielding database credentials."
+      },
+      "f-sql": {
+        tag: "File Type",
+        title: "SQL Query File (.sql)",
+        desc: "Contains database schema updates, relational definitions, and queries."
+      },
+      "f-md": {
+        tag: "File Type",
+        title: "Markdown Document (.md)",
+        desc: "A clean markup text file creating detailed developer documentation readmes."
+      },
+      "f-png": {
+        tag: "File Type",
+        title: "PNG Image (.png)",
+        desc: "High-quality raster image asset supporting transparent backgrounds."
+      },
+      "f-svg": {
+        tag: "File Type",
+        title: "Vector Graphic (.svg)",
+        desc: "Scalable Vector Graphic containing math instructions to render sharp logo icons at any size."
+      },
+      "f-ico": {
+        tag: "File Type",
+        title: "Icon Format (.ico)",
+        desc: "Short for Icon file, primarily used to render site tab symbols."
+      }
+    };
+  </script>
+
+  <!-- Script for Panning, Zooming, Node Highlighting, and Popup Details -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // --- 1. Mobile Drawer Navigation ---
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      
+      if (mobileMenuBtn && mobileDrawer) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('open');
+          
+          // Animate hamburger toggle lines
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          if (mobileDrawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+          } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
+        });
+      }
+
+      // --- 2. Mind-Map Connector Lines (SVG) ---
+      const svgContainer = document.getElementById('tree-svg-connections');
+      const rootNode = document.getElementById('root-node');
+      const branchCards = document.querySelectorAll('.branch-card');
+
+      function drawConnectionLines() {
+        if (!svgContainer || !rootNode) return;
+        svgContainer.innerHTML = ''; // Clear existing lines
+
+        const rootRect = rootNode.getBoundingClientRect();
+        const canvasRect = document.getElementById('tree-canvas').getBoundingClientRect();
+        
+        // Root Center coordinates relative to canvas wrapper (adjusted for zoomScale)
+        const rootCenterX = ((rootRect.left + rootRect.width / 2) - canvasRect.left) / zoomScale;
+        const rootCenterY = ((rootRect.top + rootRect.height / 2) - canvasRect.top) / zoomScale;
+
+        branchCards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          
+          // Compute closest anchor points (adjusted for zoomScale)
+          const cardX = (cardRect.left - canvasRect.left) / zoomScale;
+          const cardY = ((cardRect.top + cardRect.height / 2) - canvasRect.top) / zoomScale;
+          const cardW = cardRect.width / zoomScale;
+          
+          // Adjust points based on relative position
+          let targetX = cardX;
+          if (cardX < rootCenterX) {
+            targetX = cardX + cardW; // Connect to the right edge if card is left of root
+          }
+
+          // Generate an elegant cubic bezier curve path
+          const controlPointX = rootCenterX + (targetX - rootCenterX) * 0.5;
+          const pathD = `M ${rootCenterX} ${rootCenterY} C ${controlPointX} ${rootCenterY}, ${controlPointX} ${cardY}, ${targetX} ${cardY}`;
+
+          // Create SVG Path element
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', pathD);
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', 'rgba(15, 38, 21, 0.12)');
+          path.setAttribute('stroke-width', '3');
+          path.setAttribute('stroke-dasharray', '6 4');
+          
+          // Set color theme depending on card category
+          if (card.classList.contains('frontend')) path.setAttribute('stroke', 'rgba(56, 189, 248, 0.4)');
+          if (card.classList.contains('backend')) path.setAttribute('stroke', 'rgba(129, 140, 248, 0.4)');
+          if (card.classList.contains('database')) path.setAttribute('stroke', 'rgba(52, 211, 153, 0.4)');
+          if (card.classList.contains('auth')) path.setAttribute('stroke', 'rgba(251, 191, 36, 0.4)');
+          if (card.classList.contains('apis')) path.setAttribute('stroke', 'rgba(249, 115, 22, 0.4)');
+          if (card.classList.contains('devops')) path.setAttribute('stroke', 'rgba(236, 72, 153, 0.4)');
+          if (card.classList.contains('tools')) path.setAttribute('stroke', 'rgba(100, 116, 139, 0.4)');
+          if (card.classList.contains('filetypes')) path.setAttribute('stroke', 'rgba(15, 38, 21, 0.4)');
+
+          svgContainer.appendChild(path);
+        });
+      }
+
+      // Draw lines after layout renders
+      setTimeout(drawConnectionLines, 200);
+
+      // --- 3. Zooming and Drag-to-Pan Implementation ---
+      const viewport = document.getElementById('tree-viewport');
+      const canvas = document.getElementById('tree-canvas');
+
+      let zoomScale = 0.55; // Initial zoom scale to show the whole tree
+      let panX = 150;
+      let panY = 150;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+
+      function updateCanvasTransform() {
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+      }
+
+      // Apply initial zoom & center position
+      updateCanvasTransform();
+
+      // --- 3.5 Card Drag-and-Drop Variables & Functions ---
+      let activeDraggedElement = null;
+      let dragStartMouseX = 0;
+      let dragStartMouseY = 0;
+      let dragStartElementX = 0;
+      let dragStartElementY = 0;
+
+      function initiateDrag(element, clientX, clientY) {
+        activeDraggedElement = element;
+        dragStartMouseX = clientX;
+        dragStartMouseY = clientY;
+        
+        // Retrieve current visual left and top positions relative to canvas
+        dragStartElementX = parseFloat(element.style.left) || element.offsetLeft;
+        dragStartElementY = parseFloat(element.style.top) || element.offsetTop;
+        
+        element.classList.add('dragging');
+      }
+
+      function handleDragMove(clientX, clientY) {
+        if (!activeDraggedElement) return;
+        
+        const deltaX = clientX - dragStartMouseX;
+        const deltaY = clientY - dragStartMouseY;
+        
+        // Scale mouse movement delta by zoomScale for synchronized positioning
+        const scaleAdjustedDx = deltaX / zoomScale;
+        const scaleAdjustedDy = deltaY / zoomScale;
+        
+        activeDraggedElement.style.left = `${dragStartElementX + scaleAdjustedDx}px`;
+        activeDraggedElement.style.top = `${dragStartElementY + scaleAdjustedDy}px`;
+        
+        // Update connections continuously
+        drawConnectionLines();
+      }
+
+      function endDrag() {
+        if (!activeDraggedElement) return;
+        activeDraggedElement.classList.remove('dragging');
+        activeDraggedElement = null;
+      }
+
+      // Enable dragging on all cards and the root node
+      const draggableElements = document.querySelectorAll('.branch-card, .tree-root-hub');
+      draggableElements.forEach(el => {
+        el.addEventListener('mousedown', (e) => {
+          // Do not drag if clicking node badge, buttons, or popup cards
+          if (e.target.closest('.tree-node-badge') || e.target.closest('.tree-btn') || e.target.closest('.tree-details-card')) return;
+          
+          e.stopPropagation();
+          e.preventDefault(); // Prevents cursor highlights/text selections while dragging
+          initiateDrag(el, e.clientX, e.clientY);
+        });
+        
+        el.addEventListener('touchstart', (e) => {
+          if (e.target.closest('.tree-node-badge') || e.target.closest('.tree-btn') || e.target.closest('.tree-details-card')) return;
+          
+          e.stopPropagation();
+          const touch = e.touches[0];
+          initiateDrag(el, touch.clientX, touch.clientY);
+        }, { passive: true });
+      });
+
+      // Pan dragging events
+      viewport.addEventListener('mousedown', (e) => {
+        // Prevent canvas pan when clicking interactive elements or any draggable card/hub
+        if (e.target.closest('.tree-node-badge') || 
+            e.target.closest('.tree-btn') || 
+            e.target.closest('.tree-details-card') ||
+            e.target.closest('.branch-card') ||
+            e.target.closest('.tree-root-hub')) return;
+        
+        isDragging = true;
+        viewport.style.cursor = 'grabbing';
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (activeDraggedElement) {
+          handleDragMove(e.clientX, e.clientY);
+        } else if (isDragging) {
+          panX = e.clientX - startX;
+          panY = e.clientY - startY;
+          updateCanvasTransform();
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (activeDraggedElement) {
+          endDrag();
+        }
+        if (isDragging) {
+          isDragging = false;
+          viewport.style.cursor = 'grab';
+        }
+      });
+
+      viewport.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          viewport.style.cursor = 'grab';
+        }
+      });
+
+      // Mobile Touch Panning
+      viewport.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.tree-node-badge') ||
+            e.target.closest('.tree-btn') ||
+            e.target.closest('.tree-details-card') ||
+            e.target.closest('.branch-card') ||
+            e.target.closest('.tree-root-hub')) return;
+            
+        const touch = e.touches[0];
+        isDragging = true;
+        startX = touch.clientX - panX;
+        startY = touch.clientY - panY;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (activeDraggedElement) {
+          const touch = e.touches[0];
+          handleDragMove(touch.clientX, touch.clientY);
+        } else if (isDragging) {
+          const touch = e.touches[0];
+          panX = touch.clientX - startX;
+          panY = touch.clientY - startY;
+          updateCanvasTransform();
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (activeDraggedElement) {
+          endDrag();
+        }
+        isDragging = false;
+      });
+
+      // Mouse Wheel Zoom
+      viewport.addEventListener('wheel', (e) => {
+        e.preventDefault(); // Stop entire page from scrolling
+        
+        const zoomIntensity = 0.05;
+        const previousScale = zoomScale;
+
+        if (e.deltaY < 0) {
+          zoomScale = Math.min(1.5, zoomScale + zoomIntensity); // Max Zoom 150%
+        } else {
+          zoomScale = Math.max(0.25, zoomScale - zoomIntensity); // Min Zoom 25%
+        }
+
+        // Adjust pans relative to cursor pointer to zoom-to-cursor
+        const mouseX = e.clientX - viewport.getBoundingClientRect().left;
+        const mouseY = e.clientY - viewport.getBoundingClientRect().top;
+        panX = mouseX - (mouseX - panX) * (zoomScale / previousScale);
+        panY = mouseY - (mouseY - panY) * (zoomScale / previousScale);
+
+        updateCanvasTransform();
+      }, { passive: false });
+
+      // Controller buttons actions
+      document.getElementById('btn-zoom-in').addEventListener('click', () => {
+        zoomScale = Math.min(1.5, zoomScale + 0.1);
+        updateCanvasTransform();
+      });
+
+      document.getElementById('btn-zoom-out').addEventListener('click', () => {
+        zoomScale = Math.max(0.25, zoomScale - 0.1);
+        updateCanvasTransform();
+      });
+
+      // Fit to screen and center
+      function fitAndCenterTree() {
+        const viewportWidth = viewport.clientWidth;
+        const viewportHeight = viewport.clientHeight;
+        
+        // Approximate tree bounds: tree center is at 1300x800.
+        // We set zoomScale to a value that shows the full width (around 1600px wide layout).
+        if (viewportWidth < 768) {
+          zoomScale = 0.28;
+          panX = (viewportWidth / 2) - (1300 * zoomScale);
+          panY = (viewportHeight / 2) - (800 * zoomScale);
+        } else {
+          zoomScale = 0.52;
+          panX = (viewportWidth / 2) - (1300 * zoomScale);
+          panY = (viewportHeight / 2) - (800 * zoomScale);
+        }
+        
+        updateCanvasTransform();
+        drawConnectionLines();
+      }
+
+      document.getElementById('btn-zoom-fit').addEventListener('click', fitAndCenterTree);
+
+      // Trigger fit and center on load
+      setTimeout(fitAndCenterTree, 300);
+      window.addEventListener('resize', fitAndCenterTree);
+
+      // --- 4. Interactive Node Detail Popup ---
+      const detailsCard = document.getElementById('tree-details-card');
+      const detailsTitle = document.getElementById('details-title');
+      const detailsTag = document.getElementById('details-tag');
+      const detailsBody = document.getElementById('details-body');
+      const closeBtn = document.getElementById('details-close-btn');
+
+      // Click listener for badges
+      document.querySelectorAll('.tree-node-badge').forEach(badge => {
+        badge.addEventListener('click', (e) => {
+          e.stopPropagation(); // Stop bubble so we don't trigger dragging resets
+          
+          const key = badge.getAttribute('data-key');
+          const data = techData[key];
+
+          if (data) {
+            // Check if clicked badge represents a file type
+            const isFile = key.startsWith('f-') || badge.innerText.includes('.');
+            
+            detailsTag.innerText = data.tag;
+            detailsTitle.innerText = data.title;
+            
+            // Format bold text markdown inside definitions
+            let descHTML = data.desc.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            if (isFile) {
+              descHTML = descHTML.replace(/(\.[a-z0-9]+)/gi, '<span class="details-filetype-highlight">$1</span>');
+            }
+            detailsBody.innerHTML = descHTML;
+            
+            detailsCard.classList.add('open');
+            
+            // Highlight clicked badge
+            document.querySelectorAll('.tree-node-badge').forEach(b => b.classList.remove('highlighted'));
+            badge.classList.add('highlighted');
+          }
+        });
+      });
+
+      // Close popup
+      closeBtn.addEventListener('click', () => {
+        detailsCard.classList.remove('open');
+        document.querySelectorAll('.tree-node-badge').forEach(b => b.classList.remove('highlighted'));
+      });
+
+      // --- 5. Live Search / Highlighting ---
+      const searchInput = document.getElementById('tree-search-input');
+
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        
+        if (query === '') {
+          // Clear all highlighted states
+          document.querySelectorAll('.tree-node-badge').forEach(b => b.classList.remove('highlighted'));
+          document.querySelectorAll('.branch-card').forEach(c => c.classList.remove('active-pulse'));
+          return;
+        }
+
+        let foundAny = false;
+
+        document.querySelectorAll('.branch-card').forEach(card => {
+          let hasMatchInCard = false;
+          const badges = card.querySelectorAll('.tree-node-badge');
+
+          badges.forEach(badge => {
+            const text = badge.innerText.toLowerCase();
+            const key = badge.getAttribute('data-key').toLowerCase();
+            const matches = text.includes(query) || key.includes(query);
+
+            if (matches) {
+              badge.classList.add('highlighted');
+              hasMatchInCard = true;
+              foundAny = true;
+            } else {
+              badge.classList.remove('highlighted');
+            }
+          });
+
+          // Pulse card if it contains matching items
+          if (hasMatchInCard) {
+            card.classList.add('active-pulse');
+          } else {
+            card.classList.remove('active-pulse');
+          }
+        });
+      });
+
+      // --- 6. Copy Raw ASCII Tree to Clipboard ---
+      const copyBtn = document.getElementById('btn-copy-ascii');
+      const asciiPre = document.getElementById('ascii-raw-content');
+
+      copyBtn.addEventListener('click', () => {
+        const textToCopy = asciiPre.innerText;
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyBtn.innerText = '✅ Copied!';
+          copyBtn.classList.remove('accent');
+          copyBtn.style.backgroundColor = '#10b981'; // Green
+          
+          setTimeout(() => {
+            copyBtn.innerText = '📋 Copy Raw Tree';
+            copyBtn.classList.add('accent');
+            copyBtn.style.backgroundColor = '';
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy text: ', err);
+          alert('Failed to copy. Please select the text and copy manually.');
+        });
+      });
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StackEasy | Demystify Full Stack Development</title>
+  <meta name="description" content="Learn frontend, backend, and database structures in an easy, visual way with real-world analogies and interactive roadmaps.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="#" class="logo-group" id="logo-main">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+          <path d="M2 17L12 22L22 17" stroke="#0F2615" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="7" r="1.5" fill="#FFFFFF"/>
+        </svg>
+        <span class="logo-text">Stack<span>Easy</span></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
+          <li><a href="tree.html" class="nav-link">Tree</a></li>
+          <li><a href="questions.html" class="nav-link">Questions</a></li>
+          <li><a href="interview.html" class="nav-link">Interview</a></li>
+          <li><a href="interview2.html" class="nav-link">Interview 2.0</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Search & CTA -->
+      <div class="nav-actions">
+        <div class="search-pill">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="#717E75" stroke-width="2"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#717E75" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" placeholder="Search topics..." aria-label="Search" id="nav-search-input">
+        </div>
+        <a href="#customizer" class="btn-nav-cta">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="drawer-links">
+      <li><a href="#" class="drawer-link active">Home</a></li>
+      <li><a href="#fullstack" class="drawer-link">FullStack</a></li>
+      <li><a href="tree.html" class="drawer-link">Tree</a></li>
+      <li><a href="questions.html" class="drawer-link">Questions</a></li>
+      <li><a href="interview.html" class="drawer-link">Interview</a></li>
+      <li><a href="interview2.html" class="drawer-link">Interview 2.0</a></li>
+      <li><a href="#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+    <div class="drawer-search">
+      <input type="text" placeholder="Search topics..." id="mobile-search-input">
+    </div>
+  </div>
+
+  <main class="page-container">
+    
+    <!-- Hero Section Container -->
+    <section class="hero-section">
+      <div class="hero-card">
+        <!-- Left Forest Panel -->
+        <div class="hero-left-panel">
+          <div class="hero-text-content">
+            <h1 class="hero-title animate-text">
+              Demystify <br>
+              <span class="orange-highlight">the stack</span> <br>
+              with us
+            </h1>
+            <p class="hero-subtext">
+              Discover the concepts of full stack development through incredibly simple, jargon-free real-world analogies!
+            </p>
+            <a href="#customizer" class="btn-explore">
+              Explore
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 5L19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right 3D Visual Panel -->
+        <div class="hero-right-panel">
+          <div class="hero-image-wrapper">
+            <img src="assets/hero_graphic.png" alt="Interactive 3D Stack Graphic" class="hero-main-img">
+            <!-- Animated overlay layers simulating data requests -->
+            <div class="glowing-node node-client" title="Frontend Client"></div>
+            <div class="glowing-node node-server" title="Backend Server"></div>
+            <div class="glowing-node node-db" title="Database Store"></div>
+            <div class="flow-line line-client-server"></div>
+            <div class="flow-line line-server-db"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Roadmap Customizer Widget -->
+      <div class="customizer-widget-wrapper" id="customizer">
+        <div class="customizer-widget">
+          <!-- Dropdown 1: Path Focus -->
+          <div class="widget-col" id="col-path">
+            <div class="widget-col-inner">
+              <span class="widget-label">Path Focus</span>
+              <div class="widget-selection-trigger">
+                <span class="selection-value" id="val-path">Frontend Dev</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Custom Dropdown Menu -->
+            <div class="custom-dropdown" id="dropdown-path">
+              <div class="dropdown-option active" data-value="Frontend Dev">Frontend Dev</div>
+              <div class="dropdown-option" data-value="Backend Dev">Backend Dev</div>
+              <div class="dropdown-option" data-value="Database Structure">Database Structure</div>
+              <div class="dropdown-option" data-value="Full Stack Path">Full Stack Path</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Dropdown 2: Experience Level -->
+          <div class="widget-col" id="col-level">
+            <div class="widget-col-inner">
+              <span class="widget-label">Experience Level</span>
+              <div class="widget-selection-trigger">
+                <span class="selection-value" id="val-level">Absolute Beginner</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Custom Dropdown Menu -->
+            <div class="custom-dropdown" id="dropdown-level">
+              <div class="dropdown-option active" data-value="Absolute Beginner">Absolute Beginner</div>
+              <div class="dropdown-option" data-value="Some Code Experience">Some Code Experience</div>
+              <div class="dropdown-option" data-value="Junior Developer">Junior Developer</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Dropdown 3: Study Pace -->
+          <div class="widget-col" id="col-pace">
+            <div class="widget-col-inner">
+              <span class="widget-label">Study Pace</span>
+              <div class="widget-selection-trigger">
+                <span class="selection-value" id="val-pace">15 Mins / Day</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Custom Dropdown Menu -->
+            <div class="custom-dropdown" id="dropdown-pace">
+              <div class="dropdown-option active" data-value="5 Mins / Day">5 Mins / Day (Casual)</div>
+              <div class="dropdown-option" data-value="15 Mins / Day">15 Mins / Day (Ideal)</div>
+              <div class="dropdown-option" data-value="Bootcamp Pace">Bootcamp Pace (Intense)</div>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="widget-action">
+            <button class="btn-widget-search" id="btn-generate-roadmap">
+              <span>Generate</span>
+              <svg class="search-arrow" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" stroke-linecap="round"/>
+                <polyline points="12 5 19 12 12 19" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Roadmap Results Area -->
+    <section class="roadmap-results-section" id="roadmap-results">
+      <div class="section-header text-center">
+        <span class="section-tagline">Your Custom Learning Path</span>
+        <h2 class="section-title" id="generated-roadmap-title">Frontend Mastery Roadmap</h2>
+        <p class="section-desc" id="generated-roadmap-desc">Based on your selections, we've structured a step-by-step path designed for an <strong>Absolute Beginner</strong> taking <strong>15 Mins / Day</strong>.</p>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-text">Your Roadmap Progress: <span id="progress-percent">0%</span></div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="roadmap-progress"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roadmap Cards Timeline -->
+      <div class="roadmap-timeline" id="roadmap-cards-container">
+        <!-- JavaScript will dynamically render cards here -->
+      </div>
+    </section>
+
+    <!-- NEW SECTION: Dedicated FullStack Interactive Encyclopedia -->
+    <section class="fullstack-section" id="fullstack">
+      <div class="section-header text-center">
+        <span class="section-tagline">Comprehensive Encyclopedia</span>
+        <h2 class="section-title">Demystifying Full Stack</h2>
+        <p class="section-desc">Creating complete, production-ready apps by linking Frontend layout, Backend servers, Database pantries, and secure API bridges together.</p>
+      </div>
+
+      <!-- 1. Interactive Connection Sandbox -->
+      <div class="fs-card sandbox-card">
+        <div class="sandbox-header">
+          <div class="sandbox-title-group">
+            <span class="pulse-indicator"></span>
+            <h3>Interactive Data Flow Simulator</h3>
+          </div>
+          <p>Click a simulator trigger below to watch data travel down the stack, write to the database, and return!</p>
+        </div>
+
+        <div class="sandbox-grid">
+          <!-- Flow Pipeline Graphic -->
+          <div class="sandbox-visual-panel">
+            <div class="flow-pipeline-container">
+              <!-- Node 1: User/Frontend -->
+              <div class="pipeline-node node-fe active" id="sim-node-fe">
+                <span class="node-icon">📱</span>
+                <span class="node-name">Frontend (React)</span>
+              </div>
+              
+              <div class="pipeline-bridge" id="sim-bridge-fe-be">
+                <div class="pulse-particle" id="pulse-p1"></div>
+              </div>
+
+              <!-- Node 2: Backend Server -->
+              <div class="pipeline-node node-be" id="sim-node-be">
+                <span class="node-icon">⚙️</span>
+                <span class="node-name">Backend (Express)</span>
+              </div>
+
+              <div class="pipeline-bridge" id="sim-bridge-be-db">
+                <div class="pulse-particle" id="pulse-p2"></div>
+              </div>
+
+              <!-- Node 3: Database Storage -->
+              <div class="pipeline-node node-db" id="sim-node-db">
+                <span class="node-icon">🗄️</span>
+                <span class="node-name">Database (MongoDB)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls and Terminal Log -->
+          <div class="sandbox-console-panel">
+            <div class="sandbox-buttons">
+              <button class="btn-sim" id="btn-sim-get">
+                <span>Simulate GET /users</span>
+              </button>
+              <button class="btn-sim btn-sim-alt" id="btn-sim-post">
+                <span>Simulate Instagram 'Like' (POST)</span>
+              </button>
+            </div>
+            
+            <div class="console-box">
+              <div class="console-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="console-title">Live Stack Logs</span>
+              </div>
+              <div class="console-body" id="sim-console-logs">
+                <div class="log-line text-muted">&gt; System initialized. Awaiting API simulation...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Clickable Folder Structure Explorer -->
+      <div class="explorer-grid tree-grid">
+        <!-- Directory tree column -->
+        <div class="fs-card tree-card">
+          <h3 class="card-inner-title">📁 Project Folder Structure</h3>
+          <p class="card-inner-desc">Click folders to expand and files to preview what code is written inside!</p>
+          
+          <div class="folder-tree-root">
+            <div class="tree-item folder expanded" data-path="project">
+              <span class="tree-toggle">▼</span>
+              <span class="tree-icon">📂</span>
+              <span class="tree-name">project/</span>
+            </div>
+
+            <div class="tree-subtree" id="tree-project">
+              <!-- Frontend Subfolder -->
+              <div class="tree-item folder expanded" data-path="frontend" style="margin-left: 20px;">
+                <span class="tree-toggle">▼</span>
+                <span class="tree-icon">📂</span>
+                <span class="tree-name">frontend/</span>
+              </div>
+              <div class="tree-subtree" id="tree-frontend" style="margin-left: 20px;">
+                <div class="tree-item file" data-file="package-json" style="margin-left: 20px;">
+                  <span class="tree-icon">📄</span>
+                  <span class="tree-name">package.json</span>
+                </div>
+                <div class="tree-item folder expanded" data-path="src" style="margin-left: 20px;">
+                  <span class="tree-toggle">▼</span>
+                  <span class="tree-icon">📂</span>
+                  <span class="tree-name">src/</span>
+                </div>
+                <div class="tree-subtree" id="tree-src" style="margin-left: 20px;">
+                  <div class="tree-item file" data-file="index-html" style="margin-left: 20px;">
+                    <span class="tree-icon">📄</span>
+                    <span class="tree-name">index.html</span>
+                  </div>
+                  <div class="tree-item file" data-file="style-css" style="margin-left: 20px;">
+                    <span class="tree-icon">📄</span>
+                    <span class="tree-name">style.css</span>
+                  </div>
+                  <div class="tree-item file" data-file="app-js" style="margin-left: 20px;">
+                    <span class="tree-icon">📄</span>
+                    <span class="tree-name">app.js</span>
+                  </div>
+                  <div class="tree-item file" data-file="main-tsx" style="margin-left: 20px;">
+                    <span class="tree-icon">📄</span>
+                    <span class="tree-name">main.tsx</span>
+                  </div>
+                  <div class="tree-item file" data-file="navbar-jsx" style="margin-left: 20px;">
+                    <span class="tree-icon">📄</span>
+                    <span class="tree-name">Navbar.jsx</span>
+                  </div>
+                  <div class="tree-item file" data-file="home-tsx" style="margin-left: 20px;">
+                    <span class="tree-icon">📄</span>
+                    <span class="tree-name">Home.tsx</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Backend Subfolder -->
+              <div class="tree-item folder expanded" data-path="backend" style="margin-left: 20px;">
+                <span class="tree-toggle">▼</span>
+                <span class="tree-icon">📂</span>
+                <span class="tree-name">backend/</span>
+              </div>
+              <div class="tree-subtree" id="tree-backend" style="margin-left: 20px;">
+                <div class="tree-item file" data-file="server-js" style="margin-left: 20px;">
+                  <span class="tree-icon">📄</span>
+                  <span class="tree-name">server.js</span>
+                </div>
+                <div class="tree-item file" data-file="routes-js" style="margin-left: 20px;">
+                  <span class="tree-icon">📄</span>
+                  <span class="tree-name">routes.js</span>
+                </div>
+                <div class="tree-item file" data-file="auth-js" style="margin-left: 20px;">
+                  <span class="tree-icon">📄</span>
+                  <span class="tree-name">auth.js</span>
+                </div>
+                <div class="tree-item file" data-file="env-file" style="margin-left: 20px;">
+                  <span class="tree-icon">📄</span>
+                  <span class="tree-name">.env</span>
+                </div>
+              </div>
+
+              <!-- Database Subfolder -->
+              <div class="tree-item folder expanded" data-path="database" style="margin-left: 20px;">
+                <span class="tree-toggle">▼</span>
+                <span class="tree-icon">📂</span>
+                <span class="tree-name">database/</span>
+              </div>
+              <div class="tree-subtree" id="tree-database" style="margin-left: 20px;">
+                <div class="tree-item file" data-file="schema-sql" style="margin-left: 20px;">
+                  <span class="tree-icon">📄</span>
+                  <span class="tree-name">schema.sql</span>
+                </div>
+              </div>
+
+              <div class="tree-item file" data-file="readme-md" style="margin-left: 20px;">
+                <span class="tree-icon">📄</span>
+                <span class="tree-name">README.md</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- File details display column -->
+        <div class="fs-card details-display-card" id="file-details-container">
+          <div class="details-empty-state">
+            <span class="empty-icon">👈</span>
+            <h4>Select a project file</h4>
+            <p>Click on any file in the folder tree to see what code is inside and which core concepts it covers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Visual Grid of the 3 Core Layers -->
+      <div class="fs-layers-showcase">
+        <div class="fs-header text-center">
+          <h3 class="fs-subtitle">The 3 Pillars of Development</h3>
+        </div>
+        
+        <div class="layers-grid">
+          <!-- Card 1: Frontend -->
+          <div class="layer-showcase-card border-orange">
+            <div class="card-layer-header bg-orange">
+              <span class="layer-emoji">🎨</span>
+              <h4>1. Frontend (UI / Design)</h4>
+            </div>
+            <div class="card-layer-body">
+              <p class="layer-summary">The interactive dining room of the app. It encompasses everything users see, touch, and click inside the web browser.</p>
+              
+              <div class="layer-info-section">
+                <span class="info-sec-label">Languages Used:</span>
+                <div class="layer-tags">
+                  <span class="tag">HTML (structure)</span>
+                  <span class="tag">CSS (design/style)</span>
+                  <span class="tag">JavaScript (functionality)</span>
+                  <span class="tag font-bold">TypeScript (advanced)</span>
+                </div>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Frameworks:</span>
+                <div class="layer-tags">
+                  <span class="tag bg-trans">React</span>
+                  <span class="tag bg-trans">Next.js</span>
+                  <span class="tag bg-trans">Vue</span>
+                  <span class="tag bg-trans">Angular</span>
+                </div>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Code Written:</span>
+                <p class="sec-text-list">Interactive buttons, layouts, flex grids, dynamic charts, text reveal animations, responsive mobile forms, navigation menus.</p>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Key Concepts:</span>
+                <div class="layer-tags small-tags">
+                  <span class="tag-concept">DOM</span>
+                  <span class="tag-concept">Components</span>
+                  <span class="tag-concept">State</span>
+                  <span class="tag-concept">Props</span>
+                  <span class="tag-concept">Routing</span>
+                  <span class="tag-concept">Responsive UI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Backend -->
+          <div class="layer-showcase-card border-green">
+            <div class="card-layer-header bg-green">
+              <span class="layer-emoji">🧠</span>
+              <h4>2. Backend (Server / Brain)</h4>
+            </div>
+            <div class="card-layer-body">
+              <p class="layer-summary">The busy kitchen in the back. It processes business computations, securely stores/updates user files, and handles application logic.</p>
+              
+              <div class="layer-info-section">
+                <span class="info-sec-label">Languages Used:</span>
+                <div class="layer-tags">
+                  <span class="tag">JavaScript (Node.js)</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">Java</span>
+                  <span class="tag">PHP</span>
+                  <span class="tag">Go</span>
+                  <span class="tag">C#</span>
+                </div>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Frameworks:</span>
+                <div class="layer-tags">
+                  <span class="tag bg-trans">Express.js</span>
+                  <span class="tag bg-trans">Django</span>
+                  <span class="tag bg-trans">Flask</span>
+                  <span class="tag bg-trans">Spring Boot</span>
+                  <span class="tag bg-trans">Laravel</span>
+                </div>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Code Written:</span>
+                <p class="sec-text-list">Secure user registration/login, payments hooks (Stripe), email validations, API routes server, search filtering logs, data encryptions.</p>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Key Concepts:</span>
+                <div class="layer-tags small-tags">
+                  <span class="tag-concept">Server</span>
+                  <span class="tag-concept">REST APIs</span>
+                  <span class="tag-concept">JWT tokens</span>
+                  <span class="tag-concept">Middleware</span>
+                  <span class="tag-concept">CRUD Operations</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Database -->
+          <div class="layer-showcase-card border-blue">
+            <div class="card-layer-header bg-blue">
+              <span class="layer-emoji">🗄️</span>
+              <h4>3. Database (Data Storage)</h4>
+            </div>
+            <div class="card-layer-body">
+              <p class="layer-summary">The storage pantry in the basement. It houses structured storage tables ensuring user and post content persists forever.</p>
+              
+              <div class="layer-info-section">
+                <span class="info-sec-label">Databases Used:</span>
+                <div class="layer-tags">
+                  <span class="tag">MongoDB (NoSQL)</span>
+                  <span class="tag">PostgreSQL (SQL)</span>
+                  <span class="tag">MySQL</span>
+                  <span class="tag">Firebase</span>
+                  <span class="tag font-bold">Supabase</span>
+                </div>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Stores (Persisted Content):</span>
+                <p class="sec-text-list">User records, hashed passwords, user posts, video binaries, catalogs of products, billing transactions, text comments.</p>
+              </div>
+
+              <div class="layer-info-section">
+                <span class="info-sec-label">Key Concepts:</span>
+                <div class="layer-tags small-tags">
+                  <span class="tag-concept">Collections</span>
+                  <span class="tag-concept">Tables</span>
+                  <span class="tag-concept">SQL Queries</span>
+                  <span class="tag-concept">Relations</span>
+                  <span class="tag-concept">Indexing</span>
+                  <span class="tag-concept">Data Schemas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Interactive Stack Combinations Showcase -->
+      <div class="fs-combinations-section">
+        <div class="fs-header text-center">
+          <h3 class="fs-subtitle">Popular Stack Combinations</h3>
+          <p class="section-desc">Full stack paths are usually grouped by standard integrations. Here are two of the most popular combinations used today:</p>
+        </div>
+
+        <div class="combos-grid">
+          <!-- MERN Stack Card -->
+          <div class="combo-card gradient-mern">
+            <div class="combo-header">
+              <span class="combo-tag">Classic Industry Standard</span>
+              <h4>MERN Stack</h4>
+            </div>
+            <ul class="combo-list">
+              <li><strong>M - MongoDB</strong> (NoSQL flexible database)</li>
+              <li><strong>E - Express.js</strong> (Lightweight backend routing framework)</li>
+              <li><strong>R - React</strong> (Dynamic component UI frontend library)</li>
+              <li><strong>N - Node.js</strong> (Fast JavaScript backend engine runtime)</li>
+            </ul>
+            <div class="combo-footer">
+              <span class="combo-note">Ideal for standard e-commerce, portfolios, and CRUD applications.</span>
+            </div>
+          </div>
+
+          <!-- Modern AI Startup Stack Card -->
+          <div class="combo-card gradient-ai">
+            <div class="combo-header">
+              <span class="combo-tag">Modern & High Performance</span>
+              <h4>AI Startup Stack</h4>
+            </div>
+            <ul class="combo-list">
+              <li><strong>Next.js + TypeScript</strong> (Highly optimized React with backend API integration)</li>
+              <li><strong>Tailwind CSS</strong> (Ultra-fast responsive visual style design utility)</li>
+              <li><strong>Supabase / Firebase</strong> (Backend-as-a-service with instant DB, Auth, and Storage hooks)</li>
+              <li><strong>OpenAI API / Node.js</strong> (Dynamic Artificial Intelligence models connection layer)</li>
+              <li><strong>Vercel</strong> (Instant automated cloud deployment platform)</li>
+            </ul>
+            <div class="combo-footer">
+              <span class="combo-note">Ideal for launching AI apps, real-time dashboards, and rapid MVPs.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Interactive Glossaries (Main Concepts & Important Files) -->
+      <div class="fs-glossary-section">
+        <div class="fs-header text-center">
+          <h3 class="fs-subtitle">The Full Stack Reference Sheet</h3>
+          <p class="section-desc">Instantly search and lookup core terms and file formats used in full stack development!</p>
+          
+          <!-- Search Box -->
+          <div class="glossary-search-container">
+            <input type="text" placeholder="Type a concept or file extension (e.g. JWT, .env, Auth)..." id="glossary-search-input">
+          </div>
+        </div>
+
+        <div class="glossary-grid">
+          <!-- Concept Glossary Table -->
+          <div class="glossary-card">
+            <h4>💡 Main Concepts Explained</h4>
+            <div class="table-scroll-wrapper">
+              <table class="glossary-table" id="table-concepts">
+                <thead>
+                  <tr>
+                    <th>Concept</th>
+                    <th>Plain English Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="searchable-row">
+                    <td class="term-title">Frontend</td>
+                    <td><strong>User interface</strong> - everything a user directly <strong>looks at, interacts with, and clicks</strong> inside their browser.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">Backend</td>
+                    <td><strong>Logic/server</strong> - the hidden, secure <strong>brain</strong> processing API routes, payments, calculations, and database calls.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">Database</td>
+                    <td><strong>Data storage</strong> - the structured <strong>storage pantry</strong> keeping catalog products, users, passwords, and logs forever.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">API</td>
+                    <td><strong>Communication bridge</strong> - standardizing how the client waiter <strong>requests items</strong> and receives <strong>plated food back</strong>.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">Auth (Authentication)</td>
+                    <td><strong>Security checks</strong> - validating logins, managing secure <strong>JWT tokens</strong>, or checking cookies before unlocking pages.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">Deployment</td>
+                    <td><strong>Putting app live</strong> - hosting the site on <strong>public server clouds</strong> (like Vercel, Render) so anyone can visit.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">Git & GitHub</td>
+                    <td><strong>Version Control</strong> - a digital <strong>'save button'</strong> storing progress logs so you never lose code or overrides.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">NPM</td>
+                    <td><strong>Package Manager</strong> - the ultimate <strong>app store</strong> for pre-written code scripts (like icons, calendars).</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">Environment Variables</td>
+                    <td><strong>Hide secret keys</strong> - utilizing a <strong>`.env` file</strong> to encrypt database links and access tokens.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- File Glossary Table -->
+          <div class="glossary-card">
+            <h4>📄 Important File Formats</h4>
+            <div class="table-scroll-wrapper">
+              <table class="glossary-table" id="table-files">
+                <thead>
+                  <tr>
+                    <th>File Format</th>
+                    <th>Exact Practical Use</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="searchable-row">
+                    <td class="term-title">.html</td>
+                    <td><strong>Structure</strong> - sets up raw text blocks, image tags, text labels, and <strong>layout skeletons</strong>.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.css</td>
+                    <td><strong>Design</strong> - colors headers, handles <strong>responsive flexboxes</strong>, adds shadows, and coordinates keyframe motions.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.js</td>
+                    <td><strong>JavaScript logic</strong> - captures cursor clicks, <strong>toggles accordion menus</strong>, and fetches database APIs.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.jsx</td>
+                    <td><strong>React UI</strong> - combines structural HTML layout <strong>directly inside JS functions</strong> to create reusable elements.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.tsx</td>
+                    <td><strong>TypeScript React</strong> - React UI format preloaded with <strong>strict typing rules</strong> to eliminate syntax bugs.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.json</td>
+                    <td><strong>Config/data</strong> - structured JSON text detailing <strong>project dependencies</strong> or sending raw data lists.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.env</td>
+                    <td><strong>Secret keys</strong> - a protected credentials card holding <strong>database passwords</strong> and payment keys.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.sql</td>
+                    <td><strong>Database</strong> - scripts generating relational tables, primary keys, or running <strong>SQL retrieval commands</strong>.</td>
+                  </tr>
+                  <tr class="searchable-row">
+                    <td class="term-title">.md</td>
+                    <td><strong>Documentation</strong> - detailed instructions (like this page!) formatting tips, and <strong>setup descriptions</strong>.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Simple Definition Banner -->
+      <div class="fs-banner-card text-center">
+        <h3 class="fs-subtitle">The Final Definition</h3>
+        <p class="banner-definition">
+          "Full Stack Development is the craft of creating complete, independent apps by combining <strong>Frontend user designs + Backend brain servers + Database pantries + API bridges + live cloud Deployments</strong> together."
+        </p>
+      </div>
+    </section>
+
+    <!-- Interactive Stack Explorer Section -->
+    <section class="explorer-section" id="explorer">
+      <div class="section-header">
+        <span class="section-tagline">Visual Stack Explorer</span>
+        <h2 class="section-title">Understand Stack Layers via Analogies</h2>
+        <p class="section-desc">Click through each layer of a full stack application to see exactly how it maps to a real-world restaurant!</p>
+      </div>
+
+      <div class="explorer-grid">
+        <!-- Interactive Diagram Layout -->
+        <div class="explorer-diagram-card">
+          <div class="stack-visual-tabs">
+            <button class="tab-btn active" data-tab="frontend">
+              <span class="tab-dot dot-fe"></span>
+              Frontend Client
+            </button>
+            <button class="tab-btn" data-tab="backend">
+              <span class="tab-dot dot-be"></span>
+              Backend Server
+            </button>
+            <button class="tab-btn" data-tab="database">
+              <span class="tab-dot dot-db"></span>
+              Database Storage
+            </button>
+          </div>
+
+          <div class="tab-visual-content">
+            <!-- Frontend Tab Visual -->
+            <div class="tab-panel active" id="panel-frontend">
+              <div class="visual-restaurant-box dining-room">
+                <div class="dining-table">
+                  <div class="client-avatar">
+                    <span class="face">🧑‍💻</span>
+                    <span class="label">User</span>
+                  </div>
+                  <div class="menu-card">
+                    <span class="title">📜 The Website Menu</span>
+                    <span class="desc">What the user sees & clicks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Backend Tab Visual -->
+            <div class="tab-panel" id="panel-backend">
+              <div class="visual-restaurant-box kitchen">
+                <div class="chef-station">
+                  <span class="chef">🧑‍🍳</span>
+                  <div class="order-ticket">
+                    <span class="label">GET /menu-data</span>
+                    <span class="status">Cooking API Response...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Database Tab Visual -->
+            <div class="tab-panel" id="panel-database">
+              <div class="visual-restaurant-box pantry">
+                <div class="pantry-shelves">
+                  <span class="warehouse">🥫</span>
+                  <div class="data-cabinets">
+                    <span class="label">Storage Shelves</span>
+                    <span class="desc">Users table & Recipes database</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analogy Description Card -->
+        <div class="explorer-info-card">
+          <div class="info-content-wrapper" id="explorer-info-text">
+            <!-- Dynamic descriptive text generated in JS -->
+            <h3 class="info-title">The Dining Room & The Menu (Frontend)</h3>
+            <p class="info-analogy">
+              Imagine walking into a beautiful restaurant. The custom lighting, the layout of the tables, the printed menu, and the waiters are the <strong>Frontend</strong>.
+            </p>
+            <div class="info-details-box">
+              <h4 class="details-subtitle">Key Concepts Simplified:</h4>
+              <ul class="details-list">
+                <li><strong>HTML (The Structure)</strong>: Like the walls, table frames, and doors.</li>
+                <li><strong>CSS (The Decor)</strong>: The color of the napkins, the lighting, the logo.</li>
+                <li><strong>JavaScript (The Waiter)</strong>: When you press a button to order, the waiter immediately takes your request to the kitchen.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section" id="faq">
+      <div class="section-header text-center">
+        <span class="section-tagline">Common Doubts Cleared</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Have questions about starting your journey? We have simple answers.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need to be a math genius to learn Full Stack?</span>
+            <span class="faq-icon">
+              <svg class="plus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" stroke-linecap="round"/>
+                <line x1="5" y1="12" x2="19" y2="12" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Absolutely not! Coding is much more like learning a new language or organizing a recipes book. If you can write a recipe, follow a map, or describe a system to a friend, you have all the logic required to become a full stack developer.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What's the difference between Frontend and Backend?</span>
+            <span class="faq-icon">
+              <svg class="plus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" stroke-linecap="round"/>
+                <line x1="5" y1="12" x2="19" y2="12" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Frontend is everything a user directly sees, touches, and interacts with in their browser (like buttons, dropdowns, and layouts). Backend is the invisible brain running on a remote server that computes calculations, authenticates logins, and fetches data from the database.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is 15 minutes a day really enough?</span>
+            <span class="faq-icon">
+              <svg class="plus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" stroke-linecap="round"/>
+                <line x1="5" y1="12" x2="19" y2="12" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Consistency beats intensity. Spending 15 concentrated minutes every single day to grasp one single, clear concept creates massive compounding knowledge. Over a few months, you'll be building fully functional, interactive websites without feeling burned out!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Premium Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="#" class="logo-group">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+            <path d="M2 17L12 22L22 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text text-white">Stack<span>Easy</span></span>
+        </a>
+        <p class="footer-about">
+          Explaining web development through beautiful, tactile micro-learning and relatable stories. Let's build together!
+        </p>
+      </div>
+
+      <div class="footer-links-side">
+        <div class="footer-col">
+          <span class="footer-title">Roadmaps</span>
+          <ul>
+            <li><a href="#customizer">Frontend Dev</a></li>
+            <li><a href="#customizer">Backend Dev</a></li>
+            <li><a href="#customizer">Database Systems</a></li>
+            <li><a href="#customizer">Full Stack Suite</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-title">Resources</span>
+          <ul>
+            <li><a href="#explorer">Interactive Sandbox</a></li>
+            <li><a href="#explorer">Restaurant Analogy</a></li>
+            <li><a href="#faq">FAQ Hub</a></li>
+            <li><a href="#">Guides</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 StackEasy Platform. Handcrafted for awesome learners.</p>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

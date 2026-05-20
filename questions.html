@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StackEasy | Developer Q&A Hub</title>
+  <meta name="description" content="Get simple, plain English answers to the 20 most critical questions in modern full stack development.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* ==========================================================================
+       Questions Page Specific Visual Layouts
+       ========================================================================== */
+    .qa-hero {
+      padding: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.04) 0%, rgba(245, 239, 235, 0) 100%);
+    }
+
+    .qa-tagline {
+      display: inline-block;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.3rem 1.0rem;
+      border-radius: 50px;
+      margin-bottom: 1.0rem;
+      border: 1px solid rgba(255, 90, 31, 0.15);
+    }
+
+    .qa-title {
+      font-size: 2.4rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.8rem;
+      letter-spacing: -1px;
+    }
+
+    .qa-subtitle {
+      font-size: 1.0rem;
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Filter & Search Bar */
+    .qa-controls-wrapper {
+      position: sticky;
+      top: 70px;
+      z-index: 99;
+      background-color: rgba(245, 239, 235, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.05);
+      margin-bottom: 3rem;
+    }
+
+    .qa-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    @media (min-width: 768px) {
+      .qa-controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* Search Input */
+    .qa-search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background-color: var(--color-white);
+      border: 1px solid rgba(15, 38, 21, 0.12);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    .qa-search-box:focus-within {
+      border-color: var(--color-orange-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .qa-search-box input {
+      width: 100%;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* Category Filter Pills */
+    .qa-pills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .qa-pill-btn {
+      background-color: var(--color-white);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+      color: var(--color-forest-dark);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qa-pill-btn:hover {
+      background-color: var(--color-pill-bg);
+      transform: translateY(-1px);
+    }
+
+    .qa-pill-btn.active {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      border-color: var(--color-forest-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Questions Grid layout */
+    .qa-grid-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      margin-bottom: 6rem;
+    }
+
+    .category-section {
+      scroll-margin-top: 180px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid rgba(15, 38, 21, 0.06);
+      padding-bottom: 1rem;
+    }
+
+    .category-icon {
+      font-size: 1.8rem;
+    }
+
+    .category-title {
+      font-size: 1.8rem;
+      color: var(--color-forest-dark);
+    }
+
+    .qa-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .qa-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Premium Question Card */
+    .qa-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(15, 38, 21, 0.04);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qa-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 90, 31, 0.15);
+    }
+
+    .qa-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .qa-badge {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      background-color: rgba(15, 38, 21, 0.05);
+      color: var(--color-forest-dark);
+    }
+
+    .qa-card.frontend .qa-badge {
+      background-color: rgba(56, 189, 248, 0.12);
+      color: #0369a1;
+    }
+
+    .qa-card.backend .qa-badge {
+      background-color: rgba(129, 140, 248, 0.12);
+      color: #4338ca;
+    }
+
+    .qa-card.database .qa-badge {
+      background-color: rgba(52, 211, 153, 0.12);
+      color: #065f46;
+    }
+
+    .qa-card.architecture .qa-badge {
+      background-color: rgba(255, 90, 31, 0.12);
+      color: var(--color-orange-primary);
+    }
+
+    .qa-question-num {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-orange-primary);
+    }
+
+    .qa-question-text {
+      font-size: 1.4rem;
+      color: var(--color-forest-dark);
+      line-height: 1.25;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .qa-answer {
+      font-size: 1.02rem;
+      color: var(--color-text-dark);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .qa-answer strong {
+      color: var(--color-forest-dark);
+      font-weight: 700;
+    }
+
+    /* Comparison Columns inside Cards */
+    .qa-comparison-box {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      background-color: rgba(245, 239, 235, 0.5);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      border: 1px dashed rgba(15, 38, 21, 0.08);
+    }
+
+    @media (min-width: 480px) {
+      .qa-comparison-box {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .compare-side {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .compare-title {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--color-forest-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .compare-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    /* Visual Code Snippet inside Cards */
+    .qa-code-mockup {
+      background-color: #0f172a;
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .qa-code-mockup span.keyword { color: #f472b6; }
+    .qa-code-mockup span.string { color: #34d399; }
+    .qa-code-mockup span.variable { color: #60a5fa; }
+    .qa-code-mockup span.type { color: #fbbf24; }
+    .qa-code-mockup span.comment { color: #64748b; }
+
+    /* Key-Value Lists */
+    .qa-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .qa-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .qa-list-icon {
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .qa-list-content {
+      line-height: 1.5;
+    }
+
+    /* Interactive Pipeline for Flow */
+    .pipeline-section {
+      width: 100%;
+      margin: 2rem 0;
+    }
+
+    .pipeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background-color: rgba(245, 239, 235, 0.4);
+      padding: 1.2rem 1.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(15, 38, 21, 0.05);
+      transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+      cursor: default;
+    }
+
+    .pipeline-step:hover {
+      transform: translateX(5px);
+      border-color: var(--color-orange-primary);
+      background-color: var(--color-white);
+    }
+
+    .pipeline-num {
+      width: 2.2rem;
+      height: 2.2rem;
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      flex-shrink: 0;
+      font-size: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pipeline-step:hover .pipeline-num {
+      background-color: var(--color-orange-primary);
+      animation: bounce 0.5s ease-out;
+    }
+
+    .pipeline-info {
+      flex: 1;
+    }
+
+    .pipeline-step-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .pipeline-step-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    /* Comparison Tables */
+    .qa-table-wrapper {
+      overflow-x: auto;
+      margin: 1.2rem 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(15, 38, 21, 0.08);
+    }
+
+    .qa-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .qa-table th {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.8rem 1.2rem;
+    }
+
+    .qa-table td {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid rgba(15, 38, 21, 0.06);
+      background-color: var(--color-white);
+      line-height: 1.4;
+    }
+
+    .qa-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Highlight Pills */
+    .qa-highlight-tag {
+      display: inline-block;
+      background-color: rgba(255, 90, 31, 0.06);
+      color: var(--color-orange-primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 90, 31, 0.12);
+      margin-top: 0.4rem;
+    }
+
+    /* Animations */
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Empty state */
+    .qa-empty-state {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(15, 38, 21, 0.12);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qa-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .qa-empty-title {
+      font-size: 1.5rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .qa-empty-desc {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="index.html" class="logo-group" id="logo-main">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+          <path d="M2 17L12 22L22 17" stroke="#0F2615" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="7" r="1.5" fill="#FFFFFF"/>
+        </svg>
+        <span class="logo-text">Stack<span>Easy</span></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
+          <li><a href="tree.html" class="nav-link">Tree</a></li>
+          <li><a href="questions.html" class="nav-link active">Questions</a></li>
+          <li><a href="interview.html" class="nav-link">Interview</a></li>
+          <li><a href="interview2.html" class="nav-link">Interview 2.0</a></li>
+          <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Search & CTA -->
+      <div class="nav-actions">
+        <a href="index.html#customizer" class="btn-nav-cta">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="index.html#fullstack" class="drawer-link">FullStack</a></li>
+      <li><a href="tree.html" class="drawer-link">Tree</a></li>
+      <li><a href="questions.html" class="drawer-link active">Questions</a></li>
+      <li><a href="interview.html" class="drawer-link">Interview</a></li>
+      <li><a href="interview2.html" class="drawer-link">Interview 2.0</a></li>
+      <li><a href="index.html#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+  </div>
+
+  <main class="page-container">
+    
+    <!-- Hero Header -->
+    <section class="qa-hero">
+      <span class="qa-tagline">Plain English Explanations</span>
+      <h1 class="qa-title">The Full Stack Knowledge Hub</h1>
+      <p class="qa-subtitle">
+        Demystifying 20 critical concepts, setup frameworks, extension formats, and pipelines in web development with absolute simplicity.
+      </p>
+    </section>
+
+    <!-- Interactive Sticky Search and Categories Bar -->
+    <section class="qa-controls-wrapper">
+      <div class="qa-controls">
+        <!-- Search Box -->
+        <div class="qa-search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="#717E75" stroke-width="2"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#717E75" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" placeholder="Search questions, tools, or extensions..." id="qa-search-input" aria-label="Search questions">
+        </div>
+
+        <!-- Filter pills list -->
+        <div class="qa-pills-list" id="category-pills">
+          <button class="qa-pill-btn active" data-category="all">All Topics</button>
+          <button class="qa-pill-btn" data-category="frontend">🎨 Frontend & UI</button>
+          <button class="qa-pill-btn" data-category="backend">🧠 Backend & Server</button>
+          <button class="qa-pill-btn" data-category="database">🗄️ Database & Config</button>
+          <button class="qa-pill-btn" data-category="architecture">🚀 General Flow</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A Lists Grid -->
+    <section class="qa-grid-container">
+      
+      <!-- 🎨 CATEGORY 1: FRONTEND & VISUAL UI -->
+      <div class="category-section" id="sec-frontend" data-category-group="frontend">
+        <div class="category-header">
+          <span class="category-icon">🎨</span>
+          <h2 class="category-title">Frontend & Visual UI</h2>
+        </div>
+        
+        <div class="qa-grid">
+          
+          <!-- Q1: Tailwind CSS -->
+          <div class="qa-card frontend" data-tags="tailwind css utility custom">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q1</span>
+                <span class="qa-badge">Styling</span>
+              </div>
+              <h3 class="qa-question-text">Why use Tailwind CSS instead of Normal CSS?</h3>
+              <div class="qa-answer">
+                In **Normal CSS**, you write custom styles manually in separate files. This leads to **large files, repeated code structures, and messy naming classes** that are hard to manage as projects grow.
+                <br><br>
+                **Tailwind CSS** is a utility-first framework that provides prebuilt class utility tools directly. Instead of managing a separate stylesheet, you style elements directly in your HTML/JSX using short, optimized classes.
+              </div>
+              
+              <div class="qa-comparison-box">
+                <div class="compare-side">
+                  <span class="compare-title">Normal CSS (.card)</span>
+                  <pre class="qa-code-mockup" style="margin: 0; padding: 0.5rem; font-size: 0.78rem;"><span class="variable">.card</span> {
+  <span class="keyword">background</span>: black;
+  <span class="keyword">padding</span>: 20px;
+  <span class="keyword">border-radius</span>: 10px;
+}</pre>
+                </div>
+                <div class="compare-side">
+                  <span class="compare-title">Tailwind CSS (Inline Utility)</span>
+                  <pre class="qa-code-mockup" style="margin: 0; padding: 0.5rem; font-size: 0.78rem;">&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"bg-black p-5 rounded-xl"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</pre>
+                </div>
+              </div>
+              
+              <div class="qa-list">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">⚡</span>
+                  <div class="qa-list-content"><strong>Faster UI building</strong> without shifting between files.</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">📱</span>
+                  <div class="qa-list-content"><strong>Easier responsiveness</strong> using instant prefixes like `md:`, `lg:`.</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">📦</span>
+                  <div class="qa-list-content"><strong>Zero dead code</strong> - Tailwind purges unused styles, resulting in tiny final builds.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Utility-First Framework</span>
+          </div>
+
+          <!-- Q2: Why JSX Files -->
+          <div class="qa-card frontend" data-tags="react jsx file dynamic syntax">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q2</span>
+                <span class="qa-badge">React</span>
+              </div>
+              <h3 class="qa-question-text">Why does React use .jsx files?</h3>
+              <div class="qa-answer">
+                **JSX (JavaScript XML)** combines **JavaScript logic + HTML structures** directly into a single file. 
+                <br><br>
+                Because React builds dynamic interfaces using JavaScript code, normal HTML is simply too weak—it cannot **handle dynamic states easily, rerender elements smartly, or manage complex isolated components**. JSX allows HTML elements to behave like active JavaScript expressions.
+              </div>
+              
+              <pre class="qa-code-mockup"><span class="keyword">function</span> <span class="variable">App</span>() {
+  <span class="keyword">return</span> &lt;<span class="keyword">h1</span>&gt;Hello World!&lt;/<span class="keyword">h1</span>&gt;; <span class="comment">// HTML inside JS!</span>
+}</pre>
+            </div>
+            <span class="qa-highlight-tag">React UI Syntactic Sugar</span>
+          </div>
+
+          <!-- Q3: JS vs JSX -->
+          <div class="qa-card frontend" data-tags="js jsx difference components javascript html">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q3</span>
+                <span class="qa-badge">React</span>
+              </div>
+              <h3 class="qa-question-text">What is the difference between .js and .jsx?</h3>
+              <div class="qa-answer">
+                While both are compiled to standard JavaScript, their practical developer usage differs:
+              </div>
+              
+              <div class="qa-table-wrapper">
+                <table class="qa-table">
+                  <thead>
+                    <tr>
+                      <th>File Extension</th>
+                      <th>Primary Developer Use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>.js (JavaScript)</strong></td>
+                      <td>Standard logic, utility calculations, calculations libraries, or backend server files.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.jsx (React JSX)</strong></td>
+                      <td>Visual React components that contain **HTML elements layout structures** directly inside JS functions.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">File Extensions Explained</span>
+          </div>
+
+          <!-- Q4: TS vs JS -->
+          <div class="qa-card frontend" data-tags="typescript ts js javascript type safety compiler bugs">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q4</span>
+                <span class="qa-badge">TypeScript</span>
+              </div>
+              <h3 class="qa-question-text">Why use TypeScript (.ts) instead of JavaScript?</h3>
+              <div class="qa-answer">
+                JavaScript lacks **type safety**—meaning a variable storing a number can suddenly be overwritten with text, causing hidden crashes.
+                <br><br>
+                **TypeScript** is a superset of JavaScript that introduces **strict type checking**. It points out bugs inside your code editor *before* you run the website in a browser.
+              </div>
+              
+              <div class="qa-comparison-box">
+                <div class="compare-side">
+                  <span class="compare-title">JavaScript (Unsafe)</span>
+                  <pre class="qa-code-mockup" style="margin: 0; padding: 0.5rem; font-size: 0.78rem;"><span class="keyword">let</span> age = <span class="string">"hello"</span>; <span class="comment">// Can be anything!</span></pre>
+                </div>
+                <div class="compare-side">
+                  <span class="compare-title">TypeScript (Safe)</span>
+                  <pre class="qa-code-mockup" style="margin: 0; padding: 0.5rem; font-size: 0.78rem;"><span class="keyword">let</span> age: <span class="type">number</span> = <span class="variable">20</span>; <span class="comment">// Must be a number!</span></pre>
+                </div>
+              </div>
+              
+              <div class="qa-list">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">🐛</span>
+                  <div class="qa-list-content"><strong>Fewer code crashes</strong> by catching logical mistakes early.</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">💡</span>
+                  <div class="qa-list-content"><strong>Stunning autocompletion</strong> as your editor knows exactly what data objects contain.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Type Safety Guard</span>
+          </div>
+
+          <!-- Q5: TS vs TSX -->
+          <div class="qa-card frontend" data-tags="ts tsx difference typescript react ui">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q5</span>
+                <span class="qa-badge">TypeScript</span>
+              </div>
+              <h3 class="qa-question-text">What is the difference between .ts and .tsx?</h3>
+              <div class="qa-answer">
+                Similar to JS vs JSX, the suffix signals to the builder compiler what dynamic syntax syntax rules to expect:
+              </div>
+              
+              <div class="qa-table-wrapper">
+                <table class="qa-table">
+                  <thead>
+                    <tr>
+                      <th>Extension</th>
+                      <th>Primary Practical Use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>.ts (TypeScript)</strong></td>
+                      <td>Pure TypeScript logic. Stores data models, API endpoints configurations, interface types, and pure algorithms.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.tsx (TS React)</strong></td>
+                      <td>TypeScript files containing **React components and HTML tags layouts** inside them.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Syntax Extensions Mappings</span>
+          </div>
+
+          <!-- Q6: Next.js vs React -->
+          <div class="qa-card frontend" data-tags="nextjs next.js react framework library seo routing server rendering">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q6</span>
+                <span class="qa-badge">Frameworks</span>
+              </div>
+              <h3 class="qa-question-text">Why use Next.js instead of React only?</h3>
+              <div class="qa-answer">
+                **React is a visual library**—it only handles the UI layers, forcing developers to configure their own routing routers, server configurations, bundle optimizations, and SEO wrappers from scratch.
+                <br><br>
+                **Next.js is a full framework** built on top of React. It provides complete structure out of the box, introducing automated routing, built-in SEO headers, server-side page renderings, and API configurations.
+              </div>
+              
+              <div class="qa-table-wrapper">
+                <table class="qa-table">
+                  <thead>
+                    <tr>
+                      <th>React Library</th>
+                      <th>Next.js Framework</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Manual layout routing.</td>
+                      <td>**Automatic routing** based on file structure.</td>
+                    </tr>
+                    <tr>
+                      <td>Weak default SEO (Blank HTML base).</td>
+                      <td>**Strong SEO** with direct server rendering (SSR).</td>
+                    </tr>
+                    <tr>
+                      <td>Requires extra backend server build.</td>
+                      <td>**API routes** built-in (Serverless functions).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Production-Ready Framework</span>
+          </div>
+
+          <!-- Q16: Why Components Exist -->
+          <div class="qa-card frontend" data-tags="components react dry reusable layout buttons ui">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q7</span>
+                <span class="qa-badge">React</span>
+              </div>
+              <h3 class="qa-question-text">Why do Components exist in React?</h3>
+              <div class="qa-answer">
+                Without components, you would have to duplicate massive blocks of structural HTML tags for identical layout elements (like custom buttons, headers, or login cards) hundreds of times. If a button's color changes, you would have to edit all 100 places manually!
+                <br><br>
+                React solves this using **reusable Components**. You write the UI logic once, and render it anywhere using clean, custom HTML tags.
+              </div>
+              
+              <pre class="qa-code-mockup"><span class="comment">// Define it once</span>
+<span class="keyword">function</span> <span class="variable">Button</span>() {
+  <span class="keyword">return</span> &lt;<span class="keyword">button</span> <span class="type">class</span>=<span class="string">"btn"</span>&gt;Submit&lt;/<span class="keyword">button</span>&gt;;
+}
+<span class="comment">// Reuse it anywhere like a custom tag!</span>
+&lt;<span class="variable">Button</span> /&gt;</pre>
+            </div>
+            <span class="qa-highlight-tag">D.R.Y. Code (Don't Repeat Yourself)</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 🧠 CATEGORY 2: BACKEND & SERVER LOGIC -->
+      <div class="category-section" id="sec-backend" data-category-group="backend">
+        <div class="category-header">
+          <span class="category-icon">🧠</span>
+          <h2 class="category-title">Backend & Server Logic</h2>
+        </div>
+        
+        <div class="qa-grid">
+          
+          <!-- Q7: Node.js for Backend -->
+          <div class="qa-card backend" data-tags="nodejs node.js backend server javascript execution v8">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q8</span>
+                <span class="qa-badge">Server</span>
+              </div>
+              <h3 class="qa-question-text">Why use Node.js for backend server development?</h3>
+              <div class="qa-answer">
+                Historically, JavaScript was locked inside the web browser—incapable of accessing local servers, file systems, or databases.
+                <br><br>
+                **Node.js** is a runtime engine that liberates JavaScript, allowing it to execute directly on local computers and cloud servers. This means you can write entire full stack applications (APIs, auth checks, database connections, and file uploads) using **only one language: JavaScript!**
+              </div>
+              
+              <div class="qa-list">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">🌟</span>
+                  <div class="qa-list-content">**Single language stack** - frontend and backend developers write matching JavaScript scripts.</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">⚡</span>
+                  <div class="qa-list-content">**Fast network scaling** - built on Google V8, optimized for massive asynchronous flows.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Server Runtime Engine</span>
+          </div>
+
+          <!-- Q8: Express.js -->
+          <div class="qa-card backend" data-tags="expressjs express node routing clean server http">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q9</span>
+                <span class="qa-badge">Server</span>
+              </div>
+              <h3 class="qa-question-text">Why use Express.js instead of bare Node.js?</h3>
+              <div class="qa-answer">
+                Writing backend servers using bare Node.js is low-level and repetitive—you have to write raw HTTP chunks parsing, custom query string filters, and complex port listeners manually.
+                <br><br>
+                **Express.js** acts as a lightweight, clean routing library that simplifies server setup. It lets you define clean API routing loops with simple, readable commands.
+              </div>
+              
+              <div class="qa-comparison-box font-body" style="grid-template-columns: 1fr;">
+                <div>
+                  <span class="compare-title">Bare Node.js (Complex)</span>
+                  <pre class="qa-code-mockup" style="margin: 0.3rem 0; padding: 0.6rem; font-size: 0.78rem;">http.createServer((req, res) => {
+  if (req.url === '/') { res.end('Home'); }
+});</pre>
+                </div>
+                <div>
+                  <span class="compare-title">Express.js (Clean)</span>
+                  <pre class="qa-code-mockup" style="margin: 0.3rem 0; padding: 0.6rem; font-size: 0.78rem;">app.get(<span class="string">'/'</span>, (req, res) => res.send(<span class="string">'Home'</span>));</pre>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">API Routing Layer</span>
+          </div>
+
+          <!-- Q10: Firebase -->
+          <div class="qa-card backend" data-tags="firebase serverless database auth hosting backend as a service instant">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q10</span>
+                <span class="qa-badge">Serverless</span>
+              </div>
+              <h3 class="qa-question-text">Why is Firebase popular?</h3>
+              <div class="qa-answer">
+                Building custom servers takes time: configuring databases, setting up secure login encryptions, securing storage nodes, and scaling server ports.
+                <br><br>
+                **Firebase** is a "Backend-as-a-Service" (BaaS) that gives you **instant backend capabilities** without writing a server manually. You connect directly from your frontend code using official prebuilt API hooks.
+              </div>
+              
+              <div class="qa-list">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">🔑</span>
+                  <div class="qa-list-content">**Instant Authentication** (Google/Email logins ready in minutes).</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">🗃️</span>
+                  <div class="qa-list-content">**Real-time Database** updates out of the box.</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">☁️</span>
+                  <div class="qa-list-content">**Automated Hosting** and secure storage file bins.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Backend-as-a-Service (BaaS)</span>
+          </div>
+
+          <!-- Q13: Why .env -->
+          <div class="qa-card backend" data-tags="env environment secrets keys passwords configuration security gitignore">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q11</span>
+                <span class="qa-badge">Security</span>
+              </div>
+              <h3 class="qa-question-text">Why do we use .env files?</h3>
+              <div class="qa-answer">
+                Your code often depends on secret variables, like database passwords, payment gateway keys, or third-party authentication tokens.
+                <br><br>
+                If you hardcode these secrets directly inside your JavaScript files, they will be pushed to public repositories like GitHub, allowing anyone to steal your data or access tokens. A **`.env` file** stores these secrets locally as environment variables, keeping them hidden and secure.
+              </div>
+              
+              <pre class="qa-code-mockup"><span class="comment"># Inside .env (Stored locally, added to .gitignore)</span>
+<span class="variable">DATABASE_PASSWORD</span>=<span class="string">"secret12345"</span>
+<span class="variable">STRIPE_API_KEY</span>=<span class="string">"sk_test_api"</span></pre>
+            </div>
+            <span class="qa-highlight-tag">Secrets Shield</span>
+          </div>
+
+          <!-- Q15: Why APIs -->
+          <div class="qa-card backend" data-tags="api apis communication server frontend client data REST JSON">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q12</span>
+                <span class="qa-badge">Communication</span>
+              </div>
+              <h3 class="qa-question-text">Why are APIs important?</h3>
+              <div class="qa-answer">
+                **API (Application Programming Interface)** acts as a secure, standardized **communication bridge** between the frontend client browser and the backend server pantry.
+                <br><br>
+                Without an API, the frontend has no secure way to access databases, submit payments, verify accounts, or read server data. The API translates browser requests, handles checks on the server, and returns structured data (mostly in JSON format) back to the screen.
+              </div>
+              
+              <div class="qa-list">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">🤝</span>
+                  <div class="qa-list-content"><strong>Bridges Systems</strong>: Standardizes how different devices (phones, laptops) talk to one central server database.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">The Messenger Bridge</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 🗄️ CATEGORY 3: DATABASE & CONFIG -->
+      <div class="category-section" id="sec-database" data-category-group="database">
+        <div class="category-header">
+          <span class="category-icon">🗄️</span>
+          <h2 class="category-title">Database & Dependencies</h2>
+        </div>
+        
+        <div class="qa-grid">
+          
+          <!-- Q9: MongoDB vs SQL -->
+          <div class="qa-card database" data-tags="mongodb sql postgres database relatioal nosql tables documents schemas">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q13</span>
+                <span class="qa-badge">Database</span>
+              </div>
+              <h3 class="qa-question-text">Why use MongoDB instead of SQL databases?</h3>
+              <div class="qa-answer">
+                Different projects require different database architectures:
+              </div>
+              
+              <div class="qa-comparison-box">
+                <div class="compare-side">
+                  <span class="compare-title">MongoDB (NoSQL Document)</span>
+                  <span class="compare-desc">
+                    Stores flexible, JSON-like **Documents**. Best for:
+                    <ul style="list-style: disc; margin-left: 1rem; margin-top: 0.3rem;">
+                      <li>Rapidly changing app structures</li>
+                      <li>Highly scalable blogs/posts catalogs</li>
+                      <li>JS developers (MERN stack natively uses JSON)</li>
+                    </ul>
+                  </span>
+                </div>
+                <div class="compare-side">
+                  <span class="compare-title">SQL (Relational Tables)</span>
+                  <span class="compare-desc">
+                    Stores data inside rigid **Tables** with relationships. Best for:
+                    <ul style="list-style: disc; margin-left: 1rem; margin-top: 0.3rem;">
+                      <li>Strict billing and banking data</li>
+                      <li>Intricate relational structures</li>
+                      <li>Zero data tolerance for schemas changes</li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">NoSQL vs Relational Storage</span>
+          </div>
+
+          <!-- Q11: package.json -->
+          <div class="qa-card database" data-tags="packagejson package.json packages dependencies scripts configuration versions node">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q14</span>
+                <span class="qa-badge">Config</span>
+              </div>
+              <h3 class="qa-question-text">Why does package.json exist?</h3>
+              <div class="qa-answer">
+                Your app relies on various prewritten external packages (libraries like React, Express, or Tailwind). 
+                <br><br>
+                A **`package.json` file** acts as the central **control manifest** for your project. It records exactly what packages are installed, their version limits, metadata, and custom scripts commands (like `npm start` or `npm run dev`) so that other developers can build your project instantly.
+              </div>
+              
+              <pre class="qa-code-mockup">{
+  <span class="keyword">"name"</span>: <span class="string">"stackeasy-app"</span>,
+  <span class="keyword">"dependencies"</span>: {
+    <span class="keyword">"react"</span>: <span class="string">"^18.2.0"</span>,
+    <span class="keyword">"express"</span>: <span class="string">"^4.18.2"</span>
+  }
+}</pre>
+            </div>
+            <span class="qa-highlight-tag">Manifest File</span>
+          </div>
+
+          <!-- Q12: node_modules -->
+          <div class="qa-card database" data-tags="nodemodules node_modules huge dependencies packages folder size">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q15</span>
+                <span class="qa-badge">Config</span>
+              </div>
+              <h3 class="qa-question-text">Why is node_modules so huge?</h3>
+              <div class="qa-answer">
+                When you install a single library (like React), you aren't just downloading one file—you are downloading its entire dependency chain.
+                <br><br>
+                React itself depends on other utility libraries, and those libraries depend on other tools. When you run `npm install`, NPM downloads **every single nested dependency** down the chain into the `node_modules` folder, creating thousands of physical files!
+              </div>
+              
+              <div class="qa-list">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">📦</span>
+                  <div class="qa-list-content"><strong>Dependency Trees</strong>: A single top-level package can pull in 50 nested packages to execute successfully.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Local Packages Storage</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 🚀 CATEGORY 4: GENERAL FLOW -->
+      <div class="category-section" id="sec-architecture" data-category-group="architecture">
+        <div class="category-header">
+          <span class="category-icon">🚀</span>
+          <h2 class="category-title">General Flow & Mappings</h2>
+        </div>
+        
+        <div class="qa-grid">
+          
+          <!-- Q14: GitHub -->
+          <div class="qa-card architecture" data-tags="github git version control backups backup team collaboration log">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q16</span>
+                <span class="qa-badge">Architecture</span>
+              </div>
+              <h3 class="qa-question-text">Why is GitHub essential?</h3>
+              <div class="qa-answer">
+                Without version control, editing code is risky: one mistake can break your whole site, and team collaboration means emailing files back and forth.
+                <br><br>
+                **GitHub** acts as a secure cloud backup and collaboration platform using **Git**. It records a detailed **save-state timeline (commits)**, allowing you to roll back code if anything breaks, coordinate team merges safely, and deploy to the cloud instantly.
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Version Control Backup</span>
+          </div>
+
+          <!-- Q17: Why Frameworks Exist -->
+          <div class="qa-card architecture" data-tags="frameworks structure standard best practices code optimization library">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q17</span>
+                <span class="qa-badge">Architecture</span>
+              </div>
+              <h3 class="qa-question-text">Why do Frameworks Exist?</h3>
+              <div class="qa-answer">
+                Building complex modern websites from raw scratch is incredibly slow—you would have to write custom routing modules, standard database connections, security checks, and folder pipelines for every single project.
+                <br><br>
+                **Frameworks** provide a prebuilt, optimized **code skeleton**. They define the structure, establish secure best practices, optimize speeds, and handle repetitive technical setups, letting you focus entirely on your app's actual features.
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Prebuilt Structure</span>
+          </div>
+
+          <!-- Q19: Browser Understanding -->
+          <div class="qa-card architecture" data-tags="browser rendering engine html css javascript combination DOM">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q18</span>
+                <span class="qa-badge">Flow</span>
+              </div>
+              <h3 class="qa-question-text">How does the Browser read and understand websites?</h3>
+              <div class="qa-answer">
+                A web browser utilizes high-speed rendering engines to fetch, parse, and translate raw text code files into dynamic visual pixels:
+              </div>
+              
+              <div class="qa-list font-body">
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">📄</span>
+                  <div class="qa-list-content"><strong>HTML (Structure)</strong>: Creates the basic bone structure (headers, divs, images, sections).</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">🎨</span>
+                  <div class="qa-list-content"><strong>CSS (Design)</strong>: Adds skins, textures, custom layouts, flexboxes, and responsive grids.</div>
+                </div>
+                <div class="qa-list-item">
+                  <span class="qa-list-icon">⚡</span>
+                  <div class="qa-list-content"><strong>JavaScript (Functionality)</strong>: Toggles drawer classes, fetches APIs, and handles dynamic animations.</div>
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">The Rendering Loop</span>
+          </div>
+
+          <!-- Q18: File Mappings Reference -->
+          <div class="qa-card architecture" data-tags="file formats reference sheet html css js jsx ts tsx json sql md extensions">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q19</span>
+                <span class="qa-badge">Reference</span>
+              </div>
+              <h3 class="qa-question-text">Web File Extensions & Mappings Reference</h3>
+              <div class="qa-answer">
+                Quick-lookup cheat sheet detailing what each file extension in a modern workspace is used for:
+              </div>
+              
+              <div class="qa-table-wrapper" style="margin-top: 0;">
+                <table class="qa-table">
+                  <thead>
+                    <tr>
+                      <th>Extension</th>
+                      <th>Language / Tech</th>
+                      <th>Primary Target Function</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>.html</strong></td>
+                      <td>HTML5</td>
+                      <td>Sets up raw web skeleton layouts.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.css / .scss</strong></td>
+                      <td>CSS / Sass</td>
+                      <td>Designs colors, alignments, grids, and trans.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.js / .jsx</strong></td>
+                      <td>JavaScript</td>
+                      <td>Dynamic behaviors / React component files.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.ts / .tsx</strong></td>
+                      <td>TypeScript</td>
+                      <td>Type-safe logic / Safe React elements.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.json</strong></td>
+                      <td>JSON Config</td>
+                      <td>Project settings, metadata, or packages lists.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.env</strong></td>
+                      <td>Shell Environment</td>
+                      <td>Protects API passwords and server keys.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.sql</strong></td>
+                      <td>SQL Database</td>
+                      <td>Scripts to create database tables and relations.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>.md</strong></td>
+                      <td>Markdown</td>
+                      <td>Structured documentation files (like this hub!).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">Developer Cheat Sheet</span>
+          </div>
+
+          <!-- Q20: Real Full Stack Flow Pipeline -->
+          <div class="qa-card architecture" style="grid-column: 1 / -1;" data-tags="flow pipeline full stack request click API database query server UI update">
+            <div>
+              <div class="qa-card-header">
+                <span class="qa-question-num">Q20</span>
+                <span class="qa-badge">Flow Pipeline</span>
+              </div>
+              <h3 class="qa-question-text">Visualizing the Real Full Stack Request Flow</h3>
+              <div class="qa-answer">
+                How does code connect in practice? Hover over each step below to watch a single database request travel through all layers of a full stack app:
+              </div>
+              
+              <div class="pipeline-section">
+                <div class="pipeline-container">
+                  
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">1</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">User clicks a button</h4>
+                      <p class="pipeline-step-desc">A user clicks "Show My Orders" inside a React component in their browser. 📱</p>
+                    </div>
+                  </div>
+
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">2</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">Frontend event triggers</h4>
+                      <p class="pipeline-step-desc">A click-event handler captures the event and runs a secure API call: `fetch('/api/orders')`. ⚡</p>
+                    </div>
+                  </div>
+
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">3</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">API request sent to network</h4>
+                      <p class="pipeline-step-desc">The request travels across the internet network, passing ports and security domains. 🌐</p>
+                    </div>
+                  </div>
+
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">4</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">Backend server receives the call</h4>
+                      <p class="pipeline-step-desc">An Express server route parses the incoming ticket, validates auth, and executes code. ⚙️</p>
+                    </div>
+                  </div>
+
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">5</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">Database queried</h4>
+                      <p class="pipeline-step-desc">The server queries the database (e.g. MongoDB) to fetch the user's order records. 🧠</p>
+                    </div>
+                  </div>
+
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">6</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">Data returned to backend</h4>
+                      <p class="pipeline-step-desc">The database pantry returns the records. The server plates it neatly in a JSON format. 🗄️</p>
+                    </div>
+                  </div>
+
+                  <div class="pipeline-step">
+                    <div class="pipeline-num">7</div>
+                    <div class="pipeline-info">
+                      <h4 class="pipeline-step-title">Frontend updates the UI</h4>
+                      <p class="pipeline-step-desc">The React component receives the JSON data, updates state hooks, and rerenders the browser DOM instantly! 💻</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <span class="qa-highlight-tag">The 7-Step Full Stack Cycle</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Empty State for Search -->
+      <div class="qa-empty-state" id="qa-empty-state">
+        <span class="qa-empty-icon">🔍</span>
+        <h4 class="qa-empty-title">No matching questions found</h4>
+        <p class="qa-empty-desc">Try typing different search keywords like "React", "TypeScript", "SQL", or ".env".</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="index.html" class="logo-group">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+            <path d="M2 17L12 22L22 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text text-white">Stack<span>Easy</span></span>
+        </a>
+        <p class="footer-about">
+          Explaining web development through beautiful, tactile micro-learning and relatable stories. Let's build together!
+        </p>
+      </div>
+
+      <div class="footer-links-side">
+        <div class="footer-col">
+          <span class="footer-title">Q&A Topics</span>
+          <ul>
+            <li><a href="#sec-frontend">Frontend UI</a></li>
+            <li><a href="#sec-backend">Backend Server</a></li>
+            <li><a href="#sec-database">Data Storage</a></li>
+            <li><a href="#sec-architecture">System Flow</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-title">Resources</span>
+          <ul>
+            <li><a href="index.html#explorer">Interactive Sandbox</a></li>
+            <li><a href="index.html#explorer">Restaurant Analogy</a></li>
+            <li><a href="index.html#faq">FAQ Hub</a></li>
+            <li><a href="#">Guides</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 StackEasy Platform. Handcrafted for awesome learners.</p>
+    </div>
+  </footer>
+
+  <!-- Script for drawer and interactive search -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // --- 1. Mobile Drawer Navigation ---
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      
+      if (mobileMenuBtn && mobileDrawer) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('open');
+          
+          // Animate hamburger toggle lines
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          if (mobileDrawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+          } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
+        });
+      }
+
+      // Smooth close drawer when clicking links
+      const drawerLinks = document.querySelectorAll('.drawer-link');
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.remove('open');
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        });
+      });
+
+      // --- 2. Live Search & Category Filtering ---
+      const searchInput = document.getElementById('qa-search-input');
+      const categoryPills = document.querySelectorAll('.qa-pill-btn');
+      const qaCards = document.querySelectorAll('.qa-card');
+      const emptyState = document.getElementById('qa-empty-state');
+      const categorySections = document.querySelectorAll('.category-section');
+      
+      let activeCategory = 'all';
+      let searchQuery = '';
+
+      function filterQuestions() {
+        let visibleCardsCount = 0;
+        
+        // Loop through each category section to filter cards
+        categorySections.forEach(section => {
+          const sectionCategory = section.getAttribute('data-category-group');
+          const cardsInSection = section.querySelectorAll('.qa-card');
+          let visibleCardsInSection = 0;
+
+          cardsInSection.forEach(card => {
+            const cardTags = card.getAttribute('data-tags') || '';
+            const cardTitle = card.querySelector('.qa-question-text').innerText.toLowerCase();
+            const cardBody = card.querySelector('.qa-answer').innerText.toLowerCase();
+            const textToMatch = `${cardTags} ${cardTitle} ${cardBody}`;
+
+            // Check if card matches both category filter and search string
+            const matchesCategory = (activeCategory === 'all' || activeCategory === sectionCategory);
+            const matchesSearch = searchQuery === '' || textToMatch.includes(searchQuery);
+
+            if (matchesCategory && matchesSearch) {
+              card.style.display = 'flex';
+              visibleCardsInSection++;
+              visibleCardsCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Toggle visibility of the whole category header and block
+          if (visibleCardsInSection > 0) {
+            section.style.display = 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+
+        // Show/hide empty state
+        if (visibleCardsCount === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          emptyState.style.display = 'none';
+        }
+      }
+
+      // Input listener for real-time search
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        filterQuestions();
+      });
+
+      // Click listener for Category Pills
+      categoryPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          categoryPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          
+          activeCategory = pill.getAttribute('data-category');
+          filterQuestions();
+        });
+      });
+
+    });
+  </script>
+
+</body>
+</html>

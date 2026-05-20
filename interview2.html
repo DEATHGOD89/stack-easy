@@ -1,0 +1,2443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StackEasy | Interview 2.0 - Senior Problem Solver Roadmap</title>
+  <meta name="description" content="Master high scalability systems, database replication, server crashing solutions, monitoring telemetry, clean architecture, and the senior engineering mindset.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* ==========================================================================
+       Premium Interview 2.0 Specific Styles
+       ========================================================================== */
+    
+    :root {
+      --color-accent-emerald: #10B981;
+      --color-accent-blue: #3B82F6;
+      --color-accent-purple: #8B5CF6;
+      --color-accent-pink: #EC4899;
+      --color-accent-amber: #F59E0B;
+      --color-terminal-bg: #0F1D13;
+      --color-terminal-border: #1B3523;
+    }
+
+    .interview-hero {
+      padding: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 90, 31, 0.05) 0%, rgba(245, 239, 235, 0) 100%);
+    }
+
+    .interview-tagline {
+      display: inline-block;
+      background-color: rgba(255, 90, 31, 0.1);
+      color: var(--color-orange-primary);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.3rem 1.0rem;
+      border-radius: 50px;
+      margin-bottom: 1.0rem;
+      border: 1px solid rgba(255, 90, 31, 0.15);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .interview-title {
+      font-size: 2.4rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.8rem;
+      letter-spacing: -1.0px;
+    }
+
+    .interview-title span {
+      color: var(--color-orange-primary);
+    }
+
+    .interview-subtitle {
+      font-size: 1.0rem;
+      color: var(--color-text-muted);
+      max-width: 800px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.5;
+    }
+
+    /* Live Search & Filter Bar */
+    .search-wrapper {
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      position: relative;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: var(--color-white);
+      border: 2px solid rgba(15, 38, 21, 0.08);
+      padding: 1rem 1.8rem;
+      border-radius: 50px;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-normal);
+    }
+
+    .search-box:focus-within {
+      border-color: var(--color-orange-primary);
+      box-shadow: var(--shadow-lg), 0 0 0 4px rgba(255, 90, 31, 0.1);
+    }
+
+    .search-box input {
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--color-text-dark);
+    }
+
+    .search-box input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .search-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke: var(--color-text-muted);
+      flex-shrink: 0;
+    }
+
+    /* Dashboard Layout Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 6rem;
+    }
+
+    @media (min-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 280px 1fr;
+      }
+    }
+
+    /* Sticky Sidebar Navigation */
+    .sticky-sidebar {
+      position: sticky;
+      top: 100px;
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-sm);
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .sticky-sidebar {
+        display: block;
+      }
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      border-bottom: 2px solid rgba(15, 38, 21, 0.05);
+      padding-bottom: 0.5rem;
+    }
+
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--color-text-dark);
+      transition: all var(--transition-fast);
+    }
+
+    .sidebar-link:hover {
+      background-color: var(--color-pill-bg);
+      color: var(--color-orange-primary);
+      transform: translateX(4px);
+    }
+
+    .sidebar-link.active {
+      background-color: var(--color-forest-dark);
+      color: var(--color-white);
+    }
+
+    /* Content Panels */
+    .content-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 100px;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+      border-left: 5px solid var(--color-orange-primary);
+      padding-left: 1.2rem;
+    }
+
+    .section-tagline {
+      font-size: 0.85rem;
+      color: var(--color-orange-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .section-title-text {
+      font-size: 2.2rem;
+      color: var(--color-forest-dark);
+    }
+
+    /* Premium Cards & Accordions */
+    .dsa-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .dsa-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(15, 38, 21, 0.06);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+      overflow: hidden;
+    }
+
+    .dsa-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(255, 90, 31, 0.15);
+    }
+
+    .dsa-card.emerald { border-top: 5px solid var(--color-accent-emerald); }
+    .dsa-card.blue { border-top: 5px solid var(--color-accent-blue); }
+    .dsa-card.purple { border-top: 5px solid var(--color-accent-purple); }
+    .dsa-card.pink { border-top: 5px solid var(--color-accent-pink); }
+    .dsa-card.amber { border-top: 5px solid var(--color-accent-amber); }
+
+    .dsa-card-header {
+      padding: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .dsa-card-title {
+      font-size: 1.4rem;
+      color: var(--color-forest-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .complexity-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .complexity-badge.emerald { background-color: rgba(16, 185, 129, 0.1); color: var(--color-accent-emerald); }
+    .complexity-badge.blue { background-color: rgba(59, 130, 246, 0.1); color: var(--color-accent-blue); }
+    .complexity-badge.purple { background-color: rgba(139, 92, 246, 0.1); color: var(--color-accent-purple); }
+    .complexity-badge.pink { background-color: rgba(236, 72, 153, 0.1); color: var(--color-accent-pink); }
+    .complexity-badge.amber { background-color: rgba(245, 158, 11, 0.1); color: var(--color-accent-amber); }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-normal) ease-out;
+    }
+
+    .accordion-body {
+      padding: 0 1.8rem 1.8rem 1.8rem;
+      border-top: 1px dashed rgba(15, 38, 21, 0.06);
+      margin-top: -0.5rem;
+      padding-top: 1.5rem;
+    }
+
+    .dsa-card-desc {
+      font-size: 1rem;
+      color: var(--color-text-dark);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .common-questions-box {
+      background-color: var(--color-bg-cream);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(15, 38, 21, 0.03);
+    }
+
+    .common-questions-title {
+      display: block;
+      font-weight: 700;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .question-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--color-text-dark);
+      line-height: 1.5;
+    }
+
+    .question-item::before {
+      content: "✦";
+      color: var(--color-orange-primary);
+      font-weight: bold;
+    }
+
+    .answer-quote-container {
+      position: relative;
+      background-color: #0E1612;
+      border-left: 4px solid var(--color-orange-primary);
+      padding: 1.5rem 3rem 1.5rem 1.8rem;
+      border-radius: 8px;
+      color: #D3E0D7;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+
+    .answer-quote-container strong {
+      color: #FFFFFF;
+    }
+
+    .quote-title {
+      display: block;
+      color: var(--color-orange-primary);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-copy-quote {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      color: var(--color-text-muted);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-copy-quote:hover {
+      color: var(--color-white);
+      transform: scale(1.1);
+    }
+
+    .btn-copy-quote svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .accordion-indicator {
+      transition: transform var(--transition-fast);
+      color: var(--color-text-muted);
+    }
+
+    .dsa-card.active .accordion-indicator {
+      transform: rotate(180deg);
+      color: var(--color-orange-primary);
+    }
+
+    /* Helper Utilities */
+    .hidden {
+      display: none !important;
+    }
+
+    /* custom visual widgets styling */
+    .visual-widget-wrapper {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      background-color: #0F1713;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #1E2E25;
+      color: #E2ECE5;
+    }
+
+    .widget-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--color-white);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid #1E2E25;
+      padding-bottom: 0.5rem;
+    }
+
+    /* 1. HORIZONTAL INTERNET PIPELINE WIDGET */
+    .internet-pipeline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding: 1.5rem 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .internet-line-bg {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: #1E2E25;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .internet-line-active {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background-color: var(--color-orange-primary);
+      transform: translateY(-50%);
+      z-index: 2;
+      transition: width var(--transition-slow);
+    }
+
+    .internet-node {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: #16241D;
+      border: 3px solid #1E2E25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      z-index: 3;
+      cursor: pointer;
+      position: relative;
+      transition: all var(--transition-fast);
+      color: #A2BCAE;
+    }
+
+    .internet-node:hover {
+      transform: scale(1.1);
+      border-color: var(--color-orange-primary);
+      color: var(--color-white);
+    }
+
+    .internet-node.active {
+      background-color: var(--color-orange-primary);
+      border-color: var(--color-white);
+      color: var(--color-white);
+      box-shadow: 0 0 15px rgba(255, 90, 31, 0.4);
+    }
+
+    .internet-node-label {
+      position: absolute;
+      top: 3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      pointer-events: none;
+      transition: color var(--transition-fast);
+    }
+
+    .internet-node.active .internet-node-label {
+      color: var(--color-white);
+    }
+
+    .pipeline-info-panel {
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      min-height: 100px;
+    }
+
+    .pipeline-info-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-orange-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pipeline-info-text {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #B2C0B7;
+    }
+
+    /* 2. CACHE PLAYGROUND */
+    .cache-playground-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .cache-playground-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .cache-box-card {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cache-box-header {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #FFFFFF;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cache-sim-line {
+      height: 6px;
+      background-color: #1D2C22;
+      border-radius: 3px;
+      position: relative;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+
+    .cache-sim-bullet {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--color-accent-amber);
+    }
+
+    .animating-slow .cache-sim-bullet {
+      animation: bulletTravelSlow 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .animating-fast .cache-sim-bullet {
+      animation: bulletTravelFast 0.2s linear infinite;
+    }
+
+    @keyframes bulletTravelSlow {
+      0% { left: 0%; background-color: var(--color-accent-amber); }
+      50% { left: 80%; background-color: #EF4444; }
+      100% { left: 0%; background-color: var(--color-accent-emerald); }
+    }
+
+    @keyframes bulletTravelFast {
+      0% { left: 0%; background-color: var(--color-accent-amber); }
+      50% { left: 40%; background-color: var(--color-accent-emerald); }
+      100% { left: 0%; background-color: var(--color-accent-emerald); }
+    }
+
+    .btn-sim-trigger {
+      background-color: var(--color-orange-primary);
+      color: var(--color-white);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-align: center;
+      transition: all var(--transition-fast);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-sim-trigger:hover {
+      background-color: var(--color-orange-hover);
+    }
+
+    /* 3. WHY SERVERS CRASH HOVER STATS */
+    .crash-stats-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .crash-stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      cursor: pointer;
+      padding: 0.6rem;
+      border-radius: 6px;
+      transition: background-color var(--transition-fast);
+    }
+
+    .crash-stat-row:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .crash-stat-label-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .crash-stat-bar-outer {
+      height: 8px;
+      background-color: #1D2C22;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .crash-stat-bar-inner {
+      height: 100%;
+      border-radius: 4px;
+      background-color: #EF4444;
+      transition: width var(--transition-slow);
+    }
+
+    .crash-mitigation-box {
+      font-size: 0.85rem;
+      background-color: rgba(239, 68, 68, 0.05);
+      border: 1px solid rgba(239, 68, 68, 0.15);
+      color: #FCA5A5;
+      padding: 0.8rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* 5. VIDEO TRANSCODE FIFO QUEUE SIMULATOR */
+    .queue-simulator {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .queue-buttons {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .queue-display-container {
+      display: flex;
+      gap: 0.8rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px dashed #1E2E25;
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 80px;
+      overflow-x: auto;
+      align-items: center;
+    }
+
+    .queue-item-pill {
+      background: linear-gradient(135deg, #1A3C22 0%, #0F2615 100%);
+      border: 1px solid rgba(255, 90, 31, 0.2);
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--color-white);
+      white-space: nowrap;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .worker-status-box {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .worker-progress-bar-outer {
+      height: 6px;
+      background-color: #1D2C22;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0.6rem 0;
+    }
+
+    .worker-progress-bar-inner {
+      height: 100%;
+      background-color: var(--color-orange-primary);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* 8. MONITORING LIVE TELEMETRY */
+    .telemetry-dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .telemetry-status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--color-accent-emerald);
+      animation: pulseGreen 1.5s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+
+    .telemetry-graph-box {
+      height: 120px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .telemetry-log-panel {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: #9EC0AA;
+      background-color: rgba(0,0,0,0.3);
+      padding: 0.8rem;
+      border-radius: 6px;
+      height: 80px;
+      overflow-y: auto;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .log-line {
+      margin-bottom: 0.3rem;
+      animation: logFeed 0.2s ease-out;
+    }
+
+    @keyframes logFeed {
+      from { transform: translateY(4px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .log-success { color: var(--color-accent-emerald); }
+    .log-warn { color: var(--color-accent-amber); }
+    .log-info { color: var(--color-accent-blue); }
+
+    /* 20. WHY MATRIX GRID */
+    .why-matrix-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .matrix-question-row {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .matrix-question-row:hover {
+      border-color: rgba(255, 90, 31, 0.2);
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .matrix-question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+
+    .matrix-toggle-check {
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .matrix-answer-block {
+      display: none;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #B2C2B8;
+      border-top: 1px dashed rgba(255,255,255,0.05);
+      padding-top: 0.8rem;
+    }
+
+    .matrix-question-row.active .matrix-answer-block {
+      display: block;
+    }
+
+    .matrix-question-row.active .matrix-toggle-check {
+      color: var(--color-orange-primary);
+    }
+
+    /* Empty state */
+    .search-empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 2px dashed rgba(15, 38, 21, 0.08);
+      margin-bottom: 6rem;
+    }
+
+    .empty-state-title {
+      font-size: 1.5rem;
+      color: var(--color-forest-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state-desc {
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="index.html" class="logo-group" id="logo-main">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+          <path d="M2 17L12 22L22 17" stroke="#0F2615" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="7" r="1.5" fill="#FFFFFF"/>
+        </svg>
+        <span class="logo-text">Stack<span>Easy</span></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
+          <li><a href="tree.html" class="nav-link">Tree</a></li>
+          <li><a href="questions.html" class="nav-link">Questions</a></li>
+          <li><a href="interview.html" class="nav-link">Interview</a></li>
+          <li><a href="interview2.html" class="nav-link active">Interview 2.0</a></li>
+          <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA -->
+      <div class="nav-actions">
+        <a href="index.html#customizer" class="btn-nav-cta">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="index.html#fullstack" class="drawer-link">FullStack</a></li>
+      <li><a href="tree.html" class="drawer-link">Tree</a></li>
+      <li><a href="questions.html" class="drawer-link">Questions</a></li>
+      <li><a href="interview.html" class="drawer-link">Interview</a></li>
+      <li><a href="interview2.html" class="drawer-link active">Interview 2.0</a></li>
+      <li><a href="index.html#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+  </div>
+
+  <main class="page-container">
+    
+    <!-- Hero Header -->
+    <section class="interview-hero">
+      <span class="interview-tagline">Elite Prep Roadmap</span>
+      <h1 class="interview-title">SENIOR INTERVIEW <span>2.0 ROADMAP</span> 🔥</h1>
+      <p class="interview-subtitle">
+        Transition from syntax learner to Senior Problem Solver. Master system design, caching architectures, crash mitigations, high-concurrency event loops, clean folder structures, and the ultimate product developer mindset.
+      </p>
+      
+      <!-- Live Search Box -->
+      <div class="search-wrapper">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="#717E75" stroke-width="2"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#717E75" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" placeholder="Search topics (e.g., DNS, CDN, cache, crash, scale, queue)..." id="roadmap-search" aria-label="Search Roadmap">
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Dashboard Grid Layout -->
+    <div class="dashboard-grid">
+      
+      <!-- Sticky Left Navigation Sidebar (Desktop Only) -->
+      <aside class="sticky-sidebar">
+        <h3 class="sidebar-title">🎯 ROADMAP AXIS</h3>
+        <nav class="sidebar-menu">
+          <a href="#systems-scale" class="sidebar-link active">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            Systems & Scale
+          </a>
+          <a href="#engineering-safety" class="sidebar-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Engineering Safety
+          </a>
+          <a href="#code-architecture" class="sidebar-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            Code Architecture
+          </a>
+          <a href="#senior-mindset" class="sidebar-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            Senior Mindset
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Right Side Collapsible Roadmap Cards -->
+      <div class="content-panel">
+        
+        <!-- SECTION 1: SYSTEMS & SCALE -->
+        <section id="systems-scale" class="section-anchor searchable-section">
+          <div class="section-header">
+            <span class="section-tagline">🛠️ High Concurrency & Routing</span>
+            <h2 class="section-title-text">Systems & Scale</h2>
+          </div>
+
+          <div class="dsa-cards-list">
+            
+            <!-- Card 1: How Internet Works -->
+            <div class="dsa-card emerald searchable" data-search-keys="internet works dns browser lookup rendering google tcp ip request render process">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">1. How Internet Actually Works 🌍</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Core Systems</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    When you type <code>google.com</code>, a complex sequence of handshakes, searches, and data transfers triggers globally within milliseconds. Understanding this path is the bedrock of system optimization.
+                  </p>
+                  
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                      Interactive Request Timeline (Click Steps!)
+                    </div>
+                    
+                    <div class="internet-pipeline">
+                      <div class="internet-line-bg"></div>
+                      <div class="internet-line-active" id="internet-line-active"></div>
+                      
+                      <div class="internet-node active" onclick="selectInternetNode(1, 0)" data-step="1">
+                        1
+                        <span class="internet-node-label">Browser</span>
+                      </div>
+                      <div class="internet-node" onclick="selectInternetNode(2, 20)" data-step="2">
+                        2
+                        <span class="internet-node-label">DNS</span>
+                      </div>
+                      <div class="internet-node" onclick="selectInternetNode(3, 40)" data-step="3">
+                        3
+                        <span class="internet-node-label">TCP Handshake</span>
+                      </div>
+                      <div class="internet-node" onclick="selectInternetNode(4, 60)" data-step="4">
+                        4
+                        <span class="internet-node-label">Server / Backend</span>
+                      </div>
+                      <div class="internet-node" onclick="selectInternetNode(5, 80)" data-step="5">
+                        5
+                        <span class="internet-node-label">Database</span>
+                      </div>
+                      <div class="internet-node" onclick="selectInternetNode(6, 100)" data-step="6">
+                        6
+                        <span class="internet-node-label">Render</span>
+                      </div>
+                    </div>
+                    
+                    <div class="pipeline-info-panel" id="pipeline-info-panel">
+                      <div class="pipeline-info-title">1. Browser Navigation Input</div>
+                      <div class="pipeline-info-text">You enter google.com. The browser checks local HSTS headers, its internal cache, and local operating system hosts lists to resolve the website instantly.</div>
+                    </div>
+                  </div>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Technical Sequence of Events</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>DNS Lookup</strong>: Resolving human domain names to routing numbers via hierarchical domain clusters.</li>
+                      <li class="question-item"><strong>TCP Connection Handshake</strong>: Synthesizing connection paths using 3-way handshakes (SYN ➔ SYN-ACK ➔ ACK).</li>
+                      <li class="question-item"><strong>Database Query</strong>: Fetching requested profile structures or index data from storage.</li>
+                      <li class="question-item"><strong>Composite Rendering</strong>: Downloading HTML/CSS/JS, building DOM trees, performing layout calculations, and drawing screen pixels.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "When a client requests google.com, the browser resolves the domain via DNS lookup. It then establishes a <strong>TCP connection via a 3-way handshake</strong>, sends an HTTP request, receives an HTML document, builds the DOM tree, and <strong>renders pages iteratively while executing non-blocking asynchronous scripts</strong>."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="When a client requests google.com, the browser resolves the domain via DNS lookup. It then establishes a TCP connection via a 3-way handshake, sends an HTTP request, receives an HTML document, builds the DOM tree, and renders pages iteratively while executing non-blocking asynchronous scripts.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Why We Need Cache -->
+            <div class="dsa-card emerald searchable" data-search-keys="cache caching lookup performance latency buffer load database hit miss redis memory">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">2. Why We Need Cache ⚡</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Speed Optimization</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Repeatedly querying database disks kills server threads and slows down responses. Caching stores frequent answers in high-speed RAM, resolving sub-millisecond lookups.
+                  </p>
+
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      Response Speed Simulator (Watch Latency Difference)
+                    </div>
+                    <div class="cache-playground-grid">
+                      <div class="cache-box-card">
+                        <div class="cache-box-header">
+                          <span>Without Cache</span>
+                          <span style="color:#EF4444; font-weight:bold;" id="slow-latency">Disk Fetch</span>
+                        </div>
+                        <div class="cache-sim-line" id="slow-sim-line">
+                          <div class="cache-sim-bullet"></div>
+                        </div>
+                        <button class="btn-sim-trigger" onclick="triggerSlowSim()">Query DB Disk (~1200ms)</button>
+                      </div>
+                      
+                      <div class="cache-box-card">
+                        <div class="cache-box-header">
+                          <span>With Cache (RAM Hit)</span>
+                          <span style="color:var(--color-accent-emerald); font-weight:bold;" id="fast-latency">Memory Hit</span>
+                        </div>
+                        <div class="cache-sim-line" id="fast-sim-line">
+                          <div class="cache-sim-bullet"></div>
+                        </div>
+                        <button class="btn-sim-trigger" onclick="triggerFastSim()" style="background-color: var(--color-accent-emerald);">Query Cache (~10ms)</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Core Caching Concepts</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>First Request</strong>: Hits the slower primary storage (disk), processes the response, and populates the cache database.</li>
+                      <li class="question-item"><strong>Subsequent Requests</strong>: Instantly fetched from high-speed memory buffers (e.g. Redis, browser memory, CDN edges).</li>
+                      <li class="question-item"><strong>Cache Invalidation</strong>: Evicting obsolete entries when primary records modify (e.g. TTL, Write-Through caching).</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Caches are critical to **shield backend databases** from repeated read queries. By saving read operations in **RAM-based stores like Redis**, we drop API latency from **hundreds of milliseconds to single digits**, multiplying concurrent scaling thresholds."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Caches are critical to shield backend databases from repeated read queries. By saving read operations in RAM-based stores like Redis, we drop API latency from hundreds of milliseconds to single digits, multiplying concurrent scaling thresholds.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Why Servers Crash -->
+            <div class="dsa-card emerald searchable" data-search-keys="servers crash failure leaks memory spikes loop heavy query starvation outage scale bottleneck load">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">3. Why Servers Crash ⚠️</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Fault Tolerance</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Understanding server failures separates juniors from battle-tested engineers. Click each high-frequency issue below to view a Senior engineer's mitigation plan.
+                  </p>
+
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                      Crash Triggers & Mitigations (Click to Diagnose)
+                    </div>
+                    <div class="crash-stats-container">
+                      <div class="crash-stat-row" onclick="toggleCrashMitigation('leak')">
+                        <div class="crash-stat-label-bar">
+                          <span>1. JavaScript Memory Leaks</span>
+                          <span style="color:#EF4444;">94% RAM Exhaustion</span>
+                        </div>
+                        <div class="crash-stat-bar-outer">
+                          <div class="crash-stat-bar-inner" style="width: 94%;"></div>
+                        </div>
+                        <div class="crash-mitigation-box" id="mitigate-leak">
+                          <strong>Senior Solution:</strong> Audit closure bindings and global variables. Configure automated Node garbage collection hooks, implement memory profile test suites (e.g. Clinic.js), and restrict server JVM/RAM thresholds to force clean restarts rather than VM hangs.
+                        </div>
+                      </div>
+                      
+                      <div class="crash-stat-row" onclick="toggleCrashMitigation('traffic')">
+                        <div class="crash-stat-label-bar">
+                          <span>2. Concurrency Traffic Spikes</span>
+                          <span style="color:#F59E0B;">88% Thread Starvation</span>
+                        </div>
+                        <div class="crash-stat-bar-outer">
+                          <div class="crash-stat-bar-inner" style="width: 88%; background-color:#F59E0B;"></div>
+                        </div>
+                        <div class="crash-mitigation-box" id="mitigate-traffic">
+                          <strong>Senior Solution:</strong> Place a Load Balancer (NGINX/ALB) at the routing layer. Spin up auto-scaling replica nodes dynamically, offload static assets onto global Edge CDNs, and throttle abusive IPs with sliding-window Rate Limiters.
+                        </div>
+                      </div>
+
+                      <div class="crash-stat-row" onclick="toggleCrashMitigation('queries')">
+                        <div class="crash-stat-label-bar">
+                          <span>3. Heavy Database Queries</span>
+                          <span style="color:#EF4444;">99% DB Connection Pool Lock</span>
+                        </div>
+                        <div class="crash-stat-bar-outer">
+                          <div class="crash-stat-bar-inner" style="width: 99%;"></div>
+                        </div>
+                        <div class="crash-mitigation-box" id="mitigate-queries">
+                          <strong>Senior Solution:</strong> Index slow column lookups, enforce page limits on all SQL select requests, utilize Database Read Replicas, and plug in cache layers (Redis) to bypass repetitive query execution.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Servers crash due to **resource exhaustion**: memory leaks filling the heap, infinite loops blocking the event loop thread, or database pool exhaustion. To solve this, seniors **decouple tasks using queue architectures**, deploy auto-scaling sets, configure edge CDNs, and setup telemetry thresholds to warn before critical failure limits."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Servers crash due to resource exhaustion: memory leaks filling the heap, infinite loops blocking the event loop thread, or database pool exhaustion. To solve this, seniors decouple tasks using queue architectures, deploy auto-scaling sets, configure edge CDNs, and setup telemetry thresholds to warn before critical failure limits.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Handling Millions of Users -->
+            <div class="dsa-card emerald searchable" data-search-keys="millions users cdn load balancer replication scaling traffic horizontal vertical databases">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">4. Scaling for Millions of Users 🚀</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Scale Architecture</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Scaling past small server capacities requires horizontal distribution. You can't just buy a bigger server indefinitely (vertical scaling limit); you must orchestrate a network of smaller servers to work as one.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">High Scaling Pillars</span>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left; color:#D3E2D8;">
+                      <thead>
+                        <tr style="border-bottom: 2px solid #1E2E25; color: #FFFFFF;">
+                          <th style="padding: 0.6rem 0;">Component</th>
+                          <th style="padding: 0.6rem 0;">Duties</th>
+                          <th style="padding: 0.6rem 0;">Scaling Impact</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                          <td style="padding: 0.8rem 0; font-weight: bold; color:var(--color-orange-primary);">CDN</td>
+                          <td>Cache assets globally near users</td>
+                          <td>Slashes network latency by 90%</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                          <td style="padding: 0.8rem 0; font-weight: bold; color:var(--color-orange-primary);">Load Balancer</td>
+                          <td>Split traffic across instances</td>
+                          <td>Eliminates single point of server crash</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                          <td style="padding: 0.8rem 0; font-weight: bold; color:var(--color-orange-primary);">Cache Store</td>
+                          <td>Serve RAM snapshots of indexes</td>
+                          <td>Prevents DB thread starvation under load</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 0.8rem 0; font-weight: bold; color:var(--color-orange-primary);">DB Replication</td>
+                          <td>Separate writes from read nodes</td>
+                          <td>Multiplies heavy query capacity</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Scaling for millions demands **horizontal architecture**. We route incoming traffic through a **CDN for static assets**, split load across replica servers using **Load Balancers**, cache high-frequency query reads in **Redis databases**, and offload primary storage loads with **Database Read Replicas**."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Scaling for millions demands horizontal architecture. We route incoming traffic through a CDN for static assets, split load across replica servers using Load Balancers, cache high-frequency query reads in Redis databases, and offload primary storage loads with Database Read Replicas.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5: Message Queues -->
+            <div class="dsa-card emerald searchable" data-search-keys="message queues rabbitmq kafka activemq decoupling processing youtube transcode background worker async buffering thread">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">5. Message Queues 📬</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Task Decoupling</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    For heavy jobs like video transcoding, automated emails, or push notification pushes, blocking HTTP request threads causes server failure. Message queues store tasks in a buffers list, allowing background worker servers to execute them asynchronously.
+                  </p>
+
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                      Decoupled Video Transcoding Queue Console
+                    </div>
+                    <div class="queue-simulator">
+                      <div class="queue-buttons">
+                        <button class="btn-sim-trigger" onclick="addVideoToQueue()">Upload Video File</button>
+                        <span style="font-size:0.8rem; display:flex; align-items:center; color:var(--color-text-muted);" id="queue-status-txt">Idle. Upload videos to run transcoding.</span>
+                      </div>
+                      
+                      <div class="queue-display-container" id="queue-container-el">
+                        <!-- Queue pills go here -->
+                        <span style="color:var(--color-text-muted); font-size:0.85rem; margin:auto;" id="empty-queue-txt">Queue is empty. Tasks will stack here.</span>
+                      </div>
+
+                      <div class="worker-status-box">
+                        <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:bold;">
+                          <span>Background Worker Server ⚡</span>
+                          <span style="color:var(--color-accent-amber);" id="worker-task-txt">Awaiting Tasks</span>
+                        </div>
+                        <div class="worker-progress-bar-outer">
+                          <div class="worker-progress-bar-inner" id="worker-progress-bar"></div>
+                        </div>
+                        <div style="font-size:0.8rem; color:#A2C1AF; min-height:18px;" id="worker-log-txt">Logs: Worker ready to receive transcode jobs.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Message Queue Architecture</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Decoupled Pipeline</strong>: The user uploads files ➔ gets quick HTTP 202 accepted response ➔ files queued up.</li>
+                      <li class="question-item"><strong>Buffering Outages</strong>: If traffic spikes 10x, workers don't crash; the queue size grows temporarily, processing items safely at peak speed.</li>
+                      <li class="question-item"><strong>Tools</strong>: RabbitMQ, Apache Kafka, BullMQ, Redis streams.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Message Queues provide **asynchronous decoupling**. Instead of executing complex workflows inside HTTP transaction scopes, we push jobs to **queues like RabbitMQ or Kafka** and reply instantly. **Background worker clusters** read and process these tasks at their own safe pace, ensuring system uptime."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Message Queues provide asynchronous decoupling. Instead of executing complex workflows inside HTTP transaction scopes, we push jobs to queues like RabbitMQ or Kafka and reply instantly. Background worker clusters read and process these tasks at their own safe pace, ensuring system uptime.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 6: Cron Jobs -->
+            <div class="dsa-card emerald searchable" data-search-keys="cron jobs scheduling background tasks email database cleanup recurring backups interval automation linux system scheduler">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">6. Cron Jobs ⏰</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Automation</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Cron jobs are automated tasks configured to run at specified intervals (daily, weekly, hourly) to clean, back up, or synthesize reporting tables without human oversight.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Production Cron Scenarios</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Daily Cleanups</strong>: Removing temporary storage files or invalid authentication tokens.</li>
+                      <li class="question-item"><strong>Database Backups</strong>: Compressing primary tables and exporting them to secure remote storage buckets.</li>
+                      <li class="question-item"><strong>Reporting Pipelines</strong>: Compiling daily activity logs to populate admin telemetry dashboards.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Cron jobs are **daemon-based scheduler processes** that trigger background operations at defined calendar schedules. I use them to offload database cleanups, trigger automated subscription billings, and create secure offsite table exports."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Cron jobs are daemon-based scheduler processes that trigger background operations at defined calendar schedules. I use them to offload database cleanups, trigger automated subscription billings, and create secure offsite table exports.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 7: Why Scalability Important -->
+            <div class="dsa-card emerald searchable" data-search-keys="scalability scaling capacity users resource vertical horizontal elasticity cost hardware bottlenecks">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">7. Why Scalability is Important 📈</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Systems Design</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    A website that works perfectly for 100 users but drops queries when 10,000 hit it at once is not production-ready. Scalability is the architecture quality ensuring that costs scale linearly with load, while request latency remains flat.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Scaling Strategy Comparison</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Vertical Scaling</strong>: Scaling up resources by adding CPU/RAM to a single machine. Hard ceiling limit and single point of failure.</li>
+                      <li class="question-item"><strong>Horizontal Scaling</strong>: Adding multiple machines connected by load balancers. Infinite scaling ceiling with built-in high availability.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Scalability ensures that our **operating costs scale linearly** while **performance metrics remain flat** as traffic multiplies. It requires designing systems with **zero-shared state horizontal nodes**, allowing us to provision replica capacity dynamically as demand spikes."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Scalability ensures that our operating costs scale linearly while performance metrics remain flat as traffic multiplies. It requires designing systems with zero-shared state horizontal nodes, allowing us to provision replica capacity dynamically as demand spikes.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 8: Monitoring -->
+            <div class="dsa-card emerald searchable" data-search-keys="monitoring analytics logs telemetry traces metrics alerts datadog grafana prometheus server dashboard">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">8. Monitoring & Telemetry 📊</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge emerald">Operations</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    If you don't monitor your systems, you won't know they have crashed until your users start complaining on Twitter. Senior developers configure logs, traces, and metrics dashboards to isolate issues before they affect production traffic.
+                  </p>
+
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                      Simulated Live Telemetry Console (Watch Running Logs)
+                    </div>
+                    <div class="telemetry-dashboard">
+                      <div class="telemetry-header">
+                        <span style="font-size:0.85rem; font-weight:bold; display:flex; align-items:center; gap:0.4rem;">
+                          <span class="telemetry-status-dot"></span>
+                          Status: Active Telemetry Pipeline
+                        </span>
+                        <span style="font-size:0.75rem; font-family:monospace; color:var(--color-orange-primary);" id="live-rpm">RPM: 420 req/s</span>
+                      </div>
+                      
+                      <!-- Telemetry Simulated graph -->
+                      <div class="telemetry-graph-box" id="telemetry-graph">
+                        <svg width="100%" height="100%" viewBox="0 0 300 120" preserveAspectRatio="none">
+                          <!-- Grid lines -->
+                          <line x1="0" y1="30" x2="300" y2="30" stroke="#1D2C22" stroke-width="0.5" stroke-dasharray="2,2"/>
+                          <line x1="0" y1="60" x2="300" y2="60" stroke="#1D2C22" stroke-width="0.5" stroke-dasharray="2,2"/>
+                          <line x1="0" y1="90" x2="300" y2="90" stroke="#1D2C22" stroke-width="0.5" stroke-dasharray="2,2"/>
+                          <!-- Live SVG Path -->
+                          <path d="M 0 60 L 30 55 L 60 70 L 90 40 L 120 85 L 150 50 L 180 65 L 210 95 L 240 30 L 270 50 L 300 45" fill="none" stroke="var(--color-orange-primary)" stroke-width="2" id="telemetry-svg-path"></path>
+                        </svg>
+                      </div>
+
+                      <div class="telemetry-log-panel" id="telemetry-logs">
+                        <div class="log-line log-info">[15:10:24] INFO: Connected to telemetry streaming socket...</div>
+                        <div class="log-line log-success">[15:10:26] SUCCESS: Database replica node synchronized in 12ms</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Telemetry Observability Pillars</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Metrics</strong>: Aggregations of numeric values over time (e.g. CPU load, memory %, request RPM, error rate).</li>
+                      <li class="question-item"><strong>Logs</strong>: Chronological textual audits of discrete events (errors, warnings, system status).</li>
+                      <li class="question-item"><strong>Traces</strong>: Request journeys mapped step-by-step across multi-service architecture boundaries to locate bottlenecks.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Monitoring relies on the **three pillars of observability**: metrics, logs, and distributed traces. By leveraging packages like **Prometheus and Grafana**, we construct dashboards targeting **Red Method metrics (Rate, Errors, Duration)**, catching bottlenecks before they impact our users."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Monitoring relies on the three pillars of observability: metrics, logs, and distributed traces. By leveraging packages like Prometheus and Grafana, we construct dashboards targeting Red Method metrics (Rate, Errors, Duration), catching bottlenecks before they impact our users.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 2: ENGINEERING SAFETY -->
+        <section id="engineering-safety" class="section-anchor searchable-section">
+          <div class="section-header">
+            <span class="section-tagline">🛡️ Robustness & Accessibility</span>
+            <h2 class="section-title-text">Engineering Safety</h2>
+          </div>
+
+          <div class="dsa-cards-list">
+            
+            <!-- Card 9: Why Testing Important -->
+            <div class="dsa-card blue searchable" data-search-keys="testing unit integration e2e test-driven coverage regression jest selenium cypress playwrite">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">9. Why Testing is Important 🧪</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge blue">Quality Control</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Code without tests is simply legacy code written by mistake. Automated test suites guarantee that adding features or refactoring modules today won't break existing features tomorrow.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Testing Types Breakdown</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Unit Testing</strong>: Isolation audits analyzing single core functions or atomic components (e.g. Jest, Vitest).</li>
+                      <li class="question-item"><strong>Integration Testing</strong>: Verifying that multiple modular layers (e.g. Server + DB query) work together properly.</li>
+                      <li class="question-item"><strong>End-to-End (E2E) Testing</strong>: Simulating real user flows in virtual browser wrappers (e.g. Cypress, Playwright).</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Testing prevents **regression defects**. I construct a balanced **Testing Pyramid**: wrapping mathematical operations in fast **Unit Tests**, verifying API integration via **Integration Tests**, and confirming critical checkout funnels using browser-level **E2E Playwright scripts**."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Testing prevents regression defects. I construct a balanced Testing Pyramid: wrapping mathematical operations in fast Unit Tests, verifying API integration via Integration Tests, and confirming critical checkout funnels using browser-level E2E Playwright scripts.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 10: Accessibility (a11y) -->
+            <div class="dsa-card blue searchable" data-search-keys="accessibility a11y disabled screen readers keyboard navigation semantic html focus outline aria wcag contrast">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">10. Accessibility (a11y) ♿</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge blue">Inclusive Design</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Accessibility makes websites usable for everyone, including those with visual, auditory, motor, or cognitive impairments. Beginners miss this; senior engineers design inclusive products by default.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Accessibility Best Practices</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Semantic HTML Elements</strong>: Use <code>&lt;button&gt;</code> instead of styling <code>&lt;div&gt;</code> to provide default screen-reader voiceovers.</li>
+                      <li class="question-item"><strong>Keyboard Navigation</strong>: Ensuring interactive inputs are completely tabbable and show clear focus indicators.</li>
+                      <li class="question-item"><strong>ARIA Attributes</strong>: Specifying element states explicitly using properties (e.g. <code>aria-expanded="false"</code>).</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Accessibility is a **compliance and product standard**. I enforce **Semantic HTML5** to build screen-reader hierarchies, verify **tabbing focus indexes**, ensure high-contrast ratios, and audit pages via automated tools like **Lighthouse and axe-core**."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Accessibility is a compliance and product standard. I enforce Semantic HTML5 to build screen-reader hierarchies, verify tabbing focus indexes, ensure high-contrast ratios, and audit pages via automated tools like Lighthouse and axe-core.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 11: SEO -->
+            <div class="dsa-card blue searchable" data-search-keys="seo search engine optimization web crawler meta tags indexing crawlability sitemap google semantic headings">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">11. Search Engine Optimization (SEO) 🔍</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge blue">Discoverability</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    What good is an incredibly beautiful web application if no one can find it on search engines? Search engines rely on spiders and automated web-crawlers that parse code to index contents correctly.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">SEO Optimization Checklist</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Descriptive Meta Tags</strong>: Supplying high-quality page descriptions and OG tags for social links formatting.</li>
+                      <li class="question-item"><strong>Clean Heading Hierarchies</strong>: Enforcing exactly one <code>&lt;h1&gt;</code> per page with logical descending heading hierarchies.</li>
+                      <li class="question-item"><strong>Mobile Responsiveness</strong>: Providing responsive fluid viewports, since search engines index mobile views first.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "SEO relies on **crawler discoverability**. I design pages using semantic elements, supply OpenGraph tags, optimize load performance to score high on **Core Web Vitals**, and build automated XML sitemaps to accelerate web-crawler indexes."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="SEO relies on crawler discoverability. I design pages using semantic elements, supply OpenGraph tags, optimize load performance to score high on Core Web Vitals, and build automated XML sitemaps to accelerate web-crawler indexes.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 12: Why Next.js Good for SEO -->
+            <div class="dsa-card blue searchable" data-search-keys="next.js react seo ssr csr isg ssr server side rendering static generation hydration crawlers page speed performance load speed">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">12. Why Next.js is Good for SEO 📦</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge blue">Framework Choice</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Standard client-side React apps send blank HTML shells to the client, downloading and drawing contents only after executing JS scripts (Client-Side Rendering). This slows crawlers down. Next.js pre-builds elements on the server.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Server-Side Rendering (SSR) Benefits</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Instant Indexing</strong>: Crawlers get fully constructed HTML strings on the first network packet, rather than having to execute complex JS.</li>
+                      <li class="question-item"><strong>Accelerated Page Load</strong>: Users see content instantly instead of waiting for massive script packages to load, improving Core Web Vitals.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Next.js optimizes discoverability through **Server-Side Rendering (SSR) and Static Site Generation (SSG)**. Crawlers receive a fully populated HTML body on the first HTTP handshake, **eliminating client-side script execution times** and dramatically accelerating search index metrics."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Next.js optimizes discoverability through Server-Side Rendering (SSR) and Static Site Generation (SSG). Crawlers receive a fully populated HTML body on the first HTTP handshake, eliminating client-side script execution times and dramatically accelerating search index metrics.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 13: Why TypeScript Became Popular -->
+            <div class="dsa-card blue searchable" data-search-keys="typescript javascript static typing compiler autocomplete bugs security scaling typing interfaces interfaces safety">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">13. Why TypeScript Became Popular 🛡️</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge blue">Type Safety</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    In vanilla JavaScript, passing undefined objects or spelling variable names incorrectly crashes code at runtime on user machines. TypeScript catches these syntax errors during compilation in your text editor.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">TypeScript Core Strengths</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Compilation Checks</strong>: Catching type mismatches (e.g. passing a string to a math function) before deploying to servers.</li>
+                      <li class="question-item"><strong>Self-documenting Contracts</strong>: Interfaces define database layouts explicitly, making team collaboration smooth.</li>
+                      <li class="question-item"><strong>Rich Auto-complete</strong>: Editor autocomplete lists exact parameters, reducing documentation review.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "TypeScript enforces static validation contracts. By catching parameter type mismatches and syntax errors **at compilation time**, we protect users from runtime outages and create robust, self-documenting codebases."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="TypeScript enforces static validation contracts. By catching parameter type mismatches and syntax errors at compilation time, we protect users from runtime outages and create robust, self-documenting codebases.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 3: CODE ARCHITECTURE -->
+        <section id="code-architecture" class="section-anchor searchable-section">
+          <div class="section-header">
+            <span class="section-tagline">📐 Folder Organization & legacy code</span>
+            <h2 class="section-title-text">Code Architecture</h2>
+          </div>
+
+          <div class="dsa-cards-list">
+            
+            <!-- Card 14: Clean Architecture -->
+            <div class="dsa-card purple searchable" data-search-keys="clean architecture folder structure organization scaling modular decoupling layers controllers model service">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">14. Why Clean Architecture is Important 📐</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge purple">Structuring</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    In tiny projects, putting all logic in a single file is fine. In big systems with 15 engineers, ad-hoc structures lead to chaos. Clean Architecture enforces strict boundaries separating routes, business logic, and databases.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Standard Layer Boundaries</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Routing Layer (Controller)</strong>: Decodes incoming HTTP payloads, checks parameter layouts, and forwards to services.</li>
+                      <li class="question-item"><strong>Business Service Layer</strong>: Core algorithms and logic, completely insulated from database choices.</li>
+                      <li class="question-item"><strong>Infrastructure Layer (Repository)</strong>: Communicates directly with database disks, network APIs, or cache indexes.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Clean Architecture isolates core **business rules from external details** (like database dialects or routing frameworks). By separating code into **Controllers, Services, and Repositories**, we can refactor databases or frameworks without altering core calculations."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Clean Architecture isolates core business rules from external details (like database dialects or routing frameworks). By separating code into Controllers, Services, and Repositories, we can refactor databases or frameworks without altering core calculations.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 15: Reading Other People's Code -->
+            <div class="dsa-card purple searchable" data-search-keys="reading code other peoples code debugging legacy refactoring systems analysis debugging codebase git log reverse engineer">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">15. Biggest Real-World Skill: Reading Code 📖</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge purple">Productivity</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    In production, you'll spend 80% of your time reading existing codebases and only 20% writing new characters. Engineers who can decode complex systems and debug legacy modules without throwing tantrums are incredibly valuable.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Legacy Navigation Tactics</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Git Trace Audit</strong>: Run <code>git log</code> or <code>git blame</code> to understand why lines were written, checking initial PR comments.</li>
+                      <li class="question-item"><strong>Search for Entrances</strong>: Trace entry routes, network controllers, and config variables first.</li>
+                      <li class="question-item"><strong>Write Assertions</strong>: Implement a unit test to verify your assumptions about how functions run before refactoring.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Reading other people's code demands a **reverse-engineering mindset**. Instead of refactoring instantly, I trace entry controllers, inspect **Git commit history for historical rationale**, write test assertions to verify assumptions, and isolate dependencies systematically."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Reading other people's code demands a reverse-engineering mindset. Instead of refactoring instantly, I trace entry controllers, inspect Git commit history for historical rationale, write test assertions to verify assumptions, and isolate dependencies systematically.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 4: SENIOR MINDSET -->
+        <section id="senior-mindset" class="section-anchor searchable-section">
+          <div class="section-header">
+            <span class="section-tagline">🔥 Mental Models & Trade-Offs</span>
+            <h2 class="section-title-text">Senior Mindset</h2>
+          </div>
+
+          <div class="dsa-cards-list">
+            
+            <!-- Card 16: How Senior Developers Think -->
+            <div class="dsa-card pink searchable" data-search-keys="senior developers think architectural trade-offs failure scaling security performance readability clean code">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">16. How Senior Developers Think 🧠</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge pink">Mental Models</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Seniors don't just focus on the 'how to write this syntax' level. They zoom out and prioritize durability, analyzing failure modes, edge cases, maintenance costs, and team comprehension.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Core Senior Review Prompts</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>What can break?</strong> Identifying memory leakage paths or slow network dependencies.</li>
+                      <li class="question-item"><strong>What scales poorly?</strong> Pinpointing quadratic nested logic loops or unindexed SQL joins.</li>
+                      <li class="question-item"><strong>Who can read this?</strong> Refactoring obscure code blocks into plain English functions.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Seniors focus on **risk and maintainability**. Instead of seeking perfect syntax, we evaluate **architectural trade-offs**, analyzing what scales poorly, what introduces security vulnerabilities, and if team members can understand the structure."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Seniors focus on risk and maintainability. Instead of seeking perfect syntax, we evaluate architectural trade-offs, analyzing what scales poorly, what introduces security vulnerabilities, and if team members can understand the structure.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 17: Real Product Thinking -->
+            <div class="dsa-card pink searchable" data-search-keys="product thinking startups businesses monetize conversions scale speed users product management analytics feedback">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">17. Real Product Thinking 💼</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge pink">Business Alignment</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Code has no value in isolation; it only exists to solve a real user problem or drive business margins. Product developers build what users actually need instead of over-engineering hypothetical solutions.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Product Developer Decisions</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Ease of Use</strong>: Can users complete tasks in three clicks without a tutorial?</li>
+                      <li class="question-item"><strong>Time-to-Value</strong>: Deploying functional MVPs to users quickly for feedback, rather than polishing code in private for 6 months.</li>
+                      <li class="question-item"><strong>Velocity over Perfection</strong>: Shipping scalable code today, and refactoring on concrete metrics tomorrow.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Product thinking aligns **engineering output to business outcomes**. I prioritize features by analyzing their **impact on user experience and conversion margins**, rather than spending months over-engineering structures for imaginary scale."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Product thinking aligns engineering output to business outcomes. I prioritize features by analyzing their impact on user experience and conversion margins, rather than spending months over-engineering structures for imaginary scale.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 18: Biggest Beginner Mistake -->
+            <div class="dsa-card pink searchable" data-search-keys="beginner mistakes tutorial hell code errors building deploying breaking debug skills real projects">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">18. Biggest Beginner Mistake: Tutorial Hell 🛑</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge pink">Growth Mindset</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Watching tutorials endlessly creates a false sense of progress. True capability is forged by writing code from scratch, encountering errors, reading stack traces, and fixing issues independently.
+                  </p>
+
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      The Real Growth Loop
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; text-align: center;">
+                      <div style="flex: 1; min-width: 100px; padding: 0.8rem; background-color: rgba(255,255,255,0.02); border: 1px solid #1E2E25; border-radius: 6px;">
+                        <span style="display:block; font-size:1.2rem; margin-bottom:0.2rem;">🏗️</span>
+                        <strong>1. Build</strong>
+                        <span style="display:block; font-size:0.7rem; color:var(--color-text-muted);">Write original code</span>
+                      </div>
+                      <div style="color:var(--color-orange-primary); font-weight:bold;">➔</div>
+                      <div style="flex: 1; min-width: 100px; padding: 0.8rem; background-color: rgba(255,255,255,0.02); border: 1px solid #1E2E25; border-radius: 6px;">
+                        <span style="display:block; font-size:1.2rem; margin-bottom:0.2rem;">🚀</span>
+                        <strong>2. Deploy</strong>
+                        <span style="display:block; font-size:0.7rem; color:var(--color-text-muted);">Publish to live web</span>
+                      </div>
+                      <div style="color:var(--color-orange-primary); font-weight:bold;">➔</div>
+                      <div style="flex: 1; min-width: 100px; padding: 0.8rem; background-color: rgba(255,255,255,0.02); border: 1px solid #1E2E25; border-radius: 6px;">
+                        <span style="display:block; font-size:1.2rem; margin-bottom:0.2rem;">💥</span>
+                        <strong>3. Break</strong>
+                        <span style="display:block; font-size:0.7rem; color:var(--color-text-muted);">Encounter outages</span>
+                      </div>
+                      <div style="color:var(--color-orange-primary); font-weight:bold;">➔</div>
+                      <div style="flex: 1; min-width: 100px; padding: 0.8rem; background-color: rgba(255,255,255,0.02); border: 1px solid #1E2E25; border-radius: 6px;">
+                        <span style="display:block; font-size:1.2rem; margin-bottom:0.2rem;">🛠️</span>
+                        <strong>4. Repair</strong>
+                        <span style="display:block; font-size:0.7rem; color:var(--color-text-muted);">Debug issues</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "True engineering skill isn't memorizing video steps; it's **forged in the cycle of debugging**. I break away from tutorials by building original products, deploying them to real users, breaking system limits, and resolving runtime issues."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="True engineering skill isn't memorizing video steps; it's forged in the cycle of debugging. I break away from tutorials by building original products, deploying them to real users, breaking system limits, and resolving runtime issues.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 19: What Makes Someone Look Senior -->
+            <div class="dsa-card pink searchable" data-search-keys="look senior syntax architecture debugging optimization soft skills communication tradeoff tradeoffs">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">19. What Makes Someone Look Senior 👑</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge pink">Professionalism</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Seniority is not defined by knowing syntax memorizations. It's marked by architectural intuition, systematic debugging workflows, trade-off communication, and a calm demeanor during system failures.
+                  </p>
+
+                  <div class="common-questions-box">
+                    <span class="common-questions-title">Senior Professional Traits</span>
+                    <ul class="question-list">
+                      <li class="question-item"><strong>Clear Communication</strong>: Explaining complex micro-services in plain English to stakeholder teams.</li>
+                      <li class="question-item"><strong>Calm Outage Auditing</strong>: Methodically isolating root causes rather than changing lines in a panic.</li>
+                      <li class="question-item"><strong>Trade-off Decisions</strong>: Choosing the right tech stack for current limits, rather than chasing new frameworks.</li>
+                    </ul>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "Seniority is defined by **systematic thinking and communication**. It is about mapping design decisions to absolute business trade-offs, coaching team members, and resolving system outages calmly using methodical isolation workflows."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="Seniority is defined by systematic thinking and communication. It is about mapping design decisions to absolute business trade-offs, coaching team members, and resolving system outages calmly using methodical isolation workflows.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 20: Most Important Question -->
+            <div class="dsa-card pink searchable" data-search-keys="most important question why habits react cache ssr databases logic engineering reasoning framework">
+              <div class="dsa-card-header" onclick="toggleAccordion(this)">
+                <h3 class="dsa-card-title">20. The Ultimate Question: "WHY?" 🔥</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <span class="complexity-badge pink">Engineering Habit</span>
+                  <svg class="accordion-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-body">
+                  <p class="dsa-card-desc">
+                    Junior developers ask "How?". Senior developers always ask "Why?". Click the engineering choices below to reveal their architectural reasonings.
+                  </p>
+
+                  <div class="visual-widget-wrapper">
+                    <div class="widget-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                      Interactive Architectural "Why?" Matrix (Click to Reveal)
+                    </div>
+                    <div class="why-matrix-container">
+                      <div class="matrix-question-row" onclick="toggleMatrixRow(this)">
+                        <div class="matrix-question-header">
+                          <span>1. Why use React instead of raw HTML/JS?</span>
+                          <span class="matrix-toggle-check">View Why</span>
+                        </div>
+                        <div class="matrix-answer-block">
+                          <strong>Architectural Reason:</strong> Declarative state bindings. Instead of manually writing error-prone DOM selection and update procedures, React's <strong>Virtual DOM diffing algorithm</strong> schedules batches of screen updates automatically, preventing excessive repaints.
+                        </div>
+                      </div>
+                      
+                      <div class="matrix-question-row" onclick="toggleMatrixRow(this)">
+                        <div class="matrix-question-header">
+                          <span>2. Why use server caching like Redis?</span>
+                          <span class="matrix-toggle-check">View Why</span>
+                        </div>
+                        <div class="matrix-answer-block">
+                          <strong>Architectural Reason:</strong> RAM access speed vs Database disk input/output limits. Database queries must crawl through disk storage blocks. Caches like Redis hold data structures directly in memory, dropping response latency from 150ms to 2ms.
+                        </div>
+                      </div>
+
+                      <div class="matrix-question-row" onclick="toggleMatrixRow(this)">
+                        <div class="matrix-question-header">
+                          <span>3. Why use Database Indexing?</span>
+                          <span class="matrix-toggle-check">View Why</span>
+                        </div>
+                        <div class="matrix-answer-block">
+                          <strong>Architectural Reason:</strong> B-Tree search optimization. Without indexing, database engines must execute a slow linear sequence scan (O(n)) through millions of records. Indexes compile a searchable pointer directory, enabling O(log n) lookups.
+                        </div>
+                      </div>
+
+                      <div class="matrix-question-row" onclick="toggleMatrixRow(this)">
+                        <div class="matrix-question-header">
+                          <span>4. Why authenticate sessions using cryptographically signed JWTs?</span>
+                          <span class="matrix-toggle-check">View Why</span>
+                        </div>
+                        <div class="matrix-answer-block">
+                          <strong>Architectural Reason:</strong> Stateless database offloading. Instead of making secondary queries to database session tables on every API call, JSON Web Tokens contain securely signed user profiles, allowing servers to verify validation signatures locally.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="answer-quote-container">
+                    <span class="quote-title">Elite Interview Accent</span>
+                    "The habit of asking **'Why?'** builds the senior engineering mindset. We don't implement React, caching, or token parameters just because a video recommended them; we execute them to **solve specific latency, scalability, security, or maintenance constraints**."
+                    <button class="btn-copy-quote" title="Copy to Clipboard" data-copy="The habit of asking 'Why?' builds the senior engineering mindset. We don't implement React, caching, or token parameters just because a video recommended them; we execute them to solve specific latency, scalability, security, or maintenance constraints.">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Empty search results placeholder -->
+        <div class="search-empty-state hidden" id="search-empty-state">
+          <h4 class="empty-state-title">🔍 No Roadmap Matches Found</h4>
+          <p class="empty-state-desc">Try clearing your filters or searching another keyword like "caching", "monitoring", "DNS", or "TypeScript".</p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="index.html" class="logo-group">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF5A1F"/>
+            <path d="M2 17L12 22L22 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text text-white">Stack<span>Easy</span></span>
+        </a>
+        <p class="footer-about">
+          Explaining web development through beautiful, tactile micro-learning and relatable stories. Let's build together!
+        </p>
+      </div>
+
+      <div class="footer-links-side">
+        <div class="footer-col">
+          <span class="footer-title">Roadmaps</span>
+          <ul>
+            <li><a href="index.html#customizer">Frontend Dev</a></li>
+            <li><a href="index.html#customizer">Backend Dev</a></li>
+            <li><a href="index.html#customizer">Database Systems</a></li>
+            <li><a href="index.html#customizer">Full Stack Suite</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-title">Resources</span>
+          <ul>
+            <li><a href="tree.html">Tree Visualizer</a></li>
+            <li><a href="questions.html">Developer Q&A Hub</a></li>
+            <li><a href="interview.html">Interview Master Prep</a></li>
+            <li><a href="interview2.html">Interview 2.0 Roadmap</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 StackEasy Platform. Handcrafted for awesome learners.</p>
+    </div>
+  </footer>
+
+  <!-- Page Interactivity Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- 1. Mobile Menu Drawer Controller ---
+      const mobileToggleBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      
+      if (mobileToggleBtn && mobileDrawer) {
+        mobileToggleBtn.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('open');
+          
+          // Animate hamburger toggle buttons
+          const spans = mobileToggleBtn.querySelectorAll('span');
+          if (mobileDrawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+          } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
+        });
+      }
+
+      // --- 2. Table of Contents / Sidebar Scroll Highlights ---
+      const sidebarLinks = document.querySelectorAll('.sidebar-link');
+      const sections = document.querySelectorAll('.section-anchor');
+
+      window.addEventListener('scroll', () => {
+        let currentSection = "";
+        
+        sections.forEach(sec => {
+          const sectionTop = sec.offsetTop;
+          const sectionHeight = sec.clientHeight;
+          if (window.pageYOffset >= (sectionTop - 150)) {
+            currentSection = sec.getAttribute('id');
+          }
+        });
+
+        sidebarLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === currentSection) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // --- 3. Clipboard Copy for Answers ---
+      const copyButtons = document.querySelectorAll('.btn-copy-quote');
+      copyButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const textToCopy = btn.getAttribute('data-copy');
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalSVG = btn.innerHTML;
+            btn.innerHTML = `<span style="font-size:0.75rem; font-weight:bold; color:var(--color-accent-emerald); font-style:normal;">Copied!</span>`;
+            setTimeout(() => {
+              btn.innerHTML = originalSVG;
+            }, 1800);
+          }).catch(err => {
+            console.error('Failed to copy text: ', err);
+          });
+        });
+      });
+
+      // --- 4. Live Search Filter Logic ---
+      const searchInput = document.getElementById('roadmap-search');
+      const searchables = document.querySelectorAll('.searchable');
+      const emptyState = document.getElementById('search-empty-state');
+      const searchableSections = document.querySelectorAll('.searchable-section');
+
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        let globalMatchCount = 0;
+
+        searchableSections.forEach(section => {
+          const searchableItems = section.querySelectorAll('.searchable');
+          let sectionMatchCount = 0;
+
+          searchableItems.forEach(item => {
+            const keys = item.getAttribute('data-search-keys') || '';
+            const textContent = item.textContent.toLowerCase();
+            
+            if (keys.toLowerCase().includes(query) || textContent.includes(query)) {
+              item.classList.remove('hidden');
+              sectionMatchCount++;
+              globalMatchCount++;
+            } else {
+              item.classList.add('hidden');
+            }
+          });
+
+          // If no cards/accordions match in this section, hide the section header
+          if (query !== "" && sectionMatchCount === 0) {
+            section.classList.add('hidden');
+          } else {
+            section.classList.remove('hidden');
+          }
+        });
+
+        // Show/hide empty state if no matches overall
+        if (globalMatchCount === 0 && query !== "") {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      });
+
+      // Start simulated monitoring telemetry dashboard
+      initLiveTelemetry();
+    });
+
+    // --- 5. Collapsible Q&A Accordions System ---
+    function toggleAccordion(headerBtn) {
+      const item = headerBtn.closest('.accordion-item') || headerBtn.closest('.dsa-card');
+      const content = item.querySelector('.accordion-content');
+      const isActive = item.classList.contains('active');
+
+      // Close all other accordion items on the page
+      const allItems = document.querySelectorAll('.dsa-card');
+      allItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+          const otherContent = otherItem.querySelector('.accordion-content');
+          if (otherContent) otherContent.style.maxHeight = null;
+        }
+      });
+
+      if (!isActive) {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        item.classList.remove('active');
+        content.style.maxHeight = null;
+      }
+    }
+
+    // --- 6. Horizontal Internet Pipeline Controller ---
+    const internetStepDescriptions = {
+      1: {
+        title: "1. Browser Navigation Input",
+        desc: "You enter google.com. The browser checks local HSTS headers, its internal cache, and local operating system hosts lists to resolve the website instantly."
+      },
+      2: {
+        title: "2. DNS Hierarchy Resolution",
+        desc: "DNS lookup converts google.com to a routable IP address (e.g. 142.250.190.46) by querying browser DNS caches, local ISP routers, Root Servers, TLD (.com) servers, and Authoritative Nameservers."
+      },
+      3: {
+        title: "3. Establish TCP Handshake",
+        desc: "The browser opens a socket connection to the server's IP address. It performs a 3-Way Handshake (SYN ➔ SYN-ACK ➔ ACK) to synchronize sequence numbers and set up a secure HTTPS/TLS session."
+      },
+      4: {
+        title: "4. Server Gateway & Application Hit",
+        desc: "The HTTP/HTTPS request hits a server cluster. A load balancer routes the request to an application instance. Web servers (e.g. NGINX) pass it to application threads (e.g. Node, Python) to compute the payload."
+      },
+      5: {
+        title: "5. Database Query Processing",
+        desc: "The backend server contacts a database (e.g. PostgreSQL, MongoDB) to query index tables, verify user credentials, or gather static page details. Results are formatted as JSON variables."
+      },
+      6: {
+        title: "6. Browser Document Rendering",
+        desc: "The browser downloads the returned HTML, constructs the DOM tree, builds style layout blocks (CSSOM), runs script dependencies, and triggers hardware-accelerated painting to draw pixels."
+      }
+    };
+
+    function selectInternetNode(stepNumber, percentOffset) {
+      const nodes = document.querySelectorAll('.internet-node');
+      nodes.forEach(n => n.classList.remove('active'));
+      
+      const activeNode = document.querySelector(`.internet-node[data-step="${stepNumber}"]`);
+      if (activeNode) activeNode.classList.add('active');
+      
+      document.getElementById('internet-line-active').style.width = percentOffset + '%';
+      
+      const panelTitle = document.querySelector('#pipeline-info-panel .pipeline-info-title');
+      const panelText = document.querySelector('#pipeline-info-panel .pipeline-info-text');
+      
+      panelTitle.textContent = internetStepDescriptions[stepNumber].title;
+      panelText.textContent = internetStepDescriptions[stepNumber].desc;
+      
+      // Auto-resize the parent accordion to prevent layout clips
+      const accordion = activeNode.closest('.dsa-card');
+      const content = accordion.querySelector('.accordion-content');
+      content.style.maxHeight = content.scrollHeight + 100 + 'px';
+    }
+
+    // --- 7. Cache Playground Animations ---
+    let slowTimeout, fastTimeout;
+    function triggerSlowSim() {
+      const line = document.getElementById('slow-sim-line');
+      line.classList.remove('animating-slow');
+      void line.offsetWidth; // Trigger reflow
+      line.classList.add('animating-slow');
+      
+      const label = document.getElementById('slow-latency');
+      label.textContent = "Fetching... ⏳";
+      label.style.color = "var(--color-accent-amber)";
+      
+      clearTimeout(slowTimeout);
+      slowTimeout = setTimeout(() => {
+        label.textContent = "1240 ms 🛑";
+        label.style.color = "#EF4444";
+        line.classList.remove('animating-slow');
+      }, 1500);
+    }
+
+    function triggerFastSim() {
+      const line = document.getElementById('fast-sim-line');
+      line.classList.remove('animating-fast');
+      void line.offsetWidth; // Trigger reflow
+      line.classList.add('animating-fast');
+      
+      const label = document.getElementById('fast-latency');
+      label.textContent = "Hit! ⚡";
+      label.style.color = "var(--color-accent-emerald)";
+      
+      clearTimeout(fastTimeout);
+      fastTimeout = setTimeout(() => {
+        label.textContent = "4 ms 🏆";
+        line.classList.remove('animating-fast');
+      }, 200);
+    }
+
+    // --- 8. Crash Trigger Accordion Mitigations ---
+    function toggleCrashMitigation(crashId) {
+      const allMitigations = document.querySelectorAll('.crash-mitigation-box');
+      allMitigations.forEach(el => {
+        if (el.id !== 'mitigate-' + crashId) el.style.display = 'none';
+      });
+
+      const currentBox = document.getElementById('mitigate-' + crashId);
+      if (currentBox.style.display === 'block') {
+        currentBox.style.display = 'none';
+      } else {
+        currentBox.style.display = 'block';
+      }
+      
+      // Auto-resize the parent accordion
+      const card = currentBox.closest('.dsa-card');
+      const content = card.querySelector('.accordion-content');
+      content.style.maxHeight = content.scrollHeight + 150 + 'px';
+    }
+
+    // --- 9. Message Queue Simulator Controller ---
+    let transcodeTaskCounter = 1;
+    let isWorkerRunning = false;
+    const taskQueue = [];
+
+    function addVideoToQueue() {
+      const queueContainer = document.getElementById('queue-container-el');
+      const emptyText = document.getElementById('empty-queue-txt');
+      
+      if (emptyText) emptyText.remove();
+      
+      const taskId = `Task #${transcodeTaskCounter++}`;
+      taskQueue.push(taskId);
+      
+      const pill = document.createElement('div');
+      pill.className = 'queue-item-pill';
+      pill.id = `pill-${taskId.replace('#', '').replace(' ', '')}`;
+      pill.innerHTML = `
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+        ${taskId}
+      `;
+      
+      queueContainer.appendChild(pill);
+      document.getElementById('queue-status-txt').textContent = `Queue holds ${taskQueue.length} transcoding jobs.`;
+      
+      // Adjust parent accordion height
+      const card = queueContainer.closest('.dsa-card');
+      const content = card.querySelector('.accordion-content');
+      content.style.maxHeight = content.scrollHeight + 50 + 'px';
+
+      if (!isWorkerRunning) {
+        processNextQueueTask();
+      }
+    }
+
+    function processNextQueueTask() {
+      if (taskQueue.length === 0) {
+        isWorkerRunning = false;
+        document.getElementById('worker-task-txt').textContent = 'Awaiting Tasks';
+        document.getElementById('worker-task-txt').style.color = 'var(--color-accent-amber)';
+        document.getElementById('worker-log-txt').innerHTML = 'Logs: <span class="log-success">Queue cleared. Worker idle.</span>';
+        document.getElementById('queue-status-txt').textContent = 'Idle. Upload videos to run transcoding.';
+        return;
+      }
+
+      isWorkerRunning = true;
+      const nextTask = taskQueue.shift();
+      
+      // Update UI queue
+      const pillEl = document.getElementById(`pill-${nextTask.replace('#', '').replace(' ', '')}`);
+      if (pillEl) {
+        pillEl.style.border = '1px solid var(--color-accent-emerald)';
+        pillEl.style.background = 'rgba(16, 185, 129, 0.1)';
+      }
+      
+      document.getElementById('worker-task-txt').textContent = `Processing ${nextTask}`;
+      document.getElementById('worker-task-txt').style.color = 'var(--color-orange-primary)';
+      document.getElementById('worker-log-txt').innerHTML = `Logs: Initializing ffmpeg container for <span class="log-info">${nextTask}</span>...`;
+
+      // Start transcoding progress simulation
+      let progress = 0;
+      const progressBar = document.getElementById('worker-progress-bar');
+      
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + '%';
+        
+        if (progress === 40) {
+          document.getElementById('worker-log-txt').innerHTML = `Logs: <span class="log-warn">${nextTask}</span> - transmuting streams to 1080p WebM/MP4 format...`;
+        }
+        if (progress === 80) {
+          document.getElementById('worker-log-txt').innerHTML = `Logs: <span class="log-info">${nextTask}</span> - compiling audio fragments...`;
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressBar.style.width = '0%';
+          if (pillEl) pillEl.remove();
+          
+          document.getElementById('worker-log-txt').innerHTML = `Logs: <span class="log-success">SUCCESS</span>: ${nextTask} published to S3 storage.`;
+          
+          // Trigger next task
+          setTimeout(processNextQueueTask, 600);
+        }
+      }, 250);
+    }
+
+    // --- 10. Observability Dashboard Live Simulator ---
+    function initLiveTelemetry() {
+      const logsPanel = document.getElementById('telemetry-logs');
+      const rpmIndicator = document.getElementById('live-rpm');
+      const svgPath = document.getElementById('telemetry-svg-path');
+      
+      const logMessages = [
+        { type: 'log-info', text: 'GET /api/v1/users/profile - 200 OK (14ms)' },
+        { type: 'log-info', text: 'GET /assets/main.css - 304 NOT MODIFIED (2ms)' },
+        { type: 'log-success', text: 'SUCCESS: Redis cache write hit on user session key' },
+        { type: 'log-info', text: 'POST /api/v1/auth/login - 200 OK (45ms)' },
+        { type: 'log-warn', text: 'WARN: Database replica synchronization lag exceeds 500ms' },
+        { type: 'log-info', text: 'GET /api/v1/catalog/items - 200 OK (8ms)' },
+        { type: 'log-success', text: 'SUCCESS: Video transcode event published to RabbitMQ successfully' }
+      ];
+
+      // Simulated dynamic chart path coordinates
+      let chartPoints = [60, 55, 70, 40, 85, 50, 65, 95, 30, 50, 45];
+      
+      setInterval(() => {
+        // Random RPM spike
+        const mockRpm = Math.floor(Math.random() * 150) + 350;
+        rpmIndicator.textContent = `RPM: ${mockRpm} req/s`;
+
+        // Shift chart coordinates
+        chartPoints.shift();
+        chartPoints.push(Math.floor(Math.random() * 90) + 20); // Range [20, 110]
+        
+        let pathString = "M 0 " + chartPoints[0];
+        chartPoints.forEach((pt, index) => {
+          pathString += ` L ${index * 30} ${pt}`;
+        });
+        svgPath.setAttribute('d', pathString);
+
+        // Inject new telemetry log lines
+        const mockMsg = logMessages[Math.floor(Math.random() * logMessages.length)];
+        const timeStamp = new Date().toTimeString().split(' ')[0];
+        
+        const line = document.createElement('div');
+        line.className = `log-line ${mockMsg.type}`;
+        line.textContent = `[${timeStamp}] ${mockMsg.text}`;
+        
+        logsPanel.appendChild(line);
+        logsPanel.scrollTop = logsPanel.scrollHeight;
+
+        // Maintain log container size constraints
+        if (logsPanel.children.length > 8) {
+          logsPanel.children[0].remove();
+        }
+      }, 2000);
+    }
+
+    // --- 11. Architectural Matrix Trigger ---
+    function toggleMatrixRow(rowEl) {
+      rowEl.classList.toggle('active');
+      
+      // Auto-resize accordion height
+      const card = rowEl.closest('.dsa-card');
+      const content = card.querySelector('.accordion-content');
+      content.style.maxHeight = content.scrollHeight + 100 + 'px';
+    }
+
+    // --- 12. Architectural "Why?" Interactive Checklist ---
+    function toggleAnswersMatrix(row) {
+      row.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
