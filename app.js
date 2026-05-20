@@ -4,6 +4,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
+
   // --- 1. Dropdown State Manager ---
   const dropdownCols = document.querySelectorAll('.widget-col');
   

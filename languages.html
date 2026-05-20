@@ -233,35 +233,111 @@
       flex-shrink: 0;
     }
 
-    /* Category Filter Pills */
-    .qa-pills-list {
+    /* Elegant Dropdown Filters Styling */
+    .qa-filters-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 1.2rem;
+      width: 100%;
     }
 
-    .qa-pill-btn {
+    @media (min-width: 768px) {
+      .qa-filters-group {
+        width: auto;
+      }
+    }
+
+    .qa-filter-select-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-width: 170px;
+      flex: 1;
+    }
+
+    @media (min-width: 480px) {
+      .qa-filter-select-wrapper {
+        flex: 0 0 auto;
+      }
+    }
+
+    .qa-filter-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--color-text-muted);
+      margin-left: 0.4rem;
+    }
+
+    .qa-select-container {
+      position: relative;
+      display: flex;
+      align-items: center;
       background-color: var(--color-white);
-      border: 1px solid rgba(15, 38, 21, 0.08);
-      color: var(--color-forest-dark);
-      padding: 0.5rem 1.2rem;
+      border: 1px solid rgba(15, 38, 21, 0.12);
       border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: var(--transition-fast);
+      padding: 0.6rem 2.5rem 0.6rem 1.2rem;
       box-shadow: var(--shadow-sm);
+      transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+      cursor: pointer;
     }
 
-    .qa-pill-btn:hover {
-      background-color: var(--color-pill-bg);
-      transform: translateY(-1px);
-    }
-
-    .qa-pill-btn.active {
-      background-color: var(--color-forest-dark);
-      color: var(--color-white);
-      border-color: var(--color-forest-dark);
+    .qa-select-container:focus-within,
+    .qa-select-container:hover {
+      border-color: var(--color-orange-primary);
       box-shadow: var(--shadow-md);
+    }
+
+    .qa-filter-select {
+      width: 100%;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-forest-dark);
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    .qa-select-chevron {
+      position: absolute;
+      right: 1.2rem;
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+      pointer-events: none;
+      transition: transform var(--transition-fast), color var(--transition-fast);
+    }
+
+    .qa-select-container:focus-within .qa-select-chevron {
+      transform: rotate(180deg);
+      color: var(--color-orange-primary);
+    }
+
+    /* Pulse Glow highlight for filtered/selected elements */
+    @keyframes cardGlowPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.4);
+        border-color: rgba(255, 90, 31, 0.4);
+        transform: translateY(0);
+      }
+      50% {
+        box-shadow: 0 0 20px 8px rgba(255, 90, 31, 0.7);
+        border-color: var(--color-orange-primary);
+        transform: translateY(-8px);
+      }
+      100% {
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(15, 38, 21, 0.04);
+        transform: translateY(0);
+      }
+    }
+
+    .qa-card.highlight-pulse {
+      animation: cardGlowPulse 2.5s ease-in-out;
     }
 
     /* Empty state */
@@ -320,9 +396,9 @@
           <li><a href="index.html#fullstack" class="nav-link">FullStack <span class="nav-badge">Learn</span></a></li>
           <li><a href="tree.html" class="nav-link">Tree</a></li>
           <li><a href="questions.html" class="nav-link">Questions</a></li>
-          <li><a href="interview.html" class="nav-link">Interview</a></li>
+          <li><a href="interview.html" class="nav-link nav-interview-trigger">Interview</a></li>
+          <li class="nav-languages-item"><a href="languages.html" class="nav-link active">Languages</a></li>
           <li><a href="interview2.html" class="nav-link">Interview 2.0</a></li>
-          <li><a href="languages.html" class="nav-link active">Languages</a></li>
           <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
         </ul>
       </nav>
@@ -375,11 +451,47 @@
           <input type="text" placeholder="Search topics..." id="qa-search-input" aria-label="Search questions">
         </div>
 
-        <!-- Filter pills list -->
-        <div class="qa-pills-list" id="category-pills">
-          <button class="qa-pill-btn active" data-category="all">All</button>
-          <button class="qa-pill-btn" data-category="javascript">JavaScript</button>
-          <button class="qa-pill-btn" data-category="react">Frameworks & Libraries (React)</button>
+        <!-- Elegant Dropdown Filters -->
+        <div class="qa-filters-group">
+          <!-- Select 1: Languages -->
+          <div class="qa-filter-select-wrapper">
+            <label for="filter-languages" class="qa-filter-label">Languages</label>
+            <div class="qa-select-container">
+              <select id="filter-languages" class="qa-filter-select">
+                <option value="all">All Languages</option>
+                <option value="javascript">JavaScript</option>
+              </select>
+              <span class="qa-select-chevron">▼</span>
+            </div>
+          </div>
+
+          <!-- Select 2: JavaScript Libraries -->
+          <div class="qa-filter-select-wrapper">
+            <label for="filter-js-libraries" class="qa-filter-label">JS Libraries</label>
+            <div class="qa-select-container">
+              <select id="filter-js-libraries" class="qa-filter-select">
+                <option value="all">All JS Libraries</option>
+                <option value="react">React</option>
+                <option value="nextjs">Next.js</option>
+              </select>
+              <span class="qa-select-chevron">▼</span>
+            </div>
+          </div>
+
+          <!-- Select 3: Other Libs & Frameworks -->
+          <div class="qa-filter-select-wrapper">
+            <label for="filter-other-frameworks" class="qa-filter-label">Other Libs & Frameworks</label>
+            <div class="qa-select-container">
+              <select id="filter-other-frameworks" class="qa-filter-select">
+                <option value="all">All Libs & Frameworks</option>
+                <option value="nextjs">Next.js</option>
+                <option value="nodejs">Node.js</option>
+                <option value="expressjs">Express.js</option>
+                <option value="mongodb">MongoDB</option>
+              </select>
+              <span class="qa-select-chevron">▼</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -968,22 +1080,6 @@
           </div>
         </div>
         <div class="qa-card">
-          <h3 class="qa-question-text">AFTER REACT</h3>
-          <div class="qa-answer">
-            <p>Then learn:</p>
-            <p><strong>Next.js</strong></p>
-            <p>Because:</p>
-            <p>Next.js = React framework</p>
-            <p>Used for:</p>
-            <ul>
-              <li>routing</li>
-              <li>backend APIs</li>
-              <li>SEO</li>
-              <li>production apps</li>
-            </ul>
-          </div>
-        </div>
-        <div class="qa-card">
           <h3 class="qa-question-text">MOST IMPORTANT FOR YOU</h3>
           <div class="qa-answer">
             <p>DO NOT try to memorize React.</p>
@@ -1003,6 +1099,105 @@
               <li>dashboard</li>
               <li>AI app</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-section" data-category-group="nextjs">
+      <div class="category-header">
+        <h2 class="category-title">React Framework - Next.js</h2>
+      </div>
+      <div class="qa-grid">
+        <div class="qa-card">
+          <h3 class="qa-question-text">WHAT IS NEXT.JS?</h3>
+          <div class="qa-answer">
+            <p><strong>Next.js is a full-stack React framework built ON TOP of React.</strong></p>
+            <p>If React teaches:</p>
+            <ul>
+              <li>components</li>
+              <li>state</li>
+              <li>hooks</li>
+            </ul>
+            <p>Then Next.js teaches:</p>
+            <ul>
+              <li>real production apps</li>
+              <li>routing</li>
+              <li>backend APIs</li>
+              <li>optimization</li>
+              <li>deployment</li>
+            </ul>
+            <p><strong>Simple Understanding:</strong></p>
+            <p>React is only a UI library. Next.js is a full React framework. It adds: routing, backend support, SEO, server rendering, and authentication support.</p>
+            <p><strong>Think Like This:</strong></p>
+            <p>JavaScript ➡️ React ➡️ Next.js</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">WHY NEXT.JS IS IMPORTANT</h3>
+          <div class="qa-answer">
+            <p>Modern companies use it heavily (Vercel, startups, SaaS apps, AI apps, dashboards).</p>
+            <p><strong>What Next.js Adds:</strong></p>
+            <p><strong>1. File-Based Routing</strong><br>Folders create routes automatically (e.g. <code>app/about/page.js</code> automatically becomes <code>/about</code>).</p>
+            <p><strong>2. Server + Client</strong><br>React mainly runs in browser. Next.js supports server rendering and client rendering for better SEO, speed, and performance.</p>
+            <p><strong>3. API Routes</strong><br>Create backend APIs inside Next.js (e.g. <code>app/api/user/route.js</code> becomes a <code>/api/user</code> endpoint).</p>
+            <p><strong>4. Full Stack Development</strong><br>Build frontend, backend, authentication, and database connections together.</p>
+            <p><strong>5. SEO (Very Important)</strong><br>React apps are sometimes weak for SEO. Next.js fixes this, making it good for Google indexing, blogs, businesses, and marketing sites.</p>
+            <p><strong>6. Optimization</strong><br>Automatically optimizes images, loading, and overall performance.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">IMPORTANT NEXT.JS CONCEPTS</h3>
+          <div class="qa-answer">
+            <p><strong>Routing Structure:</strong></p>
+            <pre style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px; font-size: 0.85rem; font-family: monospace;">app/
+ ├── page.js
+ └── about/
+       └── page.js</pre>
+            <p><strong>Link Component:</strong><br>Instead of regular <code>&lt;a&gt;</code> tags, use: <code>import Link from "next/link";</code></p>
+            <p><strong>Server vs Client Components:</strong></p>
+            <ul>
+              <li><strong>Server Components:</strong> Runs on server (faster, secure, default).</li>
+              <li><strong>Client Components:</strong> Interactive UI. Use <code>"use client"</code> at top.</li>
+            </ul>
+            <p><strong>Fetching Data:</strong><br><code>const data = await fetch(url);</code> can be done directly inside server components.</p>
+            <p><strong>Authentication:</strong><br>Learn sessions/JWTs. Popular tools: NextAuth, Clerk.</p>
+            <p><strong>Database Connection:</strong><br>MongoDB, PostgreSQL connected through backend API routes or server actions.</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">AFTER NEXT.JS: FULLSTACK FLOW</h3>
+          <div class="qa-answer">
+            <p>After React & Next.js, learn the deeper backend ecosystem:</p>
+            <p><strong>Backend Deeper:</strong></p>
+            <ul>
+              <li><strong>Node.js:</strong> JavaScript runtime environment.</li>
+              <li><strong>Express.js:</strong> Lightweight backend API framework.</li>
+            </ul>
+            <p><strong>Databases:</strong></p>
+            <ul>
+              <li><strong>MongoDB:</strong> Best NoSQL beginner choice.</li>
+              <li><strong>PostgreSQL / MySQL:</strong> Powerful relational databases.</li>
+            </ul>
+            <p><strong>Deployment:</strong><br>Vercel, Netlify, Docker, or AWS basics.</p>
+            <p><strong>Complete Frontend/FullStack Flow:</strong></p>
+            <p>JavaScript ➡️ React ➡️ Next.js ➡️ Node.js ➡️ Express.js ➡️ MongoDB ➡️ Deployment</p>
+          </div>
+        </div>
+        <div class="qa-card">
+          <h3 class="qa-question-text">INTERVIEWS & SENIOR AXIS</h3>
+          <div class="qa-answer">
+            <p><strong>Common Interview Questions:</strong></p>
+            <ul>
+              <li>Props vs State</li>
+              <li>SSR (Server-Side Rendering) vs CSR (Client-Side Rendering)</li>
+              <li>useEffect hook lifecycle</li>
+              <li>Routing mechanisms</li>
+              <li>API handling & Authentication</li>
+            </ul>
+            <p><strong>Most Important Takeaway:</strong></p>
+            <p>React teaches you <strong>component thinking</strong>. Next.js teaches you <strong>real-world application architecture</strong>.</p>
+            <p>That is why learning this combination is extremely powerful!</p>
           </div>
         </div>
       </div>
@@ -1065,7 +1260,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('qa-search-input');
-      const categoryPills = document.querySelectorAll('.qa-pill-btn');
+      const filterLanguages = document.getElementById('filter-languages');
+      const filterJsLibraries = document.getElementById('filter-js-libraries');
+      const filterOtherFrameworks = document.getElementById('filter-other-frameworks');
       const categorySections = document.querySelectorAll('.category-section');
       const emptyState = document.getElementById('qa-empty-state');
       
@@ -1112,19 +1309,74 @@
         }
       }
 
+      function handleSelectChange(changedSelect, otherSelect1, otherSelect2) {
+        const val = changedSelect.value;
+        
+        // Reset other select menus to "all" to prevent conflicting filters
+        otherSelect1.value = 'all';
+        otherSelect2.value = 'all';
+
+        // Check if selected value is a subtopic like nodejs, expressjs, mongodb
+        if (val === 'nodejs' || val === 'expressjs' || val === 'mongodb') {
+          activeCategory = 'nextjs'; // These exist inside the Next.js section fullstack flow card
+          filterContent();
+
+          // Scroll smoothly and pulse highlight the "AFTER NEXT.JS: FULLSTACK FLOW" card
+          setTimeout(() => {
+            let targetCard = null;
+            const cards = document.querySelectorAll('.qa-card');
+            cards.forEach(card => {
+              const header = card.querySelector('.qa-question-text');
+              if (header && header.textContent.includes('AFTER NEXT.JS: FULLSTACK FLOW')) {
+                targetCard = card;
+              }
+            });
+
+            if (targetCard) {
+              targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              targetCard.classList.remove('highlight-pulse');
+              void targetCard.offsetWidth; // Force layout recalculation to restart keyframe
+              targetCard.classList.add('highlight-pulse');
+            }
+          }, 150);
+          return;
+        }
+
+        activeCategory = val;
+        filterContent();
+
+        // If selecting Next.js, smoothly scroll to the Next.js section and highlight cards
+        if (val === 'nextjs') {
+          const nextjsSection = document.querySelector('.category-section[data-category-group="nextjs"]');
+          if (nextjsSection) {
+            setTimeout(() => {
+              nextjsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              const nextjsCards = nextjsSection.querySelectorAll('.qa-card');
+              nextjsCards.forEach(card => {
+                card.classList.remove('highlight-pulse');
+                void card.offsetWidth; // Force layout recalculation
+                card.classList.add('highlight-pulse');
+              });
+            }, 150);
+          }
+        }
+      }
+
       searchInput.addEventListener('input', (e) => {
         searchQuery = e.target.value.toLowerCase().trim();
         filterContent();
       });
 
-      categoryPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-          categoryPills.forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          
-          activeCategory = pill.getAttribute('data-category');
-          filterContent();
-        });
+      filterLanguages.addEventListener('change', () => {
+        handleSelectChange(filterLanguages, filterJsLibraries, filterOtherFrameworks);
+      });
+
+      filterJsLibraries.addEventListener('change', () => {
+        handleSelectChange(filterJsLibraries, filterLanguages, filterOtherFrameworks);
+      });
+
+      filterOtherFrameworks.addEventListener('change', () => {
+        handleSelectChange(filterOtherFrameworks, filterLanguages, filterJsLibraries);
       });
     });
   </script>
